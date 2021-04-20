@@ -33,10 +33,10 @@ public class MiniController extends HttpServlet {
     	Action action=null;
     	ActionForward forward=null;
     	
-    	if(url_Command.equals("/index.mini")) { //홈
+    	if(url_Command.equals("/home.mini")) { //홈
     		forward = new ActionForward();
     		forward.setRedirect(false);
-    		forward.setPath("/WEB-INF/views/jh/main.html");
+    		forward.setPath("/WEB-INF/views/jh/home.html");
     		
     	}else if(url_Command.equals("/diary.mini")) { //다이어리 
     		action = new DiaryListService();
