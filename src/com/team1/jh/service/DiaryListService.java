@@ -22,14 +22,11 @@ public class DiaryListService implements Action {
 			MiniDao dao = new MiniDao();
 			
 			//다이어리 게시물 총 건수
-			int totalboardcount = dao.totalBoardCount();
+			int totaldiarycount = dao.totalDiaryCount();
 			
 			//상세보기 후 다시 list 넘어올 때 현재 페이지 설정 
 			String ps = request.getParameter("ps"); // pagesize
 			String cp = request.getParameter("cp"); // current page
-			
-			System.out.println("ps : " + ps);
-			System.out.println("cp : " + cp);
 			
 			//list 페이지 첫 호출 
 			if (ps == null || ps.trim().equals("")) {
@@ -40,24 +37,36 @@ public class DiaryListService implements Action {
 			if (cp == null || cp.trim().equals("")) {
 				// default 값 설정
 				cp = "1"; // 1번째 페이지 보겠다
-			}
-
+			}	
+			
 			int pagesize = Integer.parseInt(ps);
 			int cpage = Integer.parseInt(cp);
-			int pagecount = 0;
+			int pagecount = 0;			
+			
+			// 23건 % 5
+			if (totaldiarycount % pagesize == 0) {
+				pagecount = totaldiarycount / pagesize; // 20 << 100/5
+			} else {
+				pagecount = (totaldiarycount / pagesize) + 1;
+			}
 			
 			//다이어리 전체조회 
 			List<DiaryDto> list = dao.list(cpage, pagesize);
 			//System.out.println(list.get(0).getIdx() + list.get(0).getContent());
 			
 			int pagersize=3; //[1][2][3]
-			ThePager pager = new ThePager(totalboardcount,cpage,pagesize,pagersize,"diary.mini");
+			ThePager pager = new ThePager(totaldiarycount, cpage, pagesize, pagersize, "diary.mini");
 			
+			request.setAttribute("pagesize", pagesize);
+			request.setAttribute("cpage", cpage);
+			request.setAttribute("pagecount", pagecount);
 			request.setAttribute("list", list);
+			request.setAttribute("totaldiarycount", totaldiarycount);
+			request.setAttribute("pager", pager);
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
-    		forward.setPath("/WEB-INF/views/jh/diary.jsp");
+    		forward.setPath("/WEB-INF/views/jh/diary_list.jsp");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

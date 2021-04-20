@@ -14,6 +14,22 @@ public class DiaryDto {
 	private int depth; 
 	private int step;
 	
+	public DiaryDto() {}
+	
+	public DiaryDto(int idx, String userid_fk, String subject, String content, Date writedate, 
+			int readnum, String filename, int refer, int depth, int step) {
+		super();
+		this.idx = idx;
+		this.userid_fk = userid_fk;
+		this.subject = subject;
+		this.content = content;
+		this.writedate = writedate;
+		this.readnum = readnum;
+		this.filename = filename;
+		this.refer = refer;
+		this.depth = depth;
+		this.step = step;
+	}
 	
 	public int getIdx() {
 		return idx;
@@ -57,6 +73,8 @@ public class DiaryDto {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+	
+	
 	public int getRefer() {
 		return refer;
 	}

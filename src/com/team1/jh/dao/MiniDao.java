@@ -25,21 +25,23 @@ public class MiniDao {
 	}
 	
 	//다이어리 게시물 총 건수 조회 
-	public int totalBoardCount() {
+	public int totalDiaryCount() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int totalcount = 0;
 		try {
 			conn = ds.getConnection(); //dbcp 연결객체 얻기
+			
 			String sql="select count(*) cnt from diary";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				totalcount = rs.getInt("cnt");
 			}
 		}catch (Exception e) {
-			
+			System.out.println("오류 :" + e.getMessage());
 		}finally {
 			try {
 				pstmt.close();
@@ -64,20 +66,24 @@ public class MiniDao {
 			
 			//String sql = "select * from diary";
 			
-			String sql = "SELECT * FROM" +
+			
+			String sql = "SELECT * FROM " +
                     					"(SELECT rownum rn, idx, userid_fk, subject, content, writedate, readnum, filename, refer, depth, step" +
-                    					"FROM (SELECT * FROM DIARY ORDER BY REFER DESC , STEP ASC)"+
-                    					"WHERE rownum <= ?" +  //endrow
+                    					" FROM (SELECT * FROM DIARY ORDER BY REFER DESC , STEP ASC)"+
+                    					" WHERE rownum <= ?" +  //endrow
                     					") WHERE rn >= ?"; //startrow
 			
 			pstmt = conn.prepareStatement(sql);
-
+			
 			//공식같은 로직
 			int start = cpage * pagesize - (pagesize -1); //1 * 5 - (5 - 1) >> 1
 			int end = cpage * pagesize; // 1 * 5 >> 5
 			
-			pstmt.setInt(1, start);
-			pstmt.setInt(5, end);
+			pstmt.setInt(1, end);
+			pstmt.setInt(2, start);
+			
+			System.out.println("start : " +start);
+			System.out.println("end : " +end);
 			
 			rs = pstmt.executeQuery();
 			list = new ArrayList<DiaryDto>();
@@ -94,11 +100,11 @@ public class MiniDao {
 				diaryDto.setDepth(rs.getInt("depth"));
 				diaryDto.setStep(rs.getInt("step"));
 				
-				list.add(diaryDto);
+				list.add(diaryDto);	
 			}
 			
 		}catch (Exception e) {
-			System.out.println("오류 :" + e.getMessage());
+			System.out.println("dao 오류 :" + e.getMessage());
 		}finally {
 			try {
 				pstmt.close();
@@ -111,6 +117,52 @@ public class MiniDao {
 			
 		return list;
 	}
+	
+	
+	//다이어리 게시물 상세보기
+	public DiaryDto getContent(int idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DiaryDto diary = null;
+			
+			try {
+				conn = ds.getConnection();
+				String sql="select * from diary where idx=?"; //* 하지 말자
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {					
+					String userid_fk = rs.getString("userid_fk");
+					String subject = rs.getString("subject");
+					String content = rs.getString("content");
+					java.sql.Date writedate = rs.getDate("writedate");
+					int readnum = rs.getInt("readnum");
+					String filename = rs.getString("filename");
+
+					int refer = rs.getInt("refer");
+					int step = rs.getInt("step");
+					int depth = rs.getInt("depth");
+					
+					diary = new DiaryDto(idx, userid_fk, subject, content, writedate, readnum, filename, refer, depth, step);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("content: " + e.getMessage());
+			}finally {
+				try {
+					pstmt.close();
+					rs.close();
+					conn.close();//반환하기
+				} catch (Exception e2) {
+					
+				}
+			}
+			
+			return diary;
+		}
+		
 	
 	
 }
