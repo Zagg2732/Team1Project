@@ -1,6 +1,9 @@
 package com.team1.sj.controller;
 
 import java.io.IOException;
+
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.sj.service.HumorListService;
+import com.team1.sj.service.HumorBoardAddService_hsj;
+import com.team1.sj.service.HumorListService_hsj;
 
 
 @WebServlet("*.hsj")
@@ -28,22 +32,52 @@ public class FrontBoardController extends HttpServlet {
     	
     	Action action = null;
     	ActionForward forward = null;
+    	System.out.println("url_command들어왔늬???");
+    	System.out.println(url_Command);
     	
-    	if(url_Command.equals("/HumorList.hsj")) { //유머게시판 글쓰기 처리
-    		action = new HumorListService();
+    	if(url_Command.equals("/HumorList.hsj")) { //유머게시판 리스트
+    		action = new HumorListService_hsj();
     		forward = action.execute(request, response);
     		
+    		System.out.println("humorlist들어왔니???");
+    		
+    /////////////////////////////////////////////////////////////////////
+    		
+    	}else if(url_Command.equals("/HumorWrite.hsj")) { //유머게시판 글쓰기
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("WEB-INF/views/sj/board_hsj/board_write_hsj.jsp");
+    		
+    /////////////////////////////////////////////////////////////////////
+    		
+    	}else if(url_Command.equals("/HumorWriteOK.hsj")) {
+    		action = new HumorBoardAddService_hsj();
+    		forward = action.execute(request, response);
+    		
+    //////////////////////////////////////////////////////////////////////
+    		
+    	}else if(url_Command.equals("/HumorBoardContent.hsj")) {
+    		
+    	}
+    	
+    	if(forward != null) {
+    		if(forward.isRedirect()) {
+    			response.sendRedirect(forward.getPath());
+    		}else {
+    			RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+    			dis.forward(request, response);
+    		}
     	}
 	}
     
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doProcess(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doProcess(request, response);
 	}
 
 }

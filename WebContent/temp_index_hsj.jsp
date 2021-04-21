@@ -1,23 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>SJ게시판_index</title>
-	<link rel="Stylesheet" href="css/hsj_style/default.css">
+<meta charset="UTF-8">
+<title>SJ게시판_index</title>
+<link rel="Stylesheet" href="css/hsj_style/default.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/sj/header_hsj.jsp"></jsp:include> <!--페이지 이동시 모든 부분에 header.jsp가 보임  -->
-	<div id="pageContainer">
+	<jsp:include page="/WEB-INF/views/sj/header_hsj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/bottom_hsj.jsp"></jsp:include>
+	<!--페이지 이동시 모든 부분에 header.jsp가 보임  -->
+
+	<%-- 	 <div id="pageContainer">
 		<h3>DB연결 정보 확인</h3>
 		<%
 		Connection conn = null;
@@ -40,6 +41,8 @@
 		<c:set var="connect2" value="<%= connect2 %>" />
 		db 연결여부 : ${ connect2 }<br>
 		
-	</div>
+	</div>  --%>
+	
+
 </body>
 </html>

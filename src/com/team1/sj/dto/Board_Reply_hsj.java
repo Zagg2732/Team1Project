@@ -105,10 +105,11 @@ public class Board_Reply_hsj {
 
 	@Override
 	public String toString() {
-		return "sjBoard [idx_fk=" + idx_fk + ", userid_fk=" + userid_fk + ", content=" + content + ", up=" + up
+		return "Board_Reply_hsj [idx_fk=" + idx_fk + ", userid_fk=" + userid_fk + ", content=" + content + ", up=" + up
 				+ ", down=" + down + ", writedate=" + writedate + ", refer=" + refer + ", depth=" + depth + ", step="
 				+ step + "]";
 	}
-	
+
+
 	
 }
