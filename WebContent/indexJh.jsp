@@ -11,9 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="home.mini">홈</a><br>
-	<a href="diary.mini">다이어리</a><br>
-	<a href="guestbook.mini">방명록</a><br>
+	<a href="home.jh">홈</a><br>
+	<a href="diary.jh">다이어리</a><br>
+	<a href="guestbook.jh">방명록</a><br>
 	
 	<%
 	Connection conn= null;
