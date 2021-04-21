@@ -35,52 +35,9 @@ public class TotalDao {
 		
 	}
 	
-	//login 멤버 조회
-	public int isMember(Member member) {
-		System.out.println("isMember");
-		String sql = "SELECT PASSWORD FROM TEAM1_USER WHERE USERID=?";
-		int result = -1;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member.getUserId());
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				if (rs.getString("PASSWORD").equals(member.getUserPassword())) {
-					result = 1;// 일치.
-				} else {
-					result = 0;// 불일치.
-				}
-			} else {
-				result = -1;// 아이디 존재하지 않음.
-			}
-		} catch (Exception ex) {
-			System.out.println("isMember 에러: " + ex);
-		} finally {
-			System.out.println("result : " + result);
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException ex) {
-				}
-		}
-		return result;
-	}
 	
 	//login 멤버 조회
-	public Member isMember2(String userid, String userpw) {
+	public Member isMember(String userid, String userpw) {
 		System.out.println("isMember");
 		String sql = "SELECT * FROM TEAM1_USER WHERE USERID=?";
 		int result = -1;

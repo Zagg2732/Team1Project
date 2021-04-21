@@ -24,6 +24,7 @@
 			&nbsp;&nbsp;|&nbsp;&nbsp;<span class="small-text">TOTAL</span>&nbsp;7979
 		  </div>
 		  <div class="content-box" style="padding: 20px">
+		  <h5 style= "font-size: 100%; color : rgb(35, 141, 179);">다이어리 </h5>
 		  </div>
 		</div>
 	  </div>
@@ -31,7 +32,7 @@
 		<div class="inner-box" style="padding: 10px 10px 10px 5px;">
 		  <div class="content-box-header">
 			<h1 style="margin:0px; font-size: 1.3em; font-weight: 550;" class="color-blue">&nbsp;&nbsp;듀효니 미니홈삐</h1>
-			<span style="font-size: 12px;">http://www.jhmini.com</span>
+			<span style="font-size: 12px;">URL</span>
 		  </div>
 		  <div class="content-box" style="box-shadow: 5px 5px 20px -10px grey; padding: 10px 20px;">
 			<div style="display: flex; font-size: 14px;">				
@@ -43,7 +44,8 @@
 				<c:set var="list" value="${requestScope.list}" />
 				<c:set var="totaldiarycount" value="${requestScope.totaldiarycount}" />
 				<c:set var="pager" value="${requestScope.pager}" />
-					
+				
+				<div class="container">
 				<table class="table">
 		  		<thead>
 		  			<tr>
@@ -57,7 +59,7 @@
 		  			<c:forEach var="diaryContents" items="${list}">
 		  				<tr>
 		  					<td>${diaryContents.idx}</td>
-			  				<td>${diaryContents.subject}</td>
+			  				<td> <a href="diaryContent.jh?idx=${diaryContents.idx}&cp=${cpage}&ps=${pagesize}"> ${diaryContents.subject}</a></td>
 			  				<td>${diaryContents.writedate}</td>
 			  				<td>${diaryContents.readnum}</td>
 		  				</tr>
@@ -67,7 +69,7 @@
 		  			<td colspan="3" align="center">
 		  			<!-- 이전 링크 -->
 		  			<c:if test="${cpage > 1}">
-		  			<a href="diary.mini?cp=${cpage-1}&ps=${pagesize}">이전</a>
+		  			<a href="diary.jh?cp=${cpage-1}&ps=${pagesize}">이전</a>
 		  			</c:if>
 		  			
 		  			<!-- page 목록 나열하기 -->
@@ -77,14 +79,14 @@
 									<font color="red" >[${i}]</font>
 							</c:when>
 							<c:otherwise>
-								<a href="diary.mini?cp=${i}&ps=${pagesize}">[${i}]</a>
+								<a href="diary.jh?cp=${i}&ps=${pagesize}">[${i}]</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					
 					<!--다음 링크 --> 
 					<c:if test="${cpage < pagecount}">
-						<a href="diary.mini?cp=${cpage+1}&ps=${pagesize}">다음</a>
+						<a href="diary.jh?cp=${cpage+1}&ps=${pagesize}">다음</a>
 					</c:if>
 					</td>
 						<td colspan="2" align="center">총 게시물 수 : ${totaldiarycount}</td>
@@ -96,9 +98,10 @@
 					</td>
 		  		</tbody>
 		  		</table>
-			<div class="menu-item" onclick="handleClickMenu(this)">홈</div>
-			<div class="menu-item menu-selected" style="top: 48px" onclick="handleClickMenu(this)">다이어리</div>
-			<div class="menu-item" style="top: 86px" onclick="handleClickMenu(this)">방명록</div>
+		  	</div>
+			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
+			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
+			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
 		  </div>
 		</div>
 	  </div>

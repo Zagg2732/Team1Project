@@ -22,14 +22,9 @@
 	
 	//Pool 안에서 connection 가지고 오기
 	conn = ds.getConnection();
-	
-	out.print("db 연결여부 : " + conn.isClosed() + "<br>");
-	
+		
 	//POINT 반드시 작업 끝나면 객체반환
 	conn.close(); // 연결 끊는 것이 아닌 pool에게 반환
-	
-	out.print("db 연결여부 : " + conn.isClosed() + "<br>");
-	
 %>
 
 </body>
