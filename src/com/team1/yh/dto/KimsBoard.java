@@ -1,7 +1,7 @@
 package com.team1.yh.dto;
 import java.util.Date;
 
-public class Board {
+public class KimsBoard {
 	
 	private int idx;
 	private String userid;

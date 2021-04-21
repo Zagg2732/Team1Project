@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
+import com.team1.yh.service.KimsBoardAddService;
 import com.team1.yh.service.KimsBoardListService;
 import com.team1.yh.service.KimsBoardWriteService;
 
@@ -22,7 +23,7 @@ public class FrontBoardController extends HttpServlet {
     public FrontBoardController() {
         super();
     }
-
+    
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
@@ -31,13 +32,20 @@ public class FrontBoardController extends HttpServlet {
     	Action action = null;
     	ActionForward forward = null;
     	System.out.println("controller 도착");
+    	
     	//////////////////////////////////////////////
     	// 여기에 if문을 넣자
     	if(url_Command.equals("/kimslist.kims")) { //킴스게시판 글쓰기 처리
+    		System.out.println("게시판 도착");
     		action = new KimsBoardListService();
     		forward = action.execute(request, response);
     	} else if (url_Command.equals("/kimswrite.kims")) { //만약 있다면 상세보기
+    		System.out.println("글 쓰기 도착");
     		action = new KimsBoardWriteService();
+    		forward = action.execute(request, response);
+    	} else if (url_Command.equals("/kimswriteok.kims")) { //만약 있다면 상세보기
+    		System.out.println("글 등록 도착");
+    		action = new KimsBoardAddService();
     		forward = action.execute(request, response);
     	}
     	
