@@ -3,23 +3,26 @@ package com.team1.sj.dto;
 import java.util.Date;
 
 public class Board_hsj {
- private int idx;
- private int idx_fk;
- private int up;
- private int down;
- private int readnum; // default 0 
- private Date writedate; // default sysdate
- private String subject;
- private String content;
- private String filename;
+	
+	private int idx;
+	private String userid_fk;
+	private int up;
+	private int down;
+	private int readnum;
+	private Date writedate;
+	private String subject;
+	private String content;
+	private String filename;
+	private String nickname;
  
- public Board_hsj() {}
-
- public Board_hsj(int idx, int idx_fk, int up, int down, int readnum, Date writedate, 
-		 String subject, String content, String filename) {
+ public Board_hsj() {
+	 
+ }
+ 
+ public Board_hsj(int idx, String userid_fk, int up, int down, int readnum, Date writedate,String subject, String content, String filename, String nickname) {
 	 super();
 	 this.idx = idx;
-	 this.idx_fk = idx_fk;
+	 this.userid_fk = userid_fk;
 	 this.up = up;
 	 this.down = down;
 	 this.readnum = readnum;
@@ -27,8 +30,10 @@ public class Board_hsj {
 	 this.subject = subject;
 	 this.content = content;
 	 this.filename = filename;
+	 this.nickname = nickname;
+	 
  }
- 
+
 public int getIdx() {
 	return idx;
 }
@@ -37,12 +42,12 @@ public void setIdx(int idx) {
 	this.idx = idx;
 }
 
-public int getIdx_fk() {
-	return idx_fk;
+public String getUserid_fk() {
+	return userid_fk;
 }
 
-public void setIdx_fk(int idx_fk) {
-	this.idx_fk = idx_fk;
+public void setUserid_fk(String userid_fk) {
+	this.userid_fk = userid_fk;
 }
 
 public int getUp() {
@@ -101,13 +106,23 @@ public void setFilename(String filename) {
 	this.filename = filename;
 }
 
+
+public String getNickname() {
+	return nickname;
+}
+
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+
 @Override
 public String toString() {
-	return "HumorBoard [idx=" + idx + ", idx_fk=" + idx_fk + ", up=" + up + ", down=" + down + ", readnum=" + readnum
-			+ ", writedate=" + writedate + ", subject=" + subject + ", content=" + content + ", filename=" + filename
-			+ "]";
+	return "Board_hsj [idx=" + idx + ", userid_fk=" + userid_fk + ", up=" + up + ", down=" + down + ", readnum="
+			+ readnum + ", writedate=" + writedate + ", subject=" + subject + ", content=" + content + ", filename="
+			+ filename + ", nickname=" + nickname + "]";
 }
- 
+
+
  
  
 }
