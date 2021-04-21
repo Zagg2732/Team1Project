@@ -8,14 +8,14 @@
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <link rel="stylesheet" href="css/yh/bootstrap.css"> <!-- 참조  -->
 <link rel="stylesheet" href="css/yh/custom.css"> <!-- 참조  -->
-<title>JSP 게시판 웹 사이트</title>
+<title>Kim's Board</title>
 </head>
 <body>
 <%
-    String userID = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
-    if (session.getAttribute("userID") != null)
+    String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
+    if (session.getAttribute("userid") != null)
     {
-        userID = (String)session.getAttribute("userID");
+    	userid = (String)session.getAttribute("userid");
     }
 %>
     <nav class ="navbar navbar-default">
@@ -36,7 +36,7 @@
             </ul>
             <%
             // 접속하기는 로그인이 되어있지 않은 경우만 나오게한다
-                if(userID == null)
+                if(userid == null)
                 {
             %>
             <ul class="nav navbar-nav navbar-right">
@@ -72,8 +72,8 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container">
-                <h1>웹 사이트 소개</h1>
-                <p>이 웹 사이트는 부트스트랩으로 만든 JSP 웹 사이트입니다. 최소한의 간단한 로직만을 이용해서 개발했습니다. 디자인 템플릿으로는 부트스트랩을 이용했습니다.</p>
+                <h1>Kim's Board</h1>
+                <p>이 웹 사이트는 자유로운 회원 게시판입니다.</p>
                 <p><a class="btn btn-primary btn-pull" href="#" role="button">자세히 알아보기</a></p>
             </div>
         </div>
@@ -105,6 +105,6 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/yh/bootstrap.js"></script>
 </body>
 </html>

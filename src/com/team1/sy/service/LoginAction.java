@@ -19,37 +19,23 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession();
 		
 		TotalDao totalDao = new TotalDao();
-		Member member = new Member();
+						
+		String userid = request.getParameter("userid");
+		String userpw = request.getParameter("userpw");
 		
-		int result = -1;
-		
-		System.out.println();
-		
-		member.setUserId(request.getParameter("userid"));
-		member.setUserPassword(request.getParameter("userpw"));
-		
-		result = totalDao.isMember(member);
+		Member member = totalDao.isMember(userid, userpw);
 		
 		String msg = "";
 		String url = "";
 		
-		if(result == 1) {
-			
-			session.setAttribute("userid", member.getUserId());
+		if(member != null) {
+			session.setAttribute("userInfo", member);
 			forward.setRedirect(true);
-	   		//forward.setPath("./BoardList.bo");
 	   		forward.setPath("index.team1");
-						
-		}else {
 			
-			if(result == 0) {
-				msg = "비밀번호를 확인해주세요.";
-				url = "Login.team1";
-			}else if(result == -1) {
-				msg = "아이디가 없습니다.";
-				url = "Login.team1";
-				
-			}
+		}else {
+			msg = "아이디 또는 비밀번호를 확인해주세요.";
+			url = "Login.team1";
 			
 			request.setAttribute("msg", msg);
 			request.setAttribute("url", url);
@@ -57,8 +43,8 @@ public class LoginAction implements Action {
 			//forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/views/common/redirect.jsp");
-			
 		}
+		
 		return forward;
 	}
 
