@@ -1,10 +1,12 @@
 package com.team1.sj.dto;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class LSJ_board {
 	private int idx;
 	private String user_fk;
+	private String nickname;
 	private int up;
 	private int down;
 	private int readnum;
@@ -13,6 +15,14 @@ public class LSJ_board {
 	private String content;
 	private String filename;
 	
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -67,11 +77,13 @@ public class LSJ_board {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	
 	@Override
 	public String toString() {
-		return "lsj_humor_board [idx=" + idx + ", user_fk=" + user_fk + ", up=" + up + ", down=" + down + ", readnum="
-				+ readnum + ", writedate=" + writedate + ", subject=" + subject + ", content=" + content + ", filename="
-				+ filename + "]";
+		return "LSJ_board [idx=" + idx + ", user_fk=" + user_fk + ", nickname=" + nickname + ", up=" + up + ", down="
+				+ down + ", readnum=" + readnum + ", writedate=" + writedate + ", subject=" + subject + ", content="
+				+ content + ", filename=" + filename + "]";
 	}
+	
+	
+	
 }
