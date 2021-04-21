@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="userInfo" value="${sessionScope.userInfo}" />
        
 		<div class="offcanvas-menu-overlay"></div>
 		<div class="offcanvas-menu-wrapper">
@@ -22,18 +25,34 @@
                             <a href="./index.jsp"><img src="images/new_team1_logo.png" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-7">
+				<div class="col-lg-2">
+					<div class="ht-widget">
+						<c:if test="${userInfo.grade > 0}">
+							<a href="temp.team1" class="btn btn-light">admin</a>
+						</c:if>
+					</div>
+				</div>
+				<div class="col-lg-4">
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                     	<div class="ht-widget">
-	                    	Login ID : <%=session.getAttribute("userid") %>
+	                    	NickName : ${userInfo.nickName}
                     	</div>
                     </div>
 					<div class="col-lg-1">
-						<div class="ht-widget">
-							<a href="Login.team1" class="btn btn-light">Login</a>
-						</div>
+					<div class="ht-widget">
+
+						<c:choose>
+							<c:when test="${not empty userInfo}">
+								<a href="Logout.team1" class="btn btn-light">Logout</a>
+							</c:when>
+							<c:otherwise>
+								<a href="Login.team1" class="btn btn-light">Login</a>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
+				</div>
 
                 </div>
                 <div class="canvas-open">
