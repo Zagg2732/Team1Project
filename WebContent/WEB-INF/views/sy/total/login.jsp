@@ -33,7 +33,7 @@
 	<div id="signwrap" class="signwrap">
 		<jsp:include page="header.jsp" />
 		<section id="loginsection">
-			<h3 style="padding-top:100px;"align="center">Login Form Example</h3>
+			<h3 style="padding-top:150px;"align="center">Login Form</h3>
 			<!-- multistep form -->
 			<form id="msform" action="<%= request.getContextPath()%>/LoginOk.team1" method="post">
 
@@ -42,17 +42,15 @@
 					<h2 class="fs-title">Login your account</h2><br>
 					<input type="text" name="userid" placeholder="ID" />
 					<input type="password" name="userpw" placeholder="Password" />
-					<input type="button" name="login" class="next action-button" value="Login" />
-					<button name="login2" class="next action-button" value="Login2"></button>
+					<button name="login" class="next action-button" value="Login">Login</button><br><br>
+					혹시 아직도 <a href="${pageContext.request.contextPath}/Register.team1">회원가입</a>을 안하셨나요?<br>
 				</fieldset>
-				
 			</form>
 
 		</section>
 
 		<jsp:include page="footer.jsp" />
 	</div>
-
 
 	<!-- Js Plugins -->
 	<script src="js/sy/jquery-3.3.1.min.js"></script>
@@ -68,5 +66,6 @@
 	<script src="js/sy/main.js"></script>
 	<script src="https://kit.fontawesome.com/c5fd5902bb.js"
 		crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

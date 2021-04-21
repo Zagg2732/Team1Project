@@ -24,7 +24,6 @@
 			&nbsp;&nbsp;|&nbsp;&nbsp;<span class="small-text">TOTAL</span>&nbsp;7979
 		  </div>
 		  <div class="content-box" style="padding: 20px">
-		  <h5 style= "font-size: 100%; color : rgb(35, 141, 179);">다이어리 </h5>
 		  </div>
 		</div>
 	  </div>
@@ -38,67 +37,62 @@
 			<div style="display: flex; font-size: 14px;">				
 			  <div class="col" style="display: flex; flex-direction: column;">
 			  
-				<c:set var="pagesize" value="${requestScope.pagesize}" />
-				<c:set var="cpage" value="${requestScope.cpage}" />
-				<c:set var="pagecount" value="${requestScope.pagecount}" />
-				<c:set var="list" value="${requestScope.list}" />
-				<c:set var="totaldiarycount" value="${requestScope.totaldiarycount}" />
-				<c:set var="pager" value="${requestScope.pager}" />
+			  	<c:set var="diary" value="${requestScope.diaryDto}" />
+			  	<c:set var="idx" value="${requestScope.idx}" />
+			 	<c:set var="cpage" value="${requestScope.cp}" />
+				<c:set var="pagesize" value="${requestScope.ps}" />
+				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
 				
 				<div class="container">
 				<table class="table">
-		  		<thead>
+				<thead>
 		  			<tr>
-		  				<th>글번호</th>
-		  				<th>제목</th>
-		  				<th>날짜</th>
-		  				<th>조회수</th>
+		  				<td>작성일</td>
+		  				<td>${diary.writedate}</td>
+		  			</tr>
+		  			<tr>
+		  				<td>제목</td>
+		  				<td>${diary.subject}</td>
+		  			</tr>
+		  			<tr>
+		  				<td>내용</td>
+		  				<td>${diary.content}</td>
+		  			</tr>
+		  			<tr>
+		  				<td>첨부파일</td>
+		  				<td>${diary.filename}</td>
+		  			</tr>
+		  			<tr>
+		  				<td>
+		  				<a href="diary.jh?cp=${cpage}&ps=${pagesize}">목록가기</a>
+		  				<a href="diaryEdit.jh?cp=${cpage}&ps=${pagesize}">편집</a>
+		  				<a href="diaryDelete.jh?cp=${cpage}&ps=${pagesize}">삭제</a>
+		  				<a href="diaryRewrite.jh?cp=${cpage}&ps=${pagesize}">답글달기</a>
+		  				</td>
 		  			</tr>
 		  		</thead>
-		  		<tbody>
-		  			<c:forEach var="diaryContents" items="${list}">
-		  				<tr>
-		  					<td>${diaryContents.idx}</td>
-			  				<td> <a href="diaryContent.jh?idx=${diaryContents.idx}&cp=${cpage}&ps=${pagesize}"> ${diaryContents.subject}</a></td>
-			  				<td>${diaryContents.writedate}</td>
-			  				<td>${diaryContents.readnum}</td>
-		  				</tr>
-		  			</c:forEach>
-		  			
-		  			<tr>
-		  			<td colspan="3" align="center">
-		  			<!-- 이전 링크 -->
-		  			<c:if test="${cpage > 1}">
-		  			<a href="diary.jh?cp=${cpage-1}&ps=${pagesize}">이전</a>
-		  			</c:if>
-		  			
-		  			<!-- page 목록 나열하기 -->
-		  			<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-		  				<c:choose>
-							<c:when test="${cpage==i}">
-									<font color="red" >[${i}]</font>
-							</c:when>
-							<c:otherwise>
-								<a href="diary.jh?cp=${i}&ps=${pagesize}">[${i}]</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					
-					<!--다음 링크 --> 
-					<c:if test="${cpage < pagecount}">
-						<a href="diary.jh?cp=${cpage+1}&ps=${pagesize}">다음</a>
-					</c:if>
-					</td>
-						<td colspan="2" align="center">총 게시물 수 : ${totaldiarycount}</td>
-					</tr>
-					
-					<tr>
-					<td colspan="5" align="center">
-					${pager}
-					</td>
-		  		</tbody>
-		  		</table>
-		  	</div>
+				</table>
+				
+				<!-- 댓글 달기 -->
+				<form name="reply" action="diaryReply.jh" method="POST">
+					<table class="table">
+						<td>
+							<textarea name="reply_content" id="reply_content" style= "width : 430px;"></textarea>
+							<input type="button" id="replybtn"  value="등록">
+						</td>
+					</table>
+				</form>
+				
+				<!-- 댓글 목록 -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>댓글 목록</th>
+						</tr>
+					<thead>
+					<tbody id="replybody"></tbody>
+				</table>
+				</div>
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
 			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
@@ -107,4 +101,9 @@
 	  </div>
 	</div>
 </body>
+<script type="text/javascript">
+/* 댓글 비동기 구현 */
+ 
+
+</script>
 </html>

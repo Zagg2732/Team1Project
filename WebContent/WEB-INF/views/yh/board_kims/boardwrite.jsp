@@ -7,14 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <link rel="stylesheet" href="css/yh/bootstrap.css"> <!-- 참조  -->
-<title>JSP 게시판 웹 사이트</title>
+<title>Kim's Board 글쓰기</title>
 </head>
 <body>
 <%
-    String userID = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
-    if (session.getAttribute("userID") != null)
+    String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
+    if (session.getAttribute("userid") != null)
     {
-        userID = (String)session.getAttribute("userID");
+    	userid = (String)session.getAttribute("userid");
     }
 %>
     <nav class ="navbar navbar-default">
@@ -35,7 +35,7 @@
             </ul>
             <%
             // 접속하기는 로그인이 되어있지 않은 경우만 나오게한다
-                if(userID == null)
+                if(userid == null)
                 {
             %>
             <ul class="nav navbar-nav navbar-right">
@@ -70,12 +70,11 @@
     </nav>
     <div class="container">
         <div class="row">
-        <form method="post" action="writeAction.jsp">
+        <form method="post" action="${pageContext.request.contextPath}/kimswriteok.kims">
             <table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
                 <thead>
                     <tr>
                         <th colspan="2" style="background-color:#eeeeee; text-align:center;">게시판 글쓰기 양식</th>
- 
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +91,6 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/yh/bootstrap.js"></script>
 </body>
 </html>
