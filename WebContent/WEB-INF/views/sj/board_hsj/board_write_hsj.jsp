@@ -28,7 +28,7 @@
 <body>
 
 	<%-- <c:import url="/WEB-INF/views/sj/header_hsj.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/sj/header_hsj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/header_sj.jsp"></jsp:include>
 	
 	
 	
