@@ -56,10 +56,10 @@ public class DiaryContentService implements Action {
 				diaryReplyList = dao.diaryReplyList(idx);
 			}
 			
-			request.setAttribute("diaryDto", diaryDto);
 			request.setAttribute("idx", idx);
 			request.setAttribute("cp", cpage);
 			request.setAttribute("ps", pagesize);
+			request.setAttribute("diaryDto", diaryDto);
 			request.setAttribute("diaryReplyList", diaryReplyList);
 			
 			forward = new ActionForward();
