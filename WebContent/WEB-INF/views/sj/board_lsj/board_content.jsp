@@ -9,9 +9,9 @@
 	<meta charset="UTF-8">
 	<title>승준이 보드컨텐츠</title>
 	<style>
-	 a:link { color: red; text-decoration: none;}
-	 a:visited { color: black; text-decoration: none;}
-	 a:hover { color: blue; text-decoration: underline;}
+		 a:link { color: red; text-decoration: none;}
+		 a:visited { color: black; text-decoration: none;}
+		 a:hover { color: blue; text-decoration: underline;}
 	</style>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

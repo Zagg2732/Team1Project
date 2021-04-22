@@ -25,6 +25,10 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			//게시물 총 건수
 			int totalboardcount = dao.totalBoardCount();
 			
+			String type = request.getParameter("type");
+			System.out.println("type확인");
+			System.out.println(type);
+			
 			String ps = request.getParameter("ps");
 			String cp = request.getParameter("cp");
 			
@@ -45,10 +49,15 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 				pagecount = (totalboardcount / pagesize) + 1;
 			}
 			
-			List<SJ_board> list = dao.listWithPage(cpage, pagesize);
+			List<SJ_board> list = dao.listWithPage(cpage, pagesize, type);
 			
 			int pagersize = 3;
-			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.sj");
+			
+			String linkUrl = "BoardList.sj?type=" + type;
+			System.out.println("linkUrl 확인 - " + linkUrl );
+			
+			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, linkUrl ); 
+			//원본 ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.sj");
 			
 			request.setAttribute("pagesize", pagesize);
 			request.setAttribute("cpage", cpage);
@@ -57,10 +66,12 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			request.setAttribute("totalboardcount", totalboardcount);
 			request.setAttribute("pager", pager);
 			
+			String path = "WEB-INF/views/sj/board_list/" + type + "_list.jsp";
+			
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("WEB-INF/views/sj/board_hsj/board_list_hsj.jsp");
-			
+			forward.setPath(path);
+			System.out.println("path 확인코드 : " + path);
 			
 		} catch (Exception e) {
 			// TODO: handle exception

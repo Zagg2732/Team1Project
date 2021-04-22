@@ -10,8 +10,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
-<title>유머게시판</title>
+	<meta charset=UTF-8">
+	<title>유머게시판</title>
+	<style>
+		 a:link { color: black; text-decoration: none;}
+		 a:visited { color: black; text-decoration: none;}
+		 a:hover { color: black; text-decoration: none;}
+	</style>
 <!-- <link rel="Stylesheet" href="./css/hsj_style/default.css"> -->
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 <link
@@ -22,7 +27,7 @@
 </head>
 <body>
 	<%-- <c:import url="/WEB-INF/views/sj/header_hsj.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/sj/header_sj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
 
 
 	<!-- requestScope사용 가능한 이유??  -->
@@ -59,7 +64,7 @@
 							<tr>
 								<td>${board.idx}</td>
 								<td>${board.nickname}</td>
-								<td>${board.subject}</td>
+								<td><a href = "board.sj?idx=${board.idx}&type=humor_board">${board.subject}</td>
 								<td>${board.readnum}</td>
 								<td>${board.up}</td>
 								<td>${board.down}</td>
@@ -74,7 +79,7 @@
 			
 					 <!--이전 링크 -->
 					  <c:if test="${cpage > 1}">
-						<a href="HumorList.sj?cp=${cpage-1}&ps=${pagesize}">이전</a>
+						<a href="BoardList.sj?type=humor_board&cp=${cpage-1}&ps=${pagesize}">이전</a>
 						</c:if> 
 								
 								
@@ -87,7 +92,7 @@
 											<font color="red">[${i}]</font>
 										</c:when>
 										<c:otherwise>
-											<a href="HumorList.sj?cp=${i}&ps=${pagesize}">[${i}]</a>
+											<a href="BoardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">[${i}]</a>
 										</c:otherwise>
 									</c:choose>
 					</c:forEach> 
@@ -95,7 +100,7 @@
 								
 								<!--다음 링크 --> 
 								<c:if test="${cpage < pagecount}">
-									<a href="HumorList.sj?cp=${cpage+1}&ps=${pagesize}">다음</a>
+									<a href="BoardList.sj?type=humor_board&cp=${cpage+1}&ps=${pagesize}">다음</a>
 								</c:if>
 							</td>
 						</tr>

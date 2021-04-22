@@ -25,7 +25,7 @@ public class SJ_board_dao {
 		ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
 	}
 	
-	public List<SJ_board> listWithPage(int cpage, int pagesize){
+	public List<SJ_board> listWithPage(int cpage, int pagesize, String type){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -34,7 +34,9 @@ public class SJ_board_dao {
 			conn = ds.getConnection();
 			String sql = "SELECT * FROM " +
 					"(SELECT rownum rn, hb.IDX ,tu.NICKNAME , hb.SUBJECT, hb.READNUM , hb.UP , hb.DOWN , hb.WRITEDATE " +
-							" from HUMOR_BOARD hb " +
+							" from "
+							+ type 
+							+ " hb " +
 							" left join TEAM1_USER tu on hb.USERID_FK = tu.USERID " +
 							" WHERE rownum <=? order by hb.IDX desc " +
 							")WHERE rn >= ?";

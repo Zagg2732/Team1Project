@@ -14,7 +14,7 @@
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/sj/header_sj.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/sj/section_sj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/include/section_sj.jsp"></jsp:include>
 </body>
 </html>

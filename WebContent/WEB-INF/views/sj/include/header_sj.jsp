@@ -32,9 +32,9 @@
 	<div>
 		<ul>
 			<!-- a : 페이지 이동을 처리하는 마크업 -->
-			<li><a href="HumorList.sj">유머게시판&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+			<li><a href="BoardList.sj?type=humor_board">유머게시판&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!-- HumorList.hsj ㄱㄱ  -->
-			<li><a href="${pageContext.request.contextPath}/NoticeList.hsj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지
+			<li><a href="BoardList.sj?type=notice_board">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지
 					사항</a></li>
 			<!--NoticeList.hsj ㄱㄱ  -->
 			<li><a href="javscript:void(0);"></a></li>
