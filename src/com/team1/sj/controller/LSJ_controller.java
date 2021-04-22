@@ -38,7 +38,7 @@ public class LSJ_controller extends HttpServlet {
     	if(url_command.equals("/home.lsj")) {
     		action = new LSJ_HumorBoardList(); //서비스
     		forward = action.execute(request, response);
-    	} else if (url_command.equals("/humorContent.lsj")) {
+    	} else if (url_command.equals("/board.lsj")) {
     		action = new LSJ_HumorContent();
     		forward = action.execute(request, response);
     	} else {

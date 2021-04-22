@@ -37,7 +37,7 @@
 		<c:forEach var="board" items = "${requestScope.list}">
 			<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
 				<td>${board.idx}</td>
-				<td><a href = "humorContent.lsj?idx=${board.idx}&type=humorboard">${board.subject}</td>
+				<td><a href = "humorContent.lsj?idx=${board.idx}&type=humor_board">${board.subject}</td>
 				<!-- 링크에 idx 태워서감 -->
 				<td>${board.nickname}</td>
 				<td>${board.writedate}</td>
@@ -47,6 +47,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 	
 	
 	

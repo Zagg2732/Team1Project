@@ -26,29 +26,26 @@ public class LSJ_HumorContent implements Action {
 		try {
 			String idx = request.getParameter("idx");
 			String type = request.getParameter("type");
+							
 			String replyType = null;
+			
+			if(type.equals("humor_board")) {
+				replyType = "humor_reply";
+			} else if (type.equals("notice_board")) {
+				replyType = "notice_reply";
+			} else {
+				System.out.println("replyType 설정 오류발생");
+			}
 			
 			System.out.println("게시판으로부터 get으로 받아온 idx : " + idx);
 			System.out.println("게시판으로부터 get으로 받아온 type : " + type);
-			
-			if(type.equals("humorboard")) {
-				type = "humor_board"; //실제 DB 테이블이랑 이름맞추기
-				replyType = "humor_reply";
-			} else if (type.equals("noticeboard")) {
-				type = "notice_board";
-				replyType = "notice_reply";
-			} else {
-				System.out.println("게시판 type을 이상한걸 받아온듯합니다tlqkf!!!!");
-			}
-			
-			System.out.println("DB테이블 이름에 맞게 바꾼 type : " + type);
 			
 			
 			LSJ_board_dao dao = new LSJ_board_dao();
 			boolean readnumAdd = dao.getReadNum(idx, type); //조회수증가
 			
 			if (readnumAdd) { //값이들어갔으면
-				System.out.println("조회수 증가 함수가 제대로 작동했대요 의심되시면 DB에서 확인을!");
+				System.out.println("조회수 증가 함수 작동");
 			} else {
 				System.out.println("Error : 조회수증가 false 받음");
 				forward = new ActionForward();
@@ -66,7 +63,15 @@ public class LSJ_HumorContent implements Action {
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("/WEB-INF/views/sj/board_lsj/board_content_detail.jsp");
+			
+			
+			if(type.equals("humor_board")) {
+				forward.setPath("/WEB-INF/views/sj/board_lsj/board_content_detail.jsp");
+			} else if (type.equals("notice_board")) {
+				forward.setPath("/WEB-INF/views/sj/board_lsj/notice_content_detail.jsp");
+			} else {
+				System.out.println("Path error!");
+			}
 			
 			
 		} catch (NamingException e) {
