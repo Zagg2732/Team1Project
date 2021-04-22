@@ -38,18 +38,16 @@ public class SJ_controller extends HttpServlet {
     	ActionForward forward = null;
     	Action action = null;
     	
-    	if(url_command.equals("/index.sj")) {
-    	
-    		forward = new ActionForward();
-    		forward.setRedirect(false);
-    		forward.setPath("WEB-INF/views/sj/index_sj.jsp");
+    	if(url_command.equals("/index.sj")) {    	
+    		action = new SJ_HumorBoardList();
+    		forward = action.execute(request, response);
     		
     	}else if(url_command.equals("/home.lsj")) {
     		action = new SJ_HumorBoardList(); //서비스
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/board.lsj")) {
+    	} else if (url_command.equals("/board.sj")) {
     		action = new SJ_HumorContent();
     		forward = action.execute(request, response);
     		

@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <link rel="stylesheet" href="css/hsj_style/css/bootstrap.css"> -->
+	<meta charset="UTF-8">
+	<title>Insert title here</title>	
+	<style>
+		 a:link { color: black; text-decoration: none;}
+		 a:visited { color: black; text-decoration: none;}
+		 a:hover { color: black; text-decoration: none;}
+	</style>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
@@ -15,34 +23,21 @@
  <table class="table table-hover">
 	<thead>
 		<tr>
-			<th><h3>유머게시판</h3></th>
+			<th><h3>공지게시판</h3></th>
 		
 		</tr>
 		
 	</thead>
 	<tbody>
-		<tr>
-			<td>하하하하하</td>
-		</tr>
-		<tr>
-			<td>ㅋㅋㅋㅋㅋㅋㅋㅋ</td>
+		<c:forEach var="board" items = "${requestScope.noticelist}">
+			<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
+				<td><a href = "board.sj?idx=${board.idx}&type=notice_board">${board.subject}</td>
+				<td>닉네임 : ${board.nickname}</td>
+				<td>추천 : ${board.up}</td>
+				<td>비추천 : ${board.down}</td>
 			</tr>
-			<tr>
-			<td>ㅎㅎㅎㅎㅎㅎ</td>
-			</tr>
-			<tr>
-			<td>현상진 짱이라며?</td>
-			</tr>
-			<tr>
-			<td>키키키ㅣ키키킼</td>
-			</tr>
-			<tr>
-			<td>호호호호호호호호</td>
-			</tr>
-			<tr>
-			<td>깔깔깔깔깔</td>
-			</tr>
-		
+			<br>
+		</c:forEach>
 	</tbody>
 </table>
 <hr/>
@@ -52,33 +47,20 @@
  <table class="table table-hover">
 	<thead>
 		<tr>
-<th><h3>공지사항</h3></th>
+	<th><h3>유머게시판</h3></th>
 		
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-		<tr>
-		<td>공지사항입니다</td>
-		</tr>
-
+		<c:forEach var="board" items = "${requestScope.humorlist}">
+			<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
+				<td><a href = "board.sj?idx=${board.idx}&type=humor_board">${board.subject}</td>
+				<td>닉네임 : ${board.nickname}</td>
+				<td>추천 : ${board.up}</td>
+				<td>비추천 : ${board.down}</td>
+			</tr>
+			<br>
+		</c:forEach>
 	</tbody>
 </table>
 <hr/>
