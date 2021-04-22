@@ -3,7 +3,7 @@ package com.team1.sj.dto;
 import java.sql.Date;
 
 
-public class LSJ_board {
+public class SJ_board {
 	private int idx;
 	private String user_fk;
 	private String nickname;

@@ -13,24 +13,106 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.team1.sj.dto.LSJ_Reply;
-import com.team1.sj.dto.LSJ_board;
+import com.team1.sj.dto.SJ_Board_Reply;
+import com.team1.sj.dto.SJ_board;
 
 
-public class LSJ_board_dao {
+public class SJ_board_dao {
 	DataSource ds = null;
 	
-	public LSJ_board_dao() throws NamingException {
+	public SJ_board_dao() throws NamingException {
 		Context context = new InitialContext();
 		ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
 	}
 	
-	public List<LSJ_board> list(String name) { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
+	public List<SJ_board> listWithPage(int cpage, int pagesize){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<SJ_board> list = null;
+		try {
+			conn = ds.getConnection();
+			String sql = "SELECT * FROM " +
+					"(SELECT rownum rn, hb.IDX ,tu.NICKNAME , hb.SUBJECT, hb.READNUM , hb.UP , hb.DOWN , hb.WRITEDATE " +
+							" from HUMOR_BOARD hb " +
+							" left join TEAM1_USER tu on hb.USERID_FK = tu.USERID " +
+							" WHERE rownum <=? order by hb.IDX desc " +
+							")WHERE rn >= ?";
+		
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int start = cpage * pagesize - (pagesize -1);
+			int end = cpage * pagesize;
+			
+			pstmt.setInt(1, end);
+			pstmt.setInt(2, start);
+			
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<SJ_board>();
+			
+			while(rs.next()) {
+				SJ_board board = new SJ_board();
+				
+				board.setIdx(rs.getInt("idx"));
+				board.setNickname(rs.getString("nickname"));
+				board.setSubject(rs.getString("subject"));
+				board.setReadnum(rs.getInt("readnum"));
+				board.setUp(rs.getInt("up"));
+				board.setDown(rs.getInt("down"));
+				board.setWritedate(rs.getDate("writedate"));
+							
+				list.add(board);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("오류 : " + e.getMessage());
+		}finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return list;
+	}
+	
+	public int totalBoardCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int totalcount = 0;
+		try {
+			conn = ds.getConnection(); //dbcp 연결객체 얻기
+			String sql="select count(*) cnt from HUMOR_BOARD";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalcount = rs.getInt("cnt");
+			}
+		}catch (Exception e) {
+			
+		}finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();//반환  connection pool 에 반환하기
+			}catch (Exception e) {
+				
+			}
+		}
+		return totalcount;
+	}
+	
+	public List<SJ_board> list(String name) { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		List<LSJ_board> list = null;
+		List<SJ_board> list = null;
 		
 		try {
 			conn = ds.getConnection();
@@ -43,10 +125,10 @@ public class LSJ_board_dao {
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			list = new ArrayList<LSJ_board>();
+			list = new ArrayList<SJ_board>();
 			
 			while(rs.next()) {
-				LSJ_board board = new LSJ_board();
+				SJ_board board = new SJ_board();
 				board.setIdx(rs.getInt("idx"));
 				board.setNickname(rs.getString("nickname"));
 				board.setUp(rs.getInt("UP"));
@@ -74,6 +156,37 @@ public class LSJ_board_dao {
 		return list;
 	}
 	
+	public boolean getReadNum(String idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "update HUMOR_BOARD set readnum = readnum + 1 where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			
+			int row = pstmt.executeUpdate();
+			if(row > 0) {
+				result = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+			// TODO: handle exception
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		
+		return result;
+	}
 	
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
@@ -105,11 +218,11 @@ public class LSJ_board_dao {
 		return result;
 	}
 	
-	public LSJ_board getContentDetails(String idx, String boardName) {
+	public SJ_board getContentDetails(String idx, String boardName) {
 		
 		System.out.println("getContentDetails 입장성공");
 		
-		LSJ_board board = new LSJ_board();
+		SJ_board board = new SJ_board();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -150,12 +263,12 @@ public class LSJ_board_dao {
 		return board;
 	}
 	
-	public List<LSJ_Reply> getReplyList(String idx, String replyType) { //글번호, 게시판이름을 가지고와서 query문 완성
+	public List<SJ_Board_Reply> getReplyList(String idx, String replyType) { //글번호, 게시판이름을 가지고와서 query문 완성
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		List<LSJ_Reply> replyList = null;
+		List<SJ_Board_Reply> replyList = null;
 			
 		try {
 
@@ -176,7 +289,7 @@ public class LSJ_board_dao {
 			
 			while(rs.next()) {
 					
-				LSJ_Reply reply = new LSJ_Reply();
+				SJ_Board_Reply reply = new SJ_Board_Reply();
 
 				reply.setContent(rs.getString("content"));  
 				reply.setUp(rs.getInt("up"));

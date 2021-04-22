@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.sj.dao.BoardDao_hsj;
-import com.team1.sj.dto.Board_hsj;
-import com.team1.sj.dto.Board_Reply_hsj;
+import com.team1.sj.dao.SJ_board_dao;
+import com.team1.sj.dto.SJ_board;
 import com.team1.utils.ThePager;
 
-public class HumorListService_hsj implements Action{ // action interface 참조
+public class SJ_HumorListService implements Action{ // action interface 참조
 	//com.team1.sj.action에 Action, ActionForward객체 만듬 
 
 	@Override
@@ -21,7 +20,7 @@ public class HumorListService_hsj implements Action{ // action interface 참조
 		
 		ActionForward forward = null;
 		try {
-			BoardDao_hsj dao = new BoardDao_hsj();
+			SJ_board_dao dao = new SJ_board_dao();
 			
 			//게시물 총 건수
 			int totalboardcount = dao.totalBoardCount();
@@ -46,7 +45,7 @@ public class HumorListService_hsj implements Action{ // action interface 참조
 				pagecount = (totalboardcount / pagesize) + 1;
 			}
 			
-			List<Board_hsj> list = dao.list(cpage, pagesize);
+			List<SJ_board> list = dao.listWithPage(cpage, pagesize);
 			
 			int pagersize = 3;
 			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.hsj");
