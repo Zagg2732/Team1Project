@@ -35,7 +35,7 @@
 		<section id="loginsection">
 			<h3 style="padding-top:150px;"align="center">Login Form</h3>
 			<!-- multistep form -->
-			<form id="msform" action="<%= request.getContextPath()%>/LoginOk.team1" method="post">
+			<form id="msform" action="${pageContext.request.contextPath}/LoginOk.team1" method="post">
 
 				<!-- fieldsets -->
 				<fieldset>
