@@ -73,11 +73,12 @@ public class BoardDao_hsj {
 		List<Board_hsj> list = null;
 		try {
 			conn = ds.getConnection();
-			String sql = "(SELECT rownum rn, hb.IDX ,tu.NICKNAME , hb.SUBJECT, hb.READNUM , hb.UP , hb.DOWN , hb.WRITEDATE " +
+			String sql = "SELECT * FROM " +
+					"(SELECT rownum rn, hb.IDX ,tu.NICKNAME , hb.SUBJECT, hb.READNUM , hb.UP , hb.DOWN , hb.WRITEDATE " +
 							" from HUMOR_BOARD hb " +
-								" left join TEAM1_USER tu on hb.USERID_FK = tu.USERID " +
-								" WHERE rownum <=?) " +
-								")WHERE rn >= ?";
+							" left join TEAM1_USER tu on hb.USERID_FK = tu.USERID " +
+							" WHERE rownum <=? order by hb.IDX desc " +
+							")WHERE rn >= ?";
 		
 			
 			pstmt = conn.prepareStatement(sql);
@@ -150,6 +151,40 @@ public class BoardDao_hsj {
 				return totalcount;
 			}
 		
+	
+		
+		// 게시글 조회수 증가
+		public boolean getReadNum(String idx) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			boolean result = false;
+			
+			try {
+				conn = ds.getConnection();
+				String sql = "update HUMOR_BOARD set readnum = readnum + 1 where idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, idx);
+				
+				int row = pstmt.executeUpdate();
+				if(row > 0) {
+					result = true;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			
+				// TODO: handle exception
+			}finally {
+				try {
+					pstmt.close();
+					conn.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+			
+			return result;
+		}
 
 	
 }

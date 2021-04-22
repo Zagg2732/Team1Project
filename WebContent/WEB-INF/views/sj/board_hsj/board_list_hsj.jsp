@@ -11,11 +11,14 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<title>Insert title here</title>
-<link rel="Stylesheet" href="./css/hsj_style/default.css">
+<title>유머게시판</title>
+<!-- <link rel="Stylesheet" href="./css/hsj_style/default.css"> -->
+<link rel="Stylesheet" href="css/hsj_style/default.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
-	<c:import url="/WEB-INF/views/sj/header_hsj.jsp"/>
+	<%-- <c:import url="/WEB-INF/views/sj/header_hsj.jsp"/> --%>
+	<jsp:include page="/WEB-INF/views/sj/header_hsj.jsp"></jsp:include>
 
 
 	<!-- requestScope사용 가능한 이유??  -->
@@ -29,37 +32,10 @@
 	<c:set var="pager" value="${requestScope.pager}" />
 
 
-
-<div id="pagecontainer">
-		<div style="padding-top: 30px; text-align: cetner">
-			<table width="80%" border="1" cellspacing="0" align="center">
-				<tr>
-					<td colspan="5">
-						<!--  
-							form 태그 action 전송 주소(목적지) >> submit()
-							>> form name="list" ... action 없다면.. 
-							>> [현재 URL 창에 있는 주소] 그대로  .....   
-							>> board_list.jsp?ps=select 태그 값으로 .... 다시 호출 .....
-							>>http://192.168.0.169:8090/WebServlet_5_Board_Model1_Sample/board/board_list.jsp?ps=10					
-						-->
-						<form name="list" >
-						묶음보기 
-							<select name="ps" onchange="submit()">
-							   <c:forEach var="i" begin="5" end="20" step="5">
-							   		<c:choose>
-							   			<c:when test="${pagesize == i}">
-							   				<option value="${i}" selected>${i}건</option>
-							   			</c:when>
-						   				<c:otherwise>
-						   					<option value="${i}">${i}건 </option>
-						   				</c:otherwise>
-							   		</c:choose>
-							   </c:forEach>
-		   					</select>
-						</form>
-					</td>
-				</tr>
-				
+<div class="container">
+<div class="list-board">
+		<div class="list-head div-head">
+			<table class="table table-hover table-striped text-center">
 				<tr>
 					<th>번호</th>
 					<th>닉네임</th>
@@ -75,7 +51,7 @@
 				<!-- forEach()  목록 출력하기  -->
 				<tbody>
 				<c:forEach var="board" items="${list}">
-					<tr onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
+					<tr>
 						<td>${board.idx}</td>
 						<td>${board.nickname}</td>
 						<td>${board.subject}</td>
@@ -84,14 +60,17 @@
 						<td>${board.down}</td>
 						<td>${board.writedate}</td>
 					</tr>
+					
 				</c:forEach>
 				<!-- forEach()  -->
-				<tr>
+				<!-- <tr>
 					<td colspan="5" align="center">
 						<hr width="100%" color="red">
 					</td>
-				</tr>
-				<tr>
+				</tr> -->
+				
+				
+			<%-- 	<tr>
 					<td colspan="3" align="center">
 					<!--  
 					원칙적인 방법 아래 처럼 구현
@@ -125,15 +104,37 @@
 					</td>
 					<td colspan="2" align="center">총 게시물 수 : ${totalboardcount}
 					</td>
-				</tr>
+				</tr> --%>
 				<tr>
-					<td colspan="5" align="center">
+			<%-- 		<td colspan="5" align="center">
 
 					${pager}
-					</td>
+					</td> --%>
 			</tbody>
+			
 			</table>
 		</div>
 	</div>
+	<div>
+		<ul class="pagination justify-content-center">
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  ⬅️ </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  1  </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  2  </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  3  </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  4  </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  5  </a></li>
+		<li><a href="#" style="margin-right:5px;" class="text-secondary">  ➡️ ️</a></li>
+		
+		</ul>
+		 <a class="btn btn-outline-info pull-right" href="${pageContext.request.contextPath}/HumorWrite.hsj">글쓰기</a>
+	</div>
+	</div>
+	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<!-- 	<script src="js/jquery-3.1.1.js"></script>	
+<script src="js/bootstrap.js"></script>
+	 -->
+	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 </body>
 </html>

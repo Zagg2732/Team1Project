@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.service.HumorBoardAddService_hsj;
+import com.team1.sj.service.HumorBoardContentService_hsj;
 import com.team1.sj.service.HumorListService_hsj;
 
 
@@ -57,6 +58,10 @@ public class FrontBoardController extends HttpServlet {
     //////////////////////////////////////////////////////////////////////
     		
     	}else if(url_Command.equals("/HumorBoardContent.hsj")) {
+    		action = new HumorBoardContentService_hsj();
+    		forward = action.execute(request, response);
+    		
+    /////////////////////////////////////////////////////////////////////
     		
     	}
     	
