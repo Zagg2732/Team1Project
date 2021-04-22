@@ -375,7 +375,11 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection();
-			String reply_sql = "SELECT * FROM DIARY_REPLY IDX_FK=? ORDER BY DESC";
+			String reply_sql = "SELECT DR.IDX_FK, DR.USERID_FK, TU.NICKNAME, DR.CONTENT, DR.WRITEDATE "
+							 + "FROM DIARY_REPLY DR "
+							 + "JOIN TEAM1_USER TU ON DR.USERID_FK = TU.USERID "
+							 + "WHERE DR.IDX_FK = ? "
+							 + "ORDER BY DR.NUM DESC";
 			
 			pstmt = conn.prepareStatement(reply_sql);
 			pstmt.setString(1, idx_fk);
