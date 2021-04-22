@@ -24,15 +24,15 @@ public class ReplyDelete extends HttpServlet {
     
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	System.out.println("ReplyDelete.ajax Start!!!!!");
+    	//System.out.println("ReplyDelete.ajax Start!!!!!");
     	
 		String idx_fk = request.getParameter("idx_fk");
 		String userid_fk = request.getParameter("userid_fk");
 		String num = request.getParameter("num");
 		
-		System.out.println(idx_fk);
-		System.out.println(userid_fk);
-		System.out.println(num);
+		//System.out.println(idx_fk);
+		//System.out.println(userid_fk);
+		//System.out.println(num);
 		
 		
 		try {

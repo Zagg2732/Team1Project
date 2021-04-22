@@ -24,6 +24,8 @@ public class ReplyAdd extends HttpServlet {
 
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
+    	//System.out.println("ReplyAdd.ajax Start!!!!!");
+    	
 		String idx_fk = request.getParameter("idx");
 		String userid_fk = request.getParameter("userid");
 		String content = request.getParameter("reply_content");

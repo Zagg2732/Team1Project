@@ -78,7 +78,7 @@
 				<form name="reply" action="diaryReply.jh" method="POST">
 					<!-- hidden : 값 숨겨서 처리 --> 
 					<input type="hidden" name="idx" value="${idx}" id="idx">
-					<input type="hidden" name="userid" value="${diaryDto.userid_fk}" id="userid">
+					<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
 					<input type="hidden" name="nickname" value="${userInfo.nickName}" id="nickname">
 					
 					<table class="table">
@@ -130,9 +130,10 @@
 				console.log(data);
 				$.each(data, function(index,obj) {
 				$('#replybody').append(
-					'<tr align="left"><td width="80%">[' + obj.userid_fk +'] : ' + obj.content +
+					'<tr align="left"><td width="80%">[' +obj.nickname+ '] : ' + obj.content +
 					'<br> 작성일 :'+obj.writedate +'</td><td width="20%">' +
 					'<form method="POST" name="replyDel">' +
+					
 					'<input type="hidden" name="num" value="' +obj.num +'" class="reply_num">' +
 					'<input type="hidden" name="idx" value="' +obj.idx_fk +'" class="reply_idx">' +
 					'<input type="hidden" name="userid" value="' +obj.userid_fk +'" class="reply_userid">' +
@@ -170,6 +171,7 @@
 				success : function(data) {
 					replyList();
 					$('#reply_content').val("");
+					$('#nickname').val("");
 					$('#replybody').empty();
 				},
 				error : function() {
@@ -204,7 +206,3 @@
 	
 </script>
 </html>
-
-
-
-

@@ -375,7 +375,7 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection();
-			String reply_sql = "SELECT DR.IDX_FK, DR.USERID_FK, TU.NICKNAME, DR.CONTENT, DR.WRITEDATE "
+			String reply_sql = "SELECT DR.IDX_FK, DR.USERID_FK, TU.NICKNAME, DR.CONTENT, DR.WRITEDATE, DR.NUM "
 							 + "FROM DIARY_REPLY DR "
 							 + "JOIN TEAM1_USER TU ON DR.USERID_FK = TU.USERID "
 							 + "WHERE DR.IDX_FK = ? "
@@ -383,6 +383,7 @@ public class MiniDao {
 			
 			pstmt = conn.prepareStatement(reply_sql);
 			pstmt.setString(1, idx_fk);
+			
 			rs = pstmt.executeQuery();
 
 			list = new ArrayList<>();
@@ -393,13 +394,16 @@ public class MiniDao {
 				int num = Integer.parseInt(rs.getString("num"));
 				String content  =rs.getString("content");
 				java.sql.Date writedate = rs.getDate("writedate");
+				String nickName  =rs.getString("nickName");
 				
-				DiaryReplyDto replydto = new DiaryReplyDto(idx, userid_fk, num, content, writedate);
+				DiaryReplyDto replydto = new DiaryReplyDto(idx, userid_fk, num, content, writedate, nickName);
 				list.add(replydto);
-			}
+
+			}			
 
 		} catch (Exception e) {
-			
+			System.out.println("댓글 조회 오류: " +e.getMessage());
+			e.printStackTrace();
 		}finally {
 			try {
 				pstmt.close();
