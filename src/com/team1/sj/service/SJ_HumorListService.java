@@ -48,7 +48,7 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			List<SJ_board> list = dao.listWithPage(cpage, pagesize);
 			
 			int pagersize = 3;
-			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.hsj");
+			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.sj");
 			
 			request.setAttribute("pagesize", pagesize);
 			request.setAttribute("cpage", cpage);

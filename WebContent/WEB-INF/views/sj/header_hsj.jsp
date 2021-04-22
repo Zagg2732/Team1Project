@@ -16,7 +16,7 @@
 <header class="pc-header">
 		<!-- PC Logo -->
 		<div class="header-logo">
-			<a href="${pageContext.request.contextPath }/temp_index_hsj.jsp">
+			<a href="index.sj">
 				<!-- 로고 누르면 홈화면 이동  --> <img src="images/hsj/logo.png" alt="" />
 			</a>
 		</div>	
@@ -28,7 +28,7 @@
 	<div>
 		<ul>
 			<!-- a : 페이지 이동을 처리하는 마크업 -->
-			<li><a href="HumorList.hsj">유머게시판&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+			<li><a href="HumorList.sj">유머게시판&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!-- HumorList.hsj ㄱㄱ  -->
 			<li><a href="${pageContext.request.contextPath}/NoticeList.hsj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지
 					사항</a></li>
