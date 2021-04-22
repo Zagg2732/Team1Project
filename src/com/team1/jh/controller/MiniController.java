@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
+import com.team1.jh.service.DiaryContentService;
 import com.team1.jh.service.DiaryListService;
+import com.team1.jh.service.ReplyAddService;
 
-@WebServlet("*.mini")
+@WebServlet("*.jh")
 public class MiniController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public MiniController() {
@@ -33,16 +35,24 @@ public class MiniController extends HttpServlet {
     	Action action=null;
     	ActionForward forward=null;
     	
-    	if(url_Command.equals("/home.mini")) { //홈
+    	if(url_Command.equals("/home.jh")) { //홈
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/jh/home.html");
     		
-    	}else if(url_Command.equals("/diary.mini")) { //다이어리 
+    	}else if(url_Command.equals("/diary.jh")) { //다이어리 전체보기 
     		action = new DiaryListService();
     		forward = action.execute(request, response);
     		
-    	}else if(url_Command.equals("/guestbook.mini")) { //방명록
+    	}else if(url_Command.equals("/diaryContent.jh")) { //다이어리 상세보기 
+        	action = new DiaryContentService();
+        	forward = action.execute(request, response);
+        	
+    	}else if(url_Command.equals("/diaryReply.jh")) { //다이어리 댓글쓰기 
+            action = new ReplyAddService();
+            forward = action.execute(request, response);
+        		
+    	}else if(url_Command.equals("/guestbook.jh")) { //방명록
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/jh/guestbook.html");

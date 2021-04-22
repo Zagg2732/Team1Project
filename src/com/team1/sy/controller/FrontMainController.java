@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.*;
 import com.team1.sy.service.LoginAction;
+import com.team1.sy.service.LogoutAction;
+import com.team1.sy.service.RegisterOk;
 
 @WebServlet("*.team1")
 public class FrontMainController extends HttpServlet {
@@ -36,14 +38,23 @@ public class FrontMainController extends HttpServlet {
     		forward.setRedirect(false);
     		forward.setPath("index.jsp");
     	}else if(url_Command.equals("/Login.team1")) { //만약 있다면 상세보기
-    		//UI 제공 ...
+    		//UI 제공 .../Register.team1
     		//예) /WEB-INF/views/memoview.jsp 가정
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/sy/total/login.jsp");
     	}else if(url_Command.equals("/LoginOk.team1")) {
     		action = new LoginAction();
-    		System.out.println("Controller = LoginOk.team1 / LoginAction");
+    		forward = action.execute(request, response);
+    	}else if(url_Command.equals("/Logout.team1")) {
+    		action = new LogoutAction();
+    		forward = action.execute(request, response);
+    	}else if(url_Command.equals("/Register.team1")) {
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("/WEB-INF/views/sy/total/register.jsp");
+    	}else if(url_Command.equals("/RegisterOk.team1")) {
+    		action = new RegisterOk();
     		forward = action.execute(request, response);
     	}
     	

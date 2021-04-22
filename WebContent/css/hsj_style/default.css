@@ -1,212 +1,217 @@
-﻿body, h3, textarea, input, select
-{
-	font-family: Tahoma,Arial,Helvetica;
-	font-size:12px;
+﻿.list-board { 
+    margin-bottom: 15px;
 }
 
-body
-{
-	background:#ffffff none repeat scroll 0%;
-	color:#333333;
-	margin:0pt;
-	padding:0pt;
+div-head {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 15px 0;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-bottom: 1px solid #c3c3c3;
+    border-collapse: separate;
 }
 
-#pageContainer
-{
-	background:#ffffff none repeat scroll 0%;
-	margin:0pt auto;
-	max-width:100%;
-	min-width:600px;
-	padding:0pt 0px;
-	position:relative;
-	text-align:left;
+.border-black {
+    border-color: #333;
 }
 
-#header
-{
-	background-color:#5e73bb;
-	color:#ffffff;
-	width:100%;
-	padding-bottom:4px;
-	height:60px;
+body, h3, textarea, input, select {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 20px; /* 폰트 사이즈 고쳐줌  */
 }
 
-#header a
-{
-	color:#ffffff;
-	font-weight:bold;
-	text-decoration:none;
+body {
+	background: #ffffff none repeat scroll 0%;
+	color: #333333;
+	margin: 0pt;
+	padding: 0pt;
 }
 
-#header .title
-{
-	font-family:"Trebuchet MS",Sans-Serif,Verdana;
-	font-size:36px;
-	font-weight:bolder;
-	padding-left:15px;
-	padding-top:5px;
-	float:left;
+#pageContainer {
+	background: #ffffff none repeat scroll 0%;
+	margin: 0pt auto;
+	max-width: 100%;
+	min-width: 600px;
+	padding: 0pt 0px;
+	position: relative;
+	text-align: left;
 }
 
-#header .links
-{
-	padding-top:45px;
-	float:right;
+.pc-header .header-logo img { /* 로고 이미지 맞추기   */
+	display: block;
+	max-width: 100%;
+	max-height: 200px; /* 로고 사이즈 조정  */
+	text-align: center;
 }
 
-#header .links a
-{
+img {
+	vertical-align: middle; /* 로고이미지  */
+	display: block;
+	margin: 0 auto; /* 가운데 정렬  */
+}
+
+#header {
+	background-color: #5e73bb;
+	color: #ffffff;
+	width: 100%;
+	padding-bottom: 4px;
+	height: 60px;
+}
+
+#header a {
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#header .title {
+	font-family: "Trebuchet MS", Sans-Serif, Verdana;
+	font-size: 36px;
+	font-weight: bolder;
+	padding-left: 15px;
+	padding-top: 5px;
+	float: left;
+}
+
+#header .links {
+	padding-top: 45px;
+	float: right;
+}
+
+#header .links a {
 	padding: 8px 8px 8px 8px;
 }
 
-#menu
-{
-	background-color:#404040;
-	color:#000000;
-	padding:5px 15px 5px;
+#menu {
+	background-color: #404040;
+	color: #000000;
+	padding: 20px 10px 20px;  /* 네비게이션바 크기 맞추기  */
 }
 
-#menu ul
-{
-	display:inline;
-	margin-left:0pt;
-	padding-left:0pt;
+#menu ul {
+	display: inline;
+	margin-left: 0pt;
+	padding-left: 0pt;
 }
 
-#menu ul li
-{
-	border:medium none;
-	display:inline;
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
-	margin-left:0pt;
+#menu ul li {
+	border: medium none;
+	display: inline;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin-left: 0pt;
 }
 
-#menu ul li a
-{
+#menu ul li a {
 	padding: 8px 8px 8px 8px;
-	color:#ffffff;
-	font-weight:bold;
-	text-decoration : none;
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
 }
 
-#menu ul li a:focus, #menu ul li a:hover
-{
-	background-color:#5a5a5a;
-	outline-color:invert;
-	outline-style:none;
-	outline-width:medium;
+#menu ul li a:focus, #menu ul li a:hover {
+	background-color: #5a5a5a;
+	outline-color: invert;
+	outline-style: none;
+	outline-width: medium;
 }
 
-#content
-{
-	margin-left:10px;
-	margin-right:10px;
+#content {
+	margin-left: 10px;
+	margin-right: 10px;
 	padding-top: 0px;
-	text-align:center;
+	text-align: center;
 }
 
-#sidebar
-{
-	float:left;
-	width:280px;
+#sidebar {
+	float: left;
+	width: 280px;
 	padding-top: 10px;
-	margin-right:10px;
+	margin-right: 10px;
 }
 
-.divider
-{
-	height:10px;
+.divider {
+	height: 10px;
 }
 
-.form
-{
+.form {
 	background: #fff9d7 none no-repeat scroll 0%;
 	border: 1px solid #e2c822;
 	padding: 0 8px 8px 8px;
 }
 
-.form h2
-{
-	border-bottom:1px solid #e2c822;
-	font-size:12px;
-	font-weight:bold;
-	padding-bottom:5px;
+.form h2 {
+	border-bottom: 1px solid #e2c822;
+	font-size: 12px;
+	font-weight: bold;
+	padding-bottom: 5px;
 }
 
-.form p
-{
-	margin-top:5px;
-	margin-bottom:5px;
+.form p {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
-.form .label
-{
+.form .label {
 	width: 70px;
-	padding-right:2px;
-	padding-top:2px;
+	padding-right: 2px;
+	padding-top: 2px;
 	float: left;
-	clear:left;
+	clear: left;
 }
 
-.form .textbox
-{
+.form .textbox {
 	width: 280px;
-	border:1px solid #e2c822;
-	font-size:11px;
-	padding:3px;
+	border: 1px solid #e2c822;
+	font-size: 11px;
+	padding: 3px;
 }
 
-.form .textarea
-{
+.form .textarea {
 	width: 280px;
-	height:128px;
-	border:1px solid #e2c822;
-	font-size:11px;
-	padding:3px;
+	height: 128px;
+	border: 1px solid #e2c822;
+	font-size: 11px;
+	padding: 3px;
 }
 
-.form .largeTextbox
-{
+.form .largeTextbox {
 	width: 480px;
-	border:1px solid #e2c822;
-	font-size:11px;
-	padding:3px;
+	border: 1px solid #e2c822;
+	font-size: 11px;
+	padding: 3px;
 }
 
-.form .largeTextarea
-{
+.form .largeTextarea {
 	width: 480px;
-	height:192px;
-	border:1px solid #e2c822;
-	font-size:11px;
-	padding:3px;
+	height: 192px;
+	border: 1px solid #e2c822;
+	font-size: 11px;
+	padding: 3px;
 }
 
-.form .button
-{
-	background:#f2f2f2 url(../Images/buttonBG.gif) repeat-x scroll 0%;
-	border:1px solid #999999;
+.form .button {
+	background: #f2f2f2 url(../Images/buttonBG.gif) repeat-x scroll 0%;
+	border: 1px solid #999999;
 	padding: 2px 4px 2px 4px;
 }
 
-.form .validator
-{
-	color:#ff0000;
-	padding-left:72px;
+.form .validator {
+	color: #ff0000;
+	padding-left: 72px;
 }
 
-.form .smallTextbox
-{
-	border:1px solid #e2c822;
-	font-size:11px;
-	padding:3px;
+.form .smallTextbox {
+	border: 1px solid #e2c822;
+	font-size: 11px;
+	padding: 3px;
 	width: 200px;
 }
 
-.form .message
-{
-	padding-left:72px;
+.form .message {
+	padding-left: 72px;
 }
+
