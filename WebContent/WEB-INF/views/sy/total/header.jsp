@@ -22,13 +22,13 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.jsp"><img src="images/new_team1_logo.png" alt=""></a>
+                            <a href="./index.team1"><img src="images/new_team1_logo.png" alt=""></a>
                         </div>
                     </div>
 				<div class="col-lg-2">
 					<div class="ht-widget">
 						<c:if test="${userInfo.grade > 0}">
-							<a href="temp.team1" class="btn btn-light">admin</a>
+							<a href="temp.team1" class="btn btn-dark"><i class="fas fa-cog"></i> admin</a>
 						</c:if>
 					</div>
 				</div>
@@ -44,10 +44,10 @@
 
 						<c:choose>
 							<c:when test="${not empty userInfo}">
-								<a href="Logout.team1" class="btn btn-light">Logout</a>
+								<a href="Logout.team1" class="btn btn-dark">Logout</a>
 							</c:when>
 							<c:otherwise>
-								<a href="Login.team1" class="btn btn-light">Login</a>
+								<a href="Login.team1" class="btn btn-dark">Login</a>
 							</c:otherwise>
 						</c:choose>
 
@@ -66,10 +66,10 @@
                     <div class="col-lg-9">
                         <nav class="nav-menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Home</a></li>
-                                <li><a href="#">SJ Board</a></li>
-                                <li><a href="#">Joohyun's minihomepy</a></li>
-                                <li><a href="#">Kim's Board</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/index.team1">Home</a></li>
+                                <li><a href="${pageContext.request.contextPath}/temp_index_hsj.jsp">SJ Board</a></li>
+                                <li><a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">Joohyun's minihomepy</a></li>
+                                <li><a href="${pageContext.request.contextPath}/indexyh.jsp">Kim's Board</a></li>
                             </ul>
                         </nav>
                     </div>

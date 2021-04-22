@@ -18,15 +18,12 @@ import com.team1.sj.dto.LSJ_board;
 
 
 public class LSJ_board_dao {
-DataSource ds = null;
+	DataSource ds = null;
 	
 	public LSJ_board_dao() throws NamingException {
 		Context context = new InitialContext();
 		ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
 	}
-	
-	//게시글 list 만드는 함수 list
-	List<LSJ_board> list = null;
 	
 	public List<LSJ_board> list(String name) { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
 		Connection conn = null;
@@ -59,8 +56,7 @@ DataSource ds = null;
 				board.setSubject(rs.getString("SUBJECT"));
 				
 				list.add(board);
-			}
-			
+			}			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,7 +73,9 @@ DataSource ds = null;
 		}
 		return list;
 	}
-	public boolean getReadNum(String idx, String boardName) {
+	
+	
+	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -85,7 +83,7 @@ DataSource ds = null;
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "update " + boardName + " set readnum = readnum + 1 where idx = ?";
+			String sql = "update " + type + " set readnum = readnum + 1 where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idx);
 			
@@ -158,9 +156,7 @@ DataSource ds = null;
 		ResultSet rs = null;
 		
 		List<LSJ_Reply> replyList = null;
-		
-		
-		
+			
 		try {
 
 			
