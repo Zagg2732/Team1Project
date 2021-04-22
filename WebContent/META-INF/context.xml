@@ -23,7 +23,7 @@ password="tiger"   // 연결한 db의 비밀번호
 			maxActive="20"
 			password="Bit196team1!"
 			username="bituser"
-			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey/oracle-atp"
+			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/joohyun/BitCamp/Project/team1/oraoraoracle/oracle-atp"
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
 			auth="Container" 
