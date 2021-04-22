@@ -34,7 +34,7 @@
 			<h3 style="padding-top: 70px;" align="center">Register Form</h3>
 			
 			<!-- multistep form -->
-			<form id="msform">
+			<form id="msform" action="${pageContext.request.contextPath}/RegisterOk.team1" method="post">
 				<!-- progressbar -->
 				<ul id="progressbar">
 					<li class="active">Terms and Conditions</li>
@@ -79,7 +79,6 @@
 					<input type="submit" name="submit" class="submit action-button" value="Submit" />
 				</fieldset>
 				<!-- USERID,USERNAME,NICKNAME,PASSWORD,JOINDATE,GRADE_FK -->
-				
 
 			</form>
 

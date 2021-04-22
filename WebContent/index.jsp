@@ -1,7 +1,3 @@
-<%@page import="javax.sql.DataSource"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -62,7 +58,7 @@
 						data-setbg="https://random.imagecdn.app/1280/720">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="#" class="btn btn-light btn-lg"><i
+								<a href="${pageContext.request.contextPath }/temp_index_hsj.jsp" class="btn btn-light btn-lg"><i
 									class="fab fa-trello"></i> SJ Board</a>
 							</div>
 						</div>
@@ -71,7 +67,7 @@
 						data-setbg="https://random.imagecdn.app/1600/900">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="#" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');" class="btn btn-light btn-lg"><i
+								<a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');" class="btn btn-light btn-lg"><i
 									class="fas fa-home"></i> Joohyun's minihomepy</a>
 							</div>
 						</div>
@@ -80,7 +76,7 @@
 						data-setbg="https://random.imagecdn.app/1170/780">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="#" class="btn btn-light btn-lg"><i
+								<a href="${pageContext.request.contextPath}/indexyh.jsp" class="btn btn-light btn-lg"><i
 									class="fab fa-trello"></i> Kim's Board</a>
 							</div>
 						</div>

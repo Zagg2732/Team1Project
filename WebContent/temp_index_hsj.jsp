@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SJ게시판_index</title>
+<title>SJ게시판</title>
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 </head>
 <body>
