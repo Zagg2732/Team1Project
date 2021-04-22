@@ -10,10 +10,11 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.sj.dao.BoardDao_hsj;
-import com.team1.sj.dto.Board_hsj;
+import com.team1.sj.dao.SJ_board_dao;
+import com.team1.sj.dto.SJ_board;
 
-public class HumorBoardAddService_hsj implements Action{
+
+public class SJ_HumorBoardAddService implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -33,7 +34,7 @@ public class HumorBoardAddService_hsj implements Action{
 			String content = multi.getParameter("content");
 			String filename = multi.getFilesystemName("filename");
 			
-			Board_hsj board = new Board_hsj();
+			SJ_board board = new SJ_board();
 			
 			board.setSubject(subject);
 			board.setContent(content);
@@ -43,9 +44,9 @@ public class HumorBoardAddService_hsj implements Action{
 			
 			try {
 				
-				BoardDao_hsj dao = new BoardDao_hsj();
+				SJ_board_dao dao = new SJ_board_dao();
 				
-				result = dao.writeok(board);
+				//result = dao.writeok(board);
 				
 			}catch(NamingException e) {
 				e.printStackTrace();
