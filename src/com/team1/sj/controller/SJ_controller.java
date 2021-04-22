@@ -52,7 +52,7 @@ public class SJ_controller extends HttpServlet {
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/HumorList.sj")) {
+    	} else if (url_command.equals("/BoardList.sj")) {
     		action = new SJ_HumorListService();
     		forward = action.execute(request, response);
     		
