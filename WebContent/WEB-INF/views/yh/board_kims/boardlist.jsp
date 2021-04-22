@@ -88,7 +88,6 @@
                     <td>2017-05-04</td>
                     </tr>
                 </tbody>
-            
             </table>
             <a href="${pageContext.request.contextPath}/kimswrite.kims" class="btn btn-primary pull-right">글쓰기</a>
         </div>

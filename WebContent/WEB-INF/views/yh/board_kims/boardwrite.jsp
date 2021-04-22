@@ -10,8 +10,9 @@
 <title>Kim's Board 글쓰기</title>
 </head>
 <body>
+
 <%
-    String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
+    String userid = null; // 로그인이 된 사람들은 로그인정보를a 수 있도록한다
     if (session.getAttribute("userid") != null)
     {
     	userid = (String)session.getAttribute("userid");
@@ -69,8 +70,13 @@
         </div>
     </nav>
     <div class="container">
+    
+    <!-- 유저세션 -->
+    <c:set var="userInfo" value="${sessionScope.userInfo}" />
+    
         <div class="row">
-        <form method="post" action="${pageContext.request.contextPath}/kimswriteok.kims">
+        <form method="post" action="${pageContext.request.contextPath}/kimswriteok.kims" enctype="multipart/form-data">
+        <input type="hidden" name="userid" value="userid" id="${sessionScope.userInfo}">
             <table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
                 <thead>
                     <tr>

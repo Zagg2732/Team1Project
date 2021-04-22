@@ -47,6 +47,10 @@ public class FrontBoardController extends HttpServlet {
     		System.out.println("글 등록 도착");
     		action = new KimsBoardAddService();
     		forward = action.execute(request, response);
+    	} else if (url_Command.equals("/kimswriteok.kims")) { //만약 있다면 상세보기
+    		System.out.println("글 등록 도착");
+    		action = new KimsBoardAddService();
+    		forward = action.execute(request, response);
     	}
     	
     	///////////////////////////////////////////////

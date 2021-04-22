@@ -64,10 +64,9 @@ public class HumorListService_hsj implements Action{ // action interface 참조
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		return forward; // forward정보 리턴 
+		return forward;
 		
 	}
 	
