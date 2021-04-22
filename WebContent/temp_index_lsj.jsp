@@ -23,7 +23,7 @@
 	<div id = "header">TEMP PAGE</div>
 	<h3>뭘 봐? TEMP INDEX 처음봐?? [더보기]</h3>
 	<a href="home.lsj">HOME</a><br>
-	<a href="#">공지 페이지</a><br>
-	<a href="#">유머 페이지</a><br>
+	<a href="notice.lsj">공지 페이지</a><br>
+	<a href="humor.lsj">유머 페이지</a><br>
 </body>
 </html>
