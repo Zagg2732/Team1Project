@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.*;
 import com.team1.sy.service.LoginAction;
 import com.team1.sy.service.LogoutAction;
+import com.team1.sy.service.RegisterOk;
 
 @WebServlet("*.team1")
 public class FrontMainController extends HttpServlet {
@@ -52,6 +53,9 @@ public class FrontMainController extends HttpServlet {
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/sy/total/register.jsp");
+    	}else if(url_Command.equals("/RegisterOk.team1")) {
+    		action = new RegisterOk();
+    		forward = action.execute(request, response);
     	}
     	
     	if(forward != null) {
