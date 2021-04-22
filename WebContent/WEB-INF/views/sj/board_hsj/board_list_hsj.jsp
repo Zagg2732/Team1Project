@@ -38,6 +38,8 @@
 
 	<div class="container">
 		<div class="list-board">
+		
+		<!-- 시이작  -->
 			<div class="list-head div-head">
 				<table class="table table-hover table-striped text-center">
 					<tr>
@@ -65,6 +67,7 @@
 							</tr>
 
 						</c:forEach>
+
 
 						<tr>
 							<td colspan="9" align="center"> <!--페이징 처리 가운데 정렬  -->
@@ -98,7 +101,11 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> <!-- 끝  -->
+			
+			
+			
+			<a class="btn btn-outline-info">글쓰기</a>
 		</div>
 
 	</div>

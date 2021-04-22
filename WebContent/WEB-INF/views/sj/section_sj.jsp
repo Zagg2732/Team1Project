@@ -12,14 +12,38 @@
 		 a:link { color: black; text-decoration: none;}
 		 a:visited { color: black; text-decoration: none;}
 		 a:hover { color: black; text-decoration: none;}
+		 
+		 .col-sm-6{
+		 	display: flex;
+		 	width: 50%;
+		 }
+		 
+		 .col-md-9 at-col at-main{
+		 	height: auto !important;
+		 	min-height: 0px !important;
+		 }
+		 
+		 .row{
+		 	margin-right: -15px;
+		 	margin-left: -15px;
+		 	
+		 	justify-content: flex-end;
+		 }
+		 
 	</style>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
+
+
 <div class="row at-row">
+
 <div class="col-md-9 at-col at-main">
-<div class="col-sm-6" style="float: left;">
+
+<div class="row">
+
+<div class="col-sm-6">
  <table class="table table-hover">
 	<thead>
 		<tr>
@@ -30,11 +54,9 @@
 	</thead>
 	<tbody>
 		<c:forEach var="board" items = "${requestScope.noticelist}">
-			<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
-				<td><a href = "board.sj?idx=${board.idx}&type=notice_board">${board.subject}</td>
-				<td>닉네임 : ${board.nickname}</td>
-				<td>추천 : ${board.up}</td>
-				<td>비추천 : ${board.down}</td>
+			<tr class="boardlist">
+				<td><a href = "board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+
 			</tr>
 			<br>
 		</c:forEach>
@@ -43,7 +65,7 @@
 <hr/>
 </div>
 
-<div class="col-sm-6" style="float: left;">
+<div class="col-sm-6">
  <table class="table table-hover">
 	<thead>
 		<tr>
@@ -53,11 +75,9 @@
 	</thead>
 	<tbody>
 		<c:forEach var="board" items = "${requestScope.humorlist}">
-			<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
-				<td><a href = "board.sj?idx=${board.idx}&type=humor_board">${board.subject}</td>
-				<td>닉네임 : ${board.nickname}</td>
-				<td>추천 : ${board.up}</td>
-				<td>비추천 : ${board.down}</td>
+			<tr class="boardlist">
+				<td><a href = "board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+
 			</tr>
 			<br>
 		</c:forEach>
@@ -80,6 +100,7 @@
 </div> -->
 
 </div>
+</div>
 
 </div>
 <div class="col-sm-2">
@@ -93,7 +114,7 @@
 	</thead>
 	</table>
 </div>
-</div>
+</div> 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
