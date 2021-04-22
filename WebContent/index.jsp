@@ -1,6 +1,6 @@
-<%@page import="javax.sql.DataSource"%>
-<%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.sql.DataSource"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -62,7 +62,7 @@
 						data-setbg="https://random.imagecdn.app/1280/720">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="${pageContext.request.contextPath }/temp_index_hsj.jsp" class="btn btn-light btn-lg"><i
+								<a href="${pageContext.request.contextPath}/index.sj" class="btn btn-light btn-lg"><i
 									class="fab fa-trello"></i> SJ Board</a>
 							</div>
 						</div>
