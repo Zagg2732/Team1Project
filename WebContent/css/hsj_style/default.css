@@ -1,4 +1,21 @@
-﻿
+﻿.list-board { 
+    margin-bottom: 15px;
+}
+
+div-head {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 15px 0;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-bottom: 1px solid #c3c3c3;
+    border-collapse: separate;
+}
+
+.border-black {
+    border-color: #333;
+}
 
 body, h3, textarea, input, select {
 	font-family: Tahoma, Arial, Helvetica;
