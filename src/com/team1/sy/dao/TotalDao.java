@@ -35,10 +35,8 @@ public class TotalDao {
 		
 	}
 	
-	
 	//login 멤버 조회
 	public Member isMember(String userid, String userpw) {
-		System.out.println("isMember");
 		String sql = "SELECT * FROM TEAM1_USER WHERE USERID=?";
 		int result = -1;
 		
@@ -91,5 +89,40 @@ public class TotalDao {
 		}
 		return member;
 	}
+	
+	
+	public boolean insertMember(Member tempMember) {
+		//INSERT INTO TEAM1_USER(USERID,USERNAME,NICKNAME,PASSWORD,JOINDATE,GRADE_FK)
+		//VALUES ('admin','홍길동','관리자','1004',sysdate,2);
+		String sql = "INSERT INTO TEAM1_USER(USERID,USERNAME,NICKNAME,PASSWORD,JOINDATE,GRADE_FK) VALUES (?,?,?,?,sysdate,0)";
+		int result=-1;
+		
+		try{
+			con = ds.getConnection();
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, tempMember.getUserId());
+			pstmt.setString(2, tempMember.getUserName());
+			pstmt.setString(3, tempMember.getNickName());
+			pstmt.setString(4, tempMember.getUserPassword());
+
+			result=pstmt.executeUpdate();
+			
+			if(result!=0){
+				return true;
+			}
+		}catch(Exception ex){
+			System.out.println("insertMember 에러: " + ex);		
+			return false;
+		}finally{
+			if(rs!=null) try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
+			if(con!=null) try{con.close();}catch(SQLException ex){}
+		}
+		return false;
+	}
+	
+	
+	
 
 }

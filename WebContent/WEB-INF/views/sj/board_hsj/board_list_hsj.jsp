@@ -126,7 +126,7 @@
 		<li><a href="#" style="margin-right:5px;" class="text-secondary">  ➡️ ️</a></li>
 		
 		</ul>
-		 <a class="btn btn-outline-info pull-right" href="${pageContext.request.contextPath}/HumorWrite.hsj">글쓰기</a>
+		 <a class="btn btn-outline-info pull-right" href="${pageContext.request.contextPath}/HumorWrite.sj">글쓰기</a>
 	</div>
 	</div>
 	

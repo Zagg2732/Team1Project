@@ -83,11 +83,12 @@ $(function() {
 	
 	$(".submit").click((e) => {
 		const idCheck = $('#userId').val()!==''?$('#userId').val():null;
+		const nickCheck = $('#userNick').val()!==''?$('#userNick').val():null;
 		const nameCheck = $('#userName').val()!==''?$('#userName').val():null;
 		const pwCheck1 = $('#userPw').val()!==''?$('#userPw').val():null;
 		const pwCheck2 = $('#pwConfirm').val()!==''?$('#pwConfirm').val():null;
 		console.log(idCheck);
-		if(idCheck&&nameCheck&&pwCheck1&&pwCheck2){
+		if(idCheck&&nickCheck&&nameCheck&&pwCheck1&&pwCheck2){
 			alert('pass');
 		} else{
 			e.preventDefault();
@@ -107,6 +108,21 @@ $(function() {
 		}else{
 		    $("#idregex").html("5~10자리의 영 소문자+숫자 조합으로 입력해주세요.");
 			$("#idregex").css("width","75%");
+			return false;
+		}
+	});
+	
+	//닉네임
+	$("#userNick").on("input",function(){
+		var regex = /[가-힣]{2,}/;
+		var result = regex.exec($("#userNick").val());
+		if(result != null){
+			$("#nickregex").html("");
+			$("#nickregex").css("width","0");
+			return true;
+		}else{
+		    $("#nickregex").html("한글만 입력 가능합니다.");
+			$("#nickregex").css("width","75%");
 			return false;
 		}
 	});
