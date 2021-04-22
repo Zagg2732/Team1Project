@@ -16,7 +16,7 @@ public class LogoutAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true); // forward
-		forward.setPath("index.jsp");
+		forward.setPath("index.team1");
 
 		return forward;
 		
