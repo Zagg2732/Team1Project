@@ -56,23 +56,24 @@
 
 	<c:set var="cpage" value="${requestScope.cpage}" />
 	<c:set var="pagecount" value="${requestScope.pagecount}" />
+	<c:set var="userInfo" value="${sessionScope.userInfo}" />
 
 	<article>
 
 	<div class="container" role="main">
 		<br> <b>유머 게시판</b> <br> <br>
 
+			<%-- action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}" --%>
 		<form name="bbs" id="form" role="form" method="post"
-			action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}"
-			enctype="multipart/form-data">
+			action="boardWriteOK.sj" enctype="multipart/form-data"
+			>
+		<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
 
 			<div class="mb-3">
 
 				<label for="title">제목</label> <input type="text"
 					class="form-control" name="subject" id="title"
-					placeholder="제목을 입력해 주세요" onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '제목을 입력해 주세요'">
-
+					placeholder="제목을 입력해 주세요" required>
 			</div>
 
 

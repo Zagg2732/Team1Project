@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class SJ_board {
 	private int idx;
-	private String user_fk;
+	private String userid_fk;
 	private String nickname;
 	private int up;
 	private int down;
@@ -29,11 +29,11 @@ public class SJ_board {
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	public String getUser_fk() {
-		return user_fk;
+	public String getUserid_fk() {
+		return userid_fk;
 	}
-	public void setUser_fk(String user_fk) {
-		this.user_fk = user_fk;
+	public void setUserid_fk(String userid_fk) {
+		this.userid_fk = userid_fk;
 	}
 	public int getUp() {
 		return up;
@@ -79,7 +79,7 @@ public class SJ_board {
 	}
 	@Override
 	public String toString() {
-		return "LSJ_board [idx=" + idx + ", user_fk=" + user_fk + ", nickname=" + nickname + ", up=" + up + ", down="
+		return "LSJ_board [idx=" + idx + ", userid_fk=" + userid_fk + ", nickname=" + nickname + ", up=" + up + ", down="
 				+ down + ", readnum=" + readnum + ", writedate=" + writedate + ", subject=" + subject + ", content="
 				+ content + ", filename=" + filename + "]";
 	}
