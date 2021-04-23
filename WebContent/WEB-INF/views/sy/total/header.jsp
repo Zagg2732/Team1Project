@@ -10,7 +10,7 @@
 				<span class="icon_close"></span>
 			</div>
 			<div class="logo">
-				<a href="./index.jsp"> <img src="images/new_team1_logo.png" alt="">
+				<a href="./index.jsp"> <img src="images/team1_logo1.png" alt="" style="height:45px;">
 				</a>
 			</div>
 			<div id="mobile-menu-wrap"></div>
@@ -22,13 +22,13 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.team1"><img src="images/new_team1_logo.png" alt=""></a>
+                            <a href="./index.team1"><img src="images/team1_logo1.png" alt="" style="height:45px;"></a>
                         </div>
                     </div>
 				<div class="col-lg-2">
 					<div class="ht-widget">
 						<c:if test="${userInfo.grade > 0}">
-							<a href="temp.team1" class="btn btn-dark"><i class="fas fa-cog"></i> admin</a>
+							<a href="main.admin" class="btn btn-dark"><i class="fas fa-cog"></i> admin</a>
 						</c:if>
 					</div>
 				</div>
@@ -66,8 +66,8 @@
                     <div class="col-lg-9">
                         <nav class="nav-menu">
                             <ul>
-                                <li class="active"><a href="${pageContext.request.contextPath}/index.team1">Home</a></li>
-                                <li><a href="${pageContext.request.contextPath}/temp_index_hsj.jsp">SJ Board</a></li>
+                                <li class="active"><a href="index.team1">Home</a></li>
+                                <li><a href="index.sj">SJ Board</a></li>
                                 <li><a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">Joohyun's minihomepy</a></li>
                                 <li><a href="${pageContext.request.contextPath}/indexyh.jsp">Kim's Board</a></li>
                             </ul>
