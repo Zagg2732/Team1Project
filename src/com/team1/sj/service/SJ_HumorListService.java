@@ -53,7 +53,7 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			
 			int pagersize = 3;
 			
-			String linkUrl = "BoardList.sj?type=" + type;
+			String linkUrl = "boardList.sj?type=" + type;
 			System.out.println("linkUrl 확인 - " + linkUrl );
 			
 			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, linkUrl ); 
