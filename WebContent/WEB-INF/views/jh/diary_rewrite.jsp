@@ -40,30 +40,33 @@
 		  <div class="content-box" style="box-shadow: 5px 5px 20px -10px grey; padding: 10px 20px;">
 			<div style="display: flex; font-size: 14px;">				
 			  <div class="col" style="display: flex; flex-direction: column;">
-			  
-			  	<c:set var="diary" value="${requestScope.diaryDto}" />
+			  	
 			  	<c:set var="idx" value="${requestScope.idx}" />
 			 	<c:set var="cpage" value="${requestScope.cp}" />
 				<c:set var="pagesize" value="${requestScope.ps}" />
-				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
+				<c:set var="pagesize" value="${requestScope.subject}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
 				
-				원본글 쓰기
-				<form name="write" action="diaryWriteOk.jh" method="POST">
-				<!-- hidden : 값 숨겨서 처리 --> 
-				<input type="hidden" name="idx" value="${idx}" id="idx">
+				답글쓰기 
+				<form name="rewrite" action="diaryRewriteOk.jh" method="POST">
+				
+				<input type="hidden" name="cp" value="${cpage}" /> 
+				<input type="hidden" name="ps" value="${pagesize}" /> 
+				<input type="hidden" name="idx" value="${idx}" />
 				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
 				<input type="hidden" name="nickname" value="${userInfo.nickName}" id="nickname">
+				
 				<input type="text" name="subject" class="form-control mt-4 mb-2"
-				placeholder="제목을 입력해주세요." required
+				value="RE_${subject}" required
 				>
 				<div class="form-group">
 				<textarea style="resize: none; "class="form-control" rows="10" name="content"
 				placeholder="내용을 입력해주세요" required
 				></textarea>
 				</div>
-				<input type="button" name="writebtn" class="btn btn-secondary mb-4" value="등록" onclick="check();" id="writebtn">
+				<input type="button" name="writebtn" class="btn btn-secondary mb-4" value="등록" onclick="rewritecheck();" id="writebtn">
 				<input type="button" name="move" class="btn btn-secondary mb-4" value="목록" onclick="location.href='diary.jh';" id="move">
+				
 				</form>
 				
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
@@ -78,17 +81,17 @@
 /* $(document).ready(function() {
 	  $('#summernote').summernote();
 	}); */
-	function check() {
-		if(!write.subject.value) {
+	function rewritecheck() {
+		if(!rewrite.subject.value) {
 			alert("제목을 입력하세요");
 			write.subject.focus();
 			return false;
 		}
-		if(!write.content.value) {
+		if(!rewrite.content.value) {
 			alert("내용을 입력하세요");
 			return false;
 		}
-		document.write.submit();
+		document.rewrite.submit();
 	}
 	
 </script>
