@@ -158,37 +158,6 @@ public class SJ_board_dao {
 		return list;
 	}
 	
-	public boolean getReadNum(String idx) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		boolean result = false;
-		
-		try {
-			conn = ds.getConnection();
-			String sql = "update HUMOR_BOARD set readnum = readnum + 1 where idx=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, idx);
-			
-			int row = pstmt.executeUpdate();
-			if(row > 0) {
-				result = true;
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		
-			// TODO: handle exception
-		}finally {
-			try {
-				pstmt.close();
-				conn.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-		
-		return result;
-	}
 	
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
@@ -325,7 +294,7 @@ public class SJ_board_dao {
 		return replyList;
 	}
 	
-	public int replyWrite(String type, int idx_fk , String writer , String userid, String content, String pwd) {
+	public int replyWrite(String id, String content, String idx, String type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -333,15 +302,29 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into reply(no,writer,userid,content,pwd,idx_fk) "+
-			           " values(reply_no.nextval,?,?,?,?,?)";
+			String sql = "insert into "
+					   + type
+					   + " (idx_fk, userid_fk, content, up, down, writedate, refer, DEPTH, step) "+
+			           " values(?, ?, ?, 0, 0, sysdate, 0, 0, 0)";
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			pstmt.setString(2, id);
+			pstmt.setString(3, content);			
+			
+			row = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();//반환
+			}catch (Exception e) {
+				
+			}
 		}
 		
-		
-		
-		return 0;
+		return row;
 	}
 	
 }

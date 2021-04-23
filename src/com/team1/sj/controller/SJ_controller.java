@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.service.SJ_HumorBoardAddService;
-import com.team1.sj.service.SJ_HumorBoardContentService;
 import com.team1.sj.service.SJ_HumorListService;
-import com.team1.sj.service.SJ_ReplyAddService;
 import com.team1.sj.service.SJ_HumorBoardList;
 import com.team1.sj.service.SJ_HumorContent;
 
