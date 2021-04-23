@@ -62,11 +62,13 @@ public class SJ_controller extends HttpServlet {
     	} else if(url_command.equals("/boardWriteOK.sj")) {
     		action = new SJ_HumorBoardAddService();
     		forward = action.execute(request, response);
-    		   		
-    	}  else if(url_command.equals("/replyWrite.sj")) {
-    		action = new SJ_ReplyAddService();
+
+        
+    	} else if(url_command.equals("/replyWrite.sj")) {
+    		//action = new SJ_ReplyAddService();
     		forward = action.execute(request, response);
-    		   		
+
+    		
     	} else {
     		System.out.println("Error : you entered *.lsj but you didn't set commanding it yet. 아님말고");
     	}

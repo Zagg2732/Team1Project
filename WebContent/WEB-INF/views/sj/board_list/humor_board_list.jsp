@@ -79,7 +79,7 @@
 			
 					 <!--이전 링크 -->
 					  <c:if test="${cpage > 1}">
-						<a href="BoardList.sj?type=humor_board&cp=${cpage-1}&ps=${pagesize}">이전</a>
+						<a href="boardList.sj?type=humor_board&cp=${cpage-1}&ps=${pagesize}">이전</a>
 						</c:if> 
 								
 								
@@ -92,7 +92,7 @@
 											<font color="red">[${i}]</font>
 										</c:when>
 										<c:otherwise>
-											<a href="BoardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">[${i}]</a>
+											<a href="boardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">[${i}]</a>
 										</c:otherwise>
 									</c:choose>
 					</c:forEach> 
@@ -100,7 +100,7 @@
 								
 								<!--다음 링크 --> 
 								<c:if test="${cpage < pagecount}">
-									<a href="BoardList.sj?type=humor_board&cp=${cpage+1}&ps=${pagesize}">다음</a>
+									<a href="boardList.sj?type=humor_board&cp=${cpage+1}&ps=${pagesize}">다음</a>
 								</c:if>
 							</td>
 						</tr>
@@ -110,7 +110,7 @@
 			
 			
 			
-			<a class="btn btn-outline-info">글쓰기</a>
+			<a  href="boardWrite.sj" class="btn btn-outline-info">글쓰기</a>
 		</div>
 
 	</div>
