@@ -25,6 +25,44 @@ public class SJ_board_dao {
 		ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
 	}
 	
+	//글쓰기 
+	public int writeok(SJ_board boarddata, String type) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int row = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "insert into "
+					+ type +"(idx, nickname, up, down, readnum, writedate, subject, content, filename)"+
+							" values("+ type + "_idx.nextval,?,0,0,0,sysdate,?,?,?)";
+			
+			
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, boarddata.getNickname());
+				pstmt.setString(2, boarddata.getSubject());
+				pstmt.setString(3, boarddata.getContent());
+				pstmt.setString(4, boarddata.getFilename());
+				
+				
+				
+				row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		
+		return row;
+	}
+	
 	public List<SJ_board> listWithPage(int cpage, int pagesize, String type){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -157,7 +195,7 @@ public class SJ_board_dao {
 		}
 		return list;
 	}
-	
+
 	
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
