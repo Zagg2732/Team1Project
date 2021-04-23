@@ -34,14 +34,12 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into "
-					+ type +"(idx, nickname, up, down, readnum, writedate, subject, content, filename)"+
-							" values("+ type + "_idx.nextval,?,0,0,0,sysdate,?,?,?)";
-			
+			String sql = "insert into HUMOR_BOARD (idx, userid_fk, writedate, subject, content, filename)" +
+						 " values(HUMOR_BOARD_idx.nextval, sysdate, ?, ?, ?)";
 			
 				pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, boarddata.getNickname());
+				pstmt.setString(1, boarddata.getUserid_fk());
 				pstmt.setString(2, boarddata.getSubject());
 				pstmt.setString(3, boarddata.getContent());
 				pstmt.setString(4, boarddata.getFilename());
@@ -50,7 +48,7 @@ public class SJ_board_dao {
 				
 				row = pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("여기다 " +e.getMessage());
 		}finally {
 			try {
 				pstmt.close();

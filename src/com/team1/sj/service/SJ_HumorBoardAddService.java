@@ -29,6 +29,7 @@ public class SJ_HumorBoardAddService implements Action{
 		try {
 			MultipartRequest multi = new MultipartRequest(request, uploadpath, size, "UTF-8",new DefaultFileRenamePolicy());
 			
+			String userid_fk = multi.getParameter("userid_fk");
 			String subject = multi.getParameter("subject");
 			String content = multi.getParameter("content");
 			String filename = multi.getFilesystemName("filename");
@@ -37,6 +38,7 @@ public class SJ_HumorBoardAddService implements Action{
 			
 			SJ_board board = new SJ_board();
 			
+			board.setUserid_fk(userid_fk);
 			board.setSubject(subject);
 			board.setContent(content);
 			board.setFilename(filename);
@@ -61,7 +63,7 @@ public class SJ_HumorBoardAddService implements Action{
 			
 			if(result>0) {
 				msg = "success";
-				url = "boardList.hsj";
+				url = "boardList.sj";
 			}else {
 				msg = "fail";
 				url = "boardWrite.sj";
@@ -71,7 +73,7 @@ public class SJ_HumorBoardAddService implements Action{
 			request.setAttribute("board_url", url);
 			
 		} catch (IOException e1) {
-			// TODO: handle exception
+			System.out.println("여긴가 :" +e1.getMessage());
 			e1.printStackTrace();
 		}
 		
