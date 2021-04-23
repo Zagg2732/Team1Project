@@ -22,7 +22,9 @@ public class SJ_board_dao {
 	
 	public SJ_board_dao() throws NamingException {
 		Context context = new InitialContext();
-		ds = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
+		Context contextDetail = (Context)context.lookup("java:comp/env");
+		
+		ds = (DataSource)contextDetail.lookup("jdbc/oracle"); 
 	}
 	
 	//글쓰기 
@@ -34,8 +36,8 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into HUMOR_BOARD (idx, userid_fk, writedate, subject, content, filename)" +
-						 " values(HUMOR_BOARD_idx.nextval, sysdate, ?, ?, ?)";
+			String sql = "insert into HUMOR_BOARD (idx, userid_fk, writedate, subject, content, filename, readnum) " +
+						 "values (HUMOR_BOARD_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
 			
 				pstmt = conn.prepareStatement(sql);
 				
@@ -48,7 +50,7 @@ public class SJ_board_dao {
 				
 				row = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("여기다 " +e.getMessage());
+			System.out.println("널 어쩌면 좋을까 dao " +e.getMessage());
 		}finally {
 			try {
 				pstmt.close();
@@ -104,7 +106,7 @@ public class SJ_board_dao {
 				list.add(board);
 			}
 		} catch (Exception e) {
-			System.out.println("오류 : " + e.getMessage());
+			System.out.println("갑자기 너니  : " + e.getMessage());
 		}finally {
 			try {
 				pstmt.close();
@@ -179,6 +181,8 @@ public class SJ_board_dao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		System.out.println("넌 아니겠지 : " + e.getMessage());
 		} finally {
 			try {
 				pstmt.close();
@@ -187,6 +191,8 @@ public class SJ_board_dao {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+				System.out.println("너??" + e.getMessage());
 			}
 		}
 		return list;
