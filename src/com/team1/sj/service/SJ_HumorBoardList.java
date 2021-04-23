@@ -32,7 +32,7 @@ public class SJ_HumorBoardList implements Action {
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("/WEB-INF/views/sj/board_lsj/board_main.jsp");
+			forward.setPath("/WEB-INF/views/sj/index_sj.jsp");
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

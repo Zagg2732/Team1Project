@@ -29,7 +29,9 @@ public class ReplyList extends HttpServlet {
     }
 
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    	
+    	//System.out.println("ReplyList.ajax Start!!!!!");
+    	
     	String idx= request.getParameter("idx"); 
     	
 		try {
@@ -46,14 +48,17 @@ public class ReplyList extends HttpServlet {
 				
 				JSONObject jsonObj = new JSONObject();
 				
+				System.out.println(replylist.get(i).getNum());
+				
 				jsonObj.put("writedate", date);
 				jsonObj.put("num", replylist.get(i).getNum());		
 				jsonObj.put("userid_fk", replylist.get(i).getUserid_fk());
 				jsonObj.put("content", replylist.get(i).getContent());
 				jsonObj.put("idx_fk", replylist.get(i).getIdx_fk());
-				
+				jsonObj.put("nickname", replylist.get(i).getNickName());
 				
 				jsonArr.add(jsonObj);
+				
 			}
 			
 			response.setContentType("application/x-json; charset=UTF-8");

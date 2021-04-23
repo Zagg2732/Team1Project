@@ -8,7 +8,8 @@
 	
 	
 	
-	<link rel="stylesheet" href="css/hsj_style/css/bootstrap.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	
 	<link rel="Stylesheet" href="css/hsj_style/default.css">
 	
 	<!-- summernote  -->
@@ -24,17 +25,29 @@
 		
 		
 	</script>
+	<style type="text/css">
+	
+			.amina-header {
+  			  line-height: 22px;
+  			  margin-bottom: 15px;
+			}
+	
+	</style>
 </head>
 <body>
 
 	<%-- <c:import url="/WEB-INF/views/sj/header_hsj.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/sj/header_hsj.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
+	
+	<div class="amina-header">
 	
 	
+	</div>
 	
 	
-		<script src="js/jquery-3.1.1.js"></script>	
-		<script src="js/bootstrap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 
 </body>
 </html>
