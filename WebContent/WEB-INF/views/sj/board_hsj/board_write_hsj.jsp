@@ -14,19 +14,13 @@
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
 
-<!-- default css   -->
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 
 
-
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <title>유머게시판 글쓰기</title>
 
-<link rel="Stylesheet"
-	href="${pageContext.request.contextPath}/css/hsj_style/default.css" />
+<%-- <link rel="Stylesheet"
+	href="${pageContext.request.contextPath}/css/hsj_style/default.css" /> --%>
 <link rel="Stylesheet"
 	href="${pageContext.request.contextPath}/css/hsj_style/write_css.css" />
 
@@ -73,7 +67,9 @@
 
 				<label for="title">제목</label> <input type="text"
 					class="form-control" name="subject" id="title"
-					placeholder="제목을 입력해 주세요" required>
+					placeholder="제목을 입력해 주세요"
+					 onfocus="this.placeholder = ''"
+					onblur="this.placeholder = '제목을 입력해 주세요'">
 			</div>
 
 
@@ -128,8 +124,6 @@
 
 
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"

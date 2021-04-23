@@ -22,6 +22,7 @@ public class SJ_HumorBoardAddService implements Action{
 		
 		String uploadpath = request.getSession().getServletContext().getRealPath("upload");
 		
+		System.out.println("uploadpath잘있늬???");
 		System.out.println(uploadpath);
 		
 		int size = 1024*1024*10;
@@ -29,7 +30,7 @@ public class SJ_HumorBoardAddService implements Action{
 		try {
 			MultipartRequest multi = new MultipartRequest(request, uploadpath, size, "UTF-8",new DefaultFileRenamePolicy());
 			
-			String userid_fk = multi.getParameter("userid_fk");
+			String userid_fk = multi.getParameter("userid");
 			String subject = multi.getParameter("subject");
 			String content = multi.getParameter("content");
 			String filename = multi.getFilesystemName("filename");
@@ -43,6 +44,7 @@ public class SJ_HumorBoardAddService implements Action{
 			board.setContent(content);
 			board.setFilename(filename);
 			
+		System.out.println("여기탔니??????");
 			
 			int result = 0;
 			
@@ -54,6 +56,7 @@ public class SJ_HumorBoardAddService implements Action{
 				
 				
 			}catch(NamingException e) {
+			System.out.println("여기서문제나니???");
 				e.printStackTrace();
 			}
 			String msg = "";
@@ -62,10 +65,10 @@ public class SJ_HumorBoardAddService implements Action{
 		
 			
 			if(result>0) {
-				msg = "success";
+				msg = "등록이 완료되었습니다!!";
 				url = "boardList.sj";
 			}else {
-				msg = "fail";
+				msg = "등록을 실패하였습니다!!";
 				url = "boardWrite.sj";
 			}
 			
@@ -79,7 +82,7 @@ public class SJ_HumorBoardAddService implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/WEB-INF/views/sj/board_hsj/redirect_hsj.jsp");
+		forward.setPath("boardList.sj?type=humor_board");
 		
 		return forward;
 	}
