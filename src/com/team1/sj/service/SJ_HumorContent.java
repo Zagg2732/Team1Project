@@ -67,9 +67,9 @@ public class SJ_HumorContent implements Action {
 			
 			
 			if(type.equals("humor_board")) {
-				forward.setPath("WEB-INF/views/sj/board_content/humor_board_content.jsp");
+				forward.setPath("/WEB-INF/views/sj/board_content/humor_board_content.jsp");
 			} else if (type.equals("notice_board")) {
-				forward.setPath("WEB-INF/views/sj/board_content/notice_board_content.jsp");
+				forward.setPath("/WEB-INF/views/sj/board_content/notice_board_content.jsp");
 			} else {
 				System.out.println("Path error!");
 			}
