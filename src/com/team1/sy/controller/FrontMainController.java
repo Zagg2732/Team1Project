@@ -37,6 +37,10 @@ public class FrontMainController extends HttpServlet {
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("index.jsp");
+    	}else if(url_Command.equals("/redirect.team1")) {
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("/WEB-INF/views/common/redirect.jsp");
     	}else if(url_Command.equals("/Login.team1")) { //만약 있다면 상세보기
     		//UI 제공 .../Register.team1
     		//예) /WEB-INF/views/memoview.jsp 가정

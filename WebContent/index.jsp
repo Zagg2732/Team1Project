@@ -62,7 +62,7 @@
 						data-setbg="https://random.imagecdn.app/1280/720">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="${pageContext.request.contextPath}/index.sj" class="btn btn-light btn-lg"><i
+								<a href="${pageContext.request.contextPath}/WEB-INF/views/sj/index_sj.jsp" class="btn btn-light btn-lg"><i
 									class="fab fa-trello"></i> SJ Board</a>
 							</div>
 						</div>
@@ -92,20 +92,6 @@
 	
 	<jsp:include page="WEB-INF/views/sy/total/footer.jsp"></jsp:include>
 
-	<!-- Js Plugins -->
-	<script src="js/sy/jquery-3.3.1.min.js"></script>
-	<script src="js/sy/bootstrap.min.js"></script>
-	<script src="js/sy/jquery.magnific-popup.min.js"></script>
-	<script src="js/sy/mixitup.min.js"></script>
-	<script src="js/sy/jquery-ui.min.js"></script>
-	<script src="js/sy/jquery.nice-select.min.js"></script>
-	<script src="js/sy/jquery.slicknav.js"></script>
-	<script src="js/sy/owl.carousel.min.js"></script>
-	<script src="js/sy/jquery.richtext.min.js"></script>
-	<script src="js/sy/image-uploader.min.js"></script>
-	<script src="js/sy/main.js"></script>
-	<script src="https://kit.fontawesome.com/c5fd5902bb.js"
-		crossorigin="anonymous"></script>
 
 </body>
 </html>

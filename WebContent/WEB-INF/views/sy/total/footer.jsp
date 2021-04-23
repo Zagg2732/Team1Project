@@ -65,3 +65,17 @@
         </div>
     </footer>
     <!-- Footer Section End -->
+    
+    	<!-- Js Plugins -->
+	<script src="js/sy/jquery-3.3.1.min.js"></script>
+	<script src="js/sy/bootstrap.min.js"></script>
+	<script src="js/sy/jquery.magnific-popup.min.js"></script>
+	<script src="js/sy/mixitup.min.js"></script>
+	<script src="js/sy/jquery-ui.min.js"></script>
+	<script src="js/sy/jquery.nice-select.min.js"></script>
+	<script src="js/sy/jquery.slicknav.js"></script>
+	<script src="js/sy/owl.carousel.min.js"></script>
+	<script src="js/sy/jquery.richtext.min.js"></script>
+	<script src="js/sy/image-uploader.min.js"></script>
+	<script src="js/sy/main.js"></script>
+	<script src="https://kit.fontawesome.com/c5fd5902bb.js" crossorigin="anonymous"></script>
