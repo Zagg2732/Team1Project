@@ -38,8 +38,8 @@ public class ReplyAddService implements Action {
 			e.getStackTrace();
 		}
 		ActionForward forward = new ActionForward();
-		request.setAttribute("reply_msg", msg);
-		request.setAttribute("reply_url", url);
+		request.setAttribute("diary_msg", msg);
+		request.setAttribute("diary_url", url);
 		forward.setPath("/WEB-INF/views/jh/redirect.jsp");
 		
 		return forward;

@@ -46,33 +46,44 @@
 				<c:set var="pager" value="${requestScope.pager}" />
 				
 				<div class="container">
-				<table class="table">
+				<table class="table table-hover">
 		  		<thead>
 		  			<tr>
-		  				<th>글번호</th>
-		  				<th>제목</th>
-		  				<th>날짜</th>
-		  				<th>조회수</th>
+		  				<th scope="col" class="text-center">제목</th>
+		  				<th scope="col" class="text-center">작성일</th>
+		  				<th scope="col" class="text-center">조회수</th>
 		  			</tr>
 		  		</thead>
 		  		<tbody>
 		  			<c:forEach var="diaryContents" items="${list}">
-		  				<tr>
-		  					<td>${diaryContents.idx}</td>
-			  				<td> <a href="diaryContent.jh?idx=${diaryContents.idx}&cp=${cpage}&ps=${pagesize}"> ${diaryContents.subject}</a></td>
-			  				<td>${diaryContents.writedate}</td>
-			  				<td>${diaryContents.readnum}</td>
-		  				</tr>
-		  			</c:forEach>
-		  			
 		  			<tr>
-		  			<td colspan="3" align="center">
+		  			<td style="width: 50%">
+		  				<c:forEach var="i" begin="1" end="${diaryContents.depth}" step="1">
+							&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+							<!-- depth가 0보다 크면 답글임 답글모양 이미지 삽입  -->
+							<c:if test="${diaryContents.depth > 0}">
+								<img src="${pageContext.request.contextPath}/images/jh/re.gif">
+							</c:if>
+						<a href="diaryContent.jh?idx=${diaryContents.idx}&cp=${cpage}&ps=${pagesize}"> ${diaryContents.subject}</a>
+					</td>
+			  			<td style="width: 30%" class="text-center">${diaryContents.writedate}</td>
+			  			<td style="width: 20%" class="text-center">${diaryContents.readnum}</td>
+					</tr>
+		  			</c:forEach>
+		  		</tbody>
+		  		</table>
+		  		<input type="button" class="btn btn-secondary mb-3" value="새글쓰기" onclick="location.href='diaryWrite.jh';">
+		  			
+		  			<p class="text-center">
 		  			<!-- 이전 링크 -->
 		  			<c:if test="${cpage > 1}">
 		  			<a href="diary.jh?cp=${cpage-1}&ps=${pagesize}">이전</a>
 		  			</c:if>
+		  			</p>
 		  			
-		  			<!-- page 목록 나열하기 -->
+		  			<!-- 페이징 -->
+		  			<p class="text-center">
 		  			<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 		  				<c:choose>
 							<c:when test="${cpage==i}">
@@ -83,21 +94,18 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
+					</p>
 					
 					<!--다음 링크 --> 
+					<p class="text-center">
 					<c:if test="${cpage < pagecount}">
 						<a href="diary.jh?cp=${cpage+1}&ps=${pagesize}">다음</a>
 					</c:if>
-					</td>
-						<td colspan="2" align="center">총 게시물 수 : ${totaldiarycount}</td>
-					</tr>
+					<%-- 총 게시물 수 ${totaldiarycount}
+						 마지막 ${pager} --%>
 					
-					<tr>
-					<td colspan="5" align="center">
-					${pager}
-					</td>
-		  		</tbody>
-		  		</table>
+		  		
+		  		
 		  	</div>
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>

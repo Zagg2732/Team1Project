@@ -36,8 +36,8 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "INSERT INTO DIARY (IDX, USERID_FK, SUBJECT, CONTENT, WRITEDATE, READNUM, FILENAME, REFER) " + 
-						 "VALUES (DIARY_idx.nextval, ?, ?, ?, sysdate, 0, ?, ?)";
+			String sql = "INSERT INTO DIARY (IDX, USERID_FK, SUBJECT, CONTENT, WRITEDATE, READNUM, REFER) " + 
+						 "VALUES (DIARY_idx.nextval, ?, ?, ?, sysdate, 0, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -45,15 +45,16 @@ public class MiniDao {
 			pstmt.setString(1, diarydata.getUserid_fk());
 			pstmt.setString(2, diarydata.getSubject());
 			pstmt.setString(3, diarydata.getContent());
-			pstmt.setString(4, diarydata.getFilename());
+			//pstmt.setString(4, diarydata.getFilename());
 			
 			int refermax = getMaxRefer();
 			int refer = refermax + 1;
-			pstmt.setInt(5,refer);
+			pstmt.setInt(4,refer);
 			
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("오류: " +e.getMessage());
+			System.out.println("오류 너니? : " +e.getMessage());
+			e.printStackTrace();
 		}finally {
 			try {
 				pstmt.close();
@@ -75,7 +76,7 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection(); 
-			String sql="SELECT VNL(MAX(REFER),0) FROM DIARY";
+			String sql="SELECT NVL(MAX(REFER),0) FROM DIARY";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -461,6 +462,7 @@ public class MiniDao {
 	}
 	
 	//다이어리 답글 쓰기
+	@SuppressWarnings("resource")
 	public int reWrite(DiaryDto diarydata) {
 		//diary_content.jsp -> 답글 -> rewrite.jsp -> 입력 -> submit() -> rewrite.jsp
 		//내가 답글을 달려고하는 글의 글번호가 필요함 
@@ -479,7 +481,7 @@ public class MiniDao {
 			String userid_fk = diarydata.getUserid_fk();
 			String subject = diarydata.getSubject();
 			String content = diarydata.getContent();
-			String filename = diarydata.getUserid_fk();
+			//String filename = diarydata.getUserid_fk();
 			
 			//1.답글
 			//현재 내가 읽은 글의 refer, depth, step 
@@ -491,8 +493,8 @@ public class MiniDao {
 			String step_update_sql = "UPDATE DIARY SET STEP = STEP+1 WHERE STEP > ? AND REFER =? ";
 			
 			//답글 INSERT
-			String rewrite_sql = "INSERT INTO DIARY (IDX, USERID_FK, SUBJECT, CONTENT, WRITEDATE, READNUM, FILENAME, REFER, DEPTH, STEP) " + 
-									 "VALUES (DIARY_idx.nextval, ?, ?, ?, sysdate, 0, ?, ?, ?, ?)";
+			String rewrite_sql = "INSERT INTO DIARY (IDX, USERID_FK, SUBJECT, CONTENT, WRITEDATE, READNUM, REFER, DEPTH, STEP) " + 
+									 "VALUES (DIARY_idx.nextval, ?, ?, ?, sysdate, 0, ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement(refer_depth_step_sql);
 			pstmt.setInt(1, idx);
@@ -512,14 +514,14 @@ public class MiniDao {
 				//userid_fk, subject, content, filename, refer, depth, step
 				pstmt = conn.prepareStatement(rewrite_sql); //컴파일
 				pstmt.setString(1, userid_fk);
-				pstmt.setString(1, subject);
-				pstmt.setString(1, content);
-				pstmt.setString(1, filename);
+				pstmt.setString(2, subject);
+				pstmt.setString(3, content);
+				//pstmt.setString(1, filename);
 				
 				//refer, depth, step
-				pstmt.setInt(1, refer);
-				pstmt.setInt(1, depth+1); //현재 읽은 글에 depth +1
-				pstmt.setInt(1, step+1); //순서 update를 통해 자리 확보 
+				pstmt.setInt(4, refer);
+				pstmt.setInt(5, depth+1); //현재 읽은 글에 depth +1
+				pstmt.setInt(6, step+1); //순서 update를 통해 자리 확보 
 				
 				int row = pstmt.executeUpdate();
 				if(row > 0) {

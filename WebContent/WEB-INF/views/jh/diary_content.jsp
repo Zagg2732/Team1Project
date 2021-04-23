@@ -43,10 +43,10 @@
 				<c:set var="pagesize" value="${requestScope.ps}" />
 				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
+				<c:set var="pager" value="${requestScope.pager}" />
 				
 				<div class="container">
 				<table class="table">
-				<thead>
 		  			<tr>
 		  				<td>작성일</td>
 		  				<td>${diary.writedate}</td>
@@ -59,21 +59,13 @@
 		  				<td>내용</td>
 		  				<td>${diary.content}</td>
 		  			</tr>
-		  			<tr>
-		  				<td>첨부파일</td>
-		  				<td>${diary.filename}</td>
-		  			</tr>
-		  			<tr>
-<%-- 		  			<td>
-		  				<a href="diary.jh?cp=${cpage}&ps=${pagesize}">목록가기</a>
-		  				<a href="diaryEdit.jh?cp=${cpage}&ps=${pagesize}">편집</a>
-		  				<a href="diaryDelete.jh?cp=${cpage}&ps=${pagesize}">삭제</a>
-		  				<a href="diaryRewrite.jh?cp=${cpage}&ps=${pagesize}">답글달기</a>
-		  				</td> --%>
-		  			</tr>
-		  		</thead>
 				</table>
 				
+				<input type="button" class="btn btn-secondary mb-3" value="목록가기" onclick="location.href='diary.jh?cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="답글달기" onclick="diaryRewrite.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="편집" onclick="diaryEdit.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="삭제" onclick="diaryDelete.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		
 				<!-- 댓글 달기 -->
 				<form name="reply" action="diaryReply.jh" method="POST">
 					<!-- hidden : 값 숨겨서 처리 --> 
@@ -85,7 +77,7 @@
 							<c:choose>
 								<c:when test="${userInfo.grade != null}">
 									<textarea name="reply_content" id="reply_content" style= "width : 430px;"></textarea>
-									<input type="button" id="replybtn"  value="등록">
+									<input type="button" class="btn btn-secondary mb-4"  id="replybtn"  value="등록">
 								</c:when>
 								<c:otherwise>
 									<h5>회원가입 후 댓글 등록이 가능합니다 쏴리</h5>
