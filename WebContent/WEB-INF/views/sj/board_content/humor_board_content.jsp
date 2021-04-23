@@ -20,12 +20,15 @@
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
-
+	<c:set var="sessionId" value="${sessionScope.userInfo.nickName}" scope="request" />
+	
 	<div id="pageContainer">
 		<div style="padding-top: 30px; text-align: center">
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
+		<h3>${requestScope.pagesize}</h3><br>
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
+		<h3></h3>
 			<%-- <center>
 				<b>게시판 글내용</b>
 				<table width="80%" border="1">
@@ -72,7 +75,7 @@
 					</tr>
 				</table>--%>
 				<!--  꼬리글 달기 테이블 -->
-				<form name="reply" action="ReplyOk.do" method="POST">
+				<form name="reply" action="#" method="POST">
 						<!-- hidden 태그  값을 숨겨서 처리  -->
 						<input type="hidden" name="idx" value="${idx}" id="idx"> 
 						<input type="hidden" name="userid" value=""><!-- 추후 필요에 따라  -->
@@ -83,13 +86,11 @@
 							</tr>
 							<tr>
 								<td align="left">작성자 :
-								 	<input type="text" name="reply_writer" id="reply_writer"><br/> 
+								 	<input type="text" name="reply_writer" id="reply_writer" value = "${requestScope.sessionId}" disabled><br/> 
 								 	내&nbsp;&nbsp;용 : 
 								 	<textarea name="reply_content" rows="2" cols="50"  id="reply_content"></textarea>
 								</td>
 								<td align="left">
-									비밀번호:
-									<input type="password" name="reply_pwd" size="4" id="password"> 
 									<input type="button" id="replybtn"  value="등록">
 								</td>
 							</tr>
@@ -97,6 +98,19 @@
 				</form>
 				<br> 
 				<!-- 꼬리글 목록 테이블 -->
+				<h3>댓글 정보들</h3>
+				<c:forEach var="list" items="${requestScope.replyList}">
+				<form>
+					<tr class="boardlist" onmouseover="this.style.backgroundColor='gray'" onmouseout="this.style.backgroundColor='white'">
+						<td colspan="2" align="center">댓글 닉네임 : ${list.nickname}</td>
+						<td colspan="2" align="center">댓글 내용 : ${list.content}</td>
+						<td colspan="2" align="center">댓글 작성일 : ${list.writedate}</td>
+						<td colspan="2" align="center">댓글 추천수 : ${list.up}</td>
+						<td colspan="2" align="center">댓글 비추수 : ${list.down}</td>
+					</tr>
+					<br>
+				</form>
+				</c:forEach>
 				<table width="80%" border="1">
 						<thead>
 						<tr>
@@ -148,8 +162,8 @@
 			
 			var frm = document.reply; //reply form 전체
 			//댓글 유효성
-			if (frm.reply_writer.value == "" || frm.reply_content.value == "" || frm.reply_pwd.value == "") {
-				alert("내용, 작성자, 비밀번호를 모두 입력해야합니다.");
+			if (frm.reply_content.value == "") {
+				alert("내용을 입력해주세요!");
 				return false;
 			}
 			
@@ -159,15 +173,25 @@
 				data : {
 					"reply_writer" : $('#reply_writer').val(),
 					"reply_content" : $('#reply_content').val(),
-					"reply_pwd" : $('#password').val(),
-					"idx" : $('#idx').val()
+					"idx" : $('#idx').val(),
+					"type" : "humor_reply"
 				},
 				success : function(data) {
-					replyList();
+					alert("됐어용!!!");
+					$('#replybody').append('<tr align="left"><td width="80%">[' +
+							"test" +'] : ' + "test" +
+							'<br> 작성일 :'+  test +'</td><td width="20%">' +
+							'<form method="POST" name="replyDel">' +
+							'<input type="hidden" name="no" value="' +"test" +'" class="reply_no">' +
+							'<input type="hidden" name="idx" value="' +"testk "+'" class="reply_idx">' +
+							'password : <input type="password" name="delPwd" size="4" class="reply_pwd">' +
+							' <input type="button" value="삭제" onclick="reply_del(this.form)">' +
+							'</form></td></tr>');
+					/* replyList();
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
 					$('#password').val("");
-					$('#replybody').empty();
+					$('#replybody').empty(); */
 
 				},
 				error : function() {
