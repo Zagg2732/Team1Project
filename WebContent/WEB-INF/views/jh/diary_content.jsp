@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@ page import="com.team1.sy.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -43,10 +44,10 @@
 				<c:set var="pagesize" value="${requestScope.ps}" />
 				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
+				<c:set var="pager" value="${requestScope.pager}" />
 				
 				<div class="container">
 				<table class="table">
-				<thead>
 		  			<tr>
 		  				<td>작성일</td>
 		  				<td>${diary.writedate}</td>
@@ -59,21 +60,13 @@
 		  				<td>내용</td>
 		  				<td>${diary.content}</td>
 		  			</tr>
-		  			<tr>
-		  				<td>첨부파일</td>
-		  				<td>${diary.filename}</td>
-		  			</tr>
-		  			<tr>
-<%-- 		  			<td>
-		  				<a href="diary.jh?cp=${cpage}&ps=${pagesize}">목록가기</a>
-		  				<a href="diaryEdit.jh?cp=${cpage}&ps=${pagesize}">편집</a>
-		  				<a href="diaryDelete.jh?cp=${cpage}&ps=${pagesize}">삭제</a>
-		  				<a href="diaryRewrite.jh?cp=${cpage}&ps=${pagesize}">답글달기</a>
-		  				</td> --%>
-		  			</tr>
-		  		</thead>
 				</table>
 				
+				<input type="button" class="btn btn-secondary mb-3" value="목록가기" onclick="location.href='diary.jh?cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="답글달기" onclick="location.href='diaryRewrite.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="편집" onclick="location.href='diaryEdit.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		<input type="button" class="btn btn-secondary mb-3" value="삭제" onclick="location.href='diaryDelete.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+		  		
 				<!-- 댓글 달기 -->
 				<form name="reply" action="diaryReply.jh" method="POST">
 					<!-- hidden : 값 숨겨서 처리 --> 
@@ -83,12 +76,12 @@
 					
 					<table class="table">
 							<c:choose>
-								<c:when test="${userInfo.grade != null}">
-									<textarea name="reply_content" id="reply_content" style= "width : 430px;"></textarea>
-									<input type="button" id="replybtn"  value="등록">
+								<c:when test="${userInfo.userId == null}">
+									<h1 style="margin:0px; font-size: 1em; font-weight: 550; color:gray;">로그인 후 댓글 작성이 가능합니다 !</h1>
 								</c:when>
 								<c:otherwise>
-									<h5>회원가입 후 댓글 등록이 가능합니다 쏴리</h5>
+									<textarea name="reply_content" id="reply_content" style= "width : 430px;"></textarea>
+									<input type="button" class="btn btn-secondary mb-4"  id="replybtn"  value="등록">
 								</c:otherwise>
 							</c:choose>
 					</table>
@@ -96,11 +89,6 @@
 				
 				<!-- 댓글 목록 -->
 				<table class="table">
-					<thead>
-						<tr>
-							<th colspan="2"> 댓글 목록</th>
-						</tr>
-					<thead>
 					<tbody id="replybody"></tbody>
 				</table>
 				</div>
@@ -118,7 +106,17 @@
 		replyAdd();
 	});
 	
+	var frm = document.reply; //reply form 전체
+	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
+	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
+	
 	function replyList() {
+ 		
+		//비회원은 댓글을 못봐요
+		if(sessionUserid == "") {
+			return false;
+		}
+
 		$.ajax({
 			url : "ReplyList.ajax",
 			type : "GET",
@@ -127,16 +125,15 @@
 				idx : $('#idx').val()
 			},
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				$.each(data, function(index,obj) {
 				$('#replybody').append(
 					'<tr align="left"><td width="80%">[' +obj.nickname+ '] : ' + obj.content +
 					'<br> 작성일 :'+obj.writedate +'</td><td width="20%">' +
 					'<form method="POST" name="replyDel">' +
-					
 					'<input type="hidden" name="num" value="' +obj.num +'" class="reply_num">' +
 					'<input type="hidden" name="idx" value="' +obj.idx_fk +'" class="reply_idx">' +
-					'<input type="hidden" name="userid" value="' +obj.userid_fk +'" class="reply_userid">' +
+					'<input type="hidden" name="userid" value="' +obj.userid_fk +'" class="reply_userid">' +					
 					'<input type="button" value="삭제" onclick="reply_del(this.form)">' +
 					'</form></td></tr>');
 				});
@@ -149,7 +146,6 @@
 	
 	function replyAdd() {
 		$('#replybtn').click(function() {
-			var frm = document.reply;
 			
 			if (frm.reply_content) {
 				if (frm.reply_content.value == "") {
@@ -157,7 +153,6 @@
 					return false;
 				}
 			}
-			
 			
 			$.ajax({
 				url : "ReplyAdd.ajax",
@@ -183,6 +178,16 @@
 	
 	function reply_del(frm) {
 		
+		//미니홈피 주인만 모든 댓글 삭제 가능 
+		//그 밖의 회원은 본인 댓글만 삭제 가능
+		if(sessionGrade == 1) {
+			return true;
+		}else if(sessionGrade != 1) {
+			if(frm.userid.value != sessionUserid) {
+				alert('본인이 작성한 댓글만 삭제가 가능합니다!');
+				return false;
+			}
+		}
 
 		$.ajax({
 			url :"ReplyDelete.ajax",

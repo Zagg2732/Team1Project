@@ -15,7 +15,6 @@ public class ReplyAddService implements Action {
 		String userid_fk = request.getParameter("userid_fk");
 		String content = request.getParameter("content");
 		
-		
 		//Reply reply = new Reply();
 		String msg="";
 		String url="";
@@ -38,8 +37,8 @@ public class ReplyAddService implements Action {
 			e.getStackTrace();
 		}
 		ActionForward forward = new ActionForward();
-		request.setAttribute("reply_msg", msg);
-		request.setAttribute("reply_url", url);
+		request.setAttribute("diary_msg", msg);
+		request.setAttribute("diary_url", url);
 		forward.setPath("/WEB-INF/views/jh/redirect.jsp");
 		
 		return forward;

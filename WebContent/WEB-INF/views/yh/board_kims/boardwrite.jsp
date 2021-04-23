@@ -10,8 +10,9 @@
 <title>Kim's Board 글쓰기</title>
 </head>
 <body>
+
 <%
-    String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
+    String userid = null; // 로그인이 된 사람들은 로그인정보를a 수 있도록한다
     if (session.getAttribute("userid") != null)
     {
     	userid = (String)session.getAttribute("userid");
@@ -44,8 +45,8 @@
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
                     aria-expanded="false">접속하기<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.jsp">로그인</a></li>
-                        <li><a href="join.jsp">회원가입</a></li>                    
+                        <li><a href="Login.team1">로그인</a></li>
+                        <li><a href="${pageContext.request.contextPath}/Register.team1">회원가입</a></li>                    
                     </ul>
                 </li>
             </ul>
@@ -59,7 +60,7 @@
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
                     aria-expanded="false">회원관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="loginAction.jsp">로그아웃</a></li>
+                        <li><a href="Login.team1">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -69,8 +70,13 @@
         </div>
     </nav>
     <div class="container">
+    
+    <!-- 유저세션 -->
+    <%-- <c:set var="userInfo" value="${sessionScope.userInfo}" /> --%>
+    
         <div class="row">
         <form method="post" action="${pageContext.request.contextPath}/kimswriteok.kims">
+        <input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
             <table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
                 <thead>
                     <tr>
@@ -79,10 +85,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <td><input type="text" class="form-control" placeholder="글 제목"  name="bbsTitle" maxlength="50" ></td>
+                    <td><input type="text" class="form-control" placeholder="글 제목"  name="subject" maxlength="50" ></td>
                     </tr>
                     <tr>
-                    <td><textarea class="form-control" placeholder="글 내용"  name="bbsContent" maxlength="2048" style="height:350px" ></textarea></td>
+                    <td><textarea class="form-control" placeholder="글 내용"  name="content" maxlength="2048" style="height:350px" ></textarea></td>
                     </tr>
                 </tbody>
             </table>

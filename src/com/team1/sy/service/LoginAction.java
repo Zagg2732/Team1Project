@@ -13,7 +13,6 @@ public class LoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("LoginAction ing...");
 		ActionForward forward = new ActionForward();
 		
 		HttpSession session = request.getSession();

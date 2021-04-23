@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
+import com.team1.jh.service.DiaryAddService;
 import com.team1.jh.service.DiaryContentService;
 import com.team1.jh.service.DiaryListService;
+import com.team1.jh.service.DiaryRewriteOk;
+import com.team1.jh.service.DiaryRewriteService;
 import com.team1.jh.service.ReplyAddService;
+
 
 @WebServlet("*.jh")
 public class MiniController extends HttpServlet {
@@ -40,18 +44,37 @@ public class MiniController extends HttpServlet {
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/jh/home.html");
     		
-    	}else if(url_Command.equals("/diary.jh")) { //다이어리 전체보기 
+    	}else if(url_Command.equals("/diary.jh")) { //다이어리 전체보기(첫화면) 
     		action = new DiaryListService();
+    		forward = action.execute(request, response);
+    		
+    	}else if(url_Command.equals("/diaryWrite.jh")) { //다이어리 글쓰기
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("/WEB-INF/views/jh/diary_write.jsp");
+    	
+    	}else if(url_Command.equals("/diaryWriteOk.jh")) { //다이어리 글쓰기 처리
+    		action = new DiaryAddService();
     		forward = action.execute(request, response);
     		
     	}else if(url_Command.equals("/diaryContent.jh")) { //다이어리 상세보기 
         	action = new DiaryContentService();
         	forward = action.execute(request, response);
         	
+    	}else if(url_Command.equals("/diaryRewrite.jh")) { //다이어리 답글쓰기
+    		action = new DiaryRewriteService();
+    		forward = action.execute(request, response);
+    		
+    	}else if(url_Command.equals("/diaryRewriteOk.jh")) { //다이어리 답글 처리
+    		action = new DiaryRewriteOk();
+    		forward = action.execute(request, response);
+    	
+        	
     	}else if(url_Command.equals("/diaryReply.jh")) { //다이어리 댓글쓰기 
             action = new ReplyAddService();
             forward = action.execute(request, response);
-        		
+        
+        
     	}else if(url_Command.equals("/guestbook.jh")) { //방명록
     		forward = new ActionForward();
     		forward.setRedirect(false);
