@@ -110,7 +110,7 @@
 			
 			
 			
-			<a class="btn btn-outline-info">글쓰기</a>
+			<a  href="HumorWrite.sj" class="btn btn-outline-info">글쓰기</a>
 		</div>
 
 	</div>
