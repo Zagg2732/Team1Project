@@ -48,26 +48,25 @@ public class SJ_controller extends HttpServlet {
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/BoardList.sj")) {
+    	} else if (url_command.equals("/boardList.sj")) {
     		action = new SJ_HumorListService();
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/HumorWrite.sj")) {
+    	} else if (url_command.equals("/boardWrite.sj")) {
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("WEB-INF/views/sj/board_hsj/board_write_hsj.jsp");
     		
     		
-    	} else if(url_command.equals("/HumorWriteOK.sj")) {
+    	} else if(url_command.equals("/boardWriteOK.sj")) {
     		action = new SJ_HumorBoardAddService();
     		forward = action.execute(request, response);
-    		
-    		
-    	} else if (url_command.equals("/HumorBoardContent.sj")) {
-    		action = new SJ_HumorBoardContentService();
+
+    	} else if(url_command.equals("/replyWrite.sj")) {
+    		//action = new SJ_ReplyAddService();
     		forward = action.execute(request, response);
-    		
+
     		
     	} else {
     		System.out.println("Error : you entered *.lsj but you didn't set commanding it yet. 아님말고");
