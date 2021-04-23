@@ -26,10 +26,7 @@ public class SJ_HumorBoardList implements Action {
 			
 			request.setAttribute("humorlist", humorlist);
 			request.setAttribute("noticelist", noticelist);
-			
-			System.out.println(humorlist);
-			System.out.println(noticelist);
-			
+					
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/views/sj/index_sj.jsp");

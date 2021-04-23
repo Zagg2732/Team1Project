@@ -36,6 +36,7 @@ public class SJ_ajax_controller extends HttpServlet {
     	Action action = null;
     	
     	if(url_command.equals("/replyInsert.sjajax")) {
+    		System.out.println("replyInsert는 왔어요...");
     		action = new AddReply();
     		forward = action.execute(request, response);
     	}

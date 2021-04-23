@@ -25,10 +25,7 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			//게시물 총 건수
 			int totalboardcount = dao.totalBoardCount();
 			
-			String type = request.getParameter("type");
-			System.out.println("type확인");
-			System.out.println(type);
-			
+			String type = request.getParameter("type");		
 			String ps = request.getParameter("ps");
 			String cp = request.getParameter("cp");
 			
@@ -54,7 +51,6 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			int pagersize = 3;
 			
 			String linkUrl = "boardList.sj?type=" + type;
-			System.out.println("linkUrl 확인 - " + linkUrl );
 			
 			ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, linkUrl ); 
 			//원본 ThePager pager = new ThePager(totalboardcount, cpage, pagesize, pagersize, "HumorList.sj");
@@ -71,7 +67,6 @@ public class SJ_HumorListService implements Action{ // action interface 참조
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath(path);
-			System.out.println("path 확인코드 : " + path);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
