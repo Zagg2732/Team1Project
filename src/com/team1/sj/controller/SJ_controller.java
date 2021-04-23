@@ -14,6 +14,7 @@ import com.team1.action.ActionForward;
 import com.team1.sj.service.SJ_HumorBoardAddService;
 import com.team1.sj.service.SJ_HumorBoardContentService;
 import com.team1.sj.service.SJ_HumorListService;
+import com.team1.sj.service.SJ_ReplyAddService;
 import com.team1.sj.service.SJ_HumorBoardList;
 import com.team1.sj.service.SJ_HumorContent;
 
@@ -42,37 +43,30 @@ public class SJ_controller extends HttpServlet {
     		action = new SJ_HumorBoardList();
     		forward = action.execute(request, response);
     		
-    	}else if(url_command.equals("/home.lsj")) {
-    		action = new SJ_HumorBoardList(); //서비스
-    		forward = action.execute(request, response);
-    		
-    		
     	} else if (url_command.equals("/board.sj")) {
     		action = new SJ_HumorContent();
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/BoardList.sj")) {
+    	} else if (url_command.equals("/boardList.sj")) {
     		action = new SJ_HumorListService();
     		forward = action.execute(request, response);
     		
     		
-    	} else if (url_command.equals("/HumorWrite.sj")) {
+    	} else if (url_command.equals("/boardWrite.sj")) {
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("WEB-INF/views/sj/board_hsj/board_write_hsj.jsp");
     		
     		
-    	} else if(url_command.equals("/HumorWriteOK.sj")) {
+    	} else if(url_command.equals("/boardWriteOK.sj")) {
     		action = new SJ_HumorBoardAddService();
     		forward = action.execute(request, response);
-    		
-    		
-    	} else if (url_command.equals("/HumorBoardContent.sj")) {
-    		action = new SJ_HumorBoardContentService();
+    		   		
+    	}  else if(url_command.equals("/replyWrite.sj")) {
+    		action = new SJ_ReplyAddService();
     		forward = action.execute(request, response);
-    		
-    		
+    		   		
     	} else {
     		System.out.println("Error : you entered *.lsj but you didn't set commanding it yet. 아님말고");
     	}
