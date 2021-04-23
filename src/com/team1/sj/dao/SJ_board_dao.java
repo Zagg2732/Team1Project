@@ -301,8 +301,6 @@ public class SJ_board_dao {
 				reply.setDepth(rs.getInt("depth"));
 				reply.setStep(rs.getInt("step"));
 				reply.setNickname(rs.getString("nickname"));
-				
-				System.out.println("while문 도는중. 한번만 보이면 모니터 부술것");
 								
 				replyList.add(reply);
 				
@@ -326,6 +324,26 @@ public class SJ_board_dao {
 		
 		return replyList;
 	}
+	
+	public int replyWrite(String type, int idx_fk , String writer , String userid, String content, String pwd) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int row = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "insert into reply(no,writer,userid,content,pwd,idx_fk) "+
+			           " values(reply_no.nextval,?,?,?,?,?)";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return 0;
+	}
+	
 }
 
 

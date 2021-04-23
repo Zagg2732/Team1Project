@@ -14,6 +14,7 @@ import com.team1.action.ActionForward;
 import com.team1.sj.service.SJ_HumorBoardAddService;
 import com.team1.sj.service.SJ_HumorBoardContentService;
 import com.team1.sj.service.SJ_HumorListService;
+import com.team1.sj.service.SJ_ReplyAddService;
 import com.team1.sj.service.SJ_HumorBoardList;
 import com.team1.sj.service.SJ_HumorContent;
 
@@ -41,7 +42,6 @@ public class SJ_controller extends HttpServlet {
     	if(url_command.equals("/index.sj")) {    	
     		action = new SJ_HumorBoardList();
     		forward = action.execute(request, response);
-
     		
     	} else if (url_command.equals("/board.sj")) {
     		action = new SJ_HumorContent();
@@ -63,6 +63,7 @@ public class SJ_controller extends HttpServlet {
     		action = new SJ_HumorBoardAddService();
     		forward = action.execute(request, response);
 
+        
     	} else if(url_command.equals("/replyWrite.sj")) {
     		//action = new SJ_ReplyAddService();
     		forward = action.execute(request, response);
