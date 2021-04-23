@@ -30,9 +30,6 @@ public class SJ_controller extends HttpServlet {
     	String path2 = request.getRequestURI();	 //경로체크
     	String url_command = path2.substring(path1.length()); //URI 잘라서 command만 남김
     	
-    	System.out.println(path1);
-    	System.out.println(path2);
-    	System.out.println(url_command);
 
     	ActionForward forward = null;
     	Action action = null;

@@ -37,21 +37,14 @@ public class SJ_HumorContent implements Action {
 				replyType = "";
 				System.out.println("replyType 설정 오류발생");
 			}
-			
-			System.out.println("게시판으로부터 get으로 받아온 idx : " + idx);
-			System.out.println("게시판으로부터 get으로 받아온 type : " + type);
-			
-			
+					
 			SJ_board_dao dao = new SJ_board_dao();
 			boolean readnumAdd = dao.getReadNum(idx, type); //조회수증가
 			
 			if (readnumAdd) { //값이들어갔으면
-				System.out.println("조회수 증가 함수 작동");
+				//testcode 삭제
 			} else {
 				System.out.println("Error : 조회수증가 false 받음");
-				forward = new ActionForward();
-				forward.setRedirect(true);
-				forward.setPath("home.lsj"); //임시코드		
 			}
 			
 			board = dao.getContentDetails(idx, type); //DB에서 게시판 상세보기 정보 받아옴		

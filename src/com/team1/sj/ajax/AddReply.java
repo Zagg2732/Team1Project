@@ -15,7 +15,7 @@ public class AddReply implements Action {
 		
 		ActionForward forward = null;
 		
-		String id = request.getParameter("reply_id"); // 닉네임은 unique하므로 id도 이걸로 찾아올수있음
+		String id = request.getParameter("sessionId"); // 닉네임은 unique하므로 id도 이걸로 찾아올수있음
 		String content = request.getParameter("reply_content");   // input으로 받은 글내용
 		String idx = request.getParameter("idx"); // 글의 idx
 		String type = request.getParameter("type");
@@ -23,6 +23,7 @@ public class AddReply implements Action {
 		System.out.println(id);
 		System.out.println(content);
 		System.out.println(idx);
+		System.out.println(type);
 		
 
 		try {
@@ -30,6 +31,12 @@ public class AddReply implements Action {
 			
 			int result = dao.replyWrite(id, content, idx, type);
 			request.setAttribute("result", result);
+			
+			if (result>0) {
+				System.out.println("성공");
+			} else {
+				System.out.println("실패");
+			}
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

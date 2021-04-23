@@ -106,7 +106,6 @@ public class SJ_board_dao {
 				list.add(board);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("오류 : " + e.getMessage());
 		}finally {
 			try {
@@ -114,7 +113,7 @@ public class SJ_board_dao {
 				rs.close();
 				conn.close();
 			} catch (Exception e2) {
-				// TODO: handle exception
+				
 			}
 		}
 		return list;
@@ -161,7 +160,6 @@ public class SJ_board_dao {
 						 + name //humor_board || notice_board
 						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID ORDER BY idx desc"; 
 			
-			System.out.println(sql);
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -228,8 +226,6 @@ public class SJ_board_dao {
 	}
 	
 	public SJ_board getContentDetails(String idx, String boardName) {
-		
-		System.out.println("getContentDetails 입장성공");
 		
 		SJ_board board = new SJ_board();
 		
@@ -312,10 +308,7 @@ public class SJ_board_dao {
 				replyList.add(reply);
 				
 				reply = null;						
-			}
-			
-			System.out.println("replyList입니다 행님!! : " + replyList);
-			
+			}					
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

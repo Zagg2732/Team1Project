@@ -26,9 +26,10 @@
 		<div style="padding-top: 30px; text-align: center">
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
 		<h3>${requestScope.pagesize}</h3><br>
+		<h3>${requestScope.sessionId}</h3><br>
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
-		<h3></h3>
+		<h3>${sessionScope.userInfo.nickName}</h3>
 			<%-- <center>
 				<b>게시판 글내용</b>
 				<table width="80%" border="1">
@@ -159,14 +160,14 @@
 	 */	
 	 function replyAdd(){
 		$('#replybtn').click(function() {
-			
+			alert("눌렀네?");
 			var frm = document.reply; //reply form 전체
 			//댓글 유효성
 			if (frm.reply_content.value == "") {
 				alert("내용을 입력해주세요!");
 				return false;
 			}
-			
+						
 			$.ajax({
 				url : "replyInsert.sjajax",
 				type : "POST",
@@ -174,19 +175,11 @@
 					"reply_writer" : $('#reply_writer').val(),
 					"reply_content" : $('#reply_content').val(),
 					"idx" : $('#idx').val(),
+					"sessionId" : '${sessionScope.userInfo.userId}',
 					"type" : "humor_reply"
 				},
-				success : function(data) {
+				success : function(data) {iev	
 					alert("됐어용!!!");
-					$('#replybody').append('<tr align="left"><td width="80%">[' +
-							"test" +'] : ' + "test" +
-							'<br> 작성일 :'+  test +'</td><td width="20%">' +
-							'<form method="POST" name="replyDel">' +
-							'<input type="hidden" name="no" value="' +"test" +'" class="reply_no">' +
-							'<input type="hidden" name="idx" value="' +"testk "+'" class="reply_idx">' +
-							'password : <input type="password" name="delPwd" size="4" class="reply_pwd">' +
-							' <input type="button" value="삭제" onclick="reply_del(this.form)">' +
-							'</form></td></tr>');
 					/* replyList();
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
