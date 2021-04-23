@@ -52,6 +52,11 @@ body {
 .color-blue {
   color: #003380;
 }
+
+.color-gray {
+	color : #8c8c8c;
+}
+
 hr {
   border-top: 1px solid #e6e6e6;
   margin-block-start: 0.4em;
@@ -103,3 +108,4 @@ hr.dashed {
   border: 1px solid #2491b2;
   border-left: none;
 }
+

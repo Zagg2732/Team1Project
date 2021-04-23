@@ -9,11 +9,15 @@
 <meta charset="UTF-8">
 	<title>듀효니 미니홈피</title>
   	<link rel="stylesheet" href="./css/jh/main.css">
+  	<script src="./js/jh/main.js"></script>
   	<!--  문제의 부트.. -->
   	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-  	<script src="./js/jh/main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	
+	<!-- include summernote css/js-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body style="background-color: gray;">
 	<div style="width:100%; max-width:900px;">
@@ -44,8 +48,24 @@
 				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
 				
-				<div class="container">
-
+				원본글 쓰기
+				<form name="write" action="diaryWriteOk.jh" method="POST">
+				<!-- hidden : 값 숨겨서 처리 --> 
+				<input type="hidden" name="idx" value="${idx}" id="idx">
+				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
+				<input type="hidden" name="nickname" value="${userInfo.nickName}" id="nickname">
+				<input type="text" name="subject" class="form-control mt-4 mb-2"
+				placeholder="제목을 입력해주세요." required
+				>
+				<div class="form-group">
+				<textarea style="resize: none; "class="form-control" rows="10" name="content"
+				placeholder="내용을 입력해주세요" required
+				></textarea>
+				</div>
+				<input type="button" name="writebtn" class="btn btn-secondary mb-4" value="등록" onclick="check();" id="writebtn">
+				<input type="button" name="move" class="btn btn-secondary mb-4" value="목록" onclick="location.href='diary.jh';" id="move">
+				</form>
+				
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
 			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
@@ -55,6 +75,21 @@
 	</div>
 </body>
 <script type="text/javascript">
-
+/* $(document).ready(function() {
+	  $('#summernote').summernote();
+	}); */
+	function check() {
+		if(!write.subject.value) {
+			alert("제목을 입력하세요");
+			write.subject.focus();
+			return false;
+		}
+		if(!write.content.value) {
+			alert("내용을 입력하세요");
+			return false;
+		}
+		document.write.submit();
+	}
+	
 </script>
 </html>
