@@ -13,7 +13,7 @@
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 <body>
 	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/sj/include/section_sj.jsp"></jsp:include>
+	
 	
 	<c:set var="board" value="${requestScope.board}" />
 	<c:set var="idx" value="${requestScope.idx}" />

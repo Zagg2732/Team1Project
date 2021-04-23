@@ -34,11 +34,15 @@ public class SJ_HumorBoardAddService implements Action{
 			String content = multi.getParameter("content");
 			String filename = multi.getFilesystemName("filename");
 			
+			String type = multi.getParameter("type");
+			
 			SJ_board board = new SJ_board();
 			
 			board.setSubject(subject);
 			board.setContent(content);
 			board.setFilename(filename);
+			
+		System.out.println("여기탔니??????");
 			
 			int result = 0;
 			
@@ -46,7 +50,8 @@ public class SJ_HumorBoardAddService implements Action{
 				
 				SJ_board_dao dao = new SJ_board_dao();
 				
-				//result = dao.writeok(board);
+				result = dao.writeok(board, type);
+				
 				
 			}catch(NamingException e) {
 				e.printStackTrace();
@@ -54,12 +59,14 @@ public class SJ_HumorBoardAddService implements Action{
 			String msg = "";
 			String url = "";
 			
+		
+			
 			if(result>0) {
 				msg = "success";
-				url = "HumorList.hsj";
+				url = "boardList.hsj";
 			}else {
 				msg = "fail";
-				url = "HumorWrite.hsj";
+				url = "boardWrite.sj";
 			}
 			
 			request.setAttribute("board_msg", msg);
