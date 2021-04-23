@@ -11,6 +11,10 @@
 <title>Kim's Board</title>
 </head>
 <body>
+
+<!-- 세션정보 확인하기! 제이슨처럼 .으로 타고들어가면서 확인할 수 있다 -->
+<h3>${sessionScope.userInfo}</h3>
+
 <%
     String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
     if (session.getAttribute("userid") != null)
@@ -45,8 +49,8 @@
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
                     aria-expanded="false">접속하기<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.jsp">로그인</a></li>
-                        <li><a href="join.jsp">회원가입</a></li>                    
+                        <li><a href="Login.team1">로그인</a></li>
+                        <li><a href="${pageContext.request.contextPath}/Register.team1">회원가입</a></li>                    
                     </ul>
                 </li>
             </ul>
@@ -60,7 +64,7 @@
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
                     aria-expanded="false">회원관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="loginAction.jsp">로그아웃</a></li>
+                        <li><a href="Login.team1">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
