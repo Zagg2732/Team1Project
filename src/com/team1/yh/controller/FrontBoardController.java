@@ -47,7 +47,7 @@ public class FrontBoardController extends HttpServlet {
     		System.out.println("글 등록 도착");
     		action = new KimsBoardAddService();
     		forward = action.execute(request, response);
-    	}
+    	} 
     	
     	///////////////////////////////////////////////
     	
