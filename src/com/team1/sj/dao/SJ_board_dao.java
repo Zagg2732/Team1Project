@@ -37,18 +37,11 @@ public class SJ_board_dao {
 		try {
 			conn = ds.getConnection();
 			String sql = "insert into "
-<<<<<<< HEAD
-					+ type
-					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
-						 "values ("
-						 + type
-=======
 					+type
-					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
-						 "values ("
+					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " 
+					+"values("
 						 +type
->>>>>>> 0424_sangjin
-						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
+						 +"_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
 			
 				pstmt = conn.prepareStatement(sql);
 				
@@ -391,6 +384,69 @@ public class SJ_board_dao {
 		
 		return row;
 	}
+	
+//	// 좋아요 업데이트
+//	public void update_Like(int up) {
+//		String sql = "update HUMOR_BOARD set up=up+1 where num=?";
+//		
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			conn = ds.getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, up);
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				pstmt.close();
+//				conn.close();
+//			} catch (Exception e2) {
+//				// TODO: handle exception
+//			}
+//		}
+//	}
+//	
+//	
+//	// 좋아요 개수 찾기
+//	public int select_Like(int up) {
+//		String sql = "select up from HUMOR_BOARD where num=?";
+//		
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		int like = 0;
+//		
+//		try {
+//			conn = ds.getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, up);
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				like = rs.getInt("up");
+//			}
+//		} catch (SQLException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				rs.close();
+//				pstmt.close();
+//				conn.close();
+//			} catch (Exception e2) {
+//				// TODO: handle exception
+//			}
+//		}
+//		return like;
+//	}
 	
 }
 
