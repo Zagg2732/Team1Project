@@ -82,7 +82,7 @@ public class SJ_HumorBoardAddService implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("boardList.sj?type=humor_board");
+		forward.setPath("boardList.sj");
 		
 		return forward;
 	}

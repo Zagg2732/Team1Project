@@ -27,7 +27,7 @@ public class SJ_board_dao {
 		ds = (DataSource)contextDetail.lookup("jdbc/oracle"); 
 	}
 	
-	//글쓰기 
+	//유머게시판  글쓰기 
 	public int writeok(SJ_board boarddata, String type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -36,8 +36,12 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into HUMOR_BOARD (idx, userid_fk, writedate, subject, content, filename, readnum) " +
-						 "values (HUMOR_BOARD_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
+			String sql = "insert into "
+					+type
+					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
+						 "values ("
+						 +type
+						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
 			
 				pstmt = conn.prepareStatement(sql);
 				

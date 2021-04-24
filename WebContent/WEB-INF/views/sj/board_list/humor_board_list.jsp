@@ -64,7 +64,7 @@
 							<tr>
 								<td>${board.idx}</td>
 								<td>${board.nickname}</td>
-								<td><a href = "board.sj?idx=${board.idx}&type=humor_board">${board.subject}</td>
+								<td><a href = "board.sj?type=humor_board&idx=${board.idx}&type=humor_board">${board.subject}</td>
 								<td>${board.readnum}</td>
 								<td>${board.up}</td>
 								<td>${board.down}</td>
@@ -110,7 +110,7 @@
 			
 			
 			
-			<a  href="boardWrite.sj" class="btn btn-outline-info">글쓰기</a>
+			<a  href="boardWrite.sj?type=humor_board" class="btn btn-outline-info">글쓰기</a>
 		</div>
 
 	</div>
