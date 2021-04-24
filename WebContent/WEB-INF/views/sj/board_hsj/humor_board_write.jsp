@@ -17,12 +17,17 @@
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 
 
+
+
+
 <title>유머게시판 글쓰기</title>
 
 <%-- <link rel="Stylesheet"
 	href="${pageContext.request.contextPath}/css/hsj_style/default.css" /> --%>
 <link rel="Stylesheet"
 	href="${pageContext.request.contextPath}/css/hsj_style/write_css.css" />
+	
+	
 
 <SCRIPT type="text/javascript">
 	function check() {
@@ -40,6 +45,8 @@
 
 		document.bbs.submit();
 	}
+	
+
 </SCRIPT>
 
 </head>
@@ -79,7 +86,7 @@
 
 				<label for="content">내용</label>
 
-				<textarea id="summernote" class="form-control" rows="5"
+				<textarea  id="summernote" class="form-control" rows="10" cols="60"
 					name="content" placeholder="내용을 입력해 주세요"
 					onfocus="this.placeholder = ''"
 					onblur="this.placeholder = '내용을 입력해 주세요'"></textarea>
@@ -138,7 +145,6 @@
 		crossorigin="anonymous"></script>
 
 </body>
-
 
 
 </html>

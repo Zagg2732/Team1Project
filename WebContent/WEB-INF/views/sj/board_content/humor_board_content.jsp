@@ -1,83 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>board_content</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<style>
-		#replyList {
-			margin-bottom: 250px;
-		}
-	</style>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>유머 게시판</title>
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+#replyList {
+	margin-bottom: 250px;
+}
+</style>
+
+<!-- 부트  -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
 <link rel="Stylesheet" href="css/hsj_style/default.css">
+</head>
+
+
 <body>
-	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>	               
-	
-	
+	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
+
+
 	<c:set var="board" value="${requestScope.board}" />
 	<c:set var="idx" value="${requestScope.idx}" />
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.nickName}" scope="request" />
-	
-	<div id="pageContainer">
-		<div style="padding-top: 30px; text-align: center">
-		<h3>게시판 상세보기 임시디자인입니다</h3><br>
-		<h3>${requestScope.pagesize}</h3><br>
-		<h3>${requestScope.sessionId}</h3><br>
-		<h3>게시판 상세보기 임시디자인입니다</h3><br>
-		<h3>게시판 상세보기 임시디자인입니다</h3><br>
-		<h3>${sessionScope.userInfo.nickName}</h3>
+	<c:set var="sessionId" value="${sessionScope.userInfo.nickName}"
+		scope="request" />
 
-				<center>
-				<form name="reply" action="#" method="POST">
+
+
+	<div id="container" style="text-align: center;">
+		<div class="list-board"">
+			<h3>게시판 상세보기 임시디자인입니다</h3>
+			<br>
+			<h3>${requestScope.pagesize}</h3>
+			<br>
+			<h3>${requestScope.sessionId}</h3>
+			<br>
+			<h3>게시판 상세보기 임시디자인입니다</h3>
+			<br>
+			<h3>게시판 상세보기 임시디자인입니다</h3>
+			<br>
+			<h3>${sessionScope.userInfo.nickName}</h3>
+
+
+
+			<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-outline-info" id="down"
+				name="down">싫어요!</button>
+
+			<br> <br>
+
+
+			<form action="#" name="reply" method="POST">
+
+				<div class="card mb-2">
+					<div class="card-header bg-light">
+						<i class="fa fa-comment fa"></i> Comment
+					</div>
+					<div class="card-body">
+
 						<!-- hidden 태그  값을 숨겨서 처리  -->
-						<input type="hidden" name="idx" value="${idx}" id="idx"> 
-						<input type="hidden" name="userid" value=""><!-- 추후 필요에 따라  -->
-						<!-- hidden data -->
-						<table width="80%" border="1">
-							<tr>
-								<th colspan="2">덧글 쓰기</th>
-							</tr>
-							<tr>
-								<td align="left">작성자 :
-								 	<input type="text" name="reply_writer" id="reply_writer" value = "${requestScope.sessionId}" disabled><br/> 
-								 	내&nbsp;&nbsp;용 : 
-								 	<textarea name="reply_content" rows="2" cols="50"  id="reply_content"></textarea>
-								</td>
-								<td align="left">
-									<input type="button" id="replybtn"  value="등록">
-								</td>
-							</tr>
-						</table>
-				</form>
-				<br> 
-				<!-- 댓글의 답글 -->
-				<div id="replyAddReplyBody" width="80%" border="1">
-						<thead>
-						<tbody id="replyAddReplyBody"></tbody>
+						<input type="hidden" name="idx" value="${idx}" id="idx"> <input
+							type="hidden" name="userid" value="">
+						<!-- 추후 필요에 따라  -->
+
+
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<div class="form-inline mb-2">
+									<label for="replyId"><i
+										class="fa fa-user-circle-o fa-2x"></i></label>
+
+									<!-- 닉네임  -->
+									<input type="text" name="reply_writer"
+										class="form-control ml-2" value="${requestScope.sessionId}"
+										disabled id="reply_writer">
+
+									<!-- 내용  -->
+									<textarea class="form-control" id="reply_content" rows="3"
+										name="reply_content" placeholder="이쁜말 사용하기^^"></textarea>
+									<input id="replybtn" type="button" class="btn btn-dark mt-3"
+										value="등록">
+
+
+								</div>
+
+							</li>
+						</ul>
+					</div>
+
 				</div>
-				
-				<!-- 꼬리글 목록 테이블 -->
-				<table id="replyList" width="80%" border="1">
-						<thead>
-						<tr>
-							<th colspan="2">REPLY LIST</th>
-						</tr>
-						<thead>
-						<tbody id="replybody"></tbody>
-				</table>
-				</center>
+			</form>
+
+
+			<!-- 꼬리글 목록 테이블 -->
+
+			<table class="table table-striped text-center">
+				<tbody id="replybody">
+
+					<tr>
+						<th>comment</th>
+						
+					</tr>
+
+				</tbody>
+			</table>
 		</div>
 	</div>
+
 </body>
+
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+	integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+	integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+	crossorigin="anonymous"></script>
+
+
 <script type="text/javascript">
 	$(function() {
 		replyList(); 
@@ -95,9 +160,11 @@
 			},
 			success : function(data) {
 					$.each(data, function(index,obj) {
-						$('#replybody').append('<tr align="left"><td width="80%">[' 
-								+ obj.nickname +'] : ' +obj.content 
-								+ '<br> 작성일 :'+obj.writedate +'</td><td width="20%">' 
+						$('#replybody').append(
+								'<table class="table table-hover table-striped text-center">'
+								+'<tr align="left"><td>[' 
+								+ obj.nickname +'] <br> ' +obj.content 
+								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
 								+ '<input type="hidden" name="no" value="' +obj.no +'" class="reply_no">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
@@ -244,6 +311,50 @@
 			}
 		});
 	}
+	
+	/* 
+	$('#up').click(function(){
+		  var pk = $(this).attr('name') 
+		  $.ajax({
+		      url: "{ }", 
+		      data: { }, 
+		      dataType: "json", 
+
+		      success: function(response){
+		        // 요청이 성공했을 경우 좋아요/싫어요 개수 
+		        $('#up).html("count : "+ response.down_count);
+		        $('#down).html("count : "+ response.up_count);
+		      },
+		      error:function(error){
+		        // 요청이 실패했을 경우
+		        alert(error)
+		      }
+		  });
+		}) */
+
+		
+		
+	/* 	// 싫어요 버튼 처리
+		// 버튼 클릭 > ajax통신 (dislike url로 전달) > views의 dislike 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출
+		$('#down').click(function(){
+		  var pk = $(this).attr('name') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
+		  $.ajax({
+		      url: "{% url 'pledge:pledge_dislike' pledge.pk %}", // 통신할 url을 지정한다.
+		      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'}, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
+		      dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
+
+		      success: function(response){
+		        // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트
+		        $('#like_count'+ pk).html("count : "+ response.like_count);
+		        $('#dislike_count'+ pk).html("count : "+ response.dislike_count);
+		      },
+		      error:function(error){
+		        // 요청이 실패했을 경우
+		        alert(error)
+		      }
+		  });
+		})  */
+	
 </script>
 </html>
 

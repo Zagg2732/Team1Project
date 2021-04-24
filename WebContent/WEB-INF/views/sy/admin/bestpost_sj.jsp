@@ -20,11 +20,9 @@
 
 <body id="page-top">
 	<c:set var="pagesize" value="${requestScope.pagesize}" />
-	<c:set var="cpage" value="${requestScope.cpage}" />
-	<c:set var="pagecount" value="${requestScope.pagecount}" />
+	<c:set var="boardname" value="${requestScope.boardname}" />
 	<c:set var="list" value="${requestScope.list}" />
-	<c:set var="totalboardcount" value="${requestScope.totalboardcount}" />
-	<c:set var="pager" value="${requestScope.pager}" />
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -43,7 +41,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">ㅁ 회원 관리</h1>
+                        <h1 class="h3 mb-0 text-gray-800">ㅁ 추천수 게시물</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -51,7 +49,7 @@
 
 					<div class="card shadow mb-4">
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">회원 리스트 (총 회원 : ${totalboardcount})</h6>
+							<h6 class="m-0 font-weight-bold text-primary">회원 리스트 ()</h6>
 							<div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,8 +69,20 @@
 
 						<div class="card-body">
 						
-						<%-- <form name="list">
-							PageSize설정: <select name="ps" onchange="submit()">
+						<form name="list">
+							Board 설정 : <select name="bn" onchange="submit()">
+									<c:choose>
+										<c:when test="${boardname == 'NOTICE_BOARD'}">
+											<option value="HUMOR_BOARD">유머게시판</option>
+											<option value="NOTICE_BOARD" selected>공지게시판</option>
+										</c:when>
+										<c:otherwise>
+											<option value="HUMOR_BOARD" selected>유머게시판</option>
+											<option value="NOTICE_BOARD">공지게시판</option>
+										</c:otherwise>
+									</c:choose>
+							</select> &nbsp;
+							게시물 개수 설정 : <select name="ps" onchange="submit()">
 								<c:forEach var="i" begin="5" end="20" step="5">
 									<c:choose>
 										<c:when test="${pagesize == i}">
@@ -84,29 +94,31 @@
 									</c:choose>
 								</c:forEach>
 							</select>
-						</form> --%>
+						</form>
 						
 						<br>
 							<div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 	<thead>
                                 		<tr>
-                                			<th>아이디</th>
-                                			<th>이름</th>
+                                			<th>추천수</th>
+                                			<th>글번호</th>
                                 			<th>닉네임</th>
-                                			<th>가입일</th>
-                                			<th>회원 등급</th>                                		
+                                			<th>제목</th>
+                                			<th>조회수</th>
+                                			<th>작성일</th>                                		
                                 		</tr>
                                 	</thead>
 									<tbody>
 										<!-- forEach()  목록 출력하기  -->
 										<c:forEach var="user" items="${list}">
 											<tr>
-												<td align="center">${user.userId}</td>
-												<td align="center">${user.userName}</td>
-												<td align="center">${user.nickName}</td>
-												<td align="center">${user.joinDate}</td>
-												<td align="center">${user.grade}</td>
+												<td align="center">${user.up}</td>
+												<td align="center">${user.idx}</td>
+												<td align="center">${user.nickname}</td>
+												<td align="center">${user.subject}</td>
+												<td align="center">${user.readnum}</td>
+												<td align="center">${user.writedate}</td>
 											</tr>
 										</c:forEach>
 										<!-- forEach()  -->

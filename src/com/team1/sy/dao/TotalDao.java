@@ -16,11 +16,8 @@ import com.team1.sy.dto.Member;
 public class TotalDao {
 
 	Connection con;
-
 	PreparedStatement pstmt;
-
 	ResultSet rs;
-
 	DataSource ds;
 
 	public TotalDao() {
