@@ -211,6 +211,7 @@
 				$('#reply_content').val("");
 				$('#password').val("");
 				$('#replybody').empty();
+				$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
 			},
 			error : function() {
 				alert('댓글 삭제 실패');

@@ -59,7 +59,7 @@
 
 			<%-- action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}" --%>
 		<form name="bbs" id="form" role="form" method="post"
-			action="boardWriteOK.sj" enctype="multipart/form-data"
+			action="boardWriteOK.sj?type=humor_board" enctype="multipart/form-data"
 			>
 		<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
 
