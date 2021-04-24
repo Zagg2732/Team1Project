@@ -37,12 +37,6 @@ public class SJ_board_dao {
 		try {
 			conn = ds.getConnection();
 			String sql = "insert into "
-<<<<<<< HEAD
-					+ type
-					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
-						 "values ("
-						 + type
-=======
 					+type
 					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
 						 "values ("
@@ -50,9 +44,13 @@ public class SJ_board_dao {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 0424_sangjin
 >>>>>>> parent of 25adea4... 0425sooyeon commit
+=======
+						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
+>>>>>>> parent of bc9ae82... Revert "0425sooyeon commit"
 =======
 >>>>>>> parent of a2fcf14... Merge branch 'master' into sooyeonbranch
 						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
