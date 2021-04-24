@@ -8,27 +8,23 @@ import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.dao.SJ_board_dao;
 
-public class SJ_ReplyDelete implements Action {
+public class SJ_AddReply implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String sessionNickName = request.getParameter("sessionNickName");
-		String replyNickname = request.getParameter("replyNickName");
-		String idx = request.getParameter("idx");
+		String id = request.getParameter("sessionId");
+		String content = request.getParameter("reply_content");
 		String type = request.getParameter("type");
-		String refer = request.getParameter("refer");
-		String depth = request.getParameter("depth");
-		String step = request.getParameter("step");
+		String idx  = request.getParameter("idx");
 		
-		System.out.println(refer);
-		System.out.println(depth);
-		System.out.println(step);
-			
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
+			int result = dao.replyWrite(id, content, idx, type);
 			
-			//int result = dao.replyDelete(type, idx);
+			if(result == 0) {
+				System.out.println("replyAdd(ajax) db 등록실패");
+			}
 			
 		} catch (NamingException e) {
 			e.printStackTrace();
