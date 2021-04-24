@@ -2,13 +2,11 @@ package com.team1.sj.ajax;
 
 import java.io.IOException;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.sj.dao.SJ_board_dao;
 
 import net.sf.json.JSONObject;
 
@@ -20,38 +18,36 @@ public class SJ_ReplyAddReply implements Action {
 		
 		String idx = request.getParameter("idx");
 		String type = request.getParameter("type");
-		String sessionId = request.getParameter("sessionId");
+		String sessionNickName = request.getParameter("sessionNickName");
 		String replyNickName = request.getParameter("replyNickName");
 		String refer = request.getParameter("refer");
 		String depth = request.getParameter("depth");
-		String content = request.getParameter("content");
-
 		
-		//db접근해서 리플쓰기
+		System.out.println("====================대댓글========================");
+		System.out.println(idx);
+		System.out.println(type);
+		System.out.println(sessionNickName);
+		System.out.println(replyNickName);
+		System.out.println(refer);
+		System.out.println(depth);
+		System.out.println("=================================================");
 		
-		try {
-			SJ_board_dao dao = new SJ_board_dao();
-			
-			int result = dao.replyAddReply( idx,  type,  sessionId,  content,  refer,  depth);
-			
-			if(result == 0) {
-				System.out.println("replyAddReply db 업데이트 오류");
-			}
-			
-		} catch (NamingException e1) {
-			e1.printStackTrace();
-		}
-		
-		
+		String html = "<tr> <td align='left'>" + replyNickName +"에게 답글쓰기 "
+			    + "내&nbsp;&nbsp;용 :  <textarea name='reply_content' rows='2' cols='50'  id='reply_add_reply'></textarea>"
+			    + "<input type='hidden' id = 'replyAddRefer' value=' +"+ refer +"' class='replyAddRefer'>" 
+			    + "<input type='hidden' id = 'replyAddDepth' value=' +"+ depth +"' class='replyAddDepth'>" 
+			    + "내&nbsp;&nbsp;용 :  <textarea name='reply_content' rows='2' cols='50'  id='reply_add_reply'></textarea>"
+			    + "</td><td align='left'> <input type='button' id='replybtn' onclick='reply_add_reply()' value='등록'></td></tr>";	
 		
 		JSONObject jsonObj = new JSONObject();
 				
 		jsonObj.put("idx", idx);
 		jsonObj.put("type", type);
-		jsonObj.put("sessionId", sessionId);
+		jsonObj.put("sessionNickName", sessionNickName);
 		jsonObj.put("replyNickName", replyNickName);
 		jsonObj.put("refer", refer);
 		jsonObj.put("depth", depth);
+		jsonObj.put("html", html);
 
 		response.setContentType("application/x-json; charset=UTF-8");
 		try {

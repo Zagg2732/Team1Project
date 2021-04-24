@@ -1,20 +1,20 @@
-﻿.list-board {
-	margin-bottom: 15px;
+﻿.list-board { 
+    margin-bottom: 15px;
 }
 
 div-head {
-	display: table;
-	width: 100%;
-	table-layout: fixed;
-	padding: 15px 0;
-	border-top-width: 2px;
-	border-top-style: solid;
-	border-bottom: 1px solid #c3c3c3;
-	border-collapse: separate;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 15px 0;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-bottom: 1px solid #c3c3c3;
+    border-collapse: separate;
 }
 
 .border-black {
-	border-color: #333;
+    border-color: #333;
 }
 
 body, h3, textarea, input, select {
@@ -87,7 +87,7 @@ img {
 #menu {
 	background-color: #404040;
 	color: #000000;
-	padding: 20px 10px 20px; /* 네비게이션바 크기 맞추기  */
+	padding: 20px 10px 20px;  /* 네비게이션바 크기 맞추기  */
 }
 
 #menu ul {

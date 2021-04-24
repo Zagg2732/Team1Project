@@ -30,13 +30,14 @@ public class SJ_ReplyAddForm implements Action {
 		String depth = request.getParameter("depth"); //refer depth까진 필요함
 		
 		
-		String html = "<div id = 'replyAddReplyDiv'><form method='POST' id='replyAddReply'>"
-						+ "<input type='button' value ='답글달기' onclick = 'reply_add_reply(this.form)'><br>"
-						+ "<input type='hidden' name='replyNickName' value = '"+ replyNickName +"'><br>"
-						+ "<input type='hidden' name='refer' value = '"+ refer +"'><br>"
-						+ "<input type='hidden' name='depth' value = '"+ depth +"'><br>"
-						+ "<input type='text' name='content'><br>"
-						+ "</form></div>";
+		String html = "<form action='reply_add_reply()' method='POST' id='replyAddReply' style='width:300px; height:300px;'"
+						+ "<input type='hidden' name='st_name' value = '"+ sessionNickName +"'><br>"
+						+ "<input type='hidden' name='st_name' value = '"+ replyNickName +"'><br>"
+						+ "<input type='hidden' name='st_name' value = '"+ refer +"'><br>"
+						+ "<input type='hidden' name='st_name' value = '"+ depth +"'><br>"
+						+ "<input type='text' name='st_id'><br>"
+						+ "<input type='submit'><br>"
+						+ "</form>";
 				
 				
 		JSONObject jsonObj = new JSONObject();

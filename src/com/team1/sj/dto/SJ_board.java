@@ -17,7 +17,6 @@ public class SJ_board {
 	
 	
 	
-	
 	public String getNickname() {
 		return nickname;
 	}

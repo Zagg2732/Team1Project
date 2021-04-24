@@ -48,6 +48,7 @@ public class SJ_ajax_controller extends HttpServlet {
     		action = new SJ_ReplyAddForm();
     		forward = action.execute(request, response);
     	} else if (url_command.equals("/replyAddReply.sjajax")) {
+    		System.out.println("버튼을누르셨네잉");
     		action = new SJ_ReplyAddReply();
     		forward = action.execute(request, response);
     	}

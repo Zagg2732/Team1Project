@@ -26,8 +26,8 @@ url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey
 			maxActive="20"
 			password="Bit196team1!"
 			username="bituser"
-<<<<<<< HEAD
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey/oracle-atp"
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=C://DataBase/oraclecloud/oracle-atp"
@@ -36,6 +36,8 @@ url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/hyunsangjin/oraclecloud/oracle-atp"
 >>>>>>> 0424_sangjin
 >>>>>>> parent of 25adea4... 0425sooyeon commit
+=======
+>>>>>>> parent of a2fcf14... Merge branch 'master' into sooyeonbranch
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
 			auth="Container" 
