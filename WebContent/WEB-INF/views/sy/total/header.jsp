@@ -36,18 +36,8 @@
                     </div>
                     <div class="col-lg-3">
                     	<div class="ht-widget">
-	                    	
-	                    	<c:if test="${not empty userInfo}">
-	                    		<span style="font-size: 20px; padding-top: 10%;">
-		                    		<a href="#" style="text-decoration: none; color: black;">
-		                    			<i class="fas fa-user-circle"></i> ${userInfo.nickName}
-		                    		</a>
-	                    		</span>
-	                    	
-	                    	</c:if>
-
-
-						</div>
+	                    	NickName : ${userInfo.nickName}
+                    	</div>
                     </div>
 					<div class="col-lg-1">
 					<div class="ht-widget">

@@ -48,25 +48,25 @@
 }
 
 #inputarea {
-	width: 80%;
+	width: 100%;
 	height: 100%;
 	display: inline-block;
 }
 
-#talkok {
-	width: 10%;
-	height: 1%;
-}
-
-#pagearea {
-	display: inline-block;
-}
-
-#ulid > * {
-	list-style:none;
+.a {
 	padding: 5px;
-	margin: auto;
 	float: left;
+	width: 85%;
+}
+.b {
+	padding: 5px;
+	float: left;
+	width: 15%;
+}
+
+#talkok {
+	width: 100%;
+	height: 300px;
 }
 
 html {

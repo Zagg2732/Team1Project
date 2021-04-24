@@ -15,7 +15,7 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">

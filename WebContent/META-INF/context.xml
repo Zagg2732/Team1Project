@@ -29,8 +29,13 @@ url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey
 <<<<<<< HEAD
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey/oracle-atp"
 =======
+<<<<<<< HEAD
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=C://DataBase/oraclecloud/oracle-atp"
 >>>>>>> master
+=======
+			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/hyunsangjin/oraclecloud/oracle-atp"
+>>>>>>> 0424_sangjin
+>>>>>>> parent of 25adea4... 0425sooyeon commit
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
 			auth="Container" 

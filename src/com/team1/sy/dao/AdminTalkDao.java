@@ -36,17 +36,14 @@ public class AdminTalkDao {
 	}
 	
 	//talk list 목록보기
-		public List<AdminTalk> adminTalkList(int cpage){
+		public List<AdminTalk> adminTalkList(int cpage , int pagesize){
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			List<AdminTalk> list = null;
-			
-			int pagesize = 5;
-			
 			try {
 				conn = ds.getConnection();
-				String sql = "SELECT IDX , USERID_FK , CONTENT , WRITEDATE FROM (SELECT rownum rn, at2.* FROM ADMIN_TALK at2 WHERE ROWNUM <= ? ORDER BY idx DESC) WHERE rn >= ?";
+				String sql = "SELECT * FROM (SELECT * FROM ADMIN_TALK WHERE ROWNUM <= 5 ORDER BY idx DESC) WHERE ROWNUM >= 1";
 								
 				pstmt = conn.prepareStatement(sql);
 				
@@ -84,7 +81,7 @@ public class AdminTalkDao {
 			return list;
 		}
 	
-	// talk 총 건수 구하기
+	// 회원 총 건수 구하기
 	public int totalTalkCount() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -110,37 +107,6 @@ public class AdminTalkDao {
 			}
 		}
 		return totalTalkCnt;
-	}
-	
-	// talk Insert
-	public boolean insertAdminTalk(AdminTalk admintalk) {
-		
-		// INSERT INTO ADMIN_TALK (IDX,USERID_FK,CONTENT,WRITEDATE) VALUES (1,'admin','첫번째글입니다.',sysdate);
-		
-		String sql = "INSERT INTO ADMIN_TALK (IDX,USERID_FK,CONTENT,WRITEDATE) VALUES (ADMIN_TALK_IDX.nextval,?,?,sysdate)";
-		int result=-1;
-		
-		try{
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(sql);
-			
-			pstmt.setString(1, admintalk.getUserid_fk());
-			pstmt.setString(2, admintalk.getContent());
-
-			result=pstmt.executeUpdate();
-			
-			if(result!=0){
-				return true;
-			}
-		}catch(Exception ex){
-			System.out.println("insertAdminTalk 에러: " + ex);		
-			return false;
-		}finally{
-			if(rs!=null) try{rs.close();}catch(SQLException ex){}
-			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
-			if(con!=null) try{con.close();}catch(SQLException ex){}
-		}
-		return false;		
 	}
 
 }
