@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.ajax.SJ_AddReply;
+import com.team1.sj.ajax.SJ_ReplyAddForm;
+import com.team1.sj.ajax.SJ_ReplyAddReply;
 import com.team1.sj.ajax.SJ_ReplyDelete;
 import com.team1.sj.ajax.SJ_ReplyList;
 
@@ -24,6 +26,7 @@ public class SJ_ajax_controller extends HttpServlet {
     }
     
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("버튼을누르셨네잉");
     	
     	String path1 = request.getContextPath(); //경로체크
     	String path2 = request.getRequestURI();	 //경로체크
@@ -40,6 +43,13 @@ public class SJ_ajax_controller extends HttpServlet {
     		forward = action.execute(request, response);
     	} else if (url_command.equals("/replyDelete.sjajax")) {
     		action = new SJ_ReplyDelete();
+    		forward = action.execute(request, response);
+    	} else if (url_command.equals("/replyAddForm.sjajax")) {
+    		action = new SJ_ReplyAddForm();
+    		forward = action.execute(request, response);
+    	} else if (url_command.equals("/replyAddReply.sjajax")) {
+    		System.out.println("버튼을누르셨네잉");
+    		action = new SJ_ReplyAddReply();
     		forward = action.execute(request, response);
     	}
     	
