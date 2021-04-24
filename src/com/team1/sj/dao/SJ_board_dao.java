@@ -290,7 +290,7 @@ public class SJ_board_dao {
 			String sql = "SELECT hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
 					   + replyType 
 					   + " hr LEFT JOIN TEAM1_USER tu ON  hr.USERID_FK = tu.USERID LEFT JOIN HUMOR_BOARD hb ON hr.IDX_FK = hb.IDX WHERE idx = "
-					   + idx ;
+					   + idx + " ORDER BY refer ASC, DEPTH ASC, step desc";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -344,7 +344,10 @@ public class SJ_board_dao {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = "select max(refer) from humor_reply";
+			String sql = "select max(refer) from "
+					   + type
+					   + " WHERE idx_fk = "
+					   + idx;
 		
 			pstmt = conn.prepareStatement(sql);		
 			rs = pstmt.executeQuery();
@@ -383,6 +386,49 @@ public class SJ_board_dao {
 		}
 		
 		return row;
+	}
+	
+	public int replyAddReply(String idx, String type, String id, String content, String refer, String depth) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int depthUpdate = Integer.parseInt(depth) + 1;
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "UPDATE "
+					+ type
+					+ " SET STEP = STEP + 1 WHERE IDX_FK = "
+					+ idx
+					+ " AND DEPTH = "
+					+ depth
+					+ " AND step >=1 "; //step이 1이상(원본글아닌) 애들이면서 같은 depth를 가진 녀석들 step을 다 1씩올려줌
+		
+			pstmt = conn.prepareStatement(sql);		
+			rs = pstmt.executeQuery();
+			
+			sql = "INSERT INTO "
+				+ type
+				+ " (IDX_FK, USERID_FK, CONTENT , UP, DOWN, WRITEDATE, REFER , DEPTH, STEP)"
+				+ " VALUES (?, ?, ?, 0, 0, sysdate, ?, ?, 1)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			pstmt.setString(2, id);
+			pstmt.setString(3, content);			
+			pstmt.setString(4, refer);
+			pstmt.setInt(5, depthUpdate);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 //	// 좋아요 업데이트
