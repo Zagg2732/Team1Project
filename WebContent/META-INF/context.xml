@@ -26,11 +26,7 @@ url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey
 			maxActive="20"
 			password="Bit196team1!"
 			username="bituser"
-<<<<<<< HEAD
-			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/ssyy/Desktop/OracleSshKey/oracle-atp"
-=======
 			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/hyunsangjin/oraclecloud/oracle-atp"
->>>>>>> 0424_sangjin
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
 			auth="Container" 
