@@ -25,6 +25,7 @@ public class SJ_ReplyList implements Action {
 		String idx = request.getParameter("idx");
 		String type = request.getParameter("type");
 		
+		
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
 			List<SJ_Board_Reply> replyList = dao.getReplyList(idx, type);
