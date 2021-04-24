@@ -36,8 +36,12 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into HUMOR_BOARD (idx, userid_fk, writedate, subject, content, filename, readnum) " +
-						 "values (HUMOR_BOARD_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
+			String sql = "insert into "
+					+ type
+					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
+						 "values ("
+						 + type
+						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
 			
 				pstmt = conn.prepareStatement(sql);
 				
@@ -332,19 +336,38 @@ public class SJ_board_dao {
 	public int replyWrite(String id, String content, String idx, String type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		int nextvalRefer = 0;
 		int row = 0;
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "insert into "
-					   + type
-					   + " (idx_fk, userid_fk, content, up, down, writedate, refer, DEPTH, step) "+
-			           " values(?, ?, ?, 0, 0, sysdate, 0, 0, 0)";
-			pstmt =conn.prepareStatement(sql);
+			
+			String sql = "select max(refer) from humor_reply";
+		
+			pstmt = conn.prepareStatement(sql);		
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getString("MAX(REFER)") == null ) { //첫 댓글이라 refer가 아직없다면 0
+					nextvalRefer = 0;
+				} else {								  //아니면 max + 1이 새로들어갈 refer
+					int recentVal = Integer.parseInt(rs.getString("MAX(REFER)"));
+					nextvalRefer = recentVal + 1;
+				}
+			}
+		
+			sql = "insert into "
+				   + type
+				   + " (idx_fk, userid_fk, content, up, down, writedate, refer, DEPTH, step) "+
+			         " values(?, ?, ?, 0, 0, sysdate, ?, 0, 0)";
+			
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idx);
 			pstmt.setString(2, id);
 			pstmt.setString(3, content);			
+			pstmt.setInt(4, nextvalRefer);
 			
 			row = pstmt.executeUpdate();
 			

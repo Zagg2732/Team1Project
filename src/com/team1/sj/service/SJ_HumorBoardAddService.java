@@ -36,6 +36,7 @@ public class SJ_HumorBoardAddService implements Action{
 			String filename = multi.getFilesystemName("filename");
 			
 			String type = multi.getParameter("type");
+			System.out.println(type);
 			
 			SJ_board board = new SJ_board();
 			
@@ -86,5 +87,4 @@ public class SJ_HumorBoardAddService implements Action{
 		
 		return forward;
 	}
-
 }
