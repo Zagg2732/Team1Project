@@ -34,6 +34,10 @@ public class SJ_controller extends HttpServlet {
     	ActionForward forward = null;
     	Action action = null;
     	
+    	// type 받아주고 
+    	String type = request.getParameter("type");
+    	
+    	
     	if(url_command.equals("/index.sj")) {    	
     		action = new SJ_HumorBoardList();
     		forward = action.execute(request, response);
@@ -51,7 +55,7 @@ public class SJ_controller extends HttpServlet {
     	} else if (url_command.equals("/boardWrite.sj")) {
     		forward = new ActionForward();
     		forward.setRedirect(false);
-    		forward.setPath("WEB-INF/views/sj/board_hsj/board_write_hsj.jsp");
+    		forward.setPath("WEB-INF/views/sj/board_hsj/"+type+"_write.jsp");
     		
     		
     	} else if(url_command.equals("/boardWriteOK.sj")) {
