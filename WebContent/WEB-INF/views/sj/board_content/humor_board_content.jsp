@@ -36,52 +36,6 @@
 		<h3>게시판 상세보기 임시디자인입니다</h3><br>
 		<h3>${sessionScope.userInfo.nickName}</h3>
 
-			<%-- <center>
-				<b>게시판 글내용</b>
-				<table width="80%" border="1">
-					<tr>
-						<td width="20%" align="center"><b> 글번호 </b></td>
-						<td width="30%">${idx}</td>
-						<td width="20%" align="center"><b>작성일</b></td>
-						<td>${board.writedate}</td>
-					</tr>
-					<tr>
-						<td width="20%" align="center"><b>글쓴이</b></td>
-						<td width="30%">${board.writer}</td>
-						<td width="20%" align="center"><b>조회수</b></td>
-						<td>${board.readnum}</td>
-					</tr>
-					<tr>
-						<td width="20%" align="center"><b>홈페이지</b></td>
-						<td>${board.homepage}</td>
-						<td width="20%" align="center"><b>첨부파일</b></td>
-						<td>${board.filename}</td>
-					</tr>
-					<tr>
-						<td width="20%" align="center"><b>제목</b></td>
-						<td colspan="3">${board.subject}</td>
-					</tr>
-					<tr height="100">
-						<td width="20%" align="center"><b>글내용</b></td>
-						<td colspan="3">${fn:replace(board.content, newLineChar,"<br>")}<br><hr>
-						<c:if test="${not empty board.filename}">
-							<a href="<%= request.getContextPath() %>/download.jsp?file_name=${board.filename}">${board.filename}</a><br>
-							<img src="upload/${board.filename}">
-							
-						</c:if>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="center"><a
-							href="BoardList.do?cp=${cpage}&ps=${pagesize}">목록가기</a> |<a
-							href="BoardEdit.do?idx=${idx}&cp=${cpage}&ps=${pagesize}">편집</a> |<a
-							href="BoardDelete.do?idx=${idx}&cp=${cpage}&ps=${pagesize}">삭제</a>
-							|<a
-							href="BoardRewrite.do?idx=${idx}&cp=${cpage}&ps=${pagesize}&subject=${board.subject}">답글</a>
-						</td>
-					</tr>
-				</table>--%>
-				<!--  꼬리글 달기 테이블 -->
 				<center>
 				<form name="reply" action="#" method="POST">
 						<!-- hidden 태그  값을 숨겨서 처리  -->
@@ -105,6 +59,12 @@
 						</table>
 				</form>
 				<br> 
+				<!-- 댓글의 답글 -->
+				<div id="replyAddReplyBody" width="80%" border="1">
+						<thead>
+						<tbody id="replyAddReplyBody"></tbody>
+				</div>
+				
 				<!-- 꼬리글 목록 테이블 -->
 				<table id="replyList" width="80%" border="1">
 						<thead>
@@ -140,10 +100,11 @@
 								+ '<br> 작성일 :'+obj.writedate +'</td><td width="20%">' 
 								+ '<form method="POST" name="replyDel">' 
 								+ '<input type="hidden" name="no" value="' +obj.no +'" class="reply_no">' 
-								+ '<input type="hidden" id = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
-								+ '<input type="hidden" id = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
-								+ '<input type="hidden" id = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
-								+ '<input type="hidden" id = "replyStep" value="' +obj.step +'" class="replyStep">' 
+								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
+								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
+								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
+								+ '<input type="hidden" id = "replyStep" value="' +obj.step +'" class="replyStep">'
+								+ '<input type="button" id = "replyAddForm" value="답글" onclick="reply_add_form(this.form)">'
 								+ '<input type="button" id = "replyDeleteBtn" value="삭제" onclick="reply_del(this.form)">'
 								+ '</form></td></tr>');
 					});		
@@ -154,41 +115,106 @@
 		});
 		
 	}
+	
+	function reply_add_reply_button() {
+		$('#replyAddForm').click(function() {
+		
+		});
+	} 
 	 
 	 function replyAdd(){
-		$('#replybtn').click(function() {
-			var frm = document.reply; //reply form 전체
-			//댓글 유효성
-			if (frm.reply_content.value == "") {
-				alert("내용을 입력해주세요!");
-				return false;
-			}
-						
+			$('#replybtn').click(function() {
+				var frm = document.reply; //reply form 전체
+				//댓글 유효성
+				if (frm.reply_content.value == "") {
+					alert("내용을 입력해주세요!");
+					return false;
+				}
+							
+				$.ajax({
+					url : "replyInsert.sjajax",
+					type : "POST",
+					data : {
+						"reply_writer" : $('#reply_writer').val(),
+						"reply_content" : $('#reply_content').val(),
+						"idx" : $('#idx').val(),
+						"sessionId" : '${sessionScope.userInfo.userId}',
+						"type" : "humor_reply" //게시판종류와 세션ID 들고감
+					},
+					success : function(data) {
+						$('#replybody').empty();
+						replyList(); //댓글목록 다시불러옴
+						$('#reply_writer').val("");
+						$('#reply_content').val("");
+						$('#password').val("");
+						$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+					},
+					error : function() {
+						alert('댓글 등록 실패');
+					}
+				});
+			});
+		}
+	
+	 function reply_add_form(frm) {
+
 			$.ajax({
-				url : "replyInsert.sjajax",
+				url :"replyAddForm.sjajax",
 				type : "POST",
-				data : {
-					"reply_writer" : $('#reply_writer').val(),
-					"reply_content" : $('#reply_content').val(),
+				datatype : "json",
+				data :{
 					"idx" : $('#idx').val(),
-					"sessionId" : '${sessionScope.userInfo.userId}',
-					"type" : "humor_reply" //게시판종류와 세션ID 들고감
+					"type" : "humor_reply",
+					"sessionNickName" : '${sessionScope.userInfo.nickName}',
+					"replyNickName" : frm.replyNickname.value,
+					"refer" : frm.replyRefer.value,
+					"depth" : frm.replyDepth.value
 				},
-				success : function(data) {
+				success : function(data){
 					$('#replybody').empty();
 					replyList(); //댓글목록 다시불러옴
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
-					$('#password').val("");
 					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
-
+					$("#replyAddReplyBody").empty(); 
+					$("#replyAddReplyBody").append(data.html); 
 				},
 				error : function() {
-					alert('댓글 등록 실패');
+					alert('답글 data 받아오기 실패');
 				}
 			});
-		});
-	}
+		}
+	function reply_add_reply() {
+			alert('눌렀네요 ^^');
+			console.log(frm);
+				
+			$.ajax({
+				url :"replyAddReply.sjajax",
+				type : "POST",
+				datatype : "json",
+				data :{
+					"idx" : $('#idx').val(),//게시판idx
+					"type" : "humor_reply", //게시판종류
+					"sessionNickName" : '${sessionScope.userInfo.nickName}', //현재로그인한유저
+					"replyNickName" : frm.replyNickName.value,
+					/*
+					"refer" : frm.replyRefer.value,
+					"depth" : frm.replyDepth.value 
+					*/
+				},
+				success : function(data){
+					$('#replybody').empty();
+					replyList(); //댓글목록 다시불러옴
+					$('#reply_writer').val("");
+					$('#reply_content').val("");
+					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+					$("#replybody").eq(0).append(data.html); 	
+				},
+				error : function() {
+					alert('답글 data 받아오기 실패');
+				}
+			});
+		}
 	
 	function reply_del(frm) {
 

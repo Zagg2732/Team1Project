@@ -37,6 +37,8 @@
 			<li><a href="boardList.sj?type=notice_board">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지
 					사항</a></li>
 			<!--NoticeList.hsj ㄱㄱ  -->
+			<li><a href="Login.team1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인하기(임시)</a></li>
+			<!--NoticeList.hsj ㄱㄱ  -->
 			<li><a href="javscript:void(0);"></a></li>
 			<li><a href="javscript:void(0);"></a></li>
 		</ul>
