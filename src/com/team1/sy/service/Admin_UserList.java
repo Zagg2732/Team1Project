@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.sy.dao.AdminDao;
+import com.team1.sy.dao.AdminUserDao;
 import com.team1.sy.dto.Member;
 import com.team1.utils.ThePager;
 
@@ -17,7 +17,7 @@ public class Admin_UserList implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		try {
-			AdminDao dao = new AdminDao();
+			AdminUserDao dao = new AdminUserDao();
 
 			// 게시물 총 건수
 			int totalUserCnt = dao.totalUserCount();

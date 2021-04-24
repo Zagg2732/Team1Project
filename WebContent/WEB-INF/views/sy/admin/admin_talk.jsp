@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	
     <title>SB Admin 2 - Dashboard</title>
 
 </head>
@@ -43,7 +43,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">ㅁ 회원 관리</h1>
+                        <h1 class="h3 mb-0 text-gray-800">ㅁ 관리자 Talk</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -85,34 +85,41 @@
 								</c:forEach>
 							</select>
 						</form> --%>
+						<div id="inputarea" >
+							<form name="talk">
+								<span class = "a">
+									<textarea rows="5" cols="200" class="ckeditor" name="content"></textarea>
+								</span>
+								<span class = "b">
+									<input type="button" value="OK" class="btn btn-primary" id="talkok">
+								</span>
+							</form>
+						
+						</div>
+						<hr>
+						<div id="talklist">
+						
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="card-body">
+	                                    <div class="row no-gutters align-items-center">
+	                                        <div class="col mr-2">
+	                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">
+	                                            admin
+	                                            </div>
+	                                            <div>
+	                                            asdjfklasdjfklajd
+	                                            </div>
+	                                        </div>
+	                                    </div>
+								    </div>
+							
+							</div>
+						
 						
 						<br>
-							<div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                	<thead>
-                                		<tr>
-                                			<th>아이디</th>
-                                			<th>이름</th>
-                                			<th>닉네임</th>
-                                			<th>가입일</th>
-                                			<th>회원 등급</th>                                		
-                                		</tr>
-                                	</thead>
-									<tbody>
-										<!-- forEach()  목록 출력하기  -->
-										<c:forEach var="user" items="${list}">
-											<tr>
-												<td align="center">${user.userId}</td>
-												<td align="center">${user.userName}</td>
-												<td align="center">${user.nickName}</td>
-												<td align="center">${user.joinDate}</td>
-												<td align="center">${user.grade}</td>
-											</tr>
-										</c:forEach>
-										<!-- forEach()  -->
-									</tbody>
-								</table>
-                            </div>
+						
+						</div>
 						
 						</div>
 						
@@ -133,7 +140,7 @@
     <!-- End of Page Wrapper -->
 
     <jsp:include page="admin_logout_modal.jsp" />
-
+	<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 </body>
 

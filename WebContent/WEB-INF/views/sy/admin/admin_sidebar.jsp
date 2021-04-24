@@ -11,8 +11,8 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="css/sy/admin_main.css" type="text/css">
 
-<c:set var="userInfo" value="${sessionScope.userInfo}" />
-<c:if test="${empty userInfo}">
+<c:set var="userInfo" value="${sessionScope.userInfo.grade}" />
+<c:if test="${userInfo == 0}">
 	<script>
 		alert("잘못된 접근 입니다.");
 		location.href = 'index.team1';
@@ -72,7 +72,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="BestPostSJ.admin">추천수 순 게시물</a>
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="talk.admin">
                     <i class="fas fa-comments"></i>
                     <span>관리자 talk</span></a>
             </li>
