@@ -1,18 +1,18 @@
+<%@page import="com.team1.utils.ThePager"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset=UTF-8">
 
-
-<title>유머 게시판</title>
-
-
-
+<title>공지 게시판</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -22,15 +22,13 @@
 </style>
 
 <!-- 부트  -->
+<link rel="Stylesheet" href="css/hsj_style/default.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
-<link rel="Stylesheet" href="css/hsj_style/default.css">
 </head>
-
-
 <body>
 	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
 
@@ -47,6 +45,9 @@
 
 	<div id="container" style="text-align: center;">
 		<div class="list-board"">
+		<br>
+		<br>
+		
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
 			<h3>${requestScope.pagesize}</h3>
@@ -59,6 +60,8 @@
 			<br>
 			<h3>${sessionScope.userInfo.nickName}</h3>
 
+<br>
+<br>
 
 
 			<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
@@ -66,7 +69,8 @@
 			<button type="button" class="btn btn-outline-info" id="down"
 				name="down">싫어요!</button>
 
-			<br> <br>
+			<br>
+			 <br>
 
 
 			<form action="#" name="reply" method="POST">

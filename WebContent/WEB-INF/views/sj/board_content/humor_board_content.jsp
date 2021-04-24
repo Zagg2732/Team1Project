@@ -1,36 +1,41 @@
+<%@page import="com.team1.utils.ThePager"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<meta charset=UTF-8">
 
 <title>유머 게시판</title>
-
-
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 #replyList {
 	margin-bottom: 250px;
 }
+#replyAddReplyBody {
+	background-color : #6c757d;
+	width : 1117px;
+	height : 89px;
+	border: 1px solid black;
+	margin-bottom: 15px;
+}
 </style>
 
 <!-- 부트  -->
+<link rel="Stylesheet" href="css/hsj_style/default.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
-<link rel="Stylesheet" href="css/hsj_style/default.css">
 </head>
-
-
 <body>
 	<jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
 
@@ -40,13 +45,16 @@
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.nickName}"
-		scope="request" />
+	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
+	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" />
 
 
 
 	<div id="container" style="text-align: center;">
 		<div class="list-board"">
+		<br>
+		<br>
+		
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
 			<h3>${requestScope.pagesize}</h3>
@@ -60,13 +68,28 @@
 			<h3>${sessionScope.userInfo.nickName}</h3>
 
 
-
-			<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
+<br>
+<br>
+		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" class="btn btn-outline-info" id="down"
-				name="down">싫어요!</button>
+			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
+  -->
+ 
+ <form id="like_form">
+<table id="list">
+<input type="hidden" name="command" value="like_it">
+<input type="hidden" name="board_idx" value="${board.idx}">
+<tr><input type="button" value="좋아요!" onclick="return like()" > </tr>
+<tr><div id="like_result">${board.up}</div> </tr>
+</table>
+</form>
 
-			<br> <br>
+
+
+
+
+			<br> 
+			<br>
 
 
 			<form action="#" name="reply" method="POST">
@@ -91,7 +114,7 @@
 
 									<!-- 닉네임  -->
 									<input type="text" name="reply_writer"
-										class="form-control ml-2" value="${requestScope.sessionId}"
+										class="form-control ml-2" value="${requestScope.sessionNickName}"
 										disabled id="reply_writer">
 
 									<!-- 내용  -->
@@ -112,7 +135,9 @@
 
 
 			<!-- 꼬리글 목록 테이블 -->
-
+			<div id = "replyAddReplyBody">
+			안뇽 replyaddbody얌 ㅎ
+			</div>
 			<table class="table table-striped text-center">
 				<tbody id="replybody">
 
@@ -144,9 +169,11 @@
 
 
 <script type="text/javascript">
+
 	$(function() {
 		replyList(); 
  		replyAdd(); 
+ 		reply_add_reply();
 	});
 
 	function replyList(){	
@@ -166,7 +193,6 @@
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
-								+ '<input type="hidden" name="no" value="' +obj.no +'" class="reply_no">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
@@ -183,11 +209,6 @@
 		
 	}
 	
-	function reply_add_reply_button() {
-		$('#replyAddForm').click(function() {
-		
-		});
-	} 
 	 
 	 function replyAdd(){
 			$('#replybtn').click(function() {
@@ -214,7 +235,7 @@
 						$('#reply_writer').val("");
 						$('#reply_content').val("");
 						$('#password').val("");
-						$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+						$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 					},
 					error : function() {
 						alert('댓글 등록 실패');
@@ -242,7 +263,7 @@
 					replyList(); //댓글목록 다시불러옴
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
-					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+					$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 					$("#replyAddReplyBody").empty(); 
 					$("#replyAddReplyBody").append(data.html); 
 				},
@@ -251,9 +272,7 @@
 				}
 			});
 		}
-	function reply_add_reply() {
-			alert('눌렀네요 ^^');
-			console.log(frm);
+	function reply_add_reply(frm) {
 				
 			$.ajax({
 				url :"replyAddReply.sjajax",
@@ -262,20 +281,19 @@
 				data :{
 					"idx" : $('#idx').val(),//게시판idx
 					"type" : "humor_reply", //게시판종류
-					"sessionNickName" : '${sessionScope.userInfo.nickName}', //현재로그인한유저
-					"replyNickName" : frm.replyNickName.value,
-					/*
-					"refer" : frm.replyRefer.value,
-					"depth" : frm.replyDepth.value 
-					*/
+					"sessionId" : '${sessionScope.userInfo.userId}',
+					"replyNickName" : frm.replyNickName.value,					
+					"refer" : frm.refer.value,
+					"depth" : frm.depth.value, 
+					"content" : frm.content.value
 				},
 				success : function(data){
 					$('#replybody').empty();
 					replyList(); //댓글목록 다시불러옴
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
-					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
-					$("#replybody").eq(0).append(data.html); 	
+					$('#password').val("");
+					$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 				},
 				error : function() {
 					alert('답글 data 받아오기 실패');
@@ -311,6 +329,27 @@
 			}
 		});
 	}
+	
+	function like(){
+		$.ajax({
+		url: "SJ_Board",
+		type: "POST",
+		cache: false,
+		dataType: "json",
+		data: $('#like_form').serialize(), //아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+		alert("'좋아요'가 반영되었습니다!") ; // data중 put한 것의 이름 like
+		$("#like_result").html(data.like); //id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다.
+		},
+		error:
+		function (request, status, error){
+		alert("ajax실패")
+		}
+		});
+		}
+
+
 	
 	/* 
 	$('#up').click(function(){
