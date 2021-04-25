@@ -28,7 +28,7 @@
 				<div class="col-lg-2">
 					<div class="ht-widget">
 						<c:if test="${userInfo.grade > 0}">
-							<a href="main.admin" class="btn btn-dark"><i class="fas fa-cog"></i> admin</a>
+							<a href="main.admin" class="btn btn-dark btn-sm"><i class="fas fa-cog"></i> admin</a>
 						</c:if>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 		                    			<i class="fas fa-user-circle"></i> ${userInfo.nickName}
 		                    		</a>
 	                    		</span>
-	                    		<a href="EditProfile.team1" class="btn btn-dark"><i class="fas fa-user-edit"></i></i> Edit Profile</a>
+	                    		<a href="EditProfile.team1" class="btn btn-dark btn-sm"><i class="fas fa-user-edit"></i></i> Edit Profile</a>
 	                    	</c:if>
 
 
@@ -54,10 +54,10 @@
 
 						<c:choose>
 							<c:when test="${not empty userInfo}">
-								<a href="Logout.team1" class="btn btn-dark">Logout</a>
+								<a href="Logout.team1" class="btn btn-dark btn-sm">Logout</a>
 							</c:when>
 							<c:otherwise>
-								<a href="Login.team1" class="btn btn-dark">Login</a>
+								<a href="Login.team1" class="btn btn-dark btn-sm">Login</a>
 							</c:otherwise>
 						</c:choose>
 

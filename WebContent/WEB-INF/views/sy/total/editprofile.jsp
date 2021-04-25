@@ -42,55 +42,44 @@
 		<jsp:include page="header.jsp" />
 		<section id="editsection">
 		<div id="editwrap">
-			<h3 style="margin-top: 77px;">EditProfile</h3>
-			<span style="font-size: 120px; color: lightgrey;">
-				<i class="fas fa-user-circle"></i>
-			</span>
 			
-			<form id="msform">
+			<div id="msform">
 				<fieldset>
 				
-					<h3 style="margin-top: 77px;">EditProfile</h3>
+					<h3 style="margin-top: 35px;">EditProfile</h3>
 					<span style="font-size: 120px; color: lightgrey;">
 						<i class="fas fa-user-circle"></i>
 					</span><br>
 
 					ID : <input type="text" value="${userInfo.userId}" disabled><br>
-					가입일 : <b>${userInfo.joinDate}</b>
-					
-					
-					
-					
-				</fieldset>
-			</form>
-			
-			
-			<div>ID : <input type="text" value="${userInfo.userId}" disabled></div>
-			<div>가입일 : <b>${userInfo.joinDate}</b></div>
-			<div>회원 등급 :
-				<c:choose>
-					<c:when test="${userInfo.grade > 0}">
-						관리자
-					</c:when>
-					<c:otherwise>
-						일반 회원
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div>
-				<form name="nickname">
-					닉네임 : <input type="text" value="${userInfo.nickName}">
-					<input type="button" value="중복체크">
-				</form>
-			</div>
-			<hr>
-			<h5>비밀번호 변경</h5>
-			<div>
+					가입일 : <b>${userInfo.joinDate}</b><br>
+					회원 등급 :
+					<c:choose>
+						<c:when test="${userInfo.grade > 0}">
+							관리자
+						</c:when>
+						<c:otherwise>
+							일반 회원
+						</c:otherwise>
+					</c:choose>
+					<hr>
+					<h5>닉네임 변경</h5>
+					<form name="nickname">
+						닉네임 : <input type="text" value="${userInfo.nickName}">
+						<input type="button" value="중복체크">
+					</form>
+					<hr>
+					<h5>비밀번호 변경</h5>
 					현재 비밀번호 : <input type="password" value=""><br><br>
 					변경 비밀번호 : <input type="password" value="">
-			</div>
-			<hr>
+					
+					<hr>
+					
 					<input type="button" value="프로필 수정하기">
+
+					</fieldset>
+			</div>
+			
 		</div>
 		</section>
 
