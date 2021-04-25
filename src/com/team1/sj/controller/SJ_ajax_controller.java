@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.ajax.SJ_AddReply;
+import com.team1.sj.ajax.SJ_Like;
 import com.team1.sj.ajax.SJ_ReplyAddForm;
 import com.team1.sj.ajax.SJ_ReplyAddReply;
 import com.team1.sj.ajax.SJ_ReplyDelete;
@@ -49,6 +50,10 @@ public class SJ_ajax_controller extends HttpServlet {
     	} else if (url_command.equals("/replyAddReply.sjajax")) {
     		action = new SJ_ReplyAddReply();
     		forward = action.execute(request, response);
+    	} else if (url_command.equals("/like.sjajax")) {
+    		action = new SJ_Like();
+    		forward = action.execute(request, response);
+    		
     	}
     	
     	
