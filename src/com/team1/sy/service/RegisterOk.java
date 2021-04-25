@@ -14,6 +14,8 @@ public class RegisterOk implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		System.out.println("무야호");
+		
 		String userId = request.getParameter("userId");
 		String userNick = request.getParameter("userNick");
 		String userName = request.getParameter("userName");

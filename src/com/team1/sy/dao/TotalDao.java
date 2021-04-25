@@ -87,7 +87,7 @@ public class TotalDao {
 		return member;
 	}
 	
-	
+	//회원가입
 	public boolean insertMember(Member tempMember) {
 		//INSERT INTO TEAM1_USER(USERID,USERNAME,NICKNAME,PASSWORD,JOINDATE,GRADE_FK)
 		//VALUES ('admin','홍길동','관리자','1004',sysdate,2);
@@ -117,6 +117,35 @@ public class TotalDao {
 			if(con!=null) try{con.close();}catch(SQLException ex){}
 		}
 		return false;
+	}
+	
+	
+	//아이디 닉네임 중복체크 로직
+	public boolean overlapCheck(String columnName, String search) {
+		String sql = "SELECT " + columnName + " FROM TEAM1_USER WHERE " + columnName + " = ?";
+		boolean result = false;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, search);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = false;
+			}else {
+				result = true;
+			}
+			
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally{
+			if(rs!=null) try{rs.close();}catch(SQLException ex){ex.getStackTrace();}
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){ex.getStackTrace();}
+			if(con!=null) try{con.close();}catch(SQLException ex){ex.getStackTrace();}
+		}
+		
+		return result;
 	}
 	
 	
