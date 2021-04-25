@@ -38,11 +38,10 @@ public class SJ_board_dao {
 			conn = ds.getConnection();
 			String sql = "insert into "
 					+type
-					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " 
-					+ "values ("
-					+type
-					+ "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
-
+					+ "(idx, userid_fk, writedate, subject, content, filename, readnum) " +
+						 "values ("
+						 +type
+						 + "_idx.nextval, ?, sysdate, ?, ?, ?, 0)";
 			
 				pstmt = conn.prepareStatement(sql);
 				

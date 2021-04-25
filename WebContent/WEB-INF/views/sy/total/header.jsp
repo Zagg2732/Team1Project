@@ -43,7 +43,7 @@
 		                    			<i class="fas fa-user-circle"></i> ${userInfo.nickName}
 		                    		</a>
 	                    		</span>
-	                    	
+	                    		<a href="EditProfile.team1" class="btn btn-dark"><i class="fas fa-user-edit"></i></i> Edit Profile</a>
 	                    	</c:if>
 
 

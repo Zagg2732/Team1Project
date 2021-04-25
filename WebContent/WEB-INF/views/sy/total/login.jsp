@@ -33,7 +33,7 @@
 	<div id="signwrap" class="signwrap">
 		<jsp:include page="header.jsp" />
 		<section id="loginsection">
-			<h3 style="padding-top:150px;"align="center">Login Form</h3>
+			<h3 style="padding-top:220px;"align="center">Login Form</h3>
 			<!-- multistep form -->
 			<form id="msform" action="${pageContext.request.contextPath}/LoginOk.team1" method="post">
 

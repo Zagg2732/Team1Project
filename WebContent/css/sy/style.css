@@ -1209,12 +1209,28 @@ ol {
 }
 
 #loginsection,
-#registersection {
-	height: 900px;
+#registersection,
+#editsection {
+	height: 1000px;
 	width: 100%;
 	margin: auto;
 	background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2));
 	margin-block-end: 10px;
+}
+
+#editwrap {
+	height: 900px;
+	width: 70%;
+	margin: auto;
+	/* background: white; */
+	margin-block-end: 10px;
+	text-align: center;
+	/* background: linear-gradient(white, lightgrey); */
+	
+}
+
+#editsection > * {
+	padding: 5px;
 }
 
 /*form styles*/
@@ -1355,8 +1371,31 @@ background: #27AE60;
 color: white;
 }
 
-
-
 /*# sourceMappingURL=style.css.map */
+.form-group {
+	margin-bottom: 10px;
+}
 
+.form-control {
+	display: block;
+	max-width: 400px;
+	padding: 4px 10px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	outline: none;
+	height: auto;
+	margin: auto;
+}
 
+.error-text {
+	color: #FFCD69;
+	margin-top: .5rem;
+}
+
+.valid-error {
+	border: 3px solid #FFCD69;
+}
+
+.valid-pass {
+	border: 3px solid green;
+}
