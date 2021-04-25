@@ -243,7 +243,7 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT subject , nickname, readnum, up, down, writedate, content FROM "
+			String sql = "SELECT userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
 						+ boardName + 
 						" hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID WHERE IDX = "
 						+ idx ;
@@ -251,14 +251,14 @@ public class SJ_board_dao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				board.setUserid_fk(rs.getString("userid_fk"));
 				board.setSubject(rs.getString("subject"));
-				board.setNickname(rs.getString("nickname"));
+				board.setNickname(rs.getString("nickName"));
 				board.setReadnum(rs.getInt("readnum"));
 				board.setUp(rs.getInt("up"));
 				board.setDown(rs.getInt("down"));
 				board.setWritedate(rs.getDate("writedate"));
 				board.setContent(rs.getString("content"));
-				//idx는 이미 requestScope('idx')에서 쓸수 있기 때문에 굳이 받지않았습니다만 코드짤때 너무불편하다고 판단되면 그냥받을까??
 				
 			}
 			
@@ -487,6 +487,51 @@ public class SJ_board_dao {
 			}
 		}
 
+		
+		return result;
+	}
+
+	public int boardDelete(String type, String idx, String replyType) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "DELETE FROM "
+					+ replyType
+					+ " WHERE IDX_FK = "
+					+ idx;
+				
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+			
+			result = 0;
+				
+			sql = "DELETE FROM "
+					+ type
+					+ " WHERE idx = "
+					+ idx;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("Error !!! : board_delete 게시글 db쪽 작동 0개");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return result;
 	}
