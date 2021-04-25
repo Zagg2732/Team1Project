@@ -46,6 +46,7 @@
 <div class="col-sm-6">
  <table class="table table-hover">
 	<thead>
+	
 		<tr>
 			<th><h3>공지게시판</h3></th>
 		
@@ -108,7 +109,7 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Profile</th>
+			
 		
 		</tr>
 	</thead>

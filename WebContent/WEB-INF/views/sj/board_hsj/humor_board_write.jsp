@@ -1,33 +1,39 @@
+<%@page import="com.team1.utils.ThePager"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8">
+
+<title>유머게시판</title>
 
 <!-- 부트  -->
+<link rel="Stylesheet" href="css/hsj_style/default.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
 
-<link rel="Stylesheet" href="css/hsj_style/default.css">
 
 
 
 
 
-<title>유머게시판 글쓰기</title>
 
 <%-- <link rel="Stylesheet"
 	href="${pageContext.request.contextPath}/css/hsj_style/default.css" /> --%>
-<link rel="Stylesheet"
+<%-- <link rel="Stylesheet"
 	href="${pageContext.request.contextPath}/css/hsj_style/write_css.css" />
-	
-	
+	 --%>
+
 
 <SCRIPT type="text/javascript">
 	function check() {
@@ -47,6 +53,9 @@
 	}
 	
 
+
+	
+
 </SCRIPT>
 
 </head>
@@ -61,64 +70,57 @@
 
 	<article>
 
-	<div class="container" role="main">
-		<br> <b>유머 게시판</b> <br> <br>
+		<div class="container" role="main">
+			<br> <b>유머게시판 글쓰기</b> <br> <br>
 
 			<%-- action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}" --%>
-		<form name="bbs" id="form" role="form" method="post"
-			action="boardWriteOK.sj?type=humor_board" enctype="multipart/form-data"
-			>
-		<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
+			<form name="bbs" id="form" role="form" method="post"
+				action="boardWriteOK.sj?type=humor_board"
+				enctype="multipart/form-data">
+				<input type="hidden" name="userid" value="${userInfo.userId}"
+					id="userid">
 
-			<div class="mb-3">
+				<div class="mb-3">
 
-				<label for="title">제목</label> <input type="text"
-					class="form-control" name="subject" id="title"
-					placeholder="제목을 입력해 주세요"
-					 onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '제목을 입력해 주세요'">
-			</div>
-
-
+					<label for="title">제목</label> <input type="text"
+						class="form-control" name="subject" id="title"
+						placeholder="제목을 입력해 주세요" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '제목을 입력해 주세요'">
+				</div>
 
 
-			<div class="mb-3">
-
-				<label for="content">내용</label>
-
-				<textarea  id="summernote" class="form-control" rows="10" cols="60"
-					name="content" placeholder="내용을 입력해 주세요"
-					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '내용을 입력해 주세요'"></textarea>
-
-			</div>
 
 
-			<div class="custom-file">
-				<!-- <input type="file" class="custom-file-input" id="customFile"
-					name="filename"> <label class="custom-file-label"
-					for="customFile"></label> -->
-					
-                       
-                        <input type="file" name="filename">
-                   
-			</div> 
+				<div class="mb-3">
+
+					<label for="content">내용</label>
+
+					<textarea id="summernote" class="form-control" rows="5" cols="60"
+						name="content" placeholder="내용을 입력해 주세요"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '내용을 입력해 주세요'"></textarea>
+
+				</div>
+
+
 			
-			
+			<!-- 파일 선택 -->
+			<label class="form-label" for="customFile">첨부파일</label>
+				<input type="file" class="form-control" id="customFile" />
 
+			</form>
 
+			<div style="text-align: center;">
+		<br>
+		
+				<a class="btn btn-outline-info" id="btnSave" onclick="check();">등록</a>
+				&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-outline-info" id="btnList"
+					href="boardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">목록</a>
 
-		</form>
-
-		<div>
-
-			<a class="btn btn-outline-info" id="btnSave" onclick="check();">등록</a>
-			<a class="btn btn-outline-info" id="btnList"
-				href="boardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">목록</a>
+			</div>
 
 		</div>
-
-	</div>
 
 	</article>
 
@@ -143,6 +145,8 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
 		integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
 		crossorigin="anonymous"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 </body>
 
