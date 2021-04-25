@@ -53,6 +53,10 @@
 		  				<td>${diary.writedate}</td>
 		  			</tr>
 		  			<tr>
+		  				<td>작성자</td>
+		  				<td>${diary.userid_fk}</td>
+		  			</tr>
+		  			<tr>
 		  				<td>제목</td>
 		  				<td>${diary.subject}</td>
 		  			</tr>
@@ -62,11 +66,17 @@
 		  			</tr>
 				</table>
 				
+				<!-- 권한별 버튼 활성화  -->
 				<input type="button" class="btn btn-secondary mb-3" value="목록가기" onclick="location.href='diary.jh?cp=${cpage}&ps=${pagesize}';">
-		  		<input type="button" class="btn btn-secondary mb-3" value="답글달기" onclick="location.href='diaryRewrite.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
-		  		<input type="button" class="btn btn-secondary mb-3" value="편집" onclick="location.href='diaryEdit.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
-		  		<input type="button" class="btn btn-secondary mb-3" value="삭제" onclick="location.href='diaryDelete.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
-		  		
+				<c:choose>
+					<c:when test="${!empty userInfo.grade}">
+						<input type="button" class="btn btn-secondary mb-3" value="답글달기" onclick="location.href='diaryRewrite.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+							<c:if test="${userInfo.grade == 1}">
+								<input type="button" class="btn btn-secondary mb-3" value="편집" onclick="location.href='diaryEdit.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+								<input type="button" class="btn btn-secondary mb-3" value="삭제" onclick="location.href='diaryDelete.jh?idx=${idx}&cp=${cpage}&ps=${pagesize}';">
+							</c:if>
+					</c:when>
+				</c:choose>
 				<!-- 댓글 달기 -->
 				<form name="reply" action="diaryReply.jh" method="POST">
 					<!-- hidden : 값 숨겨서 처리 --> 
@@ -94,7 +104,7 @@
 				</div>
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
-			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
+			<div class="menu-item" style="top: 86px" onclick="location.href='guestBook.jh';">방명록</div>
 		  </div>
 		</div>
 	  </div>
@@ -177,7 +187,6 @@
 	}
 	
 	function reply_del(frm) {
-		
 		//미니홈피 주인만 모든 댓글 삭제 가능 
 		//그 밖의 회원은 본인 댓글만 삭제 가능
 		if(sessionGrade == 1) {

@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import com.team1.jh.dto.DiaryDto;
 import com.team1.jh.dto.DiaryReplyDto;
+import com.team1.jh.dto.GuestBookDto;
 
 public class MiniDao {
 	DataSource ds = null;
@@ -272,6 +273,7 @@ public class MiniDao {
 	
 	
 	//다이어리 글 삭제
+	@SuppressWarnings("resource")
 	public int diaryDelete(String idx) {
 		//원본글에 답글이 있으면 원본글, 답글, 댓글 다 삭제할거임
 		
@@ -282,15 +284,22 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection();
-
+			
+			//원본글을 삭제하면 답글까지 삭제해주기 위해 refer를 꺼내봅니다
+			String sql_refer = "SELECT REFER FROM DIARY WHERE IDX=?";
+			
 			//댓글(idx_fk) 먼저 삭제 후 원본글(idx) 삭제 
 			String sql_reply = "DELETE FROM DIARY_REPLY WHERE IDX_FK=?";
-			String sql_diary = "DELETE FROM DIARY WHERE IDX=?";
+			String sql_diary = "DELETE FROM DIARY WHERE IDX=? OR REFER=?";
 			
+			//refer 꺼내기 
+			pstmt = conn.prepareStatement(sql_refer);
 			pstmt.setString(1, idx);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) { //삭제글 존재
+			if(rs.next()) {
+				int refer = rs.getInt("refer");
+				
 				//실 삭제 처리
 				//트랜잭션 (둘다 처리 , 둘다 실패)
 				//두개를 하나의 논리적 단위
@@ -302,20 +311,22 @@ public class MiniDao {
 			 	pstmt.setString(1,idx);
 			 	pstmt.executeUpdate();
 			 	
-			 	//게시글 삭제 (원본글 , 답글)
+			 	//게시글 삭제 (원본글)
 			 	pstmt = conn.prepareStatement(sql_diary);
 			 	pstmt.setString(1,idx);
+			 	pstmt.setInt(2,refer);
 			 	row = pstmt.executeUpdate();
 			 	
 			 	if(row > 0) {
 			 		conn.commit(); //두개의 delete 실반영
-			 	}
-			}else { //삭제하려는 글이 존재하지 않는 경우 
-				row = 0;
+			 	
+				}else { //삭제하려는 글이 존재하지 않는 경우 
+					row = 0;
+				
+				}
 			}
-
 		} catch (Exception e) {
-			//예외 발생하면 롤백 !
+			System.out.println("diaryDelete dao 에러 :" +e.getMessage());
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
@@ -560,7 +571,7 @@ public class MiniDao {
 		String userid_fk = diarydata.getParameter("userid_fk");
 		String subject = diarydata.getParameter("subject");
 		String content = diarydata.getParameter("content");
-		String filename = diarydata.getParameter("filename");
+		//String filename = diarydata.getParameter("filename");
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -570,7 +581,10 @@ public class MiniDao {
 		try {
 			conn = ds.getConnection();
 			String sql_idx = "SELECT IDX FROM DIARY WHERE IDX=?";
-			String sql_udpate = "UPDATE DIARY SET USERID_FK=? SUBJECT=? , CONTENT=? , FILENAME=? WHERE IDX=?";
+			String sql_udpate = "UPDATE DIARY SET USERID_FK=? SUBJECT=? , CONTENT=? WHERE IDX=?";
+			
+			pstmt = conn.prepareStatement(sql_idx);
+			pstmt.setString(1, idx);
 			
 			rs = pstmt.executeQuery();
 			
@@ -583,8 +597,7 @@ public class MiniDao {
 				pstmt.setString(1, userid_fk);
 				pstmt.setString(2, subject);
 				pstmt.setString(3, content);
-				pstmt.setString(4, filename);
-				pstmt.setString(5, idx);
+				pstmt.setString(4, idx);
 				row = pstmt.executeUpdate();
 				
 				//System.out.println("row : " + row);
@@ -603,5 +616,5 @@ public class MiniDao {
 	
 		return row;
 	}
-	
+
 }
