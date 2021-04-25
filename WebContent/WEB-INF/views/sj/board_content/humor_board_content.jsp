@@ -28,6 +28,9 @@
 }
 </style>
 
+<!-- SweetAlert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <!-- 부트  -->
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 <link
@@ -54,9 +57,24 @@
 		<div class="list-board"">
 		<br>
 		<br>
-		
+
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
+			
+			<h4>글번호 : ${idx}</h4>
+			<h4>글제목 : ${board.subject} </h4>
+			<h4>글쓴이 : ${board.nickname} </h4>
+			<h4>글쓴날짜 : ${board.writedate} </h4>
+			<h4>조회수 : ${board.readnum} </h4>
+			<h4>글내용 : ${board.content} </h4>
+			<c:if test="${not empty board.filename}">
+				<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}">${board.filename}</a><br>
+				<img src="upload/${board.filename}">			
+			</c:if>
+			<h4>board.userid_kf ${board.userid_fk}  || 세션 ${sessionScope.userInfo.userId} </h4>
+			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+				<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
+			</c:if>
 			<h3>${requestScope.pagesize}</h3>
 			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
@@ -78,6 +96,15 @@
 <input type="hidden" name="command" value="like_it">
 <input type="hidden" name="board_idx" value="${board.idx}">
 <tr><input type="button" value="좋아요!" onclick="like(this.form)" > </tr>
+<tr><div id="like_result">${board.up}</div> </tr>
+</table>
+</form>
+
+<form id="like_form">
+<table id="list">
+<input type="hidden" name="command" value="like_it">
+<input type="hidden" name="board_idx" value="${board.idx}">
+<tr><input type="button" value="글삭제" onclick="deleteBoard.sj?type=humor_board&idx=${idx}" > </tr>
 <tr><div id="like_result">${board.up}</div> </tr>
 </table>
 </form>

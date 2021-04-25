@@ -53,7 +53,6 @@ public class SJ_ajax_controller extends HttpServlet {
     	} else if (url_command.equals("/like.sjajax")) {
     		action = new SJ_Like();
     		forward = action.execute(request, response);
-    		
     	}
     	
     	

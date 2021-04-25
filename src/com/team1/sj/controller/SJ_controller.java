@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
+import com.team1.sj.service.SJ_BoardDeleteService;
 import com.team1.sj.service.SJ_HumorBoardAddService;
 import com.team1.sj.service.SJ_HumorListService;
 import com.team1.sj.service.SJ_HumorBoardList;
@@ -63,8 +64,8 @@ public class SJ_controller extends HttpServlet {
     		forward = action.execute(request, response);
 
         
-    	} else if(url_command.equals("/replyWrite.sj")) {
-    		//action = new SJ_ReplyAddService();
+    	} else if(url_command.equals("/boardDelete.sj")) {
+    		action = new SJ_BoardDeleteService();
     		forward = action.execute(request, response);
 
     		
