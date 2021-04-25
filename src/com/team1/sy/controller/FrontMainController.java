@@ -60,6 +60,10 @@ public class FrontMainController extends HttpServlet {
     	}else if(url_Command.equals("/RegisterOk.team1")) {
     		action = new RegisterOk();
     		forward = action.execute(request, response);
+    	}else if(url_Command.equals("/EditProfile.team1")) {
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("/WEB-INF/views/sy/total/editprofile.jsp");
     	}
     	
     	if(forward != null) {

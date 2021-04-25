@@ -80,7 +80,7 @@ $(function() {
 		});
 	});
 	
-	
+	/*
 	$(".submit").click((e) => {
 		const idCheck = $('#userId').val()!==''?$('#userId').val():null;
 		const nickCheck = $('#userNick').val()!==''?$('#userNick').val():null;
@@ -95,7 +95,7 @@ $(function() {
 			alert('입력하지 않은 항목이 있습니다. 확인해주세요.');
 		}
 	})
-	
+	*/
 	
 	//아이디
 	$("#userId").on("input",function(){
