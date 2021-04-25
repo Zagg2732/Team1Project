@@ -24,6 +24,13 @@
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
+	
+	<style type="text/css">
+		.container{
+			width: 800px;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<%-- <c:import url="/WEB-INF/views/sj/header_hsj.jsp"/> --%>

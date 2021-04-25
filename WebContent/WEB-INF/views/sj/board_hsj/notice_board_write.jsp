@@ -96,7 +96,7 @@
 		
 			<!-- 파일 선택 -->
 			<label class="form-label" for="customFile">첨부파일</label>
-				<input type="file" class="form-control" id="customFile" />
+				<input type="file" class="form-control" id="customFile" name="filename" />
 
 			</form>
 

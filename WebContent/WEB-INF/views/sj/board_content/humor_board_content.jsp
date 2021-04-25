@@ -19,12 +19,26 @@
 #replyList {
 	margin-bottom: 250px;
 }
+
 #replyAddReplyBody {
-	background-color : #6c757d;
-	width : 1117px;
-	height : 89px;
+	background-color: #6c757d;
+	width: 1117px;
+	height: 89px;
 	border: 1px solid black;
 	margin-bottom: 15px;
+}
+
+#contentForm {
+	width: 40%;
+	margin: 0 auto;
+	padding-top: 12%;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th {
+	background-color: #e6ecff;
+	text-align: center; . container { width : 800px;
+	text-align: center;
+}
 }
 </style>
 
@@ -48,17 +62,18 @@
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
-	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
-<%-- 	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" /> --%>
+	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}"
+		scope="request" />
+	<%-- 	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" /> --%>
 
 
 
-	<div id="container" style="text-align: center;">
+	<div class="container" style="text-align: center;">
+		<br> <b>유머 게시판</b> <br> <br>
 		<div class="list-board"">
-		<br>
-		<br>
+			<br> <br>
 
-			<h3>게시판 상세보기 임시디자인입니다</h3>
+			<%-- <h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
 			
 			<h4>글번호 : ${idx}</h4>
@@ -68,7 +83,7 @@
 			<h4>조회수 : ${board.readnum} </h4>
 			<h4>글내용 : ${board.content} </h4>
 			<c:if test="${not empty board.filename}">
-				<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}">${board.filename}</a><br>
+				<a href="<%= request.getContextPath() %>/sj_download.jsp?file_name=${board.filename}">${board.filename}</a><br>
 				<img src="upload/${board.filename}">			
 			</c:if>
 			<h4>board.userid_kf ${board.userid_fk}  || 세션 ${sessionScope.userInfo.userId} </h4>
@@ -81,95 +96,180 @@
 			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
-			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3>
+			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3> --%>
+
+			<%-- 	<table>
+				<tr>
+
+					<td width="150">
+						<div>
+							닉네임 : ${board.nickname}<br> <font size="2" color="lightgray">날짜
+								: ${board.writedate}</font>
+						</div>
+					</td>
+
+				</tr>
+			</table> --%>
 
 
-<br>
-<br>
+
+			<!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
+			<form id="form1" name="form1" method="post"
+				action="${path}/boardList.sj">
+				<div class="input-group input-group-sm" role="group"
+					style="text-align: left">
+					<table class="table table-striped table-bordered">
+						<tread>
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${idx}" class="form-control"
+								aria-describedby="basic-addon1"> 번호 : ${idx}</td>
+						</tr>
+
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.readnum}" class="form-control"
+								aria-describedby="basic-addon1"> 조회 : ${board.readnum}</td>
+						</tr>
+
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.writedate}" class="form-control"
+								aria-describedby="basic-addon1"> 작성일 :
+								${board.writedate}</td>
+						</tr>
+
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.nickname}" class="form-control"
+								aria-describedby="basic-addon1"> 닉네임 : ${board.nickname}
+							</td>
+						</tr>
+
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.subject}" class="form-control"
+								aria-describedby="basic-addon1"> 글제목 : ${board.subject}
+							</td>
+						</tr>
+
+
+						<tr>
+							<td><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="$글내용 : ${board.content}" class="form-control"
+								aria-describedby="basic-addon1"> 글내용 : ${board.content}
+							</td>
+						</tr>
+
+
+						</tread>
+					</table>
+
+				</div>
+		</div>
+
+		</form>
+
+
+		<br> <br>
 		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
   -->
- 
-<form id="like_form">
-<table id="list">
-<input type="hidden" name="command" value="like_it">
-<input type="hidden" name="board_idx" value="${board.idx}">
-<tr><input type="button" value="좋아요!" onclick="like(this.form)" > </tr>
-<tr><div id="like_result">${board.up}</div> </tr>
-</table>
-</form>
 
-<form id="like_form">
-<table id="list">
-<input type="hidden" name="command" value="like_it">
-<input type="hidden" name="board_idx" value="${board.idx}">
-<tr><input type="button" value="글삭제" onclick="deleteBoard.sj?type=humor_board&idx=${idx}" > </tr>
-<tr><div id="like_result">${board.up}</div> </tr>
-</table>
-</form>
-
-			<br> 
-			<br>
-
-
-			<form action="#" name="reply" method="POST">
-
-				<div class="card mb-2">
-					<div class="card-header bg-light">
-						<i class="fa fa-comment fa"></i> Comment
-					</div>
-					<div class="card-body">
-
-						<!-- hidden 태그  값을 숨겨서 처리  -->
-						<input type="hidden" name="idx" value="${idx}" id="idx"> <input
-							type="hidden" name="userid" value="">
-						<!-- 추후 필요에 따라  -->
-
-
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-								<div class="form-inline mb-2">
-									<label for="replyId"><i
-										class="fa fa-user-circle-o fa-2x"></i></label>
-
-									<!-- 닉네임  -->
-									<input type="text" name="reply_writer"
-										class="form-control ml-2" value="${sessionScope.userInfo.nickName}"
-										disabled id="reply_writer">
-
-									<!-- 내용  -->
-									<textarea class="form-control" id="reply_content" rows="3"
-										name="reply_content" placeholder="이쁜말 사용하기^^"></textarea>
-									<input id="replybtn" type="button" class="btn btn-dark mt-3"
-										value="등록">
-
-
-								</div>
-
-							</li>
-						</ul>
-					</div>
-
-				</div>
-			</form>
-
-
-			<!-- 꼬리글 목록 테이블 -->
-			<div id = "replyAddReplyBody">
-			안뇽 replyaddbody얌 ㅎ
-			</div>
-			<table class="table table-striped text-center">
-				<tbody id="replybody">
-
-					<tr>
-						<th>comment</th>
-						
-					</tr>
-
-				</tbody>
+		<form id="like_form">
+			<table id="list">
+				<input type="hidden" name="command" value="like_it">
+				<input type="hidden" name="board_idx" value="${board.idx}">
+				<tr>
+					<input type="button" value="좋아요!" onclick="like(this.form)">
+				</tr>
+				<tr>
+					<div id="like_result">${board.up}</div>
+				</tr>
 			</table>
-		</div>
+		</form>
+
+		<form id="like_form">
+			<table id="list">
+				<input type="hidden" name="command" value="like_it">
+				<input type="hidden" name="board_idx" value="${board.idx}">
+				<tr>
+					<input type="button" value="글삭제"
+						onclick="deleteBoard.sj?type=humor_board&idx=${idx}">
+				</tr>
+				<tr>
+					<div id="like_result">${board.up}</div>
+				</tr>
+			</table>
+		</form>
+
+		<br> <br>
+
+
+		<form action="#" name="reply" method="POST">
+
+			<div class="card mb-2">
+				<div class="card-header bg-light">
+					<i class="fa fa-comment fa"></i> Comment
+				</div>
+				<div class="card-body">
+
+					<!-- hidden 태그  값을 숨겨서 처리  -->
+					<input type="hidden" name="idx" value="${idx}" id="idx"> <input
+						type="hidden" name="userid" value="">
+					<!-- 추후 필요에 따라  -->
+
+
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<div class="form-inline mb-2">
+								<label for="replyId"><i
+									class="fa fa-user-circle-o fa-2x"></i></label>
+
+								<!-- 닉네임  -->
+								<input type="text" name="reply_writer" class="form-control ml-2"
+									value="${sessionScope.userInfo.nickName}" disabled
+									id="reply_writer">
+
+								<!-- 내용  -->
+								<textarea class="form-control" id="reply_content" rows="3"
+									name="reply_content" placeholder="이쁜말 사용하기^^"></textarea>
+								<input id="replybtn" type="button" class="btn btn-dark mt-3"
+									value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+									id="replybtn" type="button" class="btn btn-dark mt-3"
+									value="목록">
+
+
+							</div>
+
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</form>
+
+
+		<!-- 꼬리글 목록 테이블 -->
+		<div id="replyAddReplyBody">안뇽 replyaddbody얌 ㅎ</div>
+		<table class="table table-striped text-center">
+			<tbody id="replybody">
+
+				<tr>
+					<th>comment</th>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
 	</div>
 
 </body>
