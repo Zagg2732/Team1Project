@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sj.service.SJ_BoardDeleteService;
+import com.team1.sj.service.SJ_BoardModifyService;
+import com.team1.sj.service.SJ_BoardModifyWriteOK;
 import com.team1.sj.service.SJ_HumorBoardAddService;
 import com.team1.sj.service.SJ_HumorListService;
 import com.team1.sj.service.SJ_HumorBoardList;
@@ -36,8 +38,7 @@ public class SJ_controller extends HttpServlet {
     	Action action = null;
     	
     	// type 받아주고 
-    	String type = request.getParameter("type");
-    	
+  	
     	
     	if(url_command.equals("/index.sj")) {    	
     		action = new SJ_HumorBoardList();
@@ -54,6 +55,7 @@ public class SJ_controller extends HttpServlet {
     		
     		
     	} else if (url_command.equals("/boardWrite.sj")) {
+    		String type = request.getParameter("type");
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("WEB-INF/views/sj/board_hsj/"+type+"_write.jsp");
@@ -66,6 +68,17 @@ public class SJ_controller extends HttpServlet {
         
     	} else if(url_command.equals("/boardDelete.sj")) {
     		action = new SJ_BoardDeleteService();
+    		forward = action.execute(request, response);
+
+    		
+    	} else if(url_command.equals("/boardModifyWrite.sj")) {
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("WEB-INF/views/sj/board_hsj/humor_board_modify.jsp");
+
+    		
+    	} else if(url_command.equals("/boardModifyWriteOK.sj")) {
+    		action = new SJ_BoardModifyWriteOK();
     		forward = action.execute(request, response);
 
     		

@@ -75,6 +75,9 @@
 			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 				<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
 			</c:if>
+			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+				<a href="boardModifyWrite.sj?type=humor_board&idx=${idx}">글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요?</a><br>		
+			</c:if>
 			<h3>${requestScope.pagesize}</h3>
 			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>

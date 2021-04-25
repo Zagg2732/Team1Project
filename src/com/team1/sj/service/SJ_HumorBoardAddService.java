@@ -18,11 +18,9 @@ public class SJ_HumorBoardAddService implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		
 		String uploadpath = request.getSession().getServletContext().getRealPath("upload");
 		
-		System.out.println("uploadpath잘있늬???");
 		System.out.println(uploadpath);
 		
 		int size = 1024*1024*10;

@@ -535,6 +535,15 @@ public class SJ_board_dao {
 		
 		return result;
 	}
+
+	public int boardModify(String type, String idx) {
+		int result = 0;
+		
+		
+		
+		
+		return result;
+	}
 	
 //	// 좋아요 업데이트
 //	public void update_Like(int up) {
