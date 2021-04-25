@@ -75,18 +75,14 @@
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
   -->
  
- <form id="like_form">
+<form id="like_form">
 <table id="list">
 <input type="hidden" name="command" value="like_it">
 <input type="hidden" name="board_idx" value="${board.idx}">
-<tr><input type="button" value="좋아요!" onclick="return like()" > </tr>
+<tr><input type="button" value="좋아요!" onclick="like(this.form)" > </tr>
 <tr><div id="like_result">${board.up}</div> </tr>
 </table>
 </form>
-
-
-
-
 
 			<br> 
 			<br>
@@ -192,10 +188,11 @@
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
+								+ '<input type="hidden" name = "replyUserId" value="' +obj.userid +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
-								+ '<input type="hidden" id = "replyStep" value="' +obj.step +'" class="replyStep">'
+								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
 								+ '<input type="button" id = "replyAddForm" value="답글" onclick="reply_add_form(this.form)">'
 								+ '<input type="button" id = "replyDeleteBtn" value="삭제" onclick="reply_del(this.form)">'
 								+ '</form></td></tr>');
@@ -305,15 +302,15 @@
 		$.ajax({
 			url :"replyDelete.sjajax",
 			type : "POST",
-			datatype : "text",
+			datatype : "ajax",
 			data :{
+				"sessionId" : '${sessionScope.userInfo.userId}',
 				"idx" : $('#idx').val(),
-				"type" : "humor_reply",
-				"sessionNickName" : '${sessionScope.userInfo.nickName}',
-				"replyNickName" : $('#replyNickname').val(),
-				"refer" : $('#replyRefer').val(),
-				"depth" : $('#replyDepth').val(),
-				"step" : $('#replyStep').val()
+				"type" : "humor_reply",		
+				"replyUserId" : frm.replyUserId.value,
+				"refer" : frm.replyRefer.value,
+				"depth" : frm.replyDepth.value, 
+				"step" : frm.replyStep.value
 			},
 			success : function(data){
 				replyList();
@@ -329,7 +326,9 @@
 		});
 	}
 	
-	function like(){
+	function like(frm){
+		alert("추천하셨습니당!")
+		
 		$.ajax({
 		url: "SJ_Board",
 		type: "POST",

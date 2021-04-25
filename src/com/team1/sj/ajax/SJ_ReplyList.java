@@ -39,6 +39,7 @@ public class SJ_ReplyList implements Action {
 				
 				JSONObject jsonObj = new JSONObject();
 				
+				jsonObj.put("userid", replyList.get(i).getUserid_fk());
 				jsonObj.put("content", replyList.get(i).getContent());
 				jsonObj.put("up", replyList.get(i).getUp());
 				jsonObj.put("down", replyList.get(i).getDown());

@@ -53,7 +53,6 @@ public class SJ_ReplyAddForm implements Action {
 		try {
 			response.getWriter().print(jsonObj);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
