@@ -162,7 +162,8 @@ public class SJ_board_dao {
 			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
 			String sql = "SELECT IDX , nickname , UP , DOWN , READNUM , WRITEDATE , SUBJECT FROM " 
 						 + name //humor_board || notice_board
-						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID ORDER BY idx desc"; 
+						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID"
+						 + " WHERE rownum <= 5 ORDER BY idx desc"; 
 			
 			
 			pstmt = conn.prepareStatement(sql);
