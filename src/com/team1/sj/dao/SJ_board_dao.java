@@ -50,8 +50,6 @@ public class SJ_board_dao {
 				pstmt.setString(3, boarddata.getContent());
 				pstmt.setString(4, boarddata.getFilename());
 				
-				
-				
 				row = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("널 어쩌면 좋을까 dao " +e.getMessage());
@@ -71,6 +69,7 @@ public class SJ_board_dao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		List<SJ_board> list = null;
 		try {
 			conn = ds.getConnection();
@@ -268,7 +267,8 @@ public class SJ_board_dao {
 		} finally {
 			try {
 				pstmt.close();
-				conn.close();		
+				conn.close();
+				rs.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -288,7 +288,7 @@ public class SJ_board_dao {
 
 			
 			conn = ds.getConnection();
-			String sql = "SELECT hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
+			String sql = "SELECT hr.USERID_FK, hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
 					   + replyType 
 					   + " hr LEFT JOIN TEAM1_USER tu ON  hr.USERID_FK = tu.USERID LEFT JOIN HUMOR_BOARD hb ON hr.IDX_FK = hb.IDX WHERE idx = "
 					   + idx + " ORDER BY refer ASC, DEPTH ASC, step desc";
@@ -304,7 +304,8 @@ public class SJ_board_dao {
 			while(rs.next()) {
 					
 				SJ_Board_Reply reply = new SJ_Board_Reply();
-
+				
+				reply.setUserid_fk(rs.getString("USERID_FK"));
 				reply.setContent(rs.getString("content"));  
 				reply.setUp(rs.getInt("up"));
 				reply.setDown(rs.getInt("down"));
@@ -380,9 +381,10 @@ public class SJ_board_dao {
 		} finally {
 			try {
 				pstmt.close();
-				conn.close();//반환
-			}catch (Exception e) {
-				
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		
@@ -392,7 +394,6 @@ public class SJ_board_dao {
 	public int replyAddReply(String idx, String type, String id, String content, String refer, String depth) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		int depthUpdate = Integer.parseInt(depth) + 1;
 		int result = 0;
@@ -404,19 +405,28 @@ public class SJ_board_dao {
 					+ type
 					+ " SET STEP = STEP + 1 WHERE IDX_FK = "
 					+ idx
+					+ " AND REFER = "
+					+ refer
 					+ " AND DEPTH = "
-					+ depth
-					+ " AND step >=1 "; //step이 1이상(원본글아닌) 애들이면서 같은 depth를 가진 녀석들 step을 다 1씩올려줌
+					+ depthUpdate ; //같은 댓글의 step 들 1씩 올려줌
 		
 			pstmt = conn.prepareStatement(sql);		
-			rs = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("step안올라감");
+			} else {
+				System.out.println("step올라갔어야함");
+			}
+			
+			pstmt = null;
 			
 			sql = "INSERT INTO "
 				+ type
 				+ " (IDX_FK, USERID_FK, CONTENT , UP, DOWN, WRITEDATE, REFER , DEPTH, STEP)"
 				+ " VALUES (?, ?, ?, 0, 0, sysdate, ?, ?, 1)";
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);					
 			pstmt.setString(1, idx);
 			pstmt.setString(2, id);
 			pstmt.setString(3, content);			
@@ -427,7 +437,56 @@ public class SJ_board_dao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
+		return result;
+	}
+	
+	public int replyDelete(String sessionId, String idx, String type, String refer, String depth, String step) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "DELETE FROM "
+					+ type
+					+ " WHERE IDX_FK = "
+					+ idx
+					+ " AND REFER = "
+					+ refer
+					+ " AND DEPTH = "
+					+ depth
+					+ " AND step = "
+					+ step ;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0 ) {
+				System.out.println("replyDelete DB 오류");
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 		
 		return result;
 	}

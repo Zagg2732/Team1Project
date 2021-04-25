@@ -46,7 +46,7 @@
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
 	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" />
+<%-- 	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" /> --%>
 
 
 
@@ -59,13 +59,11 @@
 			<br>
 			<h3>${requestScope.pagesize}</h3>
 			<br>
-			<h3>${requestScope.sessionId}</h3>
-			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
-			<h3>${sessionScope.userInfo.nickName}</h3>
+			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3>
 
 
 <br>
@@ -75,18 +73,14 @@
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
   -->
  
- <form id="like_form">
+<form id="like_form">
 <table id="list">
 <input type="hidden" name="command" value="like_it">
 <input type="hidden" name="board_idx" value="${board.idx}">
-<tr><input type="button" value="좋아요!" onclick="return like()" > </tr>
+<tr><input type="button" value="좋아요!" onclick="like(this.form)" > </tr>
 <tr><div id="like_result">${board.up}</div> </tr>
 </table>
 </form>
-
-
-
-
 
 			<br> 
 			<br>
@@ -114,7 +108,7 @@
 
 									<!-- 닉네임  -->
 									<input type="text" name="reply_writer"
-										class="form-control ml-2" value="${requestScope.sessionNickName}"
+										class="form-control ml-2" value="${sessionScope.userInfo.nickName}"
 										disabled id="reply_writer">
 
 									<!-- 내용  -->
@@ -192,10 +186,11 @@
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
+								+ '<input type="hidden" name = "replyUserId" value="' +obj.userid +'" class="replyId">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
-								+ '<input type="hidden" id = "replyStep" value="' +obj.step +'" class="replyStep">'
+								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
 								+ '<input type="button" id = "replyAddForm" value="답글" onclick="reply_add_form(this.form)">'
 								+ '<input type="button" id = "replyDeleteBtn" value="삭제" onclick="reply_del(this.form)">'
 								+ '</form></td></tr>');
@@ -305,15 +300,15 @@
 		$.ajax({
 			url :"replyDelete.sjajax",
 			type : "POST",
-			datatype : "text",
+			datatype : "ajax",
 			data :{
+				"sessionId" : '${sessionScope.userInfo.userId}',
 				"idx" : $('#idx').val(),
-				"type" : "humor_reply",
-				"sessionNickName" : '${sessionScope.userInfo.nickName}',
-				"replyNickName" : $('#replyNickname').val(),
-				"refer" : $('#replyRefer').val(),
-				"depth" : $('#replyDepth').val(),
-				"step" : $('#replyStep').val()
+				"type" : "humor_reply",		
+				"replyUserId" : frm.replyUserId.value,
+				"refer" : frm.replyRefer.value,
+				"depth" : frm.replyDepth.value, 
+				"step" : frm.replyStep.value
 			},
 			success : function(data){
 				replyList();
@@ -321,7 +316,8 @@
 				$('#reply_content').val("");
 				$('#password').val("");
 				$('#replybody').empty();
-				$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+				$('#reply_writer').val('${sessionScope.userInfo.nickName}');
+				alert(data.msg);//닉네임 초기화되니까 다시입력해줌
 			},
 			error : function() {
 				alert('댓글 삭제 실패');
@@ -329,7 +325,9 @@
 		});
 	}
 	
-	function like(){
+	function like(frm){
+		alert("추천하셨습니당!")
+		
 		$.ajax({
 		url: "SJ_Board",
 		type: "POST",
