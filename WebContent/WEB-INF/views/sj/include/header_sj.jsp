@@ -13,9 +13,11 @@
             </div>
         </div>    --%>
         
-<style>
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+</head>
 
-</style>
+
 <!-- PC Header -->
 <header class="pc-header">
 		<!-- PC Logo -->
@@ -31,16 +33,27 @@
 <div id="menu" style="text-align: center;">
 	<div>
 		<ul>
+			<!-- <li><a href="index.jsp" class="fa fa-home aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li> -->
+			
+			
 			<!-- a : 페이지 이동을 처리하는 마크업 -->
-			<li><a href="boardList.sj?type=humor_board">유머게시판&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+			<li><a href="index.jsp">
+			 Home</a></li>
+			<li><a href="boardList.sj?type=humor_board"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 Humor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!-- HumorList.hsj ㄱㄱ  -->
-			<li><a href="boardList.sj?type=notice_board">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지
-					사항</a></li>
+			<li><a href="boardList.sj?type=notice_board">Notice &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!--NoticeList.hsj ㄱㄱ  -->
-			<li><a href="Login.team1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인하기(임시)</a></li>
+			<li><a href="Login.team1">Login(임시) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!--NoticeList.hsj ㄱㄱ  -->
+			<li><a href="#">MyPage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+			
+			
 			<li><a href="javscript:void(0);"></a></li>
 			<li><a href="javscript:void(0);"></a></li>
 		</ul>
 	</div>
 </div>
+	<br>
+	<br>
+

@@ -42,6 +42,7 @@
 
 
 	<div class="container">
+	<br> <b>공지 게시판</b> <br> <br>
 		<div class="list-board">
 		
 		<!-- 시이작  -->

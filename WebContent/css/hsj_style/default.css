@@ -215,3 +215,37 @@ img {
 	padding-left: 72px;
 }
 
+.list-board .wr-num {
+    width: 60px;
+}
+
+.div-head > span {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.hidden-xs {
+    display: none!important;
+}
+
+.list-board .wr-name {
+    width: 120px;
+}
+
+list-board .wr-date {
+    width: 80px;
+}
+
+.list-board .wr-hit {
+    width: 60px;
+}
+
+.list-board .wr-good {
+    width: 50px;
+}
+
+.list-board .wr-nogood {
+    width: 50px;
+}
