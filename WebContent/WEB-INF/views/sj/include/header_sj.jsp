@@ -46,7 +46,7 @@
 			<!--NoticeList.hsj ㄱㄱ  -->
 			<li><a href="Login.team1">Login(임시) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			<!--NoticeList.hsj ㄱㄱ  -->
-			<li><a href="#">MyPage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+			<li><a href="EditProfile.team1">MyPage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 			
 			
 			<li><a href="javscript:void(0);"></a></li>
