@@ -19,6 +19,13 @@
 #replyList {
 	margin-bottom: 250px;
 }
+#replyAddReplyBody {
+	background-color : #6c757d;
+	width : 1117px;
+	height : 89px;
+	border: 1px solid black;
+	margin-bottom: 15px;
+}
 </style>
 
 <!-- 부트  -->
@@ -38,8 +45,8 @@
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.nickName}"
-		scope="request" />
+	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
+	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" />
 
 
 
@@ -63,11 +70,19 @@
 
 <br>
 <br>
-			<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
+		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
-
+  -->
  
+ <form id="like_form">
+<table id="list">
+<input type="hidden" name="command" value="like_it">
+<input type="hidden" name="board_idx" value="${board.idx}">
+<tr><input type="button" value="좋아요!" onclick="return like()" > </tr>
+<tr><div id="like_result">${board.up}</div> </tr>
+</table>
+</form>
 
 
 
@@ -81,7 +96,7 @@
 
 				<div class="card mb-2">
 					<div class="card-header bg-light">
-						 Comment
+						<i class="fa fa-comment fa"></i> Comment
 					</div>
 					<div class="card-body">
 
@@ -99,7 +114,7 @@
 
 									<!-- 닉네임  -->
 									<input type="text" name="reply_writer"
-										class="form-control ml-2" value="${requestScope.sessionId}"
+										class="form-control ml-2" value="${requestScope.sessionNickName}"
 										disabled id="reply_writer">
 
 									<!-- 내용  -->
@@ -120,7 +135,9 @@
 
 
 			<!-- 꼬리글 목록 테이블 -->
-
+			<div id = "replyAddReplyBody">
+			안뇽 replyaddbody얌 ㅎ
+			</div>
 			<table class="table table-striped text-center">
 				<tbody id="replybody">
 
@@ -133,7 +150,6 @@
 			</table>
 		</div>
 	</div>
-     
 
 </body>
 
@@ -176,7 +192,6 @@
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
-								+ '<input type="hidden" name="no" value="' +obj.no +'" class="reply_no">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
@@ -193,11 +208,6 @@
 		
 	}
 	
-	function reply_add_reply_button() {
-		$('#replyAddForm').click(function() {
-		
-		});
-	} 
 	 
 	 function replyAdd(){
 			$('#replybtn').click(function() {
@@ -224,7 +234,7 @@
 						$('#reply_writer').val("");
 						$('#reply_content').val("");
 						$('#password').val("");
-						$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+						$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 					},
 					error : function() {
 						alert('댓글 등록 실패');
@@ -252,7 +262,7 @@
 					replyList(); //댓글목록 다시불러옴
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
-					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+					$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 					$("#replyAddReplyBody").empty(); 
 					$("#replyAddReplyBody").append(data.html); 
 				},
@@ -261,9 +271,7 @@
 				}
 			});
 		}
-	function reply_add_reply() {
-			alert('눌렀네요 ^^');
-			console.log(frm);
+	function reply_add_reply(frm) {
 				
 			$.ajax({
 				url :"replyAddReply.sjajax",
@@ -272,20 +280,19 @@
 				data :{
 					"idx" : $('#idx').val(),//게시판idx
 					"type" : "humor_reply", //게시판종류
-					"sessionNickName" : '${sessionScope.userInfo.nickName}', //현재로그인한유저
-					"replyNickName" : frm.replyNickName.value,
-					/*
-					"refer" : frm.replyRefer.value,
-					"depth" : frm.replyDepth.value 
-					*/
+					"sessionId" : '${sessionScope.userInfo.userId}',
+					"replyNickName" : frm.replyNickName.value,					
+					"refer" : frm.refer.value,
+					"depth" : frm.depth.value, 
+					"content" : frm.content.value
 				},
 				success : function(data){
 					$('#replybody').empty();
 					replyList(); //댓글목록 다시불러옴
 					$('#reply_writer').val("");
 					$('#reply_content').val("");
-					$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
-					$("#replybody").eq(0).append(data.html); 	
+					$('#password').val("");
+					$('#reply_writer').val('${requestScope.sessionNickName}'); //닉네임 초기화되니까 다시입력해줌
 				},
 				error : function() {
 					alert('답글 data 받아오기 실패');
@@ -343,8 +350,8 @@
 
 
 	
-
-/* 	$('#up').click(function(){
+	/* 
+	$('#up').click(function(){
 		  var pk = $(this).attr('name') 
 		  $.ajax({
 		      url: "{ }", 
@@ -361,8 +368,8 @@
 		        alert(error)
 		      }
 		  });
-		})
- */
+		}) */
+
 		
 		
 	/* 	// 싫어요 버튼 처리
