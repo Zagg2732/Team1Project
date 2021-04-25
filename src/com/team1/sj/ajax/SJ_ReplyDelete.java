@@ -19,6 +19,10 @@ public class SJ_ReplyDelete implements Action {
 		
 		String sessionId = request.getParameter("sessionId");
 		String replyUserId = request.getParameter("replyUserId");
+		
+		System.out.println(sessionId);
+		System.out.println(replyUserId);
+		
 		String idx = request.getParameter("idx");
 		String type = request.getParameter("type");
 		String refer = request.getParameter("refer");
@@ -26,18 +30,11 @@ public class SJ_ReplyDelete implements Action {
 		String step = request.getParameter("step");
 		String msg ="";
 			
-		JSONObject jsonObj = new JSONObject();
-
-	
-		response.setContentType("application/x-json; charset=UTF-8");
-		try {
-			response.getWriter().print(jsonObj);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		JSONObject jsonObj = new JSONObject();		
 		
 		if(sessionId.equals(replyUserId)) {
+			
+			System.out.println("세션아이디랑 맞네?");
 			
 			SJ_board_dao dao;
 			try {
@@ -49,13 +46,21 @@ public class SJ_ReplyDelete implements Action {
 				} else {
 					msg += "내가 쓴 글은 맞지만 삭제가 뭔가 안됐습니다. 이 메세지가 뜨면 안되는데??";
 				}
-				jsonObj.put("msg", msg);
+				
+				jsonObj.put("msg", msg); //msg를 JSON으로 돌려줍니당..
+				response.setContentType("application/x-json; charset=UTF-8");
+				try {
+					response.getWriter().print(jsonObj);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
 			
 		} else { //자기 아이디가 아니라면?
+			System.out.println("세션아이디랑안맞네?");
 			msg += "자신이 쓴 글만 삭제할 수 있습니다";			
 			jsonObj.put("msg", msg);
 		}

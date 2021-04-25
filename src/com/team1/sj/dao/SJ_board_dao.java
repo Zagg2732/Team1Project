@@ -288,7 +288,7 @@ public class SJ_board_dao {
 
 			
 			conn = ds.getConnection();
-			String sql = "SELECT hb.USERID_FK, hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
+			String sql = "SELECT hr.USERID_FK, hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
 					   + replyType 
 					   + " hr LEFT JOIN TEAM1_USER tu ON  hr.USERID_FK = tu.USERID LEFT JOIN HUMOR_BOARD hb ON hr.IDX_FK = hb.IDX WHERE idx = "
 					   + idx + " ORDER BY refer ASC, DEPTH ASC, step desc";
@@ -452,14 +452,29 @@ public class SJ_board_dao {
 	public int replyDelete(String sessionId, String idx, String type, String refer, String depth, String step) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		int result = 0;
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "";
+			String sql = "DELETE FROM "
+					+ type
+					+ " WHERE IDX_FK = "
+					+ idx
+					+ " AND REFER = "
+					+ refer
+					+ " AND DEPTH = "
+					+ depth
+					+ " AND step = "
+					+ step ;
 			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0 ) {
+				System.out.println("replyDelete DB 오류");
+			}
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -467,14 +482,13 @@ public class SJ_board_dao {
 			try {
 				pstmt.close();
 				conn.close();
-				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 
 		
-		return 0;
+		return result;
 	}
 	
 //	// 좋아요 업데이트

@@ -46,7 +46,7 @@
 	<c:set var="pagesize" value="${requestScope.ps}" />
 	<c:set var="replyList" value="${requestScope.replyList}" />
 	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" />
+<%-- 	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" /> --%>
 
 
 
@@ -59,13 +59,11 @@
 			<br>
 			<h3>${requestScope.pagesize}</h3>
 			<br>
-			<h3>${requestScope.sessionId}</h3>
-			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
 			<h3>게시판 상세보기 임시디자인입니다</h3>
 			<br>
-			<h3>${sessionScope.userInfo.nickName}</h3>
+			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3>
 
 
 <br>
@@ -110,7 +108,7 @@
 
 									<!-- 닉네임  -->
 									<input type="text" name="reply_writer"
-										class="form-control ml-2" value="${requestScope.sessionNickName}"
+										class="form-control ml-2" value="${sessionScope.userInfo.nickName}"
 										disabled id="reply_writer">
 
 									<!-- 내용  -->
@@ -188,7 +186,7 @@
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
 								+ '<form method="POST" name="replyDel">' 
-								+ '<input type="hidden" name = "replyUserId" value="' +obj.userid +'" class="replyNickname">' 
+								+ '<input type="hidden" name = "replyUserId" value="' +obj.userid +'" class="replyId">' 
 								+ '<input type="hidden" name = "replyNickname" value="' +obj.nickname +'" class="replyNickname">' 
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
@@ -318,7 +316,8 @@
 				$('#reply_content').val("");
 				$('#password').val("");
 				$('#replybody').empty();
-				$('#reply_writer').val('${requestScope.sessionId}'); //닉네임 초기화되니까 다시입력해줌
+				$('#reply_writer').val('${sessionScope.userInfo.nickName}');
+				alert(data.msg);//닉네임 초기화되니까 다시입력해줌
 			},
 			error : function() {
 				alert('댓글 삭제 실패');
