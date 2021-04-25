@@ -79,8 +79,7 @@ $(function() {
 			easing: 'easeInOutBack'
 		});
 	});
-	
-	/*
+
 	$(".submit").click((e) => {
 		const idCheck = $('#userId').val()!==''?$('#userId').val():null;
 		const nickCheck = $('#userNick').val()!==''?$('#userNick').val():null;
@@ -94,8 +93,7 @@ $(function() {
 			e.preventDefault();
 			alert('입력하지 않은 항목이 있습니다. 확인해주세요.');
 		}
-	})
-	*/
+	});
 	
 	//아이디
 	$("#userId").on("input",function(){
@@ -166,6 +164,77 @@ $(function() {
 			$("#repwregex").html("비밀번호가 일치하지않습니다");
 			$("#repwregex").css("width","75%");
 		}
-	});
+	}); 
 
 });
+
+function overlapCheck(type, value){
+	$.ajax({
+		url : "OverlapCheck.sooyeon",
+		type : "POST",
+		dataType : "json",
+		data : {
+			"type" : type,
+			"value" : value
+		},
+		success : function(data){
+						
+			if(data.result == false){
+				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
+			}else {
+				alert('사용가능합니다.');
+			}
+		},
+		error : function(xhr){
+			alert('error' + xhr);
+		}
+		
+	});
+}
+
+function overlapCheckID(){
+		$.ajax({
+		url : "OverlapCheck.sooyeon",
+		type : "POST",
+		dataType : "json",
+		data : {
+			"type" : "id",
+			"value" : $('#userId').val()
+		},
+		success : function(data){
+						
+			if(data.result == false){
+				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
+			}else {
+				alert('사용가능합니다.');
+			}
+		},
+		error : function(xhr){
+			alert('error' + xhr);
+		}
+		
+	});
+}
+function overlapCheckNick(){
+		$.ajax({
+		url : "OverlapCheck.sooyeon",
+		type : "POST",
+		dataType : "json",
+		data : {
+			"type" : "nick",
+			"value" : $('#userNick').val()
+		},
+		success : function(data){
+						
+			if(data.result == false){
+				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
+			}else {
+				alert('사용가능합니다.');
+			}
+		},
+		error : function(xhr){
+			alert('error' + xhr);
+		}
+		
+	});
+}
