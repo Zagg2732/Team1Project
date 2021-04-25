@@ -20,9 +20,6 @@ public class SJ_ReplyDelete implements Action {
 		String sessionId = request.getParameter("sessionId");
 		String replyUserId = request.getParameter("replyUserId");
 		
-		System.out.println(sessionId);
-		System.out.println(replyUserId);
-		
 		String idx = request.getParameter("idx");
 		String type = request.getParameter("type");
 		String refer = request.getParameter("refer");
@@ -34,7 +31,6 @@ public class SJ_ReplyDelete implements Action {
 		
 		if(sessionId.equals(replyUserId)) {
 			
-			System.out.println("세션아이디랑 맞네?");
 			
 			SJ_board_dao dao;
 			try {

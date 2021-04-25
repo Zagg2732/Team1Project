@@ -26,7 +26,6 @@ public class SJ_ajax_controller extends HttpServlet {
     }
     
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("버튼을누르셨네잉");
     	
     	String path1 = request.getContextPath(); //경로체크
     	String path2 = request.getRequestURI();	 //경로체크
