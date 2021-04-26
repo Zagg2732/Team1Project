@@ -201,7 +201,7 @@ public class SJ_board_dao {
 		}
 		return list;
 	}
-
+/*
 	public List<SJ_board> hotlist() { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -249,7 +249,7 @@ public class SJ_board_dao {
 		}
 		return hotList;
 	}
-
+*/
 	
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
@@ -704,40 +704,6 @@ public class SJ_board_dao {
 //	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

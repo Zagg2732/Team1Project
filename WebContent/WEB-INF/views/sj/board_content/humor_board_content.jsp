@@ -251,7 +251,7 @@
 				<div class="card-body" >
 
 					<!-- hidden 태그  값을 숨겨서 처리  -->
-					<input type="hidden" name="idx" value="${idx}" id="idx"> <input
+					<input type="hidden" name="idx2" value="${idx}" id="idx2"> <input
 						type="hidden" name="userid" value="">
 					<!-- 추후 필요에 따라  -->
 
@@ -334,7 +334,7 @@
 			type : "GET",
 	        dataType : "json",
 			data : {
-				idx : $('#idx').val(),
+				idx : $('#idx2').val(),
 				type : "humor_reply"
 			},
 			success : function(data) {
@@ -381,7 +381,7 @@
 					data : {
 						"reply_writer" : $('#reply_writer').val(),
 						"reply_content" : $('#reply_content').val(),
-						"idx" : $('#idx').val(),
+						"idx" : $('#idx2').val(),
 						"sessionId" : '${sessionScope.userInfo.userId}',
 						"type" : "humor_reply" //게시판종류와 세션ID 들고감
 					},
@@ -407,7 +407,7 @@
 				type : "POST",
 				datatype : "json",
 				data :{
-					"idx" : $('#idx').val(),
+					"idx" : $('#idx2').val(),
 					"type" : "humor_reply",
 					"sessionNickName" : '${sessionScope.userInfo.nickName}',
 					"replyNickName" : frm.replyNickname.value,
@@ -435,7 +435,7 @@
 				type : "POST",
 				datatype : "json",
 				data :{
-					"idx" : $('#idx').val(),//게시판idx
+					"idx" : $('#idx2').val(),//게시판idx
 					"type" : "humor_reply", //게시판종류
 					"sessionId" : '${sessionScope.userInfo.userId}',
 					"replyNickName" : frm.replyNickName.value,					
@@ -465,7 +465,7 @@
 			datatype : "ajax",
 			data :{
 				"sessionId" : '${sessionScope.userInfo.userId}',
-				"idx" : $('#idx').val(),
+				"idx" : $('#idx2').val(),
 				"type" : "humor_reply",		
 				"replyUserId" : frm.replyUserId.value,
 				"refer" : frm.replyRefer.value,
