@@ -18,7 +18,7 @@ import com.team1.sy.dto.Member;
 
 public class AdminTalkDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
@@ -113,6 +113,8 @@ public class AdminTalkDao {
 	
 	// talk Insert
 	public boolean insertAdminTalk(AdminTalk admintalk) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		// INSERT INTO ADMIN_TALK (IDX,USERID_FK,CONTENT,WRITEDATE) VALUES (1,'admin','첫번째글입니다.',sysdate);
 		
@@ -120,8 +122,8 @@ public class AdminTalkDao {
 		int result=-1;
 		
 		try{
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(sql);
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
 			
 			pstmt.setString(1, admintalk.getUserid_fk());
 			pstmt.setString(2, admintalk.getContent());
@@ -137,7 +139,7 @@ public class AdminTalkDao {
 		}finally{
 			if(rs!=null) try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
-			if(con!=null) try{con.close();}catch(SQLException ex){}
+			if(conn!=null) try{conn.close();}catch(SQLException ex){}
 		}
 		return false;		
 	}

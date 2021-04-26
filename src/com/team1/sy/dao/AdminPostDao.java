@@ -18,7 +18,7 @@ import com.team1.sy.dto.Member;
 
 public class AdminPostDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
