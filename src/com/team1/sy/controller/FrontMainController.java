@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.*;
+import com.team1.sy.service.EditProfileAction;
 import com.team1.sy.service.LoginAction;
 import com.team1.sy.service.LogoutAction;
 import com.team1.sy.service.RegisterOk;
@@ -64,6 +65,9 @@ public class FrontMainController extends HttpServlet {
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/sy/total/editprofile.jsp");
+    	}else if(url_Command.equals("/ChangeInfo.team1")) {
+    		action = new EditProfileAction();
+    		forward = action.execute(request, response);
     	}
     	
     	if(forward != null) {

@@ -202,6 +202,54 @@ public class SJ_board_dao {
 		return list;
 	}
 
+	public List<SJ_board> hotlist() { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<SJ_board> hotList = null;
+		
+		try {
+			conn = ds.getConnection();
+			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
+			String sql = "SELECT * FROM ( SELECT * FROM HUMOR_BOARD UNION SELECT * FROM NOTICE_BOARD ) ORDER BY UP";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			hotList = new ArrayList<SJ_board>();
+			
+			while(rs.next()) {
+				SJ_board board = new SJ_board();
+				board.setIdx(rs.getInt("idx"));
+				board.setNickname(rs.getString("nickname"));
+				board.setUp(rs.getInt("UP"));
+				board.setDown(rs.getInt("DOWN"));
+				board.setReadnum(rs.getInt("READNUM"));
+				board.setWritedate(rs.getDate("WRITEDATE"));
+				board.setSubject(rs.getString("SUBJECT"));
+				
+				hotList.add(board);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		System.out.println("넌 아니겠지 : " + e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				System.out.println("너??" + e.getMessage());
+			}
+		}
+		return hotList;
+	}
+
 	
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
@@ -486,8 +534,6 @@ public class SJ_board_dao {
 				e.printStackTrace();
 			}
 		}
-
-		
 		return result;
 	}
 
@@ -571,6 +617,26 @@ public class SJ_board_dao {
 			}
 		}
 		
+		return result;
+	}
+	
+	public int like(String idx, String type) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "UPDATE "
+						+ type
+						+ " SET up = up + 1 WHERE "
+						+ "IDX = "
+						+ idx;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 	
