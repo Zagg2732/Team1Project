@@ -82,6 +82,10 @@ public class SJ_controller extends HttpServlet {
     		forward = action.execute(request, response);
 
     		
+    	}  else if(url_command.equals("/boardModifyWriteOK.sj")) {
+    		action = new SJ_BoardModifyWriteOK();
+    		forward = action.execute(request, response);
+
     	} else {
     		System.out.println("Error : you entered *.lsj but you didn't set commanding it yet. 아님말고");
     	}
