@@ -46,12 +46,13 @@
 			<div id="msform">
 				<fieldset>
 				
-					<h3 style="margin-top: 35px;">EditProfile</h3>
-					<span style="font-size: 120px; color: lightgrey;">
+					<h3 style="margin-top: 30px;">EditProfile</h3>
+					<span style="font-size: 100px; color: lightgrey;">
 						<i class="fas fa-user-circle"></i>
 					</span><br>
 
-					ID : <input type="text" value="${userInfo.userId}" disabled><br>
+					<form name="nickname" action="ChangeInfo.team1" method="post">
+					ID : <input type="text" name="userId" id="userId" value="${userInfo.userId}" readonly><br>
 					가입일 : <b>${userInfo.joinDate}</b><br>
 					회원 등급 :
 					<c:choose>
@@ -63,19 +64,25 @@
 						</c:otherwise>
 					</c:choose>
 					<hr>
-					<h5>닉네임 변경</h5>
-					<form name="nickname">
-						닉네임 : <input type="text" value="${userInfo.nickName}">
-						<input type="button" value="중복체크">
+					<h5>닉네임 변경</h5><br>
+					
+						<input type="hidden" id="beforeNick" value="${userInfo.nickName}">
+						닉네임 : <input type="text" name="userNick" id="userNick" placeholder="NICKNAME" value="${userInfo.nickName}" style="width:52%;"/>
+					<input type="button" name="nickCheck" id="nickCheck" class="action-button" value="중복확인" onclick="overlapCheckNick()">
+					<span id="nickregex"></span>
+					<hr>
+					<h5>비밀번호 변경</h5><br>
+					현재 비밀번호 : <input type="password" name="beforePw" id="beforePw" placeholder="PASSWORD" value=""><br>
+					변경 비밀번호 : <input type="password" name="userPw" id="userPw" placeholder="PASSWORD" />
+					<br><span id="pwregex"></span>
+					
+					<input type="password" name="pwConfirm" id="pwConfirm" placeholder="PASSWORD CONFIRM" />
+					<span id="repwregex"></span>
+					
+					<hr>
+					
+					<input type="submit" value="프로필 수정하기" class="action-button" id="changeInfo" onclick="changeInfo()">
 					</form>
-					<hr>
-					<h5>비밀번호 변경</h5>
-					현재 비밀번호 : <input type="password" value=""><br><br>
-					변경 비밀번호 : <input type="password" value="">
-					
-					<hr>
-					
-					<input type="button" value="프로필 수정하기">
 
 					</fieldset>
 			</div>
@@ -85,6 +92,7 @@
 
 		<jsp:include page="footer.jsp" />
 	</div>
-
+	<!-- makeJs -->
+	<script src="js/sy/register.js"></script>
 </body>
 </html>
