@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class DiaryDto {
 	private int idx; 
-	private String userid_fk; 
+	private String userid_fk;
+	private String username;
 	private String subject; 
 	private String content; 
 	private Date writedate; 
@@ -74,7 +75,14 @@ public class DiaryDto {
 		this.filename = filename;
 	}
 	
-	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public int getRefer() {
 		return refer;
 	}

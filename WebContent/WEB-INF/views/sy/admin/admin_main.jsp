@@ -63,7 +63,7 @@
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -81,7 +81,7 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
-                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/indexyh.jsp">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -125,7 +125,12 @@
 						</div>
 						
 						<div class="card-body" style="height:900px;">
-						
+							    <br>
+    							전체 : <%=session.getAttribute("totalCount") %>
+    							<br>
+    							오늘 : <%=session.getAttribute("todayCount") %>
+    							<br>
+
 						</div>
 						
 					</div>
