@@ -8,34 +8,37 @@
 <%@page import="java.sql.Connection"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>SJ게시판</title>
+
+<link rel="Stylesheet" href="css/hsj_style/default.css">
 
 <style type="text/css">
 /* Underline Effect*/
 .nav-item {
-  position: relative;
+	position: relative;
 }
 
 .navbar-collapse ul li a.nav-link:before {
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: transparent;
-    content: '';
-    opacity: 0;
-    -ms-transition: opacity 0.3s, -webkit-transform 0.3s;
-    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-    transition: opacity 0.3s, transform 0.3s;
-    -ms-transform: translateY(10px);
-    -webkit-transform: translateY(10px);
-    transform: translateY(10px);
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: transparent;
+	content: '';
+	opacity: 0;
+	-ms-transition: opacity 0.3s, -webkit-transform 0.3s;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	-ms-transform: translateY(10px);
+	-webkit-transform: translateY(10px);
+	transform: translateY(10px);
 }
 
 .navbar-collapse ul li:hover a.nav-link:before {
@@ -48,73 +51,256 @@
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #dd4343;
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #dd4343;
 }
 
 .dropdown-menu {
-  border: 0px;
+	border: 0px;
 }
 
 /* General Styles*/
 body {
-  background-image: url(https://jjalbot.com/media/2018/12/lxsKuDq3I/zzal.gif);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  
+	background-image: url();
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
 }
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.col-sm-6 {
+	display: flex;
+	width: 50%;
+}
+
+.col-md-9 at-col at-main {
+	height: auto !important;
+	min-height: 0px !important;
+}
+
+.row {
+	margin-right: -15px;
+	margin-left: -15px;
+	justify-content: flex-end;
+}
+
+.container{
+			width: 800px;
+		}
 </style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
 </head>
 <body>
 	<%-- <jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/sj/include/section_sj.jsp"></jsp:include> --%>
+
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;SJ Board</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="index.team1">
+						Home <span class="sr-only"></span>
+				</a></li>
+
+					<li class="nav-item"><a class="nav-link"
+					href="#">New</a></li>
+					<li class="nav-item"><a class="nav-link"
+					href="#">Best</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="boardList.sj?type=humor_board">Humor</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="boardList.sj?type=notice_board">Notice</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="EditProfile.team1">MyPage</a></li>
+			
+			</ul>
+		</div>
+	</nav>
+<head>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+</head>
+
+
+<!-- PC Header -->
+<header class="pc-header">
+	<!-- PC Logo -->
+	<div class="header-logo">
+		<a href="index.sj"> <!-- 로고 누르면 홈화면 이동  --> <img
+			src="images/hsj/logo.png" alt="" />
+		</a>
+	</div>
+</header>
+
+
+
+<div class="container">
+<!-- <div class="row at-row" > -->
+
+	<div class="col-md-9 at-col at-main">
+
+		<div class="row">
+		
+			<!-- New -->
+				<div class="col-sm-6">
+				<table class="table table-hover">
+					<thead>
+
+						<tr>
+							<th><h3>최신글</h3></th>
+
+						</tr>
+						
+					</thead>
+					
+					<tbody>
+					
+						<c:forEach var="board" items="${requestScope.noticelist}">
+							<tr class="boardlist">
+								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+
+							</tr>
+							<br>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr>
+		
+			</div> <!-- New 끝 -->
+			
+			
+			
+			
+				<!-- 베스트  -->
+				<div class="col-sm-6">
+				<table class="table table-hover">
+					<thead>
+
+						<tr>
+							<th><h3>Best</h3></th>
+
+						</tr>
+
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${requestScope.noticelist}">
+							<tr class="boardlist">
+								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+
+							</tr>
+							<br>
+						</c:forEach>
+						
+					</tbody>
+					
+				</table>
+				<hr>
+			</div> <!-- 베스트 끝  -->
+
+		
+			<!-- 공지리스트 -->
+			<div class="col-sm-6">
+				<table class="table table-hover">
+					<thead>
+
+						<tr>
+							<th><h3>공지게시판</h3></th>
+
+						</tr>
+
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${requestScope.noticelist}">
+							<tr class="boardlist">
+								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+
+							</tr>
+							<br>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr>
+			</div> <!-- 공지리스트 끝 -->
+			
+
+			<!-- 유머리스트 -->
+			<div class="col-sm-6">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th><h3>유머게시판</h3></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${requestScope.humorlist}">
+							<tr class="boardlist">
+								<td><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+
+							</tr>
+							<br>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr />
+
+				<!-- <a class="btn btn-default pull-right">글쓰기</a> -->
+
+				<!-- <div class="text-center">
+	<ul class="pagination">
+		<li><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+
+	</ul>
+
+</div> -->
+
+			</div> <!--유머리스트 끝 -->
+
+		</div>
+
+	</div>
+	</div>
 	
-	
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">SJ Board</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="index.jsp">Home <span class="sr-only"></span></a>
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link" href="boardList.sj?type=humor_board">Humor</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="boardList.sj?type=notice_board">Notice</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="EditProfile.team1">MyPage</a>
-      </li>
-      <li class="nav-item dropdown">
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="index.jsp">Home</a>
-          <a class="dropdown-item" href="boardList.sj?type=humor_board">ㅋㅋㅋㅋ</a>
-          <a class="dropdown-item" href="boardList.sj?type=notice_board">공지사항</a>
-          <a class="dropdown-item" href="EditProfile.team1">MyPage</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+<!-- </div> -->
 
 
 
- <!--  
+<!--  
   <div class="container" style="text-align: center; color: skyblue;">
   <div class="row">
   <div class="col-md-4" style="margin: auto;">
@@ -125,11 +311,20 @@ body {
   		</div>
   </div> -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+	integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+	integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+	crossorigin="anonymous"></script>
 
 
-	
+
 </body>
 </html>
