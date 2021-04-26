@@ -162,7 +162,7 @@ public class SJ_board_dao {
 			String sql = "SELECT IDX , nickname , UP , DOWN , READNUM , WRITEDATE , SUBJECT FROM " 
 						 + name //humor_board || notice_board
 						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID"
-						 + " WHERE rownum <= 5 ORDER BY idx desc"; 
+						 + " WHERE rownum <= 7 ORDER BY idx desc"; 
 			
 			
 			pstmt = conn.prepareStatement(sql);
@@ -201,22 +201,23 @@ public class SJ_board_dao {
 		}
 		return list;
 	}
-/*
-	public List<SJ_board> hotlist() { //name 파라미터로 humor_board인지 notice_board 인지 파악할거임
+	
+	//인기글
+	public List<SJ_board> hotlist() { 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		List<SJ_board> hotList = null;
+		List<SJ_board> list = null;
 		
 		try {
 			conn = ds.getConnection();
 			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
-			String sql = "SELECT * FROM ( SELECT * FROM HUMOR_BOARD UNION SELECT * FROM NOTICE_BOARD ) ORDER BY UP";
+			String sql = "SELECT * FROM HUMOR_BOARD WHERE rownum < 7 ORDER BY UP DESC";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			hotList = new ArrayList<SJ_board>();
+			list = new ArrayList<SJ_board>();
 			
 			while(rs.next()) {
 				SJ_board board = new SJ_board();
@@ -228,13 +229,14 @@ public class SJ_board_dao {
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
 				
-				hotList.add(board);
+				list.add(board);
 			}			
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-		System.out.println("넌 아니겠지 : " + e.getMessage());
+			System.out.println("넌 아니겠지 : " + e.getMessage());
 		} finally {
 			try {
 				pstmt.close();
@@ -247,10 +249,9 @@ public class SJ_board_dao {
 				System.out.println("너??" + e.getMessage());
 			}
 		}
-		return hotList;
+		return list;
 	}
-*/
-	
+
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
 		Connection conn = null;
@@ -619,7 +620,7 @@ public class SJ_board_dao {
 		
 		return result;
 	}
-	
+/*	
 	public int like(String idx, String type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -639,7 +640,7 @@ public class SJ_board_dao {
 		}
 		return result;
 	}
-	
+*/
 //	// 좋아요 업데이트
 //	public void update_Like(int up) {
 //		String sql = "update HUMOR_BOARD set up=up+1 where num=?";
