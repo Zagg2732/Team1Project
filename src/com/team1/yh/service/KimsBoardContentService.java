@@ -16,12 +16,8 @@ public class KimsBoardContentService implements Action {
 		ActionForward forward = null;
 		
 		String idx = request.getParameter("idx");	
-		//String cpage = request.getParameter("cp");
-		//String pagesize = request.getParameter("ps");
 		
-		System.out.println("idx" + idx);
-		//System.out.println("cp" + cpage);
-		//System.out.println("ps" + pagesize);
+		boolean isread = false;
 		
 		KimsBoard kimsboard = new KimsBoard();
 		
@@ -36,25 +32,14 @@ public class KimsBoardContentService implements Action {
 			
 			idx = idx.trim();
 			
-			int intIDX = Integer.parseInt(idx);
+			isread = dao.getReadNum(idx);
 			
-			kimsboard = dao.getContent(intIDX);
-			
-			/*
-			//List 페이지 처음 호출 ...
-			if(cpage == null || cpage.trim().equals("")){
-				//default 값 설정
-				cpage = "1"; 
+			if(isread) {
+				int intIDX = Integer.parseInt(idx);
+				kimsboard = dao.getContent(intIDX);
 			}
-			
-			if(pagesize == null || pagesize.trim().equals("")){
-				//default 값 설정
-				pagesize = "5"; 
-			}
-			*/
 			
 			request.setAttribute("idx", idx);
-
 			request.setAttribute("kimsboard", kimsboard);
 			
 			forward = new ActionForward();
