@@ -23,8 +23,7 @@ public class TotalDao {
 	public TotalDao() {
 		try{
 			Context init = new InitialContext();
-	  		ds = 
-	  			(DataSource) init.lookup("java:comp/env/jdbc/oracle");
+	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
 		}catch(Exception ex){
 			System.out.println("DB 연결 실패 : " + ex);
 			return;
@@ -148,7 +147,34 @@ public class TotalDao {
 		return result;
 	}
 	
-	
+	public boolean editProfileUpdate(String userId, String afterNick, String afterPW) {
+		String sql = "UPDATE TEAM1_USER SET NICKNAME = ?, PASSWORD = ? WHERE USERID = ?";
+		boolean result = false;
+		int updateResult = 0;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, afterNick);
+			pstmt.setString(2, afterPW);
+			pstmt.setString(3, userId);
+
+			updateResult = pstmt.executeUpdate();
+			
+			if(updateResult > 0) {
+				result = true;
+			}
+			
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally{
+			if(rs!=null) try{rs.close();}catch(SQLException ex){ex.getStackTrace();}
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){ex.getStackTrace();}
+			if(con!=null) try{con.close();}catch(SQLException ex){ex.getStackTrace();}
+		}
+		
+		return result;
+	}
 	
 
 }
