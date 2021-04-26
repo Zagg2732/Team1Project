@@ -21,6 +21,7 @@ public class SJ_HumorBoardAddService implements Action{
 		
 		String uploadpath = request.getSession().getServletContext().getRealPath("upload");
 		
+		System.out.println("---uploadpath---");
 		System.out.println(uploadpath);
 		
 		int size = 1024*1024*10;
@@ -34,7 +35,6 @@ public class SJ_HumorBoardAddService implements Action{
 			String filename = multi.getFilesystemName("filename");
 			
 			String type = multi.getParameter("type");
-			System.out.println(type);
 			
 			SJ_board board = new SJ_board();
 			
@@ -42,8 +42,6 @@ public class SJ_HumorBoardAddService implements Action{
 			board.setSubject(subject);
 			board.setContent(content);
 			board.setFilename(filename);
-			
-		System.out.println("여기탔니??????");
 			
 			int result = 0;
 			
