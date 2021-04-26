@@ -25,8 +25,7 @@ public class AdminPostDao {
 	public AdminPostDao() {
 		try{
 			Context init = new InitialContext();
-	  		ds = 
-	  			(DataSource) init.lookup("java:comp/env/jdbc/oracle");
+	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
 		}catch(Exception ex){
 			System.out.println("DB 연결 실패 : " + ex);
 			return;

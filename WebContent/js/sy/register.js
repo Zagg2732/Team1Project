@@ -168,31 +168,14 @@ $(function() {
 
 });
 
-function overlapCheck(type, value){
-	$.ajax({
-		url : "OverlapCheck.sooyeon",
-		type : "POST",
-		dataType : "json",
-		data : {
-			"type" : type,
-			"value" : value
-		},
-		success : function(data){
-						
-			if(data.result == false){
-				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
-			}else {
-				alert('사용가능합니다.');
-			}
-		},
-		error : function(xhr){
-			alert('error' + xhr);
-		}
-		
-	});
-}
 
 function overlapCheckID(){
+	
+	if($('#userId').val()==""){
+		alert('빈 칸을 채워주세요.');
+		return;
+	}
+	
 		$.ajax({
 		url : "OverlapCheck.sooyeon",
 		type : "POST",
@@ -216,6 +199,12 @@ function overlapCheckID(){
 	});
 }
 function overlapCheckNick(){
+		
+	if($('#userNick').val()==""){
+		alert('빈 칸을 채워주세요.');
+		return;
+	}
+	
 		$.ajax({
 		url : "OverlapCheck.sooyeon",
 		type : "POST",
@@ -237,4 +226,13 @@ function overlapCheckNick(){
 		}
 		
 	});
+}
+
+function changeInfo(){
+	if($('#userNick').val()=="" || $('#beforePw').val()=="" || $('#userPw').val()=="" || $('#pwConfirm').val()==""){
+		alert('모든 칸을 입력해야 프로필 수정이 가능합니다.');
+		return;
+	}
+	
+	
 }
