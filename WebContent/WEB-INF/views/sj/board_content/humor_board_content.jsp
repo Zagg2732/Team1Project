@@ -20,13 +20,15 @@
 	margin-bottom: 250px;
 }
 
-#replyAddReplyBody {
+
+/*대댓글 */
+/* #replyAddReplyBody {
 	background-color: #6c757d;
 	width: 1117px;
 	height: 89px;
-	border: 1px solid black;
+	 border: 1px solid black; 
 	margin-bottom: 15px;
-}
+} */
 
 #contentForm {
 	width: 40%;
@@ -160,10 +162,10 @@
 								value="$글내용 : ${board.content}" class="form-control"
 								aria-describedby="basic-addon1"> ${board.content}
 								
-								<c:if test="${not empty board.filename}">
+					<%-- 			<c:if test="${not empty board.filename}">
 					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}"></a><br>
 					<img src="upload/${board.filename}">			
-				</c:if>
+				</c:if> --%>
 							</td>
 						</tr>
 
@@ -190,7 +192,7 @@
 					<br>
 					<br>
 					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">좋아요</a>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">❤️</a>
 								
 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
@@ -271,9 +273,7 @@
 								<textarea class="form-control" id="reply_content" rows="3"
 									name="reply_content" placeholder="이쁜말 사용하기^^"></textarea>
 								<input id="replybtn" type="button" class="btn btn-dark mt-3"
-									value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-									id="replybtn" type="button" class="btn btn-dark mt-3"
-									value="목록">
+									value="등록">
 
 
 							</div>
@@ -287,7 +287,7 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody" class="container" >안뇽 replyaddbody얌 ㅎ</div>
+		<div id="replyAddReplyBody" class="container" ></div>
 		<div class="container" style="width: 900px; display: inline-block;">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
@@ -350,9 +350,10 @@
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
 								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
+								+ '<div style="text-align: right;">'
 								+ '<input type="button" id = "replyAddForm" value="답글" class="btn btn-dark mt-3" onclick="reply_add_form(this.form)">&nbsp;&nbsp;&nbsp;&nbsp;'
 								+ '<input type="button" id = "replyDeleteBtn" value="삭제" class="btn btn-dark mt-3" onclick="reply_del(this.form)">'
-								+ '</form></td></tr>');
+								+ '</div></form></td></tr>');
 						
 						/* <input id="replybtn" type="button" class="btn btn-dark mt-3"
 							value="등록"> */
