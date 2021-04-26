@@ -8,7 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
-<link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
+<link rel="stylesheet" href="css/yh/bootstrap.css"> <!-- 참조  -->
+<link rel="stylesheet" href="css/yh/custom.css"> <!-- 참조  -->
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
@@ -29,21 +30,22 @@
                 <span class ="icon-bar"></span>
                 <span class ="icon-bar"></span>
             </button>
-            <a class ="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+            <a class ="navbar-brand" href="indexyh.jsp">JSP 게시판 웹 사이트</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="main.jsp">메인</a></li>
-                <li class="active"><a href="bbs.jsp">게시판</a></li>
+                <li class="active"><a href="indexyh.jsp">메인</a></li>
+                <li><a href="${pageContext.request.contextPath}/kimslist.kims">게시판</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
                     aria-expanded="false">접속하기<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.jsp">로그인</a></li>
-                        <li><a href="join.jsp">회원가입</a></li>                    
+                        <li><a href="Login.team1">로그인</a></li>
+                        <li><a href="${pageContext.request.contextPath}/Register.team1">회원가입</a></li>                   
                     </ul>
                 </li>
             </ul>
@@ -90,7 +92,7 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="bbs.jsp" class="btn btn-primary">목록</a>
+            <a href="${pageContext.request.contextPath}/kimslist.kims" class="btn btn-primary">목록</a>
             
             <!-- 수정 삭제버튼 -->
 <%--                 <a href="update.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a>

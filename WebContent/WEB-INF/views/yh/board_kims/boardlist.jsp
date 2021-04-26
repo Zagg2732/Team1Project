@@ -53,6 +53,7 @@
                 {
             %>
             <ul class="nav navbar-nav navbar-right">
+            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
@@ -177,11 +178,11 @@
 					<td colspan="2" align="center">총 게시물 수 : ${totalboardcount}
 					</td>
 				</tr>
-				<tr>
+<%-- 				<tr>
 					<td colspan="5" align="center">
-					${pager}
+					${pager} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 총 게시물 수 : ${totalboardcount}
 					</td>
-				</tr>
+				</tr> --%>
             </table>
             <a href="${pageContext.request.contextPath}/kimswrite.kims" class="btn btn-primary pull-right">글쓰기</a>
         </div>
