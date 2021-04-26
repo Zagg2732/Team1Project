@@ -16,23 +16,23 @@ public class KimsBoardAddService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 			
-			String userid_fk = request.getParameter("userid_fk");
+			String userid_fk = request.getParameter("userid");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
+			
+			
+			KimsBoard kimsboard = new KimsBoard();
+			
+			
+			kimsboard.setUserid_fk(userid_fk); 
+			kimsboard.setSubject(subject);
+			kimsboard.setContent(content);
 			
 			System.out.println("-------------------------------");
 			System.out.println(userid_fk);
 			System.out.println(subject);
 			System.out.println(content);
 			System.out.println("-------------------------------");
-			
-			KimsBoard kimsboard = new KimsBoard();
-			
-			
-			//kimsboard.setUserid_fk(userid_fk); 
-			kimsboard.setSubject(subject);
-			kimsboard.setContent(content);
-			
 			
 			int result = 0;
 			
@@ -57,7 +57,7 @@ public class KimsBoardAddService implements Action {
 			ActionForward forward = new ActionForward();
 			request.setAttribute("board_msg", msg);
 			request.setAttribute("board_url", url);
-			//forward.setRedirect(false);
+			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/views/yh/board_kims/redirect.jsp");
 			
 			return forward;
