@@ -18,14 +18,17 @@ public class SJ_HumorBoardList implements Action {
 		ActionForward forward = null; //return할 ActionForward 객체
 		String humor = "Humor_board";
 		String notice = "notice_board";
+		
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
 			
 			List<SJ_board> humorlist = dao.list(humor);			
 			List<SJ_board> noticelist = dao.list(notice);
+			List<SJ_board> hotlist = dao.hotlist();
 			
 			request.setAttribute("humorlist", humorlist);
 			request.setAttribute("noticelist", noticelist);
+			request.setAttribute("hotlist", hotlist);
 					
 			forward = new ActionForward();
 			forward.setRedirect(false);
