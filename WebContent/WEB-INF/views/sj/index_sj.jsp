@@ -191,11 +191,9 @@ a:hover {
 	<!-- 사이드 -->
 			<div id="sidebar" style="position: absolute;">
 				<ul>
-					<li align="center"><font color="black"
-						style="font-weight: bold;"> 최근본게시물 </font> <font color="red">0</font>
-						<br>￣￣￣￣￣￣￣￣￣</li>
+					
 
-					<a href="#">Best</a>
+					<a href="#" style="color: red;">Best</a>
 					<br>
 					<br>
 					<a href="#">익명게시판</a>
