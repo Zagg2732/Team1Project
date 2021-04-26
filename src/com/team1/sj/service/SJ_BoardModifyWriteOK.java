@@ -14,14 +14,20 @@ public class SJ_BoardModifyWriteOK implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		String type = request.getParameter("type");
 		String idx = request.getParameter("idx");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		String filename = request.getParameter("filename");
 		
 		System.out.println("modify-------------------------");
 		System.out.println(type);
 		System.out.println(idx);
+		System.out.println(subject);
+		System.out.println(content);
+		System.out.println(filename);
 		
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
-			dao.boardModify();
+			//dao.boardModify();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

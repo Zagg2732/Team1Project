@@ -12,7 +12,7 @@
 <head>
 	<meta charset=UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>유머게시판</title>
+<title>수정하기</title>
 
 <!-- 부트  -->
 <link rel="Stylesheet" href="css/hsj_style/default.css">
@@ -23,16 +23,6 @@
 	crossorigin="anonymous">
 <script type="text/javascript">
 	function check() {
-		if (!bbs.subject.value) {
-			alert("제목을 입력해 주세요");
-			bbs.subject.focus();
-			return false;
-		}
-		if (!bbs.content.value) {
-			alert("내용을 입력해 주세요");
-			bbs.content.focus();
-			return false;
-		}
 		document.bbs.submit();
 	}
 </script>
@@ -45,30 +35,35 @@
 
 	<c:set var="cpage" value="${requestScope.cpage}" />
 	<c:set var="pagecount" value="${requestScope.pagecount}" />
-	<c:set var="type" value="${param.type}" />
-	<c:set var="idx" value="${param.idx}" />
+	<c:set var="type" value="${requestScope.type}" />
+	<c:set var="idx" value="${requestScope.idx}" />
 	<c:set var="userInfo" value="${sessionScope.userInfo}" />
 
 	<article>
-	<h1>${type}</h1>
-	<h1>${idx}</h1>
-	
+		<h3>type 잘받아왔니 ? -> ${param.type}</h3>
+		<h3>idx 잘받아왔니 ? -> ${param.idx}</h3>
+
 		<div class="container" role="main">
-			<br> <b>유머게시판 글쓰기</b> <br> <br>
+			<br> <b>수정하기</b> <br> <br>
 
 			<%-- action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}" --%>
 			<form name="bbs" id="form" role="form" method="post"
-				action="boardModifyWriteOK.sj?type=${type}&idx=${idx}"
+				action="boardModifyWriteOK.sj"
 				enctype="multipart/form-data">
-				<input type="hidden" name="userid" value="${userInfo.userId}"
-					id="userid">
+				<!-- POST로 들고갈 정보들 ㅎ -->
+				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
+				<input type="hidden" name="type" value="${param.type}">
+				<input type="hidden" name="idx" value="${param.idx}">
+				<input type="hidden" name="subject" value="${param.subject}">
+				<input type="hidden" name="content" value="${param.content}">
 
 				<div class="mb-3">
 
 					<label for="title">제목</label> <input type="text"
 						class="form-control" name="subject" id="title"
 						placeholder="제목을 입력해 주세요" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '제목을 입력해 주세요'">
+						onblur="this.placeholder = '제목을 입력해 주세요'"
+						value = "${param.subject}">
 				</div>
 
 
@@ -81,7 +76,7 @@
 					<textarea id="summernote" class="form-control" rows="5" cols="60"
 						name="content" placeholder="내용을 입력해 주세요"
 						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '내용을 입력해 주세요'"></textarea>
+						onblur="this.placeholder = '내용을 입력해 주세요'">${param.content}</textarea>
 
 				</div>
 
@@ -89,8 +84,7 @@
 			
 			<!-- 파일 선택 -->
 			<label class="form-label" for="customFile">첨부파일</label>
-				<input type="file" class="form-control" id="customFile" />
-
+				<input type="text" class="form-control" id="customFile" value = "${param.filename}" disabled/>
 			</form>
 
 			<div style="text-align: center;">
@@ -135,3 +129,4 @@
 
 
 </html>
+
