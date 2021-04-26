@@ -27,6 +27,7 @@
 	
 	<style type="text/css">
 		.container{
+
 			width: 800px;
 			text-align: center;
 		}
@@ -50,7 +51,7 @@
 	<c:set var="pager" value="${requestScope.pager}" />
 
 
-	<div class="container">
+	<div class="container" >
 	<br> <b>유머 게시판</b> <br> <br>
 		<div class="list-board">
 		

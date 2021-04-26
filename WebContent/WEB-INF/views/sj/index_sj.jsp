@@ -236,7 +236,7 @@ a:hover {
 			<!-- 베스트  -->
 			<div class="col-sm-6">
 				<table class="table table-hover">
-					<thead>
+					<thead style="color: #ff0000;">
 
 						<tr>
 							<th><h3>Best</h3></th>
@@ -293,7 +293,7 @@ a:hover {
 				<table class="table table-hover">
 					<thead>
 
-						<tr>
+						<tr> 
 							<th><h3>공지게시판</h3></th>
 
 						</tr>

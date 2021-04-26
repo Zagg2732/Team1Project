@@ -40,6 +40,7 @@
 	text-align: center;
 }
 }
+
 </style>
 
 <!-- SweetAlert2 -->
@@ -75,54 +76,94 @@
 			<!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
 			<form id="form1" name="form1" method="post"
 				action="${path}/boardList.sj">
-				<div class="input-group input-group-sm" role="group"
-					style="text-align: left">
+				
+				<div class="input-group input-group-sm " role="group"
+					style="text-align: left; width: 900px; display: inline-block;" >
 					<table class="table table-striped table-bordered">
 						<tread>
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${idx}" class="form-control"
-								aria-describedby="basic-addon1"> 번호 : ${idx}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1"> 조회 : ${board.readnum}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.writedate}" class="form-control"
-								aria-describedby="basic-addon1"> 작성일 :
-								${board.writedate}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.nickname}" class="form-control"
-								aria-describedby="basic-addon1"> 닉네임 : ${board.nickname}
-							</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
+						
+						
+						
+						<h2>
+							<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.subject}" class="form-control"
-								aria-describedby="basic-addon1"> 글제목 : ${board.subject}
+								aria-describedby="basic-addon1">${board.subject}
+								
+								</h2>
+								<br>
+								<br>
+								
+								
+								<tr>
+							<td>
+								<h5><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${idx}" class="form-control"
+								aria-describedby="basic-addon1">No. ${idx}</h5>
+								
+								</td>
+								</tr>
+								
+						
+						
+						
+						<tr>
+							<td>
+							<b>
+							<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.nickname}" class="form-control"
+								aria-describedby="basic-addon1"> ${board.nickname}</b>
+							
+								
 							</td>
 						</tr>
+						
+							<tr>
+							<td>
+							<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.filename}" class="form-control"
+								aria-describedby="basic-addon1"> File : ${board.filename}
+							
+								
+							</td>
+						</tr>
+						
+						
+								
+								
 
+								
+								<div style="text-align: right;">
+								<input  type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.writedate}" class="form-control"
+								aria-describedby="basic-addon1">🗓 ${board.writedate}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.readnum}" class="form-control"
+								aria-describedby="basic-addon1">👁 ${board.readnum}회
+								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="like_result" name="like_result"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.readnum}" class="form-control"
+								aria-describedby="basic-addon1">❤️ ${board.up}
+								
+								</div>
 
-						<tr>
+						<tr  style="height: 300px;">
 							<td><input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="$글내용 : ${board.content}" class="form-control"
-								aria-describedby="basic-addon1"> 글내용 : ${board.content}
+								aria-describedby="basic-addon1"> ${board.content}
+								
+								<c:if test="${not empty board.filename}">
+					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}"></a><br>
+					<img src="upload/${board.filename}">			
+				</c:if>
 							</td>
 						</tr>
 
@@ -135,14 +176,27 @@
 				</div>
 
 		</form>
-				<c:if test="${not empty board.filename}">
+				<%-- <c:if test="${not empty board.filename}">
 					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}">${board.filename}</a><br>
 					<img src="upload/${board.filename}">			
-				</c:if>
-					<h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4>
+				</c:if> --%>
+					<%-- <h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4> --%>
+					
+					
+					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					<br>
+					<br>
+					<br>
+					<br>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">좋아요</a>
+								
 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-					<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
+					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
 				</c:if>
+				
+				
 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<form action="boardModifyWrite.sj" method="POST">
 				        <input type="hidden" name="type" value = "humor_board"><br>
@@ -151,24 +205,23 @@
 				        <input type="hidden" name="subject" value = "${board.subject}"><br>
 				        <input type="hidden" name="content" value = "${board.content}"><br>
 				        
-				        <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요">
+				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
    					</form>
 				</c:if>
 		
 
 
-		<br> <br>
 		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
   -->
 
-		<form id="like_form">
+		<%-- <form id="like_form">
 			<table id="list">
 				<input type="hidden" name="command" value="like_it">
 				<input type="hidden" name="board_idx" value="${board.idx}">
 				<tr>
-					<input type="button" value="좋아요!" onclick="like(this.form)">
+					<!-- <input type="button" value="좋아요!" onclick="like(this.form)"> -->
 				</tr>
 				<tr>
 					<div id="like_result">${board.up}</div>
@@ -180,26 +233,22 @@
 			<table id="list">
 				<input type="hidden" name="command" value="like_it">
 				<input type="hidden" name="board_idx" value="${board.idx}">
-				<tr>
-					<input type="button" value="글삭제"
-						onclick="deleteBoard.sj?type=humor_board&idx=${idx}">
-				</tr>
+				
 				<tr>
 					<div id="like_result">${board.up}</div>
 				</tr>
 			</table>
-		</form>
+		</form> --%>
 
-		<br> <br>
-
+<br><br>
 
 		<form action="#" name="reply" method="POST">
 
-			<div class="card mb-2">
+			<div class="card mb-2" style="width: 900px; display: inline-block;">
 				<div class="card-header bg-light">
 					<i class="fa fa-comment fa"></i> Comment
 				</div>
-				<div class="card-body">
+				<div class="card-body" >
 
 					<!-- hidden 태그  값을 숨겨서 처리  -->
 					<input type="hidden" name="idx" value="${idx}" id="idx"> <input
@@ -238,8 +287,8 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody" class="container">안뇽 replyaddbody얌 ㅎ</div>
-		<div class="container">
+		<div id="replyAddReplyBody" class="container" >안뇽 replyaddbody얌 ㅎ</div>
+		<div class="container" style="width: 900px; display: inline-block;">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
 
