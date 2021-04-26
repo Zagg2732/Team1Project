@@ -13,6 +13,7 @@ import com.team1.action.Action;
 import com.team1.action.ActionForward;
 import com.team1.sy.service.Admin_UserList;
 import com.team1.sy.service.BestPost_JH_Diary;
+import com.team1.sy.service.BestPost_KimsBoard;
 import com.team1.sy.service.BestPost_SJ;
 import com.team1.sy.service.LoginAction;
 
@@ -52,6 +53,9 @@ public class FrontAdminController extends HttpServlet {
     		forward.setPath("/WEB-INF/views/sy/admin/admin_talk.jsp");
     	}else if(url_Command.equals("/BestPostJHmini.admin")) {
     		action = new BestPost_JH_Diary();
+    		forward = action.execute(request, response);
+    	}else if(url_Command.equals("/BestPostKimsBoard.admin")) {
+    		action = new BestPost_KimsBoard();
     		forward = action.execute(request, response);
     	}
     	
