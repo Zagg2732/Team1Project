@@ -22,32 +22,29 @@ public class GuestBookAdd extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	//String idx = request.getParameter("idx");
-    	String userid = request.getParameter("userid");
-    	String nickname = request.getParameter("nickname");
+    	String userid_fk = request.getParameter("userid");
+    	String username = request.getParameter("username");
     	String content = request.getParameter("content");
     	String readyn = request.getParameter("readyn");
     	
-    	//System.out.println("GuestBookAdd 확인; " +nickname);
-    	    	
     	try {
     		GuestBookDao dao = new GuestBookDao();
     		
     		GuestBookDto guestBookDto = new GuestBookDto();
     		
-    		//guestBookDto.setIdx(Integer.parseInt(int));
-    		guestBookDto.setUserid_fk(userid);
-    		guestBookDto.setNickName(nickname);    		
+    		//guestBookDto.setIdx(Integer.parseInt(idx));
+    		guestBookDto.setUserid_fk(userid_fk);
+    		guestBookDto.setUserName(username);    		
     		guestBookDto.setContent(content);
     		guestBookDto.setReadyn(readyn);
     		
     		int result = dao.guestBookAdd(guestBookDto);
 			
 		} catch (Exception e) {
-			System.out.println("ReplyAdd.ajax 오류 : " +e.getMessage());
+			System.out.println("GuestBookAdd.ajax 오류 : " +e.getMessage());
 			e.printStackTrace();
 		}
     	

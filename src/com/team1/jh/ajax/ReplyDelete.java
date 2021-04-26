@@ -29,11 +29,6 @@ public class ReplyDelete extends HttpServlet {
 		String idx_fk = request.getParameter("idx_fk");
 		String userid_fk = request.getParameter("userid_fk");
 		String num = request.getParameter("num");
-		
-		String userId = request.getParameter("s_userid");
-		System.out.println(userId);
-		
-		
 		//System.out.println(idx_fk);
 		//System.out.println(userid_fk);
 		//System.out.println(num);

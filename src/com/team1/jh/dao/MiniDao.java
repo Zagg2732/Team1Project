@@ -387,7 +387,7 @@ public class MiniDao {
 		
 		try {
 			conn = ds.getConnection();
-			String reply_sql = "SELECT DR.IDX_FK, DR.USERID_FK, TU.NICKNAME, DR.CONTENT, DR.WRITEDATE, DR.NUM "
+			String reply_sql = "SELECT DR.IDX_FK, DR.USERID_FK, TU.USERNAME, DR.CONTENT, DR.WRITEDATE, DR.NUM "
 							 + "FROM DIARY_REPLY DR "
 							 + "JOIN TEAM1_USER TU ON DR.USERID_FK = TU.USERID "
 							 + "WHERE DR.IDX_FK = ? "
@@ -406,9 +406,9 @@ public class MiniDao {
 				int num = Integer.parseInt(rs.getString("num"));
 				String content  =rs.getString("content");
 				java.sql.Date writedate = rs.getDate("writedate");
-				String nickName  =rs.getString("nickName");
+				String username  =rs.getString("username");
 				
-				DiaryReplyDto replydto = new DiaryReplyDto(idx, userid_fk, num, content, writedate, nickName);
+				DiaryReplyDto replydto = new DiaryReplyDto(idx, userid_fk, num, content, writedate, username);
 				list.add(replydto);
 
 			}			

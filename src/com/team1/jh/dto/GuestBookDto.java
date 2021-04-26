@@ -8,26 +8,29 @@ public class GuestBookDto {
 	private String content;
 	private Date writedate;
 	private String readyn;
-	private String nickName;
+	private String username;
+	
 	
 	public GuestBookDto() {}  
 
-	public GuestBookDto(int idx, String userid_fk, String content, Date writedate, String readyn, String nickName) {
+	public GuestBookDto(int idx, String userid_fk, String content, Date writedate, String readyn, String username) {
 		super();
 		this.idx = idx;
 		this.userid_fk = userid_fk;
 		this.content = content;
 		this.writedate = writedate;
 		this.readyn = readyn;
-		this.nickName = nickName;
+		this.username = username;
+		
+		
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getUserName() {
+		return username;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public int getIdx() {

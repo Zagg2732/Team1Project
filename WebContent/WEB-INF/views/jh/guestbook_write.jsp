@@ -66,14 +66,13 @@
 		  <c:set var="replyList" value="${requestScope.guestBookList}" />
 		  <c:set var="userInfo" value="${sessionScope.userInfo}" />	
 
-
 			<!-- 방명록 글 작성-->
 			<div class="card">
 				<div class="card-body">
   					<!-- <label>비밀글은 미니홈피 주인에게만 공개됩니다 .</label> -->
     				<form name="guestbook">
     				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
-    				<input type="hidden" name="nickname" value="${userInfo.nickName}" id="nickname">
+    				<input type="hidden" name="username" value="${userInfo.userName}" id="username">
       					<div class="form-group">
         					<textarea name="content" id="content" class="form-control" id="content" rows="3" style="resize: none; margin-bottom:10px;"></textarea>
         					
@@ -147,6 +146,8 @@
 <script type="text/javascript">
 
 	var frm = document.guestbook; //guestbook form 전체
+	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
+	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
 	
 	$(function() {
 		guestBookList();
@@ -159,13 +160,13 @@
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
-				//console.log(data);
+				console.log(data);
+				
 				$.each(data, function(index, obj) {
 					let htmlString = `
 	  				<div class="card-wrap">
   						<div class="card-title">` +
-  							obj.nickname + ` | ` + obj.writedate + `
-  								<input type="button" value="삭제" onclick="guestbook_del(this.form)">
+  							obj.username + ` | ` + obj.writedate + `
   						</div>
   						<div class="card-content">`
   							+ obj.content +
@@ -173,14 +174,6 @@
   					</div>
 					`
 					$('#guestbooklist').append(htmlString);
-					
-				/*
-				$('#guestbooklist').append(
-						'<tr><td>['+obj.nickname+' ] : ' +obj.content+ 
-						'<br> 작성일: '+obj.writedate+'</td>' +
-						'<input type="button" value="삭제" onclick="guestbook_del(this.form)">' +
-						'</td></tr>'						
-					);*/
 				});
 			},
 			error : function() {
@@ -194,15 +187,22 @@
 			alert('내용을 입력하세요.');
 			return false;
 		}
+		//체크박스 선택값에 따라 방명록 공개 여부 
+		if($('#readyn').is(":checked") == true){
+		    var readyn = 'N';
+		}else {
+			var readyn = 'Y';
+		}
+		//console.log(readyn);
 		
 		$.ajax ({
 			url : "GuestBookAdd.ajax",
 			type : "GET",
 			data : {
 				"userid" : $('#userid').val(),
-				"nickname" : $('#nickname').val(),
+				"username" : $('#username').val(),
 				"content" : $('#content').val(),
-				"readyn" : $('#readyn').val(),			
+				"readyn" : readyn
 			},
 			success : function(data) {
 				//console.log(data);
@@ -215,38 +215,5 @@
 			}
 		});
 	}
-	
-	function guestBook_del(frm) {
-		
-		if(sessionGrade == 1) {
-			return true;
-		}else if(sessionGrade != 1) {
-			if(frm.userid.value != sessionUserid) {
-				alert('본인이 작성한 댓글만 삭제가 가능합니다!');
-				return false;
-			}
-		}
-
-		$.ajax({
-			url :"ReplyDelete.ajax",
-			type : "POST",
-			datatype : "text",
-			data :{
-				"num" : frm.num.value,
-				"idx_fk" : frm.idx.value,
-				"userid_fk" : frm.userid.value
-			},
-			success : function(data){
-				replyList();
-				$('#reply_content').val("");
-				$('#replybody').empty();
-			},
-			error : function() {
-				alert('댓글 삭제 실패');
-			}
-		});
-	}
-	
-	
 </script>
 </html>
