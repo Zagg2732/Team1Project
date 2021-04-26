@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import com.team1.jh.dto.DiaryDto;
 import com.team1.sj.dto.SJ_board;
 import com.team1.sy.dto.Member;
+import com.team1.yh.dto.KimsBoard;
 
 public class AdminPostDao {
 
@@ -117,7 +118,7 @@ public class AdminPostDao {
 		List<DiaryDto> list = null;
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT USERNAME, SUBJECT, WRITEDATE, READNUM FROM DIARY d LEFT JOIN TEAM1_USER tu ON d.USERID_FK = tu.USERID WHERE rownum <= ? ORDER BY READNUM DESC";
+			String sql = "SELECT IDX, USERNAME, SUBJECT, WRITEDATE, READNUM FROM DIARY d LEFT JOIN TEAM1_USER tu ON d.USERID_FK = tu.USERID WHERE rownum <= ? ORDER BY READNUM DESC";
 			
 			pstmt = conn.prepareStatement(sql);
 
@@ -128,7 +129,8 @@ public class AdminPostDao {
 			while(rs.next()) {
 				
 				DiaryDto diary = new DiaryDto();
-												
+				
+				diary.setIdx(rs.getInt("IDX"));
 				diary.setUsername(rs.getString("USERNAME"));
 				diary.setSubject(rs.getString("SUBJECT"));
 				diary.setWritedate(rs.getDate("WRITEDATE"));
@@ -150,5 +152,48 @@ public class AdminPostDao {
 		}
 		return list;
 	}
+	
+	//Kim'sboard 조회수순 리스트 가져오기
+		public List<KimsBoard> kimBestList(int pagesize){
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<KimsBoard> list = null;
+			try {
+				conn = ds.getConnection();
+				String sql = "SELECT IDX, USERID_FK, SUBJECT, WRITEDATE, READNUM FROM (SELECT rownum, kb.* FROM KIMS_BOARD kb ORDER BY READNUM DESC) WHERE ROWNUM <= ?";
+				
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, pagesize);
+				
+				rs = pstmt.executeQuery();
+				list = new ArrayList<KimsBoard>();
+				while(rs.next()) {
+					
+					KimsBoard kim = new KimsBoard();
+					
+					kim.setIdx(rs.getInt("IDX"));
+					kim.setUserid_fk(rs.getString("USERID_FK"));
+					kim.setSubject(rs.getString("SUBJECT"));
+					kim.setWritedate(rs.getDate("WRITEDATE"));
+					kim.setReadnum(rs.getInt("READNUM"));
+								
+					list.add(kim);
+				}
+				
+			}catch (Exception e) {
+				System.out.println("오류 :" + e.getMessage());
+			}finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();//반환
+				} catch (Exception e2) {
+					
+				}
+			}
+			return list;
+		}
 
 }
