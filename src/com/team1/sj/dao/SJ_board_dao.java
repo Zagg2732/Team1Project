@@ -536,11 +536,33 @@ public class SJ_board_dao {
 		return result;
 	}
 
-	public int boardModify(String type, String idx) {
+	public int boardModify(String type, String idx, String subject, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		int result = 0;
 		
-		
-		
+		try {
+			conn = ds.getConnection();
+			String sql = "UPDATE "
+					+ type
+					+ " SET SUBJECT = '"
+					+ subject
+					+ "' , CONTENT  = '"
+					+ content
+					+ "' WHERE IDX = "
+					+ idx;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("Error! : db update(modify) 오류");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return result;
 	}
