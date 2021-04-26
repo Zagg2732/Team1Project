@@ -33,6 +33,7 @@ public class ReplyList extends HttpServlet {
     	//System.out.println("ReplyList.ajax Start!!!!!");
     	
     	String idx= request.getParameter("idx"); 
+    	System.out.println("idx : " +idx);
     	
 		try {
 			
@@ -55,7 +56,7 @@ public class ReplyList extends HttpServlet {
 				jsonObj.put("userid_fk", replylist.get(i).getUserid_fk());
 				jsonObj.put("content", replylist.get(i).getContent());
 				jsonObj.put("idx_fk", replylist.get(i).getIdx_fk());
-				jsonObj.put("nickname", replylist.get(i).getNickName());
+				jsonObj.put("username", replylist.get(i).getUserName());
 				
 				jsonArr.add(jsonObj);
 				

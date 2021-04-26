@@ -33,13 +33,19 @@ public class GuestBookList extends HttpServlet {
 
 private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	//String idx_fk = request.getParameter("idx"); 
-    	//System.out.println("GuestBookList 잘 받아오니? : " +idx_fk);
-    	
-		try {			
+		try {		
+			
+			HttpSession session = request.getSession();
+			Member userInfo = (Member)session.getAttribute("userInfo");
+			
+			int grade = userInfo.getGrade();
+			String userid = userInfo.getUserId();
+			
+			request.setAttribute("sessionGrade", grade);
+			request.setAttribute("sessionUserid", userid);
 			
 			GuestBookDao dao = new GuestBookDao();
-			List<GuestBookDto> guestBooklist = dao.guestBookList();
+			List<GuestBookDto> guestBooklist = dao.guestBookList(grade, userid);
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -51,10 +57,12 @@ private void doProcess(HttpServletRequest request, HttpServletResponse response)
 				JSONObject jsonObj = new JSONObject();
 				
 				jsonObj.put("userid_fk", guestBooklist.get(i).getUserid_fk());
+				jsonObj.put("userid_fk", guestBooklist.get(i).getUserid_fk());
 				jsonObj.put("content", guestBooklist.get(i).getContent());
 				jsonObj.put("writedate", date);
-				jsonObj.put("nickname", guestBooklist.get(i).getNickName());
+				jsonObj.put("username", guestBooklist.get(i).getUserName());
 				jsonObj.put("readyn", guestBooklist.get(i).getReadyn());
+				
 				
 				jsonArr.add(jsonObj);
 				

@@ -55,7 +55,7 @@ public class DiaryListService implements Action {
 			//System.out.println(list.get(0).getIdx() + list.get(0).getContent());
 			
 			int pagersize=3; //[1][2][3]
-			ThePager pager = new ThePager(totaldiarycount, cpage, pagesize, pagersize, "diary.mini");
+			ThePager pager = new ThePager(totaldiarycount, cpage, pagesize, pagersize, "diary.jh");
 			
 			request.setAttribute("pagesize", pagesize);
 			request.setAttribute("cpage", cpage);

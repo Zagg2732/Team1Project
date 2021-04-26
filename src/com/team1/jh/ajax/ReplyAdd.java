@@ -29,7 +29,7 @@ public class ReplyAdd extends HttpServlet {
 		String idx_fk = request.getParameter("idx");
 		String userid_fk = request.getParameter("userid");
 		String content = request.getParameter("reply_content");
-		String nickName = request.getParameter("nickname");
+		String username = request.getParameter("usernam");
 		
 //		System.out.println(content);
 //		System.out.println(idx_fk);

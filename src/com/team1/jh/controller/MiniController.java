@@ -19,6 +19,7 @@ import com.team1.jh.service.DiaryEditService;
 import com.team1.jh.service.DiaryListService;
 import com.team1.jh.service.DiaryRewriteOk;
 import com.team1.jh.service.DiaryRewriteService;
+import com.team1.jh.service.GuestBookAddService;
 import com.team1.jh.service.ReplyAddService;
 
 @WebServlet("*.jh")
@@ -88,10 +89,8 @@ public class MiniController extends HttpServlet {
             forward = action.execute(request, response);
         
     	}else if(url_Command.equals("/guestBook.jh")) { //방명록 글쓰기
-    		forward = new ActionForward();
-    		forward.setRedirect(false);
-    		forward.setPath("/WEB-INF/views/jh/guestbook_write.jsp");
-    		
+    		action = new GuestBookAddService();
+        	forward = action.execute(request, response);
     	}
     	
     	if(forward != null) {
