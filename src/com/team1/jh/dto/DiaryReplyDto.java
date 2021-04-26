@@ -8,18 +8,18 @@ public class DiaryReplyDto {
 	private int num;
 	private String content;
 	private Date writedate;
-	private String nickName;
+	private String username;
 	
 	public DiaryReplyDto() {}
 
-	public DiaryReplyDto(int idx_fk, String userid_fk, int num, String content, Date writedate, String nickName) {
+	public DiaryReplyDto(int idx_fk, String userid_fk, int num, String content, Date writedate, String username) {
 		super();
 		this.idx_fk = idx_fk;
 		this.userid_fk = userid_fk;
 		this.num = num;
 		this.content = content;
 		this.writedate = writedate;
-		this.nickName = nickName;
+		this.username = username;
 	}
 
 	public int getIdx_fk() {
@@ -38,12 +38,12 @@ public class DiaryReplyDto {
 		this.userid_fk = userid_fk;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getUserName() {
+		return username;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public int getNum() {

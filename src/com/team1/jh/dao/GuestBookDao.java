@@ -11,10 +11,13 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import javax.websocket.Session;
 
 import com.team1.jh.dto.GuestBookDto;
 import com.team1.sy.dto.AdminTalk;
+import com.team1.sy.dto.Member;
 
 public class GuestBookDao {
 	DataSource ds = null;
@@ -28,42 +31,52 @@ public class GuestBookDao {
 	}
 
 	//방명록 전체조회 
-	public List<GuestBookDto> guestBookList() {
+	public List<GuestBookDto> guestBookList(int grade, String userid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<GuestBookDto> list = null;
 		
+		//System.out.println("userid : " +userid);
+		
 		try {
-			conn = ds.getConnection();
-			String sql = "SELECT GB.IDX, GB.USERID_FK, TU.NICKNAME, GB.CONTENT, GB.WRITEDATE, GB.READYN " +
-							   "FROM GUESTBOOK GB " +
-							   "JOIN TEAM1_USER TU ON GB.USERID_FK = TU.USERID " +
-							   "ORDER BY GB.IDX DESC";
+			conn = ds.getConnection();			
+			String sql = "SELECT GB.IDX, GB.USERID_FK, TU.USERNAME, GB.CONTENT, GB.WRITEDATE, GB.READYN " +
+					   "FROM GUESTBOOK GB " +
+					   "JOIN TEAM1_USER TU ON GB.USERID_FK = TU.USERID ";
 			
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
+			if( grade != 1 ) {
+				sql += "WHERE GB.READYN = 'Y' OR GB.USERID_FK = ? ";
+				sql += "ORDER BY GB.IDX DESC";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userid);
+				rs = pstmt.executeQuery();
+				
+			}else {
+				sql += "ORDER BY GB.IDX DESC";	
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}
 
 			list = new ArrayList<>();
 			
 			while(rs.next()) {
 				
-				
-				
+				String idx = rs.getString("idx");
 				String userid_fk = rs.getString("userid_fk");
 				String content  =rs.getString("content");				
 				Date date = rs.getDate("writedate");
 				String readyn = rs.getString("readyn");
-				String nickName  =rs.getString("nickName");
+				String username  =rs.getString("username");
 				
 				GuestBookDto book = new GuestBookDto();
-				
+				book.setIdx(Integer.parseInt(idx));
 				book.setUserid_fk(userid_fk);
 				book.setContent(content);
 				book.setWritedate(date);
 				book.setReadyn(readyn);
-				book.setNickName(nickName);
+				book.setUserName(username);
 								
 				list.add(book);
 
@@ -117,5 +130,6 @@ public class GuestBookDao {
 		}
 		return row;		
 	}
+	
 	
 }

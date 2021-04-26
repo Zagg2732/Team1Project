@@ -54,7 +54,7 @@
 		  			</tr>
 		  			<tr>
 		  				<td>작성자</td>
-		  				<td>${diary.userid_fk}</td>
+		  				<td>${userInfo.userName}</td>
 		  			</tr>
 		  			<tr>
 		  				<td>제목</td>
@@ -82,7 +82,7 @@
 					<!-- hidden : 값 숨겨서 처리 --> 
 					<input type="hidden" name="idx" value="${idx}" id="idx">
 					<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
-					<input type="hidden" name="nickname" value="${userInfo.nickName}" id="nickname">
+					<input type="hidden" name="nickname" value="${userInfo.userName}" id="username">
 					
 					<table class="table">
 							<c:choose>
@@ -138,7 +138,7 @@
 				//console.log(data);
 				$.each(data, function(index,obj) {
 				$('#replybody').append(
-					'<tr align="left"><td width="80%">[' +obj.nickname+ '] : ' + obj.content +
+					'<tr align="left"><td width="80%">[' +obj.username+ '] : ' + obj.content +
 					'<br> 작성일 :'+obj.writedate +'</td><td width="20%">' +
 					'<form method="POST" name="replyDel">' +
 					'<input type="hidden" name="num" value="' +obj.num +'" class="reply_num">' +
@@ -170,7 +170,7 @@
 				data : {
 					"idx" : $('#idx').val(),
 					"userid" : $('#userid').val(),
-					"nickname" : $('#nickname').val(),
+					"username" : $('#username').val(),
 					"reply_content" : $('#reply_content').val()
 				},
 				success : function(data) {
