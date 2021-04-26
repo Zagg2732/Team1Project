@@ -243,7 +243,7 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
+			String sql = "SELECT filename, userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
 						+ boardName + 
 						" hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID WHERE IDX = "
 						+ idx ;
@@ -259,7 +259,7 @@ public class SJ_board_dao {
 				board.setDown(rs.getInt("down"));
 				board.setWritedate(rs.getDate("writedate"));
 				board.setContent(rs.getString("content"));
-				
+				board.setFilename(rs.getString("filename"));
 			}
 			
 		} catch (Exception e) {

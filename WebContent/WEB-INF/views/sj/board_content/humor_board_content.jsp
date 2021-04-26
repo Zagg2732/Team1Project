@@ -71,51 +71,7 @@
 	<div class="container" style="text-align: center;">
 		<br> <b>유머 게시판</b> <br> <br>
 		<div class="list-board"">
-			<br> <br>
-
-			<%-- <h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			
-			<h4>글번호 : ${idx}</h4>
-			<h4>글제목 : ${board.subject} </h4>
-			<h4>글쓴이 : ${board.nickname} </h4>
-			<h4>글쓴날짜 : ${board.writedate} </h4>
-			<h4>조회수 : ${board.readnum} </h4>
-			<h4>글내용 : ${board.content} </h4>
-			<c:if test="${not empty board.filename}">
-				<a href="<%= request.getContextPath() %>/sj_download.jsp?file_name=${board.filename}">${board.filename}</a><br>
-				<img src="upload/${board.filename}">			
-			</c:if>
-			<h4>board.userid_kf ${board.userid_fk}  || 세션 ${sessionScope.userInfo.userId} </h4>
-			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-				<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
-			</c:if>
-			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-				<a href="boardModifyWrite.sj?type=humor_board&idx=${idx}">글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요?</a><br>		
-			</c:if>
-			<h3>${requestScope.pagesize}</h3>
-			<br>
-			<h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			<h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3> --%>
-
-			<%-- 	<table>
-				<tr>
-
-					<td width="150">
-						<div>
-							닉네임 : ${board.nickname}<br> <font size="2" color="lightgray">날짜
-								: ${board.writedate}</font>
-						</div>
-					</td>
-
-				</tr>
-			</table> --%>
-
-
-
+		<br> <br>
 			<!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
 			<form id="form1" name="form1" method="post"
 				action="${path}/boardList.sj">
@@ -175,9 +131,30 @@
 					</table>
 
 				</div>
-		</div>
+				
+				</div>
 
 		</form>
+				<c:if test="${not empty board.filename}">
+					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}">${board.filename}</a><br>
+					<img src="upload/${board.filename}">			
+				</c:if>
+					<h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4>
+				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
+				</c:if>
+				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<form action="boardModifyWrite.sj" method="POST">
+				        <input type="hidden" name="type" value = "humor_board"><br>
+				        <input type="hidden" name="idx" value = "${idx}"><br>
+				        <input type="hidden" name="filename" value = "${board.filename}"><br>
+				        <input type="hidden" name="subject" value = "${board.subject}"><br>
+				        <input type="hidden" name="content" value = "${board.content}"><br>
+				        
+				        <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요">
+   					</form>
+				</c:if>
+		
 
 
 		<br> <br>
@@ -300,6 +277,7 @@
 		replyList(); 
  		replyAdd(); 
 	});
+	
 
 	function replyList(){	
 		$.ajax({
