@@ -261,7 +261,8 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody">안뇽 replyaddbody얌 ㅎ</div>
+		<div id="replyAddReplyBody" class="container">안뇽 replyaddbody얌 ㅎ</div>
+		<div class="container">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
 
@@ -272,6 +273,7 @@
 
 			</tbody>
 		</table>
+		</div>
 	</div>
 	</div>
 
@@ -311,7 +313,7 @@
 			success : function(data) {
 					$.each(data, function(index,obj) {
 						$('#replybody').append(
-								'<table class="table table-hover table-striped text-center">'
+						'<table class="table table-hover table-striped text-center">'
 								+'<tr align="left"><td>[' 
 								+ obj.nickname +'] <br> ' +obj.content 
 								+ '<br> 작성일 :'+obj.writedate +'</td><td>' 
@@ -321,9 +323,12 @@
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
 								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
-								+ '<input type="button" id = "replyAddForm" value="답글" onclick="reply_add_form(this.form)">'
-								+ '<input type="button" id = "replyDeleteBtn" value="삭제" onclick="reply_del(this.form)">'
+								+ '<input type="button" id = "replyAddForm" value="답글" class="btn btn-dark mt-3" onclick="reply_add_form(this.form)">&nbsp;&nbsp;&nbsp;&nbsp;'
+								+ '<input type="button" id = "replyDeleteBtn" value="삭제" class="btn btn-dark mt-3" onclick="reply_del(this.form)">'
 								+ '</form></td></tr>');
+						
+						/* <input id="replybtn" type="button" class="btn btn-dark mt-3"
+							value="등록"> */
 					});		
 			},
 			error : function() {
