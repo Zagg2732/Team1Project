@@ -50,13 +50,17 @@
 			<form name="bbs" id="form" role="form" method="post"
 				action="boardModifyWriteOK.sj"
 				enctype="multipart/form-data">
-				<!-- POST로 들고갈 정보들 ㅎ -->
-				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
-				<input type="hidden" name="type" value="${param.type}">
-				<input type="hidden" name="idx" value="${param.idx}">
-				<input type="hidden" name="subject" value="${param.subject}">
-				<input type="hidden" name="content" value="${param.content}">
-
+				
+				<div class="hiddenClass">
+						<!-- POST로 들고갈 정보들 ㅎ -->
+					<input type="hidden" name="userid" id = "userid" value="${sessionScope.userInfo.userId}">
+					<input type="hidden" name="type" id= "type" value="${param.type}">
+					<input type="hidden" name="idx" id= "idx" value="${param.idx}">
+					<input type="hidden" name="subject" value="${param.subject}">
+					<input type="hidden" name="content" value="${param.content}">	
+					<input type="hidden" name="filename" value="${param.filename}">	
+				</div>
+				
 				<div class="mb-3">
 
 					<label for="title">제목</label> <input type="text"
