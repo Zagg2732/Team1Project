@@ -10,14 +10,10 @@
 	<title>듀효니 미니홈피</title>
   	<link rel="stylesheet" href="./css/jh/main.css">
   	<script src="./js/jh/main.js"></script>
-  	<!--  문제의 부트.. -->
   	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	
-	<!-- include summernote css/js-->
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body style="background-color: gray;">
 	<div style="width:100%; max-width:900px;">
@@ -68,7 +64,7 @@
 				
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
-			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
+			<div class="menu-item" style="top: 86px" onclick="location.href='guestBook.jh';">방명록</div>
 		  </div>
 		</div>
 	  </div>

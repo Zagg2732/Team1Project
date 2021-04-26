@@ -58,7 +58,7 @@ public class DiaryContentService implements Action {
 			MiniDao dao = new MiniDao();
 			// 글 번호를 가지고 오지 않았을 경우 예외처리
 			if (idx == null || idx.trim().equals("")) {
-				response.sendRedirect("diary.mini"); //다이어리 목록으로
+				response.sendRedirect("diary.jh"); //다이어리 목록으로
 				return null;
 			}
 			

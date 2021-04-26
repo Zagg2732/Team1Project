@@ -71,7 +71,7 @@
 				
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
-			<div class="menu-item" style="top: 86px" onclick="location.href='guestbook.jh';">방명록</div>
+			<div class="menu-item" style="top: 86px" onclick="location.href='guestBook.jh';">방명록</div>
 		  </div>
 		</div>
 	  </div>

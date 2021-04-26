@@ -50,8 +50,6 @@ public class SJ_board_dao {
 				pstmt.setString(3, boarddata.getContent());
 				pstmt.setString(4, boarddata.getFilename());
 				
-				
-				
 				row = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("널 어쩌면 좋을까 dao " +e.getMessage());
@@ -71,6 +69,7 @@ public class SJ_board_dao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		List<SJ_board> list = null;
 		try {
 			conn = ds.getConnection();
@@ -162,7 +161,8 @@ public class SJ_board_dao {
 			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
 			String sql = "SELECT IDX , nickname , UP , DOWN , READNUM , WRITEDATE , SUBJECT FROM " 
 						 + name //humor_board || notice_board
-						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID ORDER BY idx desc"; 
+						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID"
+						 + " WHERE rownum <= 5 ORDER BY idx desc"; 
 			
 			
 			pstmt = conn.prepareStatement(sql);
@@ -243,7 +243,7 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT subject , nickname, readnum, up, down, writedate, content FROM "
+			String sql = "SELECT userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
 						+ boardName + 
 						" hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID WHERE IDX = "
 						+ idx ;
@@ -251,14 +251,14 @@ public class SJ_board_dao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				board.setUserid_fk(rs.getString("userid_fk"));
 				board.setSubject(rs.getString("subject"));
-				board.setNickname(rs.getString("nickname"));
+				board.setNickname(rs.getString("nickName"));
 				board.setReadnum(rs.getInt("readnum"));
 				board.setUp(rs.getInt("up"));
 				board.setDown(rs.getInt("down"));
 				board.setWritedate(rs.getDate("writedate"));
 				board.setContent(rs.getString("content"));
-				//idx는 이미 requestScope('idx')에서 쓸수 있기 때문에 굳이 받지않았습니다만 코드짤때 너무불편하다고 판단되면 그냥받을까??
 				
 			}
 			
@@ -267,7 +267,8 @@ public class SJ_board_dao {
 		} finally {
 			try {
 				pstmt.close();
-				conn.close();		
+				conn.close();
+				rs.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -287,7 +288,7 @@ public class SJ_board_dao {
 
 			
 			conn = ds.getConnection();
-			String sql = "SELECT hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
+			String sql = "SELECT hr.USERID_FK, hb.idx, hr.CONTENT , hr.UP , hr.DOWN , hr.WRITEDATE , hr.REFER , hr.\"DEPTH\" , hr.STEP , tu.NICKNAME FROM "
 					   + replyType 
 					   + " hr LEFT JOIN TEAM1_USER tu ON  hr.USERID_FK = tu.USERID LEFT JOIN HUMOR_BOARD hb ON hr.IDX_FK = hb.IDX WHERE idx = "
 					   + idx + " ORDER BY refer ASC, DEPTH ASC, step desc";
@@ -303,7 +304,8 @@ public class SJ_board_dao {
 			while(rs.next()) {
 					
 				SJ_Board_Reply reply = new SJ_Board_Reply();
-
+				
+				reply.setUserid_fk(rs.getString("USERID_FK"));
 				reply.setContent(rs.getString("content"));  
 				reply.setUp(rs.getInt("up"));
 				reply.setDown(rs.getInt("down"));
@@ -379,9 +381,10 @@ public class SJ_board_dao {
 		} finally {
 			try {
 				pstmt.close();
-				conn.close();//반환
-			}catch (Exception e) {
-				
+				conn.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		
@@ -391,7 +394,6 @@ public class SJ_board_dao {
 	public int replyAddReply(String idx, String type, String id, String content, String refer, String depth) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		int depthUpdate = Integer.parseInt(depth) + 1;
 		int result = 0;
@@ -403,19 +405,28 @@ public class SJ_board_dao {
 					+ type
 					+ " SET STEP = STEP + 1 WHERE IDX_FK = "
 					+ idx
+					+ " AND REFER = "
+					+ refer
 					+ " AND DEPTH = "
-					+ depth
-					+ " AND step >=1 "; //step이 1이상(원본글아닌) 애들이면서 같은 depth를 가진 녀석들 step을 다 1씩올려줌
+					+ depthUpdate ; //같은 댓글의 step 들 1씩 올려줌
 		
 			pstmt = conn.prepareStatement(sql);		
-			rs = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("step안올라감");
+			} else {
+				System.out.println("step올라갔어야함");
+			}
+			
+			pstmt = null;
 			
 			sql = "INSERT INTO "
 				+ type
 				+ " (IDX_FK, USERID_FK, CONTENT , UP, DOWN, WRITEDATE, REFER , DEPTH, STEP)"
 				+ " VALUES (?, ?, ?, 0, 0, sysdate, ?, ?, 1)";
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);					
 			pstmt.setString(1, idx);
 			pstmt.setString(2, id);
 			pstmt.setString(3, content);			
@@ -426,7 +437,110 @@ public class SJ_board_dao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
+		return result;
+	}
+	
+	public int replyDelete(String sessionId, String idx, String type, String refer, String depth, String step) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "DELETE FROM "
+					+ type
+					+ " WHERE IDX_FK = "
+					+ idx
+					+ " AND REFER = "
+					+ refer
+					+ " AND DEPTH = "
+					+ depth
+					+ " AND step = "
+					+ step ;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0 ) {
+				System.out.println("replyDelete DB 오류");
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+		return result;
+	}
+
+	public int boardDelete(String type, String idx, String replyType) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "DELETE FROM "
+					+ replyType
+					+ " WHERE IDX_FK = "
+					+ idx;
+				
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+			
+			result = 0;
+				
+			sql = "DELETE FROM "
+					+ type
+					+ " WHERE idx = "
+					+ idx;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("Error !!! : board_delete 게시글 db쪽 작동 0개");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+	public int boardModify(String type, String idx) {
+		int result = 0;
+		
+		
+		
 		
 		return result;
 	}
