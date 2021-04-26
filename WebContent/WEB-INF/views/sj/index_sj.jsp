@@ -100,10 +100,32 @@ a:hover {
 	justify-content: flex-end;
 }
 
-.container{
-			width: 800px;
-		}
+.container {
+	width: 800px;
+}
+
+/* body {margin:0;}
+ #wrap {margin:0 auto;text-align:center;}
+ #quick_bg {margin:0 auto;text-align:center;width:1130px;position:relative;}
+ #quick {position:absolute;z-index:2;top:15px;width:153px;right:0px;}
+ #container {position:relative;} */
+#sidebar {
+	width: 250px;
+	height: 300px;
+	right: 0;
+	border: 1px solid #DCDCDC;
+	border-radius: 50px;
+	text-align: center;
+	margin-right: 50px;
+	padding-top: 10px;
+}
+
+#sidebar ul {
+	padding: 20px;
+}
 </style>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
@@ -114,6 +136,20 @@ a:hover {
 <body>
 	<%-- <jsp:include page="/WEB-INF/views/sj/include/header_sj.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/sj/include/section_sj.jsp"></jsp:include> --%>
+
+	<!-- 배너 -->
+	<!-- <div id="wrap">
+	<div id="container">
+		<div id="quick_bg">
+			<div id="quick">
+				<a href="#form"><img src="images/hsj/d.png"></a>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+
+
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -132,25 +168,46 @@ a:hover {
 						Home <span class="sr-only"></span>
 				</a></li>
 
-					<li class="nav-item"><a class="nav-link"
-					href="#">New</a></li>
-					<li class="nav-item"><a class="nav-link"
-					href="#">Best</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Best</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Anonymous</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=notice_board">Notice</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="EditProfile.team1">MyPage</a></li>
-			
+
 			</ul>
 		</div>
+
 	</nav>
+	
 <head>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 </head>
 
+
+	<!-- 사이드 -->
+			<div id="sidebar" style="position: absolute;">
+				<ul>
+					<li align="center"><font color="black"
+						style="font-weight: bold;"> 최근본게시물 </font> <font color="red">0</font>
+						<br>￣￣￣￣￣￣￣￣￣</li>
+
+					<a href="#">Best</a>
+					<br>
+					<br>
+					<a href="#">익명게시판</a>
+					<br>
+					<br>
+					<a href="boardList.sj?type=notice_board">공지게시판</a>
+					<br>
+					<br>
+					<a href="boardList.sj?type=humor_board">유머게시판</a>
+				</ul>
+			</div>
+			<!-- 사이드 끝 -->
 
 <!-- PC Header -->
 <header class="pc-header">
@@ -164,45 +221,20 @@ a:hover {
 
 
 
-<div class="container">
-<!-- <div class="row at-row" > -->
 
+
+<div class="container">
+	<!-- <div class="row at-row" > -->
 	<div class="col-md-9 at-col at-main">
 
 		<div class="row">
-		
-			<!-- New -->
-				<div class="col-sm-6">
-				<table class="table table-hover">
-					<thead>
 
-						<tr>
-							<th><h3>최신글</h3></th>
 
-						</tr>
-						
-					</thead>
-					
-					<tbody>
-					
-						<c:forEach var="board" items="${requestScope.noticelist}">
-							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
 
-							</tr>
-							<br>
-						</c:forEach>
-					</tbody>
-				</table>
-				<hr>
-		
-			</div> <!-- New 끝 -->
-			
-			
-			
-			
-				<!-- 베스트  -->
-				<div class="col-sm-6">
+
+
+			<!-- 베스트  -->
+			<div class="col-sm-6">
 				<table class="table table-hover">
 					<thead>
 
@@ -220,14 +252,42 @@ a:hover {
 							</tr>
 							<br>
 						</c:forEach>
-						
+
 					</tbody>
-					
+
 				</table>
 				<hr>
-			</div> <!-- 베스트 끝  -->
+			</div>
+			<!-- 베스트 끝  -->
 
-		
+			<!-- New -->
+			<div class="col-sm-6">
+				<table class="table table-hover">
+					<thead>
+
+						<tr>
+							<th><h3>익명게시판</h3></th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<c:forEach var="board" items="${requestScope.noticelist}">
+							<tr class="boardlist">
+								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+
+							</tr>
+							<br>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr>
+
+			</div>
+			<!-- New 끝 -->
+
 			<!-- 공지리스트 -->
 			<div class="col-sm-6">
 				<table class="table table-hover">
@@ -250,8 +310,9 @@ a:hover {
 					</tbody>
 				</table>
 				<hr>
-			</div> <!-- 공지리스트 끝 -->
-			
+			</div>
+			<!-- 공지리스트 끝 -->
+
 
 			<!-- 유머리스트 -->
 			<div class="col-sm-6">
@@ -288,13 +349,16 @@ a:hover {
 
 </div> -->
 
-			</div> <!--유머리스트 끝 -->
+			</div>
+			<!--유머리스트 끝 -->
+
+
 
 		</div>
 
 	</div>
-	</div>
-	
+
+</div>
 
 <!-- </div> -->
 
@@ -327,4 +391,34 @@ a:hover {
 
 
 </body>
+
+<script type="text/javascript">
+/* var quick_menu = $('#quick');
+var quick_top = 470;
+
+quick_menu.css('top', $(window).height() );
+$(document).ready(function(){
+quick_menu.animate( { "top": $(document).scrollTop() + quick_top +"px" }, 200 ); 
+$(window).scroll(function(){
+quick_menu.stop();
+quick_menu.animate( { "top": $(document).scrollTop() + quick_top + "px" }, 500 );
+});
+}); */
+$(function() {
+	var offset = $("#sidebar").offset();
+	var topPadding = 500;  // 300px만큼 여백을 둘때 사용 
+	$(window).scroll(function() {
+		if ($(window).scrollTop() > offset.top) {
+			$("#sidebar").stop().animate({
+				marginTop: $(window).scrollTop() - offset.top + topPadding
+			});
+		} else {
+			$("#sidebar").stop().animate({
+				marginTop: 100
+			});
+		};
+	});
+});
+
+</script>
 </html>

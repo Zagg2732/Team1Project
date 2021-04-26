@@ -129,9 +129,9 @@ a:hover {
 				</a></li>
 
 					<li class="nav-item"><a class="nav-link"
-					href="#">New</a></li>
-					<li class="nav-item"><a class="nav-link"
 					href="#">Best</a></li>
+					<li class="nav-item"><a class="nav-link"
+					href="#">Anonymous</a></li>
 						<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"
