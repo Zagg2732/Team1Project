@@ -11,7 +11,6 @@ public class KimsBoard {
 	private int readnum;
 	private int rownum;
 	
-	
 	public int getIdx() {
 		return idx;
 	}

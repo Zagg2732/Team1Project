@@ -13,13 +13,12 @@
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
-	<c:set var="board" value="${requestScope.board}" />
+
+	<c:set var="board" value="${requestScope.kimsboard}" />
 	<c:set var="idx" value="${requestScope.idx}" />
 	<c:set var="cpage" value="${requestScope.cp}" />
 	<c:set var="pagesize" value="${requestScope.ps}" />
-	<c:set var="replyList" value="${requestScope.replyList}" />
-	<c:set var="sessionNickName" value="${sessionScope.userInfo.nickName}" scope="request" />
-	<c:set var="sessionId" value="${sessionScope.userInfo.userId}" scope="request" />
+	<c:set var="userInfo" value="${sessionScope.userInfo}" />
 	
     <nav class ="navbar navbar-default">
         <div class="navbar-header"> <!-- 홈페이지의 로고 -->
@@ -38,7 +37,6 @@
                 <li><a href="${pageContext.request.contextPath}/kimslist.kims">게시판</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
@@ -51,6 +49,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
@@ -60,16 +59,16 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </nav>
+    
+    
     <div class="container">
         <div class="row">
             <table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
                 <thead>
                     <tr>
                         <th colspan="3" style="background-color:#eeeeee; text-align:center;">게시판 글 보기</th>
- 
                     </tr>
                 </thead>
                 <tbody>
@@ -79,15 +78,17 @@
                     </tr>
                     <tr>
                         <td>작성자</td>
-                        <td colspan="2">${board.subject}</td>
+                        <td colspan="2">${board.userid_fk}</td>
                     </tr>
                     <tr>
                         <td>작성일자</td>
-                        <td colspan="2">${board.subject}</td>
+                        <td colspan="2">${board.writedate}</td>
                     </tr>
                     <tr>
                         <td>내용</td>
                         <td colspan="2" style="min-height:200px; text-align:left;">
+                        ${board.content}
+                        </td>
                         <!-- 특수문자를 제대로 출력하기위해 & 악성스크립트를 방지하기위해 -->
                     </tr>
                 </tbody>
@@ -98,10 +99,9 @@
 <%--                 <a href="update.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a>
                 <a href="deleteAction.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">삭제</a> --%>
                 
-
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/yh/bootstrap.js"></script>
 </body>
 </html>

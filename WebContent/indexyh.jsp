@@ -15,13 +15,13 @@
 <!-- 세션정보 확인하기! 제이슨처럼 .으로 타고들어가면서 확인할 수 있다 -->
 <h3>${sessionScope.userInfo}</h3>
 
-<%
+<%-- <%
     String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
     if (session.getAttribute("userid") != null)
     {
     	userid = (String)session.getAttribute("userid");
     }
-%>
+%> --%>
     <nav class ="navbar navbar-default">
         <div class="navbar-header"> <!-- 홈페이지의 로고 -->
             <button type="button" class="navbar-toggle collapsed"
@@ -38,13 +38,12 @@
                 <li class="active"><a href="indexyh.jsp">메인</a></li>
                 <li><a href="${pageContext.request.contextPath}/kimslist.kims">게시판</a></li>
             </ul>
-            <%
+<%--             <%
             // 접속하기는 로그인이 되어있지 않은 경우만 나오게한다
                 if(userid == null)
                 {
-            %>
+            %> --%>
             <ul class="nav navbar-nav navbar-right">
-            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
@@ -55,11 +54,12 @@
                     </ul>
                 </li>
             </ul>
-            <%
+<%--             <%
             // 로그인이 되어있는 사람만 볼수 있는 화면
                 } else {
-            %>
+            %> --%>
             <ul class="nav navbar-nav navbar-right">
+            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
@@ -69,11 +69,13 @@
                     </ul>
                 </li>
             </ul>
-            <%
+<%--             <%
                 }
-            %>
+            %> --%>
         </div>
     </nav>
+    
+    
     <div class="container">
         <div class="jumbotron">
             <div class="container">

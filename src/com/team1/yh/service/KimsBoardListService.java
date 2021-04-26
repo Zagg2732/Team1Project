@@ -27,6 +27,9 @@ public class KimsBoardListService implements Action {
 			String ps = request.getParameter("ps");
 			String cp = request.getParameter("cp");
 			
+			System.out.println("리스트 도오오오옹착" + ps);
+			System.out.println("리스트 도오오오옹착" + cp);
+			
 			if(ps == null || ps.trim().equals("")) {
 				ps = "5";
 			}
@@ -63,8 +66,7 @@ public class KimsBoardListService implements Action {
 			forward.setPath("/WEB-INF/views/yh/board_kims/boardlist.jsp");
 			
 		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
+			System.out.println("리스트서비스" + e.getMessage());
 		}
 		return forward; // forward정보 리턴 
 		
