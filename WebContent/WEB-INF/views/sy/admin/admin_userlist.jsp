@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>- Team.1 ADMIN -</title>
 	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 

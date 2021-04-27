@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="css/sy/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/sy/style.css" type="text/css">
 
-<title>Insert title here</title>
+<title>- Team.1 Page -</title>
 </head>
 <body>
 <c:set var="userInfo" value="${sessionScope.userInfo}" />

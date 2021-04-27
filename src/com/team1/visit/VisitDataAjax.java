@@ -34,16 +34,22 @@ public class VisitDataAjax extends HttpServlet {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		//System.out.println("today : " + df.format(cal.getTime()));
 		
-		for(int i = 1; i <= 7; i++) {
+		String todayDate = df.format(cal.getTime());
+		int todayResult = dao.getThatdayCount(todayDate);
+		
+		JSONObject tobj = new JSONObject();
+		tobj.put("date", todayDate.toString());
+		tobj.put("count", todayResult);
+		list.add(tobj);
+		
+		for(int i = 1; i <= 6; i++) {
 			cal.add(Calendar.DATE, -1);
 			
 			String strDate = df.format(cal.getTime());
 			int result = dao.getThatdayCount(strDate);
 			
 			JSONObject obj = new JSONObject();
-			
 			obj.put("date", strDate.toString());
-			
 			obj.put("count", result);
 			
 			list.add(obj);
