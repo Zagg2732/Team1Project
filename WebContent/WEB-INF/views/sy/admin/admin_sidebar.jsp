@@ -73,7 +73,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">상세 메뉴 :</h6>
                         <a class="collapse-item" href="BestPostSJ.admin">추천수 순 게시물</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
             </li>
@@ -90,7 +89,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">상세 메뉴 :</h6>
                         <a class="collapse-item" href="BestPostJHmini.admin">조회 순 다이어리 게시물</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
                     </div>
                 </div>
             </li>
@@ -106,7 +104,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">상세 메뉴 :</h6>
                         <a class="collapse-item" href="BestPostKimsBoard.admin">조회순 게시물</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
                     </div>
                 </div>
             </li>

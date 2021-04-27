@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	
-    <title>SB Admin 2 - Dashboard</title>
+    <title>- Team.1 ADMIN -</title>
 
 </head>
 
@@ -45,7 +45,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">ㅁ 관리자 Talk</h1> ${userInfo.userId}
+						<h1 class="h3 mb-0 text-gray-800">ㅁ 관리자 Talk</h1>
 					</div>
 
 					<!-- Content Row -->
@@ -54,8 +54,7 @@
 					<div class="card shadow mb-4">
 						<div
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">회원 리스트 (총 회원 :
-								${totalboardcount})</h6>
+							<h6 class="m-0 font-weight-bold text-primary">관리자 talk!</h6>
 							<div class="dropdown no-arrow">
 								<a class="dropdown-toggle" href="#" role="button"
 									id="dropdownMenuLink" data-toggle="dropdown"
@@ -79,7 +78,7 @@
 							<div id="inputarea">
 								<form name="talk">
 										<input type="hidden" value="${userInfo.userId}" id="idString">
-										<textarea rows="5" cols="100" name="content" id="content"></textarea>
+										<textarea rows="5" cols="80" name="content" id="content"></textarea>
 										<input type="button" value="OK" class="btn btn-primary" id="talkok" onclick="talkInsert()">
 								</form>
 

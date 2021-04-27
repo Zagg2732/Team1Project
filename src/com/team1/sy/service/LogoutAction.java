@@ -11,10 +11,9 @@ public class LogoutAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		//HttpSession session = request.getSession();
-		//session.invalidate();
-		
 		request.getSession().removeAttribute("userInfo");
+		HttpSession session = request.getSession();
+		session.invalidate();
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true); // forward
