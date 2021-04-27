@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +30,13 @@
 		}
 		.card-content {
 			padding: 10px; min-height: 80px;
-		}	
+		}
+		 .font-small { 
+		 	font-size: small; 
+		}
+		 .jb-medium { 
+		 	font-size: medium; 
+		}
 	</style>	
 </head>
 <body>
@@ -74,17 +82,24 @@
     				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
     				<input type="hidden" name="username" value="${userInfo.userName}" id="username">
       					<div class="form-group">
-        					<textarea name="content" id="content" class="form-control" id="content" rows="3" style="resize: none; margin-bottom:10px;"></textarea>
-        					
-      						<input type="checkbox" name="readyn" value="Y" id="readyn">&nbsp;&nbsp;
-      						<input type="hidden" name="readyn_hidden" value="N" id="readyn_hidden">
-      						
-      						<button type="button" class="btn btn-primary" id="guestBookbtn" onclick="guestBookAdd()">등록</button>
+      						<c:choose>
+      							<c:when test="${empty userInfo.grade}">
+      								<textarea name="content" id="content" class="form-control" id="content" rows="3" style="resize: none; margin-bottom:10px;" disabled></textarea>      							
+      								<button type="button" class="btn btn-outline-secondary btn-sm float-right" id="guestBookbtn" onclick="guestBookAdd()">등록</button>
+      							</c:when>
+      							<c:otherwise>
+      								<textarea name="content" id="content" class="form-control font-small" id="content" rows="3" placeholder="방명록 내용을 입력해주세요. 비밀글은 작성자와 관리자에게만 공개됩니다. " required 
+      								style="resize: none; margin-bottom:10px;"></textarea>
+      									<input type="checkbox" name="readyn" value="Y" id="readyn">&nbsp;🔑
+      									<input type="hidden" name="readyn_hidden" value="N" id="readyn_hidden">      									
+      									<button type="button" class="btn btn-outline-secondary btn-sm float-right" id="guestBookbtn" onclick="guestBookAdd()">등록</button>
+      							</c:otherwise>
+      						</c:choose>
       					</div>
    					</form>
   				</div>
   					<!-- 방명록 목록 -->
-  				<div id="guestbooklist" style="width: 95%; height:230px; margin: 10px auto; overflow: scroll;">
+  				<div id="guestbooklist" style="width: 95%; height:260px; margin: 10px auto; overflow: scroll;">
   				</div>
  			</div>
  			
@@ -96,7 +111,7 @@
 	  </div>
 	  
 	  <!-- bgm player -->
-	  <div class="outer-box border-bgm-box" style="width: 25%; background: #8c8c8c" >
+	  <div class="outer-box border-bgm-box" style="width: 25%; background: gray" >
 			<div class="player">
    				<div class="title-wrap">
         			<div class="clearfix"></div>
@@ -155,6 +170,12 @@
 	
 	function guestBookList(value) {
 		
+		//비회원 방명록 못봐요
+		if(sessionUserid == "") {
+			alert('비회원은 방명록 서비스를 이용할 수 없습니다.')
+			return false;
+		}
+		
 		$.ajax({
 			url : "GuestBookList.ajax",
 			type : "GET",
@@ -164,11 +185,11 @@
 				
 				$.each(data, function(index, obj) {
 					let htmlString = `
-	  				<div class="card-wrap">
-  						<div class="card-title">` +
+	  				<div class="card-wrap font-small">
+  						<div class="card-title font-small">` +
   							obj.username + ` | ` + obj.writedate + `
   						</div>
-  						<div class="card-content">`
+  						<div class="card-content font-small">`
   							+ obj.content +
   						`</div>
   					</div>

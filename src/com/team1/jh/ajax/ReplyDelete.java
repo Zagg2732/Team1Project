@@ -24,14 +24,14 @@ public class ReplyDelete extends HttpServlet {
     
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	//System.out.println("ReplyDelete.ajax Start!!!!!");
-    	
+    	System.out.println("ReplyDelete.ajax Start!!!!!");
+    	String num = request.getParameter("num");
 		String idx_fk = request.getParameter("idx_fk");
 		String userid_fk = request.getParameter("userid_fk");
-		String num = request.getParameter("num");
-		//System.out.println(idx_fk);
-		//System.out.println(userid_fk);
-		//System.out.println(num);
+		
+		System.out.println("idx_fk :" +idx_fk);
+		System.out.println("userid_fk :" +userid_fk);
+		System.out.println("num :" +num);
 		
 		
 		try {
@@ -42,6 +42,7 @@ public class ReplyDelete extends HttpServlet {
 			int result = dao.replyDelete(num, userid_fk);
 			
 		} catch (NamingException e) {
+			System.out.println("replydelete.ajax 오류 :" +e.getMessage());
 			e.printStackTrace();
 		}
 	}

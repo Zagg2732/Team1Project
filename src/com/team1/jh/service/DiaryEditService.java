@@ -19,6 +19,10 @@ public class DiaryEditService implements Action {
 		String cpage = request.getParameter("cp"); // current page
 		String pagesize = request.getParameter("ps"); // pagesize
 		
+		//System.out.println("idx :" +idx);
+		//System.out.println("cp :" +cpage);
+		//System.out.println("ps :" +pagesize);
+		
 		String msg="";
 	    String url="";
 	    
@@ -51,6 +55,8 @@ public class DiaryEditService implements Action {
 				request.setAttribute("cp", cpage);
 				request.setAttribute("ps", pagesize);
 				request.setAttribute("diaryDto", diaryDto);
+				
+				//System.out.println("diaryeditservice dx :" +idx);
 				
 				forward = new ActionForward();
 				forward.setRedirect(false);

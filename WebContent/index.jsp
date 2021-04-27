@@ -71,7 +71,7 @@
 						data-setbg="https://random.imagecdn.app/1600/900">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');" class="btn btn-light btn-lg"><i
+								<a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1100,height=650,location=no,status=no,scrollbars=yes');" class="btn btn-light btn-lg"><i
 									class="fas fa-home"></i> Joohyun's minihomepy</a>
 							</div>
 						</div>

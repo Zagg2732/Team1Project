@@ -285,20 +285,23 @@ public class MiniDao {
 		try {
 			conn = ds.getConnection();
 			
-			//원본글을 삭제하면 답글까지 삭제해주기 위해 refer를 꺼내봅니다
-			String sql_refer = "SELECT REFER FROM DIARY WHERE IDX=?";
+			//원본글을 삭제하면 답글까지 삭제해주기 위해 refer, depth를 꺼내봅니다
+			String sql_refer_depth = "SELECT REFER, DEPTH FROM DIARY WHERE IDX=?";
 			
-			//댓글(idx_fk) 먼저 삭제 후 원본글(idx) 삭제 
-			String sql_reply = "DELETE FROM DIARY_REPLY WHERE IDX_FK=?";
-			String sql_diary = "DELETE FROM DIARY WHERE IDX=? OR REFER=?";
+			//댓글 삭제할 때 답글, 답글의 답글, 답글의 답글의 답글에 달린 댓글 전부를 먼저 삭제
+			String sql_reply = "DELETE FROM DIARY_REPLY " +
+							   "WHERE IDX_FK IN (SELECT IDX FROM DIARY WHERE IDX=? OR (REFER=? AND DEPTH >=?))";
+			//삭제 대상 원본or답글 삭제
+			String sql_diary = "DELETE FROM DIARY WHERE IDX=? OR (REFER=? AND DEPTH >=?)";
 			
 			//refer 꺼내기 
-			pstmt = conn.prepareStatement(sql_refer);
+			pstmt = conn.prepareStatement(sql_refer_depth);
 			pstmt.setString(1, idx);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				int refer = rs.getInt("refer");
+				int depth = rs.getInt("depth");
 				
 				//실 삭제 처리
 				//트랜잭션 (둘다 처리 , 둘다 실패)
@@ -309,12 +312,15 @@ public class MiniDao {
 				//댓글삭제
 			 	pstmt = conn.prepareStatement(sql_reply);
 			 	pstmt.setString(1,idx);
+			 	pstmt.setInt(2,refer);
+			 	pstmt.setInt(3,depth);
 			 	pstmt.executeUpdate();
 			 	
 			 	//게시글 삭제 (원본글)
 			 	pstmt = conn.prepareStatement(sql_diary);
 			 	pstmt.setString(1,idx);
 			 	pstmt.setInt(2,refer);
+			 	pstmt.setInt(3,depth);
 			 	row = pstmt.executeUpdate();
 			 	
 			 	if(row > 0) {
@@ -572,6 +578,10 @@ public class MiniDao {
 		String subject = diarydata.getParameter("subject");
 		String content = diarydata.getParameter("content");
 		//String filename = diarydata.getParameter("filename");
+		System.out.println("dao idx : " +idx);
+		System.out.println("dao userid_fk : " +userid_fk);
+		System.out.println("dao subject : " +subject);
+		System.out.println("dao content : " +content);
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;

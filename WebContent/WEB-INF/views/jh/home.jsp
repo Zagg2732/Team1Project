@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,15 @@
 			</div>
 			<hr>
 			<b class="color-blue">박주현</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-			<div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+			<div style="margin-top: 15px;">
+			<select style="width: 100%">
+			<option>파도타기</option>
+			<option>이승준(맥날드실분)</option>
+			<option>김수연</option>
+			<option>김영허</option>
+			<option>현상진</option>
+			</select>
+			</div>
 		  </div>
 		</div>
 	  </div>
@@ -43,6 +53,7 @@
 			<h1 style="margin:0px; font-size: 1.3em; font-weight: 550;" class="color-blue">&nbsp;&nbsp;주현's h.p</h1>
 			<span style="font-size: 12px;">http://cyworld.com/joohyun</span>
 		  </div>
+		  
 		  <div class="content-box" style="box-shadow: 5px 5px 20px -10px grey; padding: 10px 20px;">
 			<div style="display: flex; font-size: 14px;">
 			  <div class="col" style="display: flex; flex-direction: column;">
@@ -80,7 +91,7 @@
 			</div>
 			<div style="margin-top: 20px;">
 			  <span class="content-title">미니룸 <span style="color: #ccc">| 스토리룸</span></span>
-			  <img style="width: 100%; height: 300px; object-fit: cover;" src="./images/jh/miniroom03.gif"></img>
+			  <img style="width: 100%; height: 300px; object-fit: cover;" src="./images/jh/miniroom.gif"></img>
 			</div>
 			<div class="menu-item menu-selected" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
@@ -88,12 +99,9 @@
 		  </div>
 		</div>
 	  </div>
-	  <div class="outer-box border-bgm-box" style="width: 25%; background: #8c8c8c" >
+	  <div class="outer-box border-bgm-box" style="width: 25%; background: gray" >
 			<div class="player">
    				<div class="title-wrap">
-        			<!-- <div class="playlistIcon"> -->
-            			<!-- <i class="fa fa-list"></i> -->
-        			<!-- </div> -->
         			<div class="clearfix"></div>
         			<div class="trackDetails">
             			<span class="artist"></span>
