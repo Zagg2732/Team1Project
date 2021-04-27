@@ -80,7 +80,7 @@
 						data-setbg="https://random.imagecdn.app/1170/780">
 						<div class="row">
 							<div class="col-lg-12">
-								<a href="${pageContext.request.contextPath}/indexyh.jsp" class="btn btn-light btn-lg"><i
+								<a href="index.kims" class="btn btn-light btn-lg"><i
 									class="fab fa-trello"></i> Kim's Board</a>
 							</div>
 						</div>
