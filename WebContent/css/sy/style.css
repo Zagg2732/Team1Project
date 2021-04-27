@@ -1204,14 +1204,11 @@ ol {
 
 /*  --------  */
 
-.signwrap {
-	
-}
 
 #loginsection,
 #registersection,
 #editsection {
-	height: 1000px;
+	height: 1111px;
 	width: 100%;
 	margin: auto;
 	background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2));

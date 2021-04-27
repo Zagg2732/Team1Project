@@ -31,7 +31,7 @@
 	<div id="signwrap" class="signwrap">
 		<jsp:include page="header.jsp" />
 		<section id="registersection">
-			<h3 style="padding-top: 70px;" align="center">Register Form</h3>
+			<h3 style="padding-top: 140px;" align="center">Register Form</h3>
 			
 			<!-- multistep form -->
 			<form id="msform" action="${pageContext.request.contextPath}/RegisterOk.team1" method="post">

@@ -20,7 +20,6 @@
 
 <body id="page-top">
 	<c:set var="pagesize" value="${requestScope.pagesize}" />
-	<c:set var="boardname" value="${requestScope.boardname}" />
 	<c:set var="list" value="${requestScope.list}" />
 
 
@@ -49,7 +48,7 @@
 
 					<div class="card shadow mb-4">
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">회원 리스트 ()</h6>${boardname}
+							<h6 class="m-0 font-weight-bold text-primary">회원 리스트 ()</h6>
 							<div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,18 +69,6 @@
 						<div class="card-body">
 						
 						<form name="list">
-							Board 설정 : <select name="bn" onchange="submit()">
-									<c:choose>
-										<c:when test="${boardname == 'notice_board'}">
-											<option value="humor_board">유머게시판</option>
-											<option value="notice_board" selected>공지게시판</option>
-										</c:when>
-										<c:otherwise>
-											<option value="humor_board" selected>유머게시판</option>
-											<option value="notice_board">공지게시판</option>
-										</c:otherwise>
-									</c:choose>
-							</select> &nbsp;
 							게시물 개수 설정 : <select name="ps" onchange="submit()">
 								<c:forEach var="i" begin="5" end="20" step="5">
 									<c:choose>
@@ -101,11 +88,9 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 	<thead>
                                 		<tr>
-                                			<th>추천수</th>
-                                			<th>글번호</th>
-                                			<th>닉네임</th>
-                                			<th>제목</th>
                                 			<th>조회수</th>
+                                			<th>작성자</th>
+                                			<th>제목</th>
                                 			<th>작성일</th>                                		
                                 		</tr>
                                 	</thead>
@@ -113,11 +98,9 @@
 										<!-- forEach()  목록 출력하기  -->
 										<c:forEach var="user" items="${list}">
 											<tr>
-												<td align="center">${user.up}</td>
-												<td align="center">${user.idx}</td>
-												<td align="center">${user.nickname}</td>
-												<td align="center"><a href="board.sj?idx=${user.idx}&type=${boardname}">${user.subject}</a></td>
 												<td align="center">${user.readnum}</td>
+												<td align="center">${user.username}</td>
+												<td align="center"><a href="javscript:void(0);" onclick="window.open('diaryContent.jh?idx=${user.idx}','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">${user.subject}</a></td>
 												<td align="center">${user.writedate}</td>
 											</tr>
 										</c:forEach>

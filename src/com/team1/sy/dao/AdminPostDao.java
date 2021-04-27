@@ -12,12 +12,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.team1.jh.dto.DiaryDto;
 import com.team1.sj.dto.SJ_board;
 import com.team1.sy.dto.Member;
+import com.team1.yh.dto.KimsBoard;
 
 public class AdminPostDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
@@ -25,8 +27,7 @@ public class AdminPostDao {
 	public AdminPostDao() {
 		try{
 			Context init = new InitialContext();
-	  		ds = 
-	  			(DataSource) init.lookup("java:comp/env/jdbc/oracle");
+	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
 		}catch(Exception ex){
 			System.out.println("DB 연결 실패 : " + ex);
 			return;
@@ -34,7 +35,7 @@ public class AdminPostDao {
 		
 	}
 	
-	//회원 목록보기
+	//SJ 추천수순 리스트 가져오기
 		public List<SJ_board> sjBoardBestList(String boardName, int pagesize){
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -46,7 +47,6 @@ public class AdminPostDao {
 								+ boardName + 
 								" bn LEFT JOIN TEAM1_USER tu ON bn.USERID_FK = tu.USERID ORDER BY up DESC) WHERE rownum <= ?";
 				
-				System.out.println(sql);
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setInt(1, pagesize);
@@ -109,5 +109,91 @@ public class AdminPostDao {
 		}
 		return totalUserCnt;
 	}
+	
+	//jh minihomepy 추천수순 리스트 가져오기
+	public List<DiaryDto> diaryBestList(int pagesize){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<DiaryDto> list = null;
+		try {
+			conn = ds.getConnection();
+			String sql = "SELECT IDX, USERNAME, SUBJECT, WRITEDATE, READNUM FROM DIARY d LEFT JOIN TEAM1_USER tu ON d.USERID_FK = tu.USERID WHERE rownum <= ? ORDER BY READNUM DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, pagesize);
+			
+			rs = pstmt.executeQuery();
+			list = new ArrayList<DiaryDto>();
+			while(rs.next()) {
+				
+				DiaryDto diary = new DiaryDto();
+				
+				diary.setIdx(rs.getInt("IDX"));
+				diary.setUsername(rs.getString("USERNAME"));
+				diary.setSubject(rs.getString("SUBJECT"));
+				diary.setWritedate(rs.getDate("WRITEDATE"));
+				diary.setReadnum(rs.getInt("READNUM"));
+							
+				list.add(diary);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("오류 :" + e.getMessage());
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();//반환
+			} catch (Exception e2) {
+				
+			}
+		}
+		return list;
+	}
+	
+	//Kim'sboard 조회수순 리스트 가져오기
+		public List<KimsBoard> kimBestList(int pagesize){
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<KimsBoard> list = null;
+			try {
+				conn = ds.getConnection();
+				String sql = "SELECT IDX, USERID_FK, SUBJECT, WRITEDATE, READNUM FROM (SELECT rownum, kb.* FROM KIMS_BOARD kb ORDER BY READNUM DESC) WHERE ROWNUM <= ?";
+				
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, pagesize);
+				
+				rs = pstmt.executeQuery();
+				list = new ArrayList<KimsBoard>();
+				while(rs.next()) {
+					
+					KimsBoard kim = new KimsBoard();
+					
+					kim.setIdx(rs.getInt("IDX"));
+					kim.setUserid_fk(rs.getString("USERID_FK"));
+					kim.setSubject(rs.getString("SUBJECT"));
+					kim.setWritedate(rs.getDate("WRITEDATE"));
+					kim.setReadnum(rs.getInt("READNUM"));
+								
+					list.add(kim);
+				}
+				
+			}catch (Exception e) {
+				System.out.println("오류 :" + e.getMessage());
+			}finally {
+				try {
+					rs.close();
+					pstmt.close();
+					conn.close();//반환
+				} catch (Exception e2) {
+					
+				}
+			}
+			return list;
+		}
 
 }

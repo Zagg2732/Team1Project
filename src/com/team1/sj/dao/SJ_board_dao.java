@@ -162,7 +162,7 @@ public class SJ_board_dao {
 			String sql = "SELECT IDX , nickname , UP , DOWN , READNUM , WRITEDATE , SUBJECT FROM " 
 						 + name //humor_board || notice_board
 						 + " hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID"
-						 + " WHERE rownum <= 5 ORDER BY idx desc"; 
+						 + " WHERE rownum <= 7 ORDER BY idx desc"; 
 			
 			
 			pstmt = conn.prepareStatement(sql);
@@ -201,8 +201,57 @@ public class SJ_board_dao {
 		}
 		return list;
 	}
-
 	
+	//인기글
+	public List<SJ_board> hotlist() { 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<SJ_board> list = null;
+		
+		try {
+			conn = ds.getConnection();
+			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
+			String sql = "SELECT * FROM HUMOR_BOARD WHERE rownum < 7 ORDER BY UP DESC";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<SJ_board>();
+			
+			while(rs.next()) {
+				SJ_board board = new SJ_board();
+				board.setIdx(rs.getInt("idx"));
+				board.setNickname(rs.getString("nickname"));
+				board.setUp(rs.getInt("UP"));
+				board.setDown(rs.getInt("DOWN"));
+				board.setReadnum(rs.getInt("READNUM"));
+				board.setWritedate(rs.getDate("WRITEDATE"));
+				board.setSubject(rs.getString("SUBJECT"));
+				
+				list.add(board);
+			}			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			System.out.println("넌 아니겠지 : " + e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				System.out.println("너??" + e.getMessage());
+			}
+		}
+		return list;
+	}
+
 	public boolean getReadNum(String idx, String type) { //idx는 글번호 type은 boardtype(공지사항, 유머게시판 등을 구분)
 	
 		Connection conn = null;
@@ -217,7 +266,7 @@ public class SJ_board_dao {
 			
 			int row = pstmt.executeUpdate(); //executeUpdate는 db에 적용된 행의갯수를 출력함. 0개면 실패 1개면 성공한거임(해당게시글 조회수만 건드리니까)
 			if(row > 0) {
-				result = true;
+				System.out.println("Readnum 동작했어요!!!!!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -243,7 +292,7 @@ public class SJ_board_dao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
+			String sql = "SELECT filename, userid_fk, subject , nickname, readnum, up, down, writedate, content FROM "
 						+ boardName + 
 						" hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID WHERE IDX = "
 						+ idx ;
@@ -259,7 +308,7 @@ public class SJ_board_dao {
 				board.setDown(rs.getInt("down"));
 				board.setWritedate(rs.getDate("writedate"));
 				board.setContent(rs.getString("content"));
-				
+				board.setFilename(rs.getString("filename"));
 			}
 			
 		} catch (Exception e) {
@@ -486,8 +535,6 @@ public class SJ_board_dao {
 				e.printStackTrace();
 			}
 		}
-
-		
 		return result;
 	}
 
@@ -536,15 +583,64 @@ public class SJ_board_dao {
 		return result;
 	}
 
-	public int boardModify(String type, String idx) {
+	public int boardModify(String type, String idx, String subject, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		int result = 0;
 		
-		
-		
+		try {
+			conn = ds.getConnection();
+			String sql = "UPDATE "
+					+ type
+					+ " SET SUBJECT = '"
+					+ subject
+					+ "' , CONTENT  = '"
+					+ content
+					+ "' WHERE IDX = "
+					+ idx;
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				System.out.println("Error! : db update(modify) 오류");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return result;
 	}
-	
+/*	
+	public int like(String idx, String type) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "UPDATE "
+						+ type
+						+ " SET up = up + 1 WHERE "
+						+ "IDX = "
+						+ idx;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+*/
 //	// 좋아요 업데이트
 //	public void update_Like(int up) {
 //		String sql = "update HUMOR_BOARD set up=up+1 where num=?";
@@ -609,40 +705,6 @@ public class SJ_board_dao {
 //	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

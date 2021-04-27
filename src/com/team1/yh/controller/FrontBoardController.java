@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.team1.action.Action;
 import com.team1.action.ActionForward;
-import com.team1.jh.service.DiaryContentService;
 import com.team1.yh.service.KimsBoardAddService;
 import com.team1.yh.service.KimsBoardContentService;
 import com.team1.yh.service.KimsBoardListService;
@@ -45,7 +44,7 @@ public class FrontBoardController extends HttpServlet {
     		System.out.println("글 쓰기 도착");
     		action = new KimsBoardWriteService();
     		forward = action.execute(request, response);
-    	} else if (url_Command.equals("/kimswriteok.kims")) { //만약 있다면 상세보기
+    	} else if (url_Command.equals("/kimswriteok.kims")) {
     		System.out.println("글 등록 도착");
     		action = new KimsBoardAddService();
     		forward = action.execute(request, response);

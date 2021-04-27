@@ -20,81 +20,16 @@
 	<c:set var="list" value="${requestScope.list}" />
 	<c:set var="totalboardcount" value="${requestScope.totalboardcount}" />
 	<c:set var="pager" value="${requestScope.pager}" />
+	<c:set var="board" value="${requestScope.kimsboard}" />
 
-<%
-    String userid = null; // 로그인이 된 사람들은 로그인정보를 담을 수 있도록한다
-    if (session.getAttribute("userid") != null)
-    {
-    	userid = (String)session.getAttribute("userid");
-    }
-%>
-
-
-
-    <nav class ="navbar navbar-default">
-        <div class="navbar-header"> <!-- 홈페이지의 로고 -->
-            <button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                aria-expand="false">
-                <span class ="icon-bar"></span> <!-- 줄였을때 옆에 짝대기 -->
-                <span class ="icon-bar"></span>
-                <span class ="icon-bar"></span>
-            </button>
-            <a class ="navbar-brand" href="indexyh.jsp">Kim's Board</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="indexyh.jsp">메인</a></li>
-                <li class="active"><a href="boardlist.jsp">게시판</a></li>
-            </ul>
-            <%
-            // 접속하기는 로그인이 되어있지 않은 경우만 나오게한다
-                if(userid == null)
-                {
-            %>
-            <ul class="nav navbar-nav navbar-right">
-            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li class="dropdown">
-                <a href="#" class = "dropdown-toggle"
-                    data-toggle="dropdown" role ="button" aria-haspopup="true"
-                    aria-expanded="false">접속하기<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="Login.team1">로그인</a></li>
-                        <li><a href="${pageContext.request.contextPath}/Register.team1">회원가입</a></li>                    
-                    </ul>
-                </li>
-            </ul>
-            <%
-            // 로그인이 되어있는 사람만 볼수 있는 화면
-                } else {
-            %>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                <a href="#" class = "dropdown-toggle"
-                    data-toggle="dropdown" role ="button" aria-haspopup="true"
-                    aria-expanded="false">회원관리<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="Login.team1">로그아웃</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <%
-                }
-            %>
-        </div>
-    </nav>
+	<jsp:include page="/WEB-INF/views/yh/include/header.jsp"></jsp:include>
+    
+    
 	<!-- 페이지설정 -->
 		<div style="padding-top: 10px; text-align: cetner">
 			<table width="76%" border="0" cellspacing="0" align="center">
 				<tr>
 					<td colspan="5">
-						<!--  
-							form 태그 action 전송 주소(목적지) >> submit()
-							>> form name="list" ... action 없다면.. 
-							>> [현재 URL 창에 있는 주소] 그대로  .....   
-							>> board_list.jsp?ps=select 태그 값으로 .... 다시 호출 .....
-							>>http://192.168.0.169:8090/WebServlet_5_Board_Model1_Sample/board/board_list.jsp?ps=10					
-						-->
 						<form name="list">
 							PageSize설정: <select name="ps" onchange="submit()">
 								<c:forEach var="i" begin="5" end="20" step="5">
@@ -133,7 +68,7 @@
                 <c:forEach var="board" items="${list}">
                     <tr>
 	                    <td>${board.rownum}</td>
-	                    <td><a href="boardcontent.kims?idx=${board.idx}">${board.subject}</td>
+	                    <td><a href="kimsboardcontent.kims?idx=${board.idx}&cp=${cpage}&ps=${pagesize}">${board.subject}</td>
 	                    <td>${board.userid_fk}</td>
 	                    <td>${board.writedate}</td>
 	                    <td>${board.readnum}</td>
@@ -144,17 +79,6 @@
                 <!-- forEach()  -->
 				<tr>
 					<td colspan="3" align="center">
-					<!--  
-					원칙적인 방법 아래 처럼 구현
-					[1][2][3][다음]
-					[이전][4][5][6][다음]
-					[이전][7][8][9][다음]
-					[이전][10][11]
-					
-					현재 아래 코드 [][][][][][][]...
-					-->
-					
-						<!--이전 링크 --> 
 						<c:if test="${cpage > 1}">
 							<a href="kimslist.kims?cp=${cpage-1}&ps=${pagesize}">이전</a>
 						</c:if>
@@ -178,11 +102,7 @@
 					<td colspan="2" align="center">총 게시물 수 : ${totalboardcount}
 					</td>
 				</tr>
-<%-- 				<tr>
-					<td colspan="5" align="center">
-					${pager} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 총 게시물 수 : ${totalboardcount}
-					</td>
-				</tr> --%>
+				
             </table>
             <a href="${pageContext.request.contextPath}/kimswrite.kims" class="btn btn-primary pull-right">글쓰기</a>
         </div>

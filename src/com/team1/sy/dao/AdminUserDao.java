@@ -16,7 +16,7 @@ import com.team1.sy.dto.Member;
 
 public class AdminUserDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
@@ -24,8 +24,7 @@ public class AdminUserDao {
 	public AdminUserDao() {
 		try{
 			Context init = new InitialContext();
-	  		ds = 
-	  			(DataSource) init.lookup("java:comp/env/jdbc/oracle");
+	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
 		}catch(Exception ex){
 			System.out.println("DB 연결 실패 : " + ex);
 			return;
@@ -68,8 +67,8 @@ public class AdminUserDao {
 				System.out.println("오류 :" + e.getMessage());
 			}finally {
 				try {
-					pstmt.close();
 					rs.close();
+					pstmt.close();
 					conn.close();//반환
 				} catch (Exception e2) {
 					
@@ -97,8 +96,8 @@ public class AdminUserDao {
 
 		} finally {
 			try {
-				pstmt.close();
 				rs.close();
+				pstmt.close();
 				conn.close();// 반환 connection pool 에 반환하기
 			} catch (Exception e) {
 

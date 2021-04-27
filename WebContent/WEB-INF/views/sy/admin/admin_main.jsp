@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +64,7 @@
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -81,7 +82,7 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
-                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/indexyh.jsp">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -107,7 +108,7 @@
 
                     <div class="card shadow mb-4">
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Chart Data</h6>
 							<div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -124,8 +125,9 @@
                                     </div>
 						</div>
 						
-						<div class="card-body" style="height:900px;">
-						
+						<div class="card-body" style="height:550px;">
+							<div id="chartArea"></div>    
+
 						</div>
 						
 					</div>
@@ -146,6 +148,64 @@
     <!-- End of Page Wrapper -->
 
     <jsp:include page="admin_logout_modal.jsp" />
+    <!-- chart.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	var myChart;
+		var date = [];
+		var count = [];
+    	
+    	$('#chartArea').empty();
+		$('<canvas>').attr("id", "myChart").appendTo($('#chartArea'));
+		var ctx = document.getElementById("myChart").getContext('2d');
+    	
+    	$.ajax({
+    		url : "VisitDataAjax.sooyeon",
+    		type : "POST",
+    		dataType : "json",
+    		success : function(data){
+    			console.log(data);
+    			
+    			$.each(data, function(index,obj){
+    				date.push(obj.date);
+    				count.push(obj.count);
+    			});
+    			
+    			myChart = new Chart(ctx, {
+					type : "line",
+					data : {
+						labels: date,
+						datasets: [{
+							label: "일별 방문자 수",
+							data : count,
+							backgroundColor : 'rgba(255, 99, 132, 0.2)',
+							borderColor : 'rgba(255, 99, 132, 0.2)',
+							borderWidth : 1
+						}]
+					},
+					options: {
+				        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+				        scales: {
+				            yAxes: [{
+				                ticks: {
+				                    beginAtZero:true
+				                }
+				            }]
+				        }
+				    }
+				})
+    			
+    			
+    		},error : function(xhr){
+    			alert(xhr.status);
+    		}
+    	});
+    	
+    	
+    });
+    
+    </script>
 
 
 </body>

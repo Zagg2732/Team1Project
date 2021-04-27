@@ -18,7 +18,7 @@ import com.team1.sy.dto.Member;
 
 public class AdminTalkDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
@@ -26,8 +26,7 @@ public class AdminTalkDao {
 	public AdminTalkDao() {
 		try{
 			Context init = new InitialContext();
-	  		ds = 
-	  			(DataSource) init.lookup("java:comp/env/jdbc/oracle");
+	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
 		}catch(Exception ex){
 			System.out.println("DB 연결 실패 : " + ex);
 			return;
@@ -74,8 +73,8 @@ public class AdminTalkDao {
 				System.out.println("오류 :" + e.getMessage());
 			}finally {
 				try {
-					pstmt.close();
 					rs.close();
+					pstmt.close();
 					conn.close();//반환
 				} catch (Exception e2) {
 					
@@ -102,8 +101,8 @@ public class AdminTalkDao {
 
 		} finally {
 			try {
-				pstmt.close();
 				rs.close();
+				pstmt.close();
 				conn.close();// 반환 connection pool 에 반환하기
 			} catch (Exception e) {
 
@@ -114,6 +113,8 @@ public class AdminTalkDao {
 	
 	// talk Insert
 	public boolean insertAdminTalk(AdminTalk admintalk) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		// INSERT INTO ADMIN_TALK (IDX,USERID_FK,CONTENT,WRITEDATE) VALUES (1,'admin','첫번째글입니다.',sysdate);
 		
@@ -121,8 +122,8 @@ public class AdminTalkDao {
 		int result=-1;
 		
 		try{
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(sql);
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
 			
 			pstmt.setString(1, admintalk.getUserid_fk());
 			pstmt.setString(2, admintalk.getContent());
@@ -138,7 +139,7 @@ public class AdminTalkDao {
 		}finally{
 			if(rs!=null) try{rs.close();}catch(SQLException ex){}
 			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
-			if(con!=null) try{con.close();}catch(SQLException ex){}
+			if(conn!=null) try{conn.close();}catch(SQLException ex){}
 		}
 		return false;		
 	}
