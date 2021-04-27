@@ -149,8 +149,13 @@
 								&nbsp;&nbsp;&nbsp;
 								<input type="hidden" id="like_result" name="like_result"
 								class="form-control" aria-describedby="basic-addon1"
-								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1">❤️ ${board.up}
+								value="${board.up}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👍️ ${board.up}
+								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="like_result" name="like_result"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.down}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👎️ ${board.down}
 								
 								</div>
 

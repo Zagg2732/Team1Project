@@ -661,7 +661,7 @@ public class SJ_board_dao {
 			conn = ds.getConnection();
 			String sql = "UPDATE "
 						+ type
-						+ " SET down = down - 1 WHERE "
+						+ " SET down = down + 1 WHERE "
 						+ "IDX = "
 						+ idx;
 
