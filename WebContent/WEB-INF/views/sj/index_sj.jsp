@@ -263,7 +263,7 @@ a:hover {
 					<thead>
 
 						<tr>
-							<th><h3>익명게시판</h3></th>
+							<th><h3>New</h3></th>
 
 						</tr>
 
