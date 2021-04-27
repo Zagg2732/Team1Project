@@ -184,23 +184,7 @@
 				</c:if> --%>
 					<%-- <h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4> --%>
 					
-					
-					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
-					<br>
-					<br>
-					<br>
-					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
-								
-				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
-				</c:if>
-				
-				
-				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<form action="boardModifyWrite.sj" method="POST">
 				        <input type="hidden" name="type" value = "humor_board"><br>
 				        <input type="hidden" name="idx" value = "${idx}"><br>
@@ -210,7 +194,36 @@
 				        
 				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
    					</form>
-				</c:if>
+					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
+					</c:if>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					
+					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					</c:if>
+					<br>
+					<br>
+					<br>
+					<br>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
+								
+<%-- 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
+				</c:if> --%>
+				
+				
+			<%-- 	<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<form action="boardModifyWrite.sj" method="POST">
+				        <input type="hidden" name="type" value = "humor_board"><br>
+				        <input type="hidden" name="idx" value = "${idx}"><br>
+				        <input type="hidden" name="filename" value = "${board.filename}"><br>
+				        <input type="hidden" name="subject" value = "${board.subject}"><br>
+				        <input type="hidden" name="content" value = "${board.content}"><br>
+				        
+				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
+   					</form>
+				</c:if> --%>
 		
 
 
