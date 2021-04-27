@@ -14,8 +14,10 @@ import com.team1.action.ActionForward;
 import com.team1.sj.service.SJ_BoardDeleteService;
 import com.team1.sj.service.SJ_BoardModifyService;
 import com.team1.sj.service.SJ_BoardModifyWriteOK;
+import com.team1.sj.service.SJ_Dislike;
 import com.team1.sj.service.SJ_HumorBoardAddService;
 import com.team1.sj.service.SJ_HumorListService;
+import com.team1.sj.service.SJ_Like;
 import com.team1.sj.service.SJ_HumorBoardList;
 import com.team1.sj.service.SJ_HumorContent;
 
@@ -82,11 +84,15 @@ public class SJ_controller extends HttpServlet {
     		forward = action.execute(request, response);
 
     		
-    	}  else if(url_command.equals("/boardModifyWriteOK.sj")) {
-    		action = new SJ_BoardModifyWriteOK();
+    	} else if(url_command.equals("/like.sj")) {
+    		action = new SJ_Like();
     		forward = action.execute(request, response);
 
-    	} else {
+    	} else if(url_command.equals("/dislike.sj")) {
+    		action = new SJ_Dislike();
+    		forward = action.execute(request, response);
+
+    	}  else {
     		System.out.println("Error : you entered *.lsj but you didn't set commanding it yet. 아님말고");
     	}
     		
