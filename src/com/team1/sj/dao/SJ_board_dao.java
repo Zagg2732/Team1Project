@@ -620,7 +620,7 @@ public class SJ_board_dao {
 		
 		return result;
 	}
-/*	
+	
 	public int like(String idx, String type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -635,12 +635,53 @@ public class SJ_board_dao {
 						+ "IDX = "
 						+ idx;
 
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
-*/
+		
+	public int dislike(String idx, String type) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "UPDATE "
+						+ type
+						+ " SET down = down - 1 WHERE "
+						+ "IDX = "
+						+ idx;
+
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+
 //	// 좋아요 업데이트
 //	public void update_Like(int up) {
 //		String sql = "update HUMOR_BOARD set up=up+1 where num=?";

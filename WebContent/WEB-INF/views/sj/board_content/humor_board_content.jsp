@@ -205,8 +205,8 @@
 					<br>
 					<br>
 					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
+					<a href="like.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info" >️👍</a>
+					<a href="dislike.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">👎</a>
 								
 <%-- 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
