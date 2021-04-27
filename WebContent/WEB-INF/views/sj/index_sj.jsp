@@ -242,9 +242,9 @@ a:hover {
 
 					</thead>
 					<tbody>
-						<c:forEach var="board" items="${requestScope.noticelist}">
+						<c:forEach var="board" items="${requestScope.hotlist}">
 							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+								<td><a href="board.sj?idx=${board.idx}&type=${board.type}">${board.subject}</a></td>
 
 							</tr>
 							<br>

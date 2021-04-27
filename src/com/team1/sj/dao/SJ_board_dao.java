@@ -178,6 +178,7 @@ public class SJ_board_dao {
 				board.setReadnum(rs.getInt("READNUM"));
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
+				board.setType(name);
 				
 				list.add(board);
 			}			
@@ -226,6 +227,7 @@ public class SJ_board_dao {
 				board.setReadnum(rs.getInt("READNUM"));
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
+				board.setType("humor_board");
 				
 				list.add(board);
 			}			
