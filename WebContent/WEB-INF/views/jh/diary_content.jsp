@@ -82,19 +82,17 @@
 				<table class="table font-small">
 		  			<tr>
 		  				<td>작성일</td>
-		  				<td>${diary.writedate}</td>
-		  			</tr>
-		  			<tr>
+		  				<td style="border-right: 1px solid lightgrey;">${diary.writedate}</td>
 		  				<td>작성자</td>
 		  				<td>${userInfo.userName}</td>
 		  			</tr>
 		  			<tr>
 		  				<td>제목</td>
-		  				<td>${diary.subject}</td>
+		  				<td colspan="3">${diary.subject}</td>
 		  			</tr>
 		  			<tr>
 		  				<td>내용</td>
-		  				<td>${diary.content}</td>
+		  				<td colspan="3">${diary.content}</td>
 		  			</tr>
 				</table>
 				
@@ -112,6 +110,7 @@
 							</c:if>
 					</c:when>
 				</c:choose>
+				
 				<!-- 댓글 달기 -->
 				<form name="reply" action="diaryReply.jh" method="POST">
 					<!-- hidden : 값 숨겨서 처리 --> 
@@ -131,18 +130,22 @@
 							</c:choose>
 					</table>
 				</form>
+				<div class="content-box">
+				<div id="conwrap" style="padding: 10px;">
 				<!-- 댓글 목록 -->	
 				<c:choose>
 					<c:when test="${userInfo.userId == null}">
 					</c:when>
 				<c:otherwise>
-					<div class="card">			
+					<div class="cardreply">			
 						<div id="replybody" style="width: 95%; height:100px; margin: 10px auto; overflow: scroll;">
   						</div>
   					</div> 
 				</c:otherwise>
 				</c:choose>
-			</div>
+				</div>
+				</div>
+			</div><!-- 컨테이너 -->
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
 			<div class="menu-item" style="top: 86px" onclick="location.href='guestBook.jh';">방명록</div>

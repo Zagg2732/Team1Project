@@ -111,7 +111,7 @@
             			<div class="rew">
                 			<i class="fas fa-backward"></i>
             			</div>
-            		<div class="play">
+            		<div class="play" id="musicplay">
                 		<svg viewBox="0 0 25 25" xml:space="preserve" style="visibility: visible;">
                     		<defs><rect x="-49.5" y="-132.9" width="446.4" height="366.4"></rect></defs>
                     		<g>
@@ -145,5 +145,10 @@
 		</ul>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#musicplay').click();
+		});
+	</script>
 </body>
 </html>
