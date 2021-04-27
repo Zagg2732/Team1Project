@@ -41,11 +41,6 @@ public class SJ_HumorContent implements Action {
 			SJ_board_dao dao = new SJ_board_dao();
 			boolean readnumAdd = dao.getReadNum(idx, type); //조회수증가
 			
-			if (readnumAdd) { //값이들어갔으면
-				//testcode 삭제
-			} else {
-				System.out.println("Error : 조회수증가 false 받음");
-			}
 			
 			board = dao.getContentDetails(idx, type); //DB에서 게시판 상세보기 정보 받아옴		
 			replyList = dao.getReplyList(idx, replyType); //DB에서 해당 게시글 댓글목록 받아옴
