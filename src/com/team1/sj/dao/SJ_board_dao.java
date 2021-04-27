@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -212,12 +213,13 @@ public class SJ_board_dao {
 		try {
 			conn = ds.getConnection();
 			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
-			String sql = "SELECT * FROM HUMOR_BOARD WHERE rownum < 7 ORDER BY UP DESC";
+			String sql = "SELECT IDX , nickname , UP , DOWN , READNUM , WRITEDATE , SUBJECT FROM HUMOR_BOARD hb LEFT JOIN TEAM1_USER tu ON hb.USERID_FK = tu.USERID ORDER BY hb.Up DESC";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<SJ_board>();
 			
+			int rows = 0;
 			while(rs.next()) {
 				SJ_board board = new SJ_board();
 				board.setIdx(rs.getInt("idx"));
@@ -227,7 +229,58 @@ public class SJ_board_dao {
 				board.setReadnum(rs.getInt("READNUM"));
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
-				board.setType("humor_board");
+				
+				list.add(board);
+				rows += 1;
+				if(rows >= 7) {
+					break;
+				}
+			}			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			System.out.println("넌 아니겠지 : " + e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+				System.out.println("너??" + e.getMessage());
+			}
+		}
+		return list;
+	}
+	//새글
+	public List<SJ_board> newlist() { 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<SJ_board> list = null;
+		
+		try {
+			conn = ds.getConnection();
+			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
+			String sql = "SELECT * FROM (SELECT * FROM HUMOR_BOARD UNION SELECT * FROM NOTICE_BOARD) WHERE rownum <= 7 ORDER BY WRITEDATE desc";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			list = new ArrayList<SJ_board>();
+			
+			while(rs.next()) {
+				SJ_board board = new SJ_board();
+				board.setIdx(rs.getInt("idx"));
+				//board.setNickname(rs.getString("nickname"));
+				board.setUp(rs.getInt("UP"));
+				board.setDown(rs.getInt("DOWN"));
+				board.setReadnum(rs.getInt("READNUM"));
+				board.setWritedate(rs.getDate("WRITEDATE"));
+				board.setSubject(rs.getString("SUBJECT"));
 				
 				list.add(board);
 			}			
@@ -679,6 +732,8 @@ public class SJ_board_dao {
 		}
 		return result;
 	}
+
+
 
 
 //	// 좋아요 업데이트
