@@ -266,11 +266,13 @@ public class SJ_board_dao {
 		try {
 			conn = ds.getConnection();
 			//sql문. board에 출력될 정보가 담긴 컬럼들 조회
-			String sql = "SELECT * FROM (SELECT * FROM HUMOR_BOARD UNION SELECT * FROM NOTICE_BOARD) WHERE rownum <= 7 ORDER BY WRITEDATE desc";
+			String sql = "SELECT * FROM humor_board ORDER BY WRITEDATE desc";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			list = new ArrayList<SJ_board>();
+			
+			int rows = 0;
 			
 			while(rs.next()) {
 				SJ_board board = new SJ_board();
@@ -283,6 +285,11 @@ public class SJ_board_dao {
 				board.setSubject(rs.getString("SUBJECT"));
 				
 				list.add(board);
+				
+				rows += 1;
+				if(rows >= 7) {
+					break;
+				}
 			}			
 			
 		} catch (SQLException e) {
