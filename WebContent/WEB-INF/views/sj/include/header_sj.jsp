@@ -113,7 +113,7 @@ a:hover {
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;SJ Board</a>
+		<a class="navbar-brand" href="index.sj">&nbsp;&nbsp;&nbsp;&nbsp;SJ Board</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -128,10 +128,8 @@ a:hover {
 						Home <span class="sr-only"></span>
 				</a></li>
 
-					<li class="nav-item"><a class="nav-link"
-					href="#">Best</a></li>
-					<li class="nav-item"><a class="nav-link"
-					href="#">Anonymous</a></li>
+					
+					
 						<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"

@@ -192,7 +192,8 @@
 					<br>
 					<br>
 					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">❤️</a>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
 								
 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		

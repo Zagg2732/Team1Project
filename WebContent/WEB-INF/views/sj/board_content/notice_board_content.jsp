@@ -12,7 +12,7 @@
 <head>
 <meta charset=UTF-8">
 
-<title>유머 게시판</title>
+<title>공지 게시판</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -20,13 +20,13 @@
 	margin-bottom: 250px;
 }
 
-#replyAddReplyBody {
+/* #replyAddReplyBody {
 	background-color: #6c757d;
 	width: 1117px;
 	height: 89px;
 	border: 1px solid black;
 	margin-bottom: 15px;
-}
+} */
 
 #contentForm {
 	width: 40%;
@@ -73,97 +73,97 @@
 		<div class="list-board"">
 			<br> <br>
 
-			<%-- <h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			
-			<h4>글번호 : ${idx}</h4>
-			<h4>글제목 : ${board.subject} </h4>
-			<h4>글쓴이 : ${board.nickname} </h4>
-			<h4>글쓴날짜 : ${board.writedate} </h4>
-			<h4>조회수 : ${board.readnum} </h4>
-			<h4>글내용 : ${board.content} </h4>
-			<c:if test="${not empty board.filename}">
-				<a href="<%= request.getContextPath() %>/sj_download.jsp?file_name=${board.filename}">${board.filename}</a><br>
-				<img src="upload/${board.filename}">			
-			</c:if>
-			<h4>board.userid_kf ${board.userid_fk}  || 세션 ${sessionScope.userInfo.userId} </h4>
-			<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-				<a href="boardDelete.sj?type=humor_board&idx=${idx}">글쓴이는 삭제버튼이 보여요. 눌러서 삭제해볼래요?</a><br>		
-			</c:if>
-			<h3>${requestScope.pagesize}</h3>
-			<br>
-			<h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			<h3>게시판 상세보기 임시디자인입니다</h3>
-			<br>
-			<h3>세션닉네임 : ${sessionScope.userInfo.nickName}</h3> --%>
-
-			<%-- 	<table>
-				<tr>
-
-					<td width="150">
-						<div>
-							닉네임 : ${board.nickname}<br> <font size="2" color="lightgray">날짜
-								: ${board.writedate}</font>
-						</div>
-					</td>
-
-				</tr>
-			</table> --%>
-
-
-
-			<!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
+<!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
 			<form id="form1" name="form1" method="post"
 				action="${path}/boardList.sj">
-				<div class="input-group input-group-sm" role="group"
-					style="text-align: left">
+				
+				<div class="input-group input-group-sm " role="group"
+					style="text-align: left; width: 900px; display: inline-block;" >
 					<table class="table table-striped table-bordered">
 						<tread>
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${idx}" class="form-control"
-								aria-describedby="basic-addon1"> 번호 : ${idx}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1"> 조회 : ${board.readnum}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.writedate}" class="form-control"
-								aria-describedby="basic-addon1"> 작성일 :
-								${board.writedate}</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
-								class="form-control" aria-describedby="basic-addon1"
-								value="${board.nickname}" class="form-control"
-								aria-describedby="basic-addon1"> 닉네임 : ${board.nickname}
-							</td>
-						</tr>
-
-						<tr>
-							<td><input type="hidden" id="idx" name="idx"
+						
+						
+						
+						<h2>
+							<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.subject}" class="form-control"
-								aria-describedby="basic-addon1"> 글제목 : ${board.subject}
+								aria-describedby="basic-addon1">${board.subject}
+								
+								</h2>
+								<br>
+								<br>
+								
+								
+								<tr>
+							<td>
+								<h5><input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${idx}" class="form-control"
+								aria-describedby="basic-addon1">No. ${idx}</h5>
+								
+								</td>
+								</tr>
+								
+						
+						
+						
+						<tr>
+							<td>
+							<b>
+							<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.nickname}" class="form-control"
+								aria-describedby="basic-addon1"> ${board.nickname}</b>
+							
+								
 							</td>
 						</tr>
+						
+							<tr>
+							<td>
+							<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.filename}" class="form-control"
+								aria-describedby="basic-addon1"> File : ${board.filename}
+							
+								
+							</td>
+						</tr>
+						
+						
+								
+								
 
+								
+								<div style="text-align: right;">
+								<input  type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.writedate}" class="form-control"
+								aria-describedby="basic-addon1">🗓 ${board.writedate}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="idx" name="idx"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.readnum}" class="form-control"
+								aria-describedby="basic-addon1">👁 ${board.readnum}회
+								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="like_result" name="like_result"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.readnum}" class="form-control"
+								aria-describedby="basic-addon1">❤️ ${board.up}
+								
+								</div>
 
-						<tr>
+						<tr  style="height: 300px;">
 							<td><input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="$글내용 : ${board.content}" class="form-control"
-								aria-describedby="basic-addon1"> 글내용 : ${board.content}
+								aria-describedby="basic-addon1"> ${board.content}
+								
+					<%-- 			<c:if test="${not empty board.filename}">
+					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}"></a><br>
+					<img src="upload/${board.filename}">			
+				</c:if> --%>
 							</td>
 						</tr>
 
@@ -172,23 +172,57 @@
 					</table>
 
 				</div>
-		</div>
+				
+				</div>
 
 		</form>
+				<%-- <c:if test="${not empty board.filename}">
+					<a href="<%= request.getContextPath() %>/shdownload.jsp?file_name=${board.filename}">${board.filename}</a><br>
+					<img src="upload/${board.filename}">			
+				</c:if> --%>
+					<%-- <h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4> --%>
+					
+					
+					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					<br>
+					<br>
+					<br>
+					<br>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
+					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
+								
+				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
+				</c:if>
+				
+				
+				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<form action="boardModifyWrite.sj" method="POST">
+				        <input type="hidden" name="type" value = "humor_board"><br>
+				        <input type="hidden" name="idx" value = "${idx}"><br>
+				        <input type="hidden" name="filename" value = "${board.filename}"><br>
+				        <input type="hidden" name="subject" value = "${board.subject}"><br>
+				        <input type="hidden" name="content" value = "${board.content}"><br>
+				        
+				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
+   					</form>
+				</c:if>
+		
 
 
-		<br> <br>
 		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <button type="button" class="btn btn-outline-info" id="down"name="down">싫어요!</button>
   -->
 
-		<form id="like_form">
+		<%-- <form id="like_form">
 			<table id="list">
 				<input type="hidden" name="command" value="like_it">
 				<input type="hidden" name="board_idx" value="${board.idx}">
 				<tr>
-					<input type="button" value="좋아요!" onclick="like(this.form)">
+					<!-- <input type="button" value="좋아요!" onclick="like(this.form)"> -->
 				</tr>
 				<tr>
 					<div id="like_result">${board.up}</div>
@@ -200,29 +234,25 @@
 			<table id="list">
 				<input type="hidden" name="command" value="like_it">
 				<input type="hidden" name="board_idx" value="${board.idx}">
-				<tr>
-					<input type="button" value="글삭제"
-						onclick="deleteBoard.sj?type=notice_board&idx=${idx}">
-				</tr>
+				
 				<tr>
 					<div id="like_result">${board.up}</div>
 				</tr>
 			</table>
-		</form>
+		</form> --%>
 
-		<br> <br>
-
+<br><br>
 
 		<form action="#" name="reply" method="POST">
 
-			<div class="card mb-2">
+			<div class="card mb-2" style="width: 900px; display: inline-block;">
 				<div class="card-header bg-light">
 					<i class="fa fa-comment fa"></i> Comment
 				</div>
-				<div class="card-body">
+				<div class="card-body" >
 
 					<!-- hidden 태그  값을 숨겨서 처리  -->
-					<input type="hidden" name="idx" value="${idx}" id="idx"> <input
+					<input type="hidden" name="idx2" value="${idx}" id="idx2"> <input
 						type="hidden" name="userid" value="">
 					<!-- 추후 필요에 따라  -->
 
@@ -242,9 +272,7 @@
 								<textarea class="form-control" id="reply_content" rows="3"
 									name="reply_content" placeholder="이쁜말 사용하기^^"></textarea>
 								<input id="replybtn" type="button" class="btn btn-dark mt-3"
-									value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-									id="replybtn" type="button" class="btn btn-dark mt-3"
-									value="목록">
+									value="등록">
 
 
 							</div>
@@ -258,7 +286,8 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody">안뇽 replyaddbody얌 ㅎ</div>
+		<div id="replyAddReplyBody" class="container" ></div>
+		<div class="container" style="width: 900px; display: inline-block;">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
 
@@ -269,6 +298,7 @@
 
 			</tbody>
 		</table>
+		</div>
 	</div>
 	</div>
 
@@ -289,6 +319,7 @@
 	crossorigin="anonymous"></script>
 
 
+
 <script type="text/javascript">
 
 	$(function() {
@@ -302,8 +333,8 @@
 			type : "GET",
 	        dataType : "json",
 			data : {
-				idx : $('#idx').val(),
-				type : "humor_reply"
+				idx : $('#idx2').val(),
+				type : "notice_reply"
 			},
 			success : function(data) {
 					$.each(data, function(index,obj) {
@@ -318,8 +349,8 @@
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
 								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
-								+ '<input type="button" id = "replyAddForm" value="답글" onclick="reply_add_form(this.form)">'
-								+ '<input type="button" id = "replyDeleteBtn" value="삭제" onclick="reply_del(this.form)">'
+								+ '<input type="button" id = "replyAddForm" value="답글" class="btn btn-dark mt-3" onclick="reply_add_form(this.form)">'
+								+ '<input type="button" id = "replyDeleteBtn" value="삭제" class="btn btn-dark mt-3" onclick="reply_del(this.form)">'
 								+ '</form></td></tr>');
 					});		
 			},
@@ -346,9 +377,9 @@
 					data : {
 						"reply_writer" : $('#reply_writer').val(),
 						"reply_content" : $('#reply_content').val(),
-						"idx" : $('#idx').val(),
+						"idx" : $('#idx2').val(),
 						"sessionId" : '${sessionScope.userInfo.userId}',
-						"type" : "humor_reply" //게시판종류와 세션ID 들고감
+						"type" : "notice_reply" //게시판종류와 세션ID 들고감
 					},
 					success : function(data) {
 						$('#replybody').empty();
@@ -372,8 +403,8 @@
 				type : "POST",
 				datatype : "json",
 				data :{
-					"idx" : $('#idx').val(),
-					"type" : "humor_reply",
+					"idx" : $('#idx2').val(),
+					"type" : "notice_reply",
 					"sessionNickName" : '${sessionScope.userInfo.nickName}',
 					"replyNickName" : frm.replyNickname.value,
 					"refer" : frm.replyRefer.value,
@@ -400,7 +431,7 @@
 				type : "POST",
 				datatype : "json",
 				data :{
-					"idx" : $('#idx').val(),//게시판idx
+					"idx" : $('#idx2').val(),//게시판idx
 					"type" : "humor_reply", //게시판종류
 					"sessionId" : '${sessionScope.userInfo.userId}',
 					"replyNickName" : frm.replyNickName.value,					
@@ -430,8 +461,8 @@
 			datatype : "ajax",
 			data :{
 				"sessionId" : '${sessionScope.userInfo.userId}',
-				"idx" : $('#idx').val(),
-				"type" : "humor_reply",		
+				"idx" : $('#idx2').val(),
+				"type" : "notice_reply",		
 				"replyUserId" : frm.replyUserId.value,
 				"refer" : frm.replyRefer.value,
 				"depth" : frm.replyDepth.value, 
