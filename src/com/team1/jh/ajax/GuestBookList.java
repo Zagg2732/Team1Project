@@ -56,7 +56,7 @@ private void doProcess(HttpServletRequest request, HttpServletResponse response)
 				
 				JSONObject jsonObj = new JSONObject();
 				
-				jsonObj.put("userid_fk", guestBooklist.get(i).getUserid_fk());
+				jsonObj.put("idx", guestBooklist.get(i).getIdx());
 				jsonObj.put("userid_fk", guestBooklist.get(i).getUserid_fk());
 				jsonObj.put("content", guestBooklist.get(i).getContent());
 				jsonObj.put("writedate", date);

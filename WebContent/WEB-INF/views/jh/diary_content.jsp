@@ -202,17 +202,20 @@
 	</div>
 </body>
 <script type="text/javascript">
+	
+	var frm = document.reply; //reply form 전체
+	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
+	var sessionGrade = <%=(int)request.getAttribute("sessionGrade")%>;
+	//sessionGrade를 int로 받겠다고 했지만 '' 때문에 string 으로 인식했었음
+	//그래서 !== 타입까지 비교를 하니 조건이 제대로 동작을 안함 
+	
 	$(function() {
 		replyList();
 		replyAdd();
 	});
-	
-	var frm = document.reply; //reply form 전체
-	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
-	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
 		
 	function replyList() {
-		console.log($('#idx').val());
+		
 		//비회원은 댓글을 못봐요
 		if(sessionUserid == "") {
 			alert('비회원은 댓글 서비스를 이용할 수 없습니다.');
@@ -229,9 +232,8 @@
 			success : function(data) {
 				//console.log(data);
 				$.each(data, function(index,obj) {
-					
 					let htmlString = `
-					<form>
+					<form method="POST">
 					<div class="card-wrap font-small">
 						<div class="card-title font-small">` +
 							obj.username + ` | ` + obj.writedate + `
@@ -288,29 +290,33 @@
 		});
 	}
 	
-	var del = document.replybody;
 	
 	//미니홈피 주인만 모든 댓글 삭제 가능 
 	//그 밖의 회원은 본인 댓글만 삭제 가능
-	function reply_del(value) {
-		//console.log(value.num.value);
-		//console.log(value.userid.value);
+	function reply_del(frm) {
+		console.log(sessionGrade); //회원등급
+		console.log(frm.userid.value); //글쓴이
+		console.log(sessionUserid); //로그인세션
+		
+		console.log(sessionGrade !==1); //true
+		console.log(typeof(sessionGrade)); //String 
+
 		
  		if(sessionGrade !== 1) {
-			if(value.userid.value !== sessionUserid) {
-				alert('본인이 작성한 댓글만 삭제 가능합니다.');
+			if(frm.userid.value !== sessionUserid) {
+				alert('본인이 작성한 댓글만 삭제 가능합니다 !');
 				return false;
 			}
-		} 
+		}
 
 		$.ajax({
 			url :"ReplyDelete.ajax",
 			type : "POST",
 			datatype : "text",
 			data :{
-				"num" : value.num.value,
-				"idx_fk" : value.idx.value,
-				"userid_fk" : value.userid.value
+				"num" : frm.num.value,
+				"idx_fk" : frm.idx.value,
+				"userid_fk" : sessionUserid
 			},
 			success : function(data){
 				console.log(data);

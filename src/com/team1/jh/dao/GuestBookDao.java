@@ -37,8 +37,6 @@ public class GuestBookDao {
 		ResultSet rs = null;
 		ArrayList<GuestBookDto> list = null;
 		
-		//System.out.println("userid : " +userid);
-		
 		try {
 			conn = ds.getConnection();			
 			String sql = "SELECT GB.IDX, GB.USERID_FK, TU.USERNAME, GB.CONTENT, GB.WRITEDATE, GB.READYN " +
@@ -63,7 +61,7 @@ public class GuestBookDao {
 			
 			while(rs.next()) {
 				
-				String idx = rs.getString("idx");
+				int idx = rs.getInt("idx");
 				String userid_fk = rs.getString("userid_fk");
 				String content  =rs.getString("content");				
 				Date date = rs.getDate("writedate");
@@ -71,7 +69,7 @@ public class GuestBookDao {
 				String username  =rs.getString("username");
 				
 				GuestBookDto book = new GuestBookDto();
-				book.setIdx(Integer.parseInt(idx));
+				book.setIdx(idx);
 				book.setUserid_fk(userid_fk);
 				book.setContent(content);
 				book.setWritedate(date);
