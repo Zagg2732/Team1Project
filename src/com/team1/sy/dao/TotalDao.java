@@ -143,7 +143,6 @@ public class TotalDao {
 			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){ex.getStackTrace();}
 			if(con!=null) try{con.close();}catch(SQLException ex){ex.getStackTrace();}
 		}
-		
 		return result;
 	}
 	
