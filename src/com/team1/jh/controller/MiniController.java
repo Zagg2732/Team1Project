@@ -45,7 +45,7 @@ public class MiniController extends HttpServlet {
     	if(url_Command.equals("/home.jh")) { //홈
     		forward = new ActionForward();
     		forward.setRedirect(false);
-    		forward.setPath("/WEB-INF/views/jh/home.html");
+    		forward.setPath("/WEB-INF/views/jh/home.jsp");
     		
     	}else if(url_Command.equals("/diary.jh")) { //다이어리 전체보기(첫화면) 
     		action = new DiaryListService();

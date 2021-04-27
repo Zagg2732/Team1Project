@@ -21,7 +21,7 @@ public class SJ_BoardModifyWriteOK implements Action {
 		
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
-			dao.boardModify();
+			//dao.boardModify();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
