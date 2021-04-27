@@ -38,10 +38,10 @@
 			<div style="margin-top: 15px;">
 			<select style="width: 100%">
 			<option>파도타기</option>
-			<option>이승준(맥날드실분)</option>
-			<option>김수연</option>
-			<option>김영허</option>
-			<option>현상진</option>
+			<option>칭구칭긔 (이승준)</option>
+			<option>여늬♡ (김수연)</option>
+			<option>평생B.F.(김영허)</option>
+			<option>섹ㅅiㄱrOi (현상진)</option>
 			</select>
 			</div>
 		  </div>
@@ -111,7 +111,7 @@
             			<div class="rew">
                 			<i class="fas fa-backward"></i>
             			</div>
-            		<div class="play">
+            		<div class="play" id="musicplay">
                 		<svg viewBox="0 0 25 25" xml:space="preserve" style="visibility: visible;">
                     		<defs><rect x="-49.5" y="-132.9" width="446.4" height="366.4"></rect></defs>
                     		<g>
@@ -145,5 +145,10 @@
 		</ul>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#musicplay').click();
+		});
+	</script>
 </body>
 </html>
