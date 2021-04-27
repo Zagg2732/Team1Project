@@ -17,6 +17,8 @@ public class KimsBoardContentService implements Action {
 		
 		String idx = request.getParameter("idx");	
 		
+		System.out.println("조회수idx:" + idx);
+		
 		boolean isread = false;
 		
 		KimsBoard kimsboard = new KimsBoard();

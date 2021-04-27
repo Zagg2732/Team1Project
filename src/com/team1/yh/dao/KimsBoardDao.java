@@ -3,6 +3,7 @@ package com.team1.yh.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,6 +210,51 @@ DataSource ds = null;
 				}
 				return result;
 				
+			}
+			
+			
+			//킴스보드 글 삭제
+			public int kimsDelete(String idx) {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				int row = 0;
+				
+				try {
+					conn = ds.getConnection();
+					
+					String sql = "DELETE FROM KIMS_BOARD WHERE IDX=?";
+					
+						conn.setAutoCommit(false);//개발자가 rollback , commit 강제
+					 	
+					 	//게시글 삭제
+					 	pstmt = conn.prepareStatement(sql);
+					 	pstmt.setString(1, idx);
+					 	row = pstmt.executeUpdate();
+					 	
+					 	if(row > 0) {
+					 		conn.commit(); //delete 실반영
+					 	
+						}else { //삭제하려는 글이 존재하지 않는 경우 
+							row = 0;
+							System.out.println("게시글이 존재하지 않습니다.");
+						}
+					
+				} catch (Exception e) {
+					System.out.println("KimsBoardDelete dao 에러 :" +e.getMessage());
+					try {
+						conn.rollback();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}finally {
+					try {
+						pstmt.close();
+						conn.close();//반환
+					} catch (Exception e2) {
+						
+					}
+				}
+				return row;
 			}
 			
 }
