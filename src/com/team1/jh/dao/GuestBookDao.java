@@ -131,5 +131,48 @@ public class GuestBookDao {
 		return row;		
 	}
 	
+	//방명록 삭제
+	public int guestBookDelete(String idx, String userid_fk) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int row = 0;
+		
+		try {
+			String select = "SELECT USERID_FK FROM GUESTBOOK WHERE IDX =?";
+			String delete = "DELETE FROM GUESTBOOK WHERE IDX =?";
+			
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(select);
+			pstmt.setString(1, idx);
+			rs =pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String userid = rs.getString("userid_fk");
+				if(userid_fk.equals(userid)) {
+					pstmt.close();
+					pstmt = conn.prepareStatement(delete);
+					pstmt.setString(1, idx);
+					row = pstmt.executeUpdate();
+				}else {
+					row = 0;
+				}
+			}else {
+				row = -1;
+			}
+		} catch (Exception e) {
+			System.out.println("오류: " +e.getMessage());
+		}finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close();//반환
+			}catch (Exception e) {
+				
+			}
+		}
+		return row;
+	}
+	
 	
 }

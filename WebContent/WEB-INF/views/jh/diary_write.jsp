@@ -85,7 +85,8 @@
 				<c:set var="replyList" value="${requestScope.diaryReplyList}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
 				
-				원본글 쓰기
+				
+				<div class="font-small text-secondary">✏️원본글 쓰기</div>
 				<form name="write" action="diaryWriteOk.jh" method="POST">
 				<!-- hidden : 값 숨겨서 처리 --> 
 				<input type="hidden" name="idx" value="${idx}" id="idx">

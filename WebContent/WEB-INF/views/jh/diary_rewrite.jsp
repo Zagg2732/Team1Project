@@ -84,7 +84,7 @@
 				<c:set var="pagesize" value="${requestScope.subject}" />
 				<c:set var="userInfo" value="${sessionScope.userInfo}" />
 				
-				답글쓰기 
+				<div class="font-small text-secondary">✏️답글 쓰기</div>
 				<form name="rewrite" action="diaryRewriteOk.jh" method="POST">
 				
 				<input type="hidden" name="cp" value="${cpage}" /> 
