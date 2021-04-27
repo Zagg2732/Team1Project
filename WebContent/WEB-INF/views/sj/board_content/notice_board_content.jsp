@@ -88,7 +88,7 @@
 							<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.subject}" class="form-control"
-								aria-describedby="basic-addon1">${board.subject}
+								aria-describedby="basic-addon1">[${board.subject}]
 								
 								</h2>
 								<br>
