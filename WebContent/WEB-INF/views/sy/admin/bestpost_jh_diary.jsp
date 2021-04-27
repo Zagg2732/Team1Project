@@ -100,7 +100,7 @@
 											<tr>
 												<td align="center">${user.readnum}</td>
 												<td align="center">${user.username}</td>
-												<td align="center">${user.subject}</td>
+												<td align="center"><a href="javscript:void(0);" onclick="window.open('diaryContent.jh?idx=${user.idx}','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">${user.subject}</a></td>
 												<td align="center">${user.writedate}</td>
 											</tr>
 										</c:forEach>

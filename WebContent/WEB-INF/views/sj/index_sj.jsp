@@ -153,7 +153,7 @@ a:hover {
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;SJ Board</a>
+		<a class="navbar-brand" href="index.sj">&nbsp;&nbsp;&nbsp;&nbsp;SJ Board</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -169,7 +169,7 @@ a:hover {
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#">Best</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Anonymous</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">New</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -191,12 +191,11 @@ a:hover {
 	<!-- 사이드 -->
 			<div id="sidebar" style="position: absolute;">
 				<ul>
-					
 
 					<a href="#" style="color: red;">Best</a>
 					<br>
 					<br>
-					<a href="#">익명게시판</a>
+					<a href="#">New</a>
 					<br>
 					<br>
 					<a href="boardList.sj?type=notice_board">공지게시판</a>

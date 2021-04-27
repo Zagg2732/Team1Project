@@ -71,7 +71,7 @@ DataSource ds = null;
 						" )kb " + 
 						" ) WHERE RN >= ?" +
 						"order by rownum DESC";
-								
+				
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -93,6 +93,7 @@ DataSource ds = null;
 					board.setSubject(rs.getString("subject"));
 					board.setUserid_fk(rs.getString("userid_fk"));
 					board.setWritedate(rs.getDate("writedate"));
+					board.setReadnum(rs.getInt("readnum"));
 					
 					list.add(board);
 				}

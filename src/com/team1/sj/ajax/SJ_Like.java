@@ -18,12 +18,13 @@ public class SJ_Like implements Action {
 		
 		try {
 			SJ_board_dao dao = new SJ_board_dao();
-			
+			/*
 			int result = dao.like(idx, type);
 			
 			if(result == 0) {
 				System.out.println("Error ! : 좋아요 에러");
 			}
+			*/
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

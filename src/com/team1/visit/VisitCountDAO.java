@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  */
 public class VisitCountDAO {
 	
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
@@ -24,7 +24,7 @@ public class VisitCountDAO {
     private static VisitCountDAO instance;
     
     // 싱글톤 패턴
-    private VisitCountDAO(){
+    VisitCountDAO(){
     	try{
 			Context init = new InitialContext();
 	  		ds = (DataSource) init.lookup("java:comp/env/jdbc/oracle");
@@ -118,6 +118,7 @@ public class VisitCountDAO {
         } finally {
             // Connection, PreparedStatement를 닫는다.
             try{
+            	if(rs!=null) try{rs.close();}catch(SQLException ex){}
                 if ( pstmt != null ){ pstmt.close(); pstmt=null; }
                 if ( conn != null ){ conn.close(); conn=null;    }
             }catch(Exception e){
@@ -157,6 +158,7 @@ public class VisitCountDAO {
         } finally {
             // Connection, PreparedStatement를 닫는다.
             try{
+            	if(rs!=null) try{rs.close();}catch(SQLException ex){}
                 if ( pstmt != null ){ pstmt.close(); pstmt=null; }
                 if ( conn != null ){ conn.close(); conn=null;    }
             }catch(Exception e){
@@ -164,4 +166,38 @@ public class VisitCountDAO {
             }
         }
     }// end getTodayCount()
+    
+    //특정날짜 방문자수 가져오기
+    public int getThatdayCount(String strDate) {
+    	Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        int resultCount = 0;
+        
+        String sql = "SELECT COUNT(*) cnt FROM visit WHERE v_date LIKE TO_DATE(?, 'YYYY-MM-DD')";
+        
+        try {
+        	conn = ds.getConnection(); // dbcp 연결객체 얻기
+        	pstmt = conn.prepareStatement(sql);
+        	
+        	pstmt.setString(1, strDate);
+        	rs = pstmt.executeQuery();
+        	
+        	if(rs.next()) {
+        		resultCount = rs.getInt("cnt");
+        	} else {
+        		resultCount = -1;
+        	}
+
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally{
+			if(rs!=null) try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
+			if(conn!=null) try{conn.close();}catch(SQLException ex){}
+		}
+    	return resultCount;
+    }
+    
 }

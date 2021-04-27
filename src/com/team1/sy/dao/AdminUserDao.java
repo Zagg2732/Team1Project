@@ -16,7 +16,7 @@ import com.team1.sy.dto.Member;
 
 public class AdminUserDao {
 
-	Connection con;
+	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
