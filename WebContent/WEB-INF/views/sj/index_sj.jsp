@@ -260,7 +260,7 @@ a:hover {
 			<!-- New -->
 			<div class="col-sm-6">
 				<table class="table table-hover">
-					<thead>
+					<thead >
 
 						<tr>
 							<th><h3>New</h3></th>

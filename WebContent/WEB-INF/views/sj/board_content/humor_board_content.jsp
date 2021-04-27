@@ -149,7 +149,7 @@
 								<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1">👁 ${board.readnum}회
+								aria-describedby="basic-addon1">👀 ${board.readnum}회
 								&nbsp;&nbsp;&nbsp;
 								<input type="hidden" id="like_result" name="like_result"
 								class="form-control" aria-describedby="basic-addon1"
