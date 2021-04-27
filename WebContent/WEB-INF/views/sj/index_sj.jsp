@@ -287,7 +287,7 @@ a:hover {
 
 						<c:forEach var="board" items="${requestScope.newlist}">
 							<tr class="boardlist">
-								<td class="tdNew"><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+								<td class="tdNew"><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
 								<td class="tdNewDate">🗓 ${board.writedate}</td>
 							</tr>
 							<br>
