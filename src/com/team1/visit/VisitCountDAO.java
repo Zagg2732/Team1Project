@@ -16,9 +16,9 @@ import javax.sql.DataSource;
  */
 public class VisitCountDAO {
 	
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
+	//Connection conn;
+	//PreparedStatement pstmt;
+	//ResultSet rs;
 	DataSource ds;
 	
     private static VisitCountDAO instance;

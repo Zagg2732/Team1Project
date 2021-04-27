@@ -170,12 +170,10 @@ $(function() {
 
 
 function overlapCheckID(){
-	
 	if($('#userId').val()==""){
 		alert('빈 칸을 채워주세요.');
 		return;
 	}
-	
 		$.ajax({
 		url : "OverlapCheck.sooyeon",
 		type : "POST",
@@ -185,7 +183,6 @@ function overlapCheckID(){
 			"value" : $('#userId').val()
 		},
 		success : function(data){
-						
 			if(data.result == false){
 				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
 			}else {
@@ -199,12 +196,10 @@ function overlapCheckID(){
 	});
 }
 function overlapCheckNick(){
-		
 	if($('#userNick').val()==""){
 		alert('빈 칸을 채워주세요.');
 		return;
 	}
-	
 		$.ajax({
 		url : "OverlapCheck.sooyeon",
 		type : "POST",
@@ -214,7 +209,6 @@ function overlapCheckNick(){
 			"value" : $('#userNick').val()
 		},
 		success : function(data){
-						
 			if(data.result == false){
 				alert('이미 사용 중입니다. 다시 입력 후 중복체크를 진행해주세요 :)');
 			}else {
