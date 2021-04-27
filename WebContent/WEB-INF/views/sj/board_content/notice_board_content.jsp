@@ -203,14 +203,14 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					
-					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					<a  href="boardDelete.sj?type=notice_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
 					</c:if>
 					<br>
 					<br>
 					<br>
 					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
+					<a href="like.sj?type=notice_board&idx=${idx}" class="btn btn-outline-info" >️👍</a>
+					<a href="dislike.sj?type=notice_board&idx=${idx}" class="btn btn-outline-info" >👎</a>
 								
 <%-- 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
@@ -452,7 +452,7 @@
 				datatype : "json",
 				data :{
 					"idx" : $('#idx2').val(),//게시판idx
-					"type" : "humor_reply", //게시판종류
+					"type" : "notice_reply", //게시판종류
 					"sessionId" : '${sessionScope.userInfo.userId}',
 					"replyNickName" : frm.replyNickName.value,					
 					"refer" : frm.refer.value,
@@ -503,7 +503,7 @@
 		});
 	}
 	
-	function like(frm){
+/* 	function like(frm){
 		alert("추천하셨습니당!")
 		
 		$.ajax({
@@ -522,7 +522,7 @@
 			alert("ajax실패")
 			}
 			});
-		}
+		} */
 
 
 	
