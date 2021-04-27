@@ -324,8 +324,8 @@ public class SJ_board_dao {
 			pstmt.setString(1, idx);
 			
 			int row = pstmt.executeUpdate(); //executeUpdate는 db에 적용된 행의갯수를 출력함. 0개면 실패 1개면 성공한거임(해당게시글 조회수만 건드리니까)
-			if(row > 0) {
-				System.out.println("Readnum 동작했어요!!!!!");
+			if(row == 0) {
+				System.out.println("readnum error");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
