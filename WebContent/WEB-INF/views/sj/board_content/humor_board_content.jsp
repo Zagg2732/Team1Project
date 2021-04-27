@@ -306,8 +306,6 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody" class="container" ></div>
-		<div class="container" style="width: 900px; display: inline-block;">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
 
@@ -318,6 +316,8 @@
 
 			</tbody>
 		</table>
+		<div class="container" style="width: 900px; display: inline-block;">
+		<div id="replyAddReplyBody" class="container" ></div>
 		</div>
 	</div>
 	</div>
