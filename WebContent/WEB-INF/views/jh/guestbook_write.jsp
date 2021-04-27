@@ -58,7 +58,15 @@
 			</div>
 			<hr>
 			<b class="color-blue">박주현</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-			<div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+			<div style="margin-top: 15px;">
+			<select style="width: 100%">
+			<option>파도타기</option>
+				<option>칭구칭긔 (이승준)</option>
+				<option>여늬♡ (김수연)</option>
+				<option>평생B.F.(김영허)</option>
+				<option>섹ㅅiㄱrOi (현상진)</option>
+			</select>
+			</div>
 		  </div>
 		</div>
 	  </div>
@@ -79,6 +87,7 @@
 				<div class="card-body">
   					<!-- <label>비밀글은 미니홈피 주인에게만 공개됩니다 .</label> -->
     				<form name="guestbook">
+    				<input type="hidden" name="idx" value="${idx}" id="idx">
     				<input type="hidden" name="userid" value="${userInfo.userId}" id="userid">
     				<input type="hidden" name="username" value="${userInfo.userName}" id="username">
       					<div class="form-group">
@@ -168,8 +177,7 @@
 		guestBookList();
 	});
 	
-	function guestBookList(value) {
-		
+	function guestBookList() {	
 		//비회원 방명록 못봐요
 		if(sessionUserid == "") {
 			alert('비회원은 방명록 서비스를 이용할 수 없습니다.')
@@ -179,21 +187,29 @@
 		$.ajax({
 			url : "GuestBookList.ajax",
 			type : "GET",
-			dataType : "json",
+			dataType : "json"
+			,
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				
 				$.each(data, function(index, obj) {
+					//console.log(obj.idx);
 					let htmlString = `
+					<form>
 	  				<div class="card-wrap font-small">
   						<div class="card-title font-small">` +
   							obj.username + ` | ` + obj.writedate + `
+  							<input type="button" value="삭제" class="btn btn-outline-warning btn-sm font-small"
+							onclick="guestbook_del(this.form)">
   						</div>
   						<div class="card-content font-small">`
   							+ obj.content +
   						`</div>
   					</div>
-					`
+  					<input type="hidden" name="idx" value=` +obj.idx + ` class="idx">
+  					<input type="hidden" name="userid_fk" value=` +obj.userid_fk + ` class="userid_fk">
+  					</form>
+  					`
 					$('#guestbooklist').append(htmlString);
 				});
 			},
@@ -220,6 +236,7 @@
 			url : "GuestBookAdd.ajax",
 			type : "GET",
 			data : {
+				"idx" : $('#idx').val(),
 				"userid" : $('#userid').val(),
 				"username" : $('#username').val(),
 				"content" : $('#content').val(),
@@ -236,5 +253,46 @@
 			}
 		});
 	}
+	
+	var del = document.guestbooklist;
+	
+	//미니홈피 주인만 모든 방명록 삭제 가능 
+	//그 밖의 회원은 본인 방명록만 삭제 가능
+	function guestbook_del(frm) {
+		
+		console.log(frm.idx.value); //undefined
+		console.log(sessionUserid); //잘받음 
+		console.log(frm.userid.value); //에러 
+
+		if(sessionGrade !== 1) {
+			if(value.userid.value !== sessionUserid) {
+				alert('본인이 작성한 방명록만 삭제 가능합니다.');
+				return false;
+			}
+		}
+
+		$.ajax({
+			url :"GuestBookDelete.ajax", 
+			type : "POST",
+			datatype : "text",
+			data :{
+				"idx" : frm.idx.value,
+				"userid_fk" : sessionUserid
+			},
+			success : function(data){
+				console.log(data);
+				guestBookList();
+				$('#content').val("");
+				$('#guestbooklist').empty();
+			},
+			error : function() {
+				alert('방명록 삭제 실패');
+			}
+		});
+	}
+	
+	
+	
+	
 </script>
 </html>

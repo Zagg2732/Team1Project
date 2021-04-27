@@ -130,21 +130,21 @@
 							</c:choose>
 					</table>
 				</form>
-				<div class="content-box">
-				<div id="conwrap" style="padding: 10px;">
 				<!-- 댓글 목록 -->	
+				<!-- <div class="content-box"> -->
+				<!-- <div id="conwrap" style="padding: 10px;"> -->
 				<c:choose>
 					<c:when test="${userInfo.userId == null}">
 					</c:when>
 				<c:otherwise>
 					<div class="cardreply">			
-						<div id="replybody" style="width: 95%; height:100px; margin: 10px auto; overflow: scroll;">
+						<div id="replybody" style="width: 95%; height:130px; margin: 10px auto; overflow: scroll;">
   						</div>
   					</div> 
 				</c:otherwise>
 				</c:choose>
-				</div>
-				</div>
+				<!-- </div> -->
+				<!-- </div> -->
 			</div><!-- 컨테이너 -->
 			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
@@ -212,7 +212,7 @@
 	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
 		
 	function replyList() {
- 		
+		console.log($('#idx').val());
 		//비회원은 댓글을 못봐요
 		if(sessionUserid == "") {
 			alert('비회원은 댓글 서비스를 이용할 수 없습니다.');
@@ -229,12 +229,13 @@
 			success : function(data) {
 				//console.log(data);
 				$.each(data, function(index,obj) {
+					
 					let htmlString = `
 					<form>
 					<div class="card-wrap font-small">
 						<div class="card-title font-small">` +
 							obj.username + ` | ` + obj.writedate + `
-							<input type="button" value="삭제" class="btn btn-sm"
+							<input type="button" value="삭제" class="btn btn-sm font-small"
 							onclick="reply_del(this.form)">
 						</div>
 						<div class ="card-content font-small">`
@@ -292,13 +293,15 @@
 	//미니홈피 주인만 모든 댓글 삭제 가능 
 	//그 밖의 회원은 본인 댓글만 삭제 가능
 	function reply_del(value) {
-
-		if(sessionGrade != 1) {
-			if(value.userid.value != sessionUserid) {
-				alert('본인이 작성한 댓글만 삭제가 가능합니다!');
+		//console.log(value.num.value);
+		//console.log(value.userid.value);
+		
+ 		if(sessionGrade !== 1) {
+			if(value.userid.value !== sessionUserid) {
+				alert('본인이 작성한 댓글만 삭제 가능합니다.');
 				return false;
 			}
-		}
+		} 
 
 		$.ajax({
 			url :"ReplyDelete.ajax",
