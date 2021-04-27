@@ -27,7 +27,7 @@ url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=C://DataBase/oraclecloud/oracle-
 			maxActive="20"
 			password="Bit196team1!"
 			username="bituser"
-			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/joohyun/BitCamp/Project/team1/oracle-atp"
+			url="jdbc:oracle:thin:@sooyeondb_high?TNS_ADMIN=/Users/hyunsangjin/oraclecloud/oracle-atp"
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
 			auth="Container" 
