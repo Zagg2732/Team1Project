@@ -38,10 +38,10 @@
 			<div style="margin-top: 15px;">
 			<select style="width: 100%">
 			<option>파도타기</option>
-			<option>이승준(맥날드실분)</option>
-			<option>김수연</option>
-			<option>김영허</option>
-			<option>현상진</option>
+			<option>칭구칭긔 (이승준)</option>
+			<option>여늬♡ (김수연)</option>
+			<option>평생B.F.(김영허)</option>
+			<option>섹ㅅiㄱrOi (현상진)</option>
 			</select>
 			</div>
 		  </div>

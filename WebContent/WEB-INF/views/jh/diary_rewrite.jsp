@@ -50,7 +50,7 @@
 		  </div>
 		  <div class="content-box" style="padding: 20px">
 			<img style="width: 100%" src="./images/jh/profile.png"></img>
-			<p style="font-size: 14px">일촌신청 X<br><br><br><br><br><br></p>
+			<p style="font-size: 14px">일촌신청 X<br><br><br><br></p>
 			<div style="font-size: 10px">
 			  <i style="color: #068cb9" class="fa fa-caret-right"></i><b>&nbsp;HISTORY</b>
 			  <span style="float: right; font-size: 14px; color: #999999">
@@ -58,7 +58,15 @@
 			</div>
 			<hr>
 			<b class="color-blue">박주현</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-			<div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+			<div style="margin-top: 15px;">
+			<select style="width: 100%">
+			<option>파도타기</option>
+				<option>칭구칭긔 (이승준)</option>
+				<option>여늬♡ (김수연)</option>
+				<option>평생B.F.(김영허)</option>
+				<option>섹ㅅiㄱrOi (현상진)</option>
+			</select>
+			</div>
 		  </div>
 		</div>
 	  </div>

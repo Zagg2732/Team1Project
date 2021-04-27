@@ -50,7 +50,7 @@
 		  </div>
 		  <div class="content-box" style="padding: 20px">
 			<img style="width: 100%" src="./images/jh/profile.png"></img>
-			<p style="font-size: 14px">일촌신청 X<br><br><br><br><br><br></p>
+			<p style="font-size: 14px">일촌신청 X<br><br><br><br></p>
 			<div style="font-size: 10px">
 			  <i style="color: #068cb9" class="fa fa-caret-right"></i><b>&nbsp;HISTORY</b>
 			  <span style="float: right; font-size: 14px; color: #999999">
@@ -58,7 +58,15 @@
 			</div>
 			<hr>
 			<b class="color-blue">박주현</b><span style="color: #b3b3b3; font-size: 12px;">&nbsp;(<i class="fa fa-mars-stroke-v"></i>)</span>
-			<div style="margin-top: 15px;"><select style="width: 100%"><option>파도타기</option></select></div>
+			<div style="margin-top: 15px;">
+			<select style="width: 100%">
+			<option>파도타기</option>
+				<option>칭구칭긔 (이승준)</option>
+				<option>여늬♡ (김수연)</option>
+				<option>평생B.F.(김영허)</option>
+				<option>섹ㅅiㄱrOi (현상진)</option>
+			</select>
+			</div>
 		  </div>
 		</div>
 	  </div>
@@ -69,7 +77,8 @@
 			<span style="font-size: 12px;">http://cyworld.com/joohyun</span>
 		  </div>
 		  <div class="content-box" style="box-shadow: 5px 5px 20px -10px grey; padding: 10px 20px;">
-		  		<c:set var="userInfo" value="${sessionScope.userInfo}" />
+			  
+			  	<c:set var="userInfo" value="${sessionScope.userInfo}" />
 				<c:set var="pagesize" value="${requestScope.pagesize}" />
 				<c:set var="cpage" value="${requestScope.cpage}" />
 				<c:set var="pagecount" value="${requestScope.pagecount}" />
@@ -81,7 +90,7 @@
 				<table class="table table-hover">
 		  		<thead>
 		  			<tr>
-		  				<th scope="col" class="text-center font-small ">제목</th>
+		  				<th scope="col" class="text-center font-small">제목</th>
 		  				<th scope="col" class="text-center font-small">작성일</th>
 		  				<th scope="col" class="text-center font-small">조회수</th>
 		  			</tr>
@@ -113,7 +122,7 @@
 		  			<p class="text-center">
 		  			<!-- 이전 링크 -->
 		  			<c:if test="${cpage > 1}">
-		  			<a href="diary.jh?cp=${cpage-1}&ps=${pagesize}"class="font-small" >이전</a>
+		  			<a href="diary.jh?cp=${cpage-1}&ps=${pagesize}">이전</a>
 		  			</c:if>
 		  			</p>
 		  			
@@ -134,10 +143,12 @@
 					<!--다음 링크 --> 
 					<p class="text-center">
 					<c:if test="${cpage < pagecount}">
-						<a href="diary.jh?cp=${cpage+1}&ps=${pagesize}" class="font-small">다음</a>
+						<a href="diary.jh?cp=${cpage+1}&ps=${pagesize}">다음</a>
 					</c:if>
+					<%-- 총 게시물 수 ${totaldiarycount}
+						 마지막 ${pager} --%>
 		  	</div>
-		  	<div class="menu-item" onclick="location.href='home.jh';">홈</div>
+			<div class="menu-item" onclick="location.href='home.jh';">홈</div>
 			<div class="menu-item menu-selected" style="top: 48px" onclick="location.href='diary.jh';">다이어리</div>
 			<div class="menu-item" style="top: 86px" onclick="location.href='guestBook.jh';">방명록</div>
 		  </div>
@@ -193,4 +204,3 @@
 	</div>
 </body>
 </html>
-		  
