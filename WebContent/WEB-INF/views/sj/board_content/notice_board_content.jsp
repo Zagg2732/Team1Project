@@ -207,7 +207,7 @@
 					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
 					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
 								
-				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+<%-- 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
 				</c:if>
 				
@@ -223,7 +223,7 @@
 				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
    					</form>
 				</c:if>
-		
+		 --%>
 
 
 		<!-- 	<button type="button" class="btn btn-outline-info" id="up" name="up">좋아요!</button>
@@ -363,9 +363,10 @@
 								+ '<input type="hidden" name = "replyRefer" value="' +obj.refer +'" class="replyRefer">' 
 								+ '<input type="hidden" name = "replyDepth" value="' +obj.depth +'" class="replyDepth">' 
 								+ '<input type="hidden" name = "replyStep" value="' +obj.step +'" class="replyStep">'
-								+ '<input type="button" id = "replyAddForm" value="답글" class="btn btn-dark mt-3" onclick="reply_add_form(this.form)">'
+								+ '<div style="text-align: right;">'
+								+ '<input type="button" id = "replyAddForm" value="답글" class="btn btn-dark mt-3" onclick="reply_add_form(this.form)">&nbsp;&nbsp;&nbsp;&nbsp;'
 								+ '<input type="button" id = "replyDeleteBtn" value="삭제" class="btn btn-dark mt-3" onclick="reply_del(this.form)">'
-								+ '</form></td></tr>');
+								+ '</div></form></td></tr>');
 					});		
 			},
 			error : function() {
