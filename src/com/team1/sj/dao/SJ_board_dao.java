@@ -183,7 +183,6 @@ public class SJ_board_dao {
 			}			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		System.out.println("넌 아니겠지 : " + e.getMessage());
@@ -193,7 +192,6 @@ public class SJ_board_dao {
 				rs.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 				System.out.println("너??" + e.getMessage());
@@ -243,7 +241,6 @@ public class SJ_board_dao {
 				rs.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 				System.out.println("너??" + e.getMessage());
