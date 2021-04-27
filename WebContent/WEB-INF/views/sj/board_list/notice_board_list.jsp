@@ -116,9 +116,9 @@
 				</table>
 			</div> <!-- 끝  -->
 			
-			
-			
-			<a href="boardWrite.sj?type=notice_board" class="btn btn-outline-info">글쓰기</a>
+			<c:if test= "${sessionScope.userInfo.userId eq 'user05'}">
+				<a href="boardWrite.sj?type=notice_board" class="btn btn-outline-info">글쓰기</a>
+			</c:if>
 		</div>
 
 	</div>
