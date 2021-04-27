@@ -44,8 +44,9 @@
 		<h3>idx 잘받아왔니 ? -> ${param.idx}</h3>
 
 		<div class="container" role="main">
+		<div style="text-align: center;">
 			<br> <b>수정하기</b> <br> <br>
-
+</div>
 			<%-- action="${pageContext.request.contextPath}/boardWriteOK.sj?type=humor_board&cp=${i}&ps=${pagesize}" --%>
 			<form name="bbs" id="form" role="form" method="post"
 				action="boardModifyWriteOK.sj"

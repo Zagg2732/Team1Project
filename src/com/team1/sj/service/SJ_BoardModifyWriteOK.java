@@ -33,7 +33,7 @@ public class SJ_BoardModifyWriteOK implements Action {
 			String filename = multi.getParameter("filename");
 			
 			SJ_board_dao dao = new SJ_board_dao();
-			
+      
 			int result = dao.boardModify(type, idx, subject, content);
 			
 			if(result == 0) {
@@ -44,7 +44,6 @@ public class SJ_BoardModifyWriteOK implements Action {
 			forward.setRedirect(false);
 			forward.setPath("board.sj?type="+ type +"&idx=" + idx);
 			return forward;
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
