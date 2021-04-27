@@ -166,23 +166,25 @@
 		</ul>
 		</div>
 	</div>
+	<script src="https://kit.fontawesome.com/c5fd5902bb.js" crossorigin="anonymous"></script>
 </body>
 <script type="text/javascript">
 
 	var frm = document.guestbook; //guestbook form 전체
 	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
-	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
+	var sessionGrade = <%=(int)request.getAttribute("sessionGrade")%>;
 	
 	$(function() {
 		guestBookList();
 	});
 	
-	function guestBookList() {	
+	function guestBookList() {
+		console.log(sessionUserid);
 		//비회원 방명록 못봐요
 		if(sessionUserid == "") {
 			alert('비회원은 방명록 서비스를 이용할 수 없습니다.')
 			return false;
-		}
+		}		
 		
 		$.ajax({
 			url : "GuestBookList.ajax",
@@ -191,15 +193,14 @@
 			,
 			success : function(data) {
 				//console.log(data);
-				
 				$.each(data, function(index, obj) {
-					//console.log(obj.idx);
+					console.log(data);
 					let htmlString = `
-					<form>
+					<form method="POST">
 	  				<div class="card-wrap font-small">
   						<div class="card-title font-small">` +
-  							obj.username + ` | ` + obj.writedate + `
-  							<input type="button" value="삭제" class="btn btn-outline-warning btn-sm font-small"
+  							obj.username + ` | ` + obj.writedate + ` | ` +obj.readyn+ `
+  							<input type="button" value="삭제" class="btn btn-outline-warning btn-sm font-small float-right"
 							onclick="guestbook_del(this.form)">
   						</div>
   						<div class="card-content font-small">`
@@ -207,7 +208,7 @@
   						`</div>
   					</div>
   					<input type="hidden" name="idx" value=` +obj.idx + ` class="idx">
-  					<input type="hidden" name="userid_fk" value=` +obj.userid_fk + ` class="userid_fk">
+  					<input type="hidden" name="userid" value=` +obj.userid_fk + ` class="userid_fk">
   					</form>
   					`
 					$('#guestbooklist').append(htmlString);
@@ -224,13 +225,13 @@
 			alert('내용을 입력하세요.');
 			return false;
 		}
+		
 		//체크박스 선택값에 따라 방명록 공개 여부 
 		if($('#readyn').is(":checked") == true){
 		    var readyn = 'N';
 		}else {
 			var readyn = 'Y';
 		}
-		//console.log(readyn);
 		
 		$.ajax ({
 			url : "GuestBookAdd.ajax",
@@ -252,20 +253,14 @@
 				alert('등록 실패 ㅠ');
 			}
 		});
-	}
-	
-	var del = document.guestbooklist;
+	}	
 	
 	//미니홈피 주인만 모든 방명록 삭제 가능 
 	//그 밖의 회원은 본인 방명록만 삭제 가능
 	function guestbook_del(frm) {
-		
-		console.log(frm.idx.value); //undefined
-		console.log(sessionUserid); //잘받음 
-		console.log(frm.userid.value); //에러 
 
 		if(sessionGrade !== 1) {
-			if(value.userid.value !== sessionUserid) {
+			if(frm.userid.value !== sessionUserid) {
 				alert('본인이 작성한 방명록만 삭제 가능합니다.');
 				return false;
 			}
@@ -290,9 +285,5 @@
 			}
 		});
 	}
-	
-	
-	
-	
 </script>
 </html>
