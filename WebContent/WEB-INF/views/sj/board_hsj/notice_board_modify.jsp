@@ -98,7 +98,7 @@
 				<a class="btn btn-outline-info" id="btnSave" onclick="check();">등록</a>
 				&nbsp;&nbsp;&nbsp;
 				<a class="btn btn-outline-info" id="btnList"
-					href="boardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">목록</a>
+					href="boardList.sj?type=notice_board&cp=${i}&ps=${pagesize}">목록</a>
 
 			</div>
 

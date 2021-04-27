@@ -43,6 +43,8 @@
 }
 }
 
+
+
 </style>
 
 <!-- SweetAlert2 -->
@@ -90,7 +92,7 @@
 							<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.subject}" class="form-control"
-								aria-describedby="basic-addon1">${board.subject}
+								aria-describedby="basic-addon1"> [${board.subject}]
 								
 								</h2>
 								<br>
@@ -147,12 +149,17 @@
 								<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1">👁 ${board.readnum}회
+								aria-describedby="basic-addon1">👀 ${board.readnum}회
 								&nbsp;&nbsp;&nbsp;
 								<input type="hidden" id="like_result" name="like_result"
 								class="form-control" aria-describedby="basic-addon1"
-								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1" onclick="">❤️ ${board.up}
+								value="${board.up}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👍️ ${board.up}
+								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="like_result" name="like_result"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.down}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👎️ ${board.down}
 								
 								</div>
 
@@ -183,24 +190,23 @@
 					<img src="upload/${board.filename}">			
 				</c:if> --%>
 					<%-- <h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4> --%>
-					
 					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-					<form action="boardModifyWrite.sj" method="POST">
-				        <input type="hidden" name="type" value = "humor_board"><br>
-				        <input type="hidden" name="idx" value = "${idx}"><br>
-				        <input type="hidden" name="filename" value = "${board.filename}"><br>
-				        <input type="hidden" name="subject" value = "${board.subject}"><br>
-				        <input type="hidden" name="content" value = "${board.content}"><br>
-				        
-				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
-   					</form>
-					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
+					<form action="boardModifyWrite.sj" method="POST" >
+					        <input type="hidden" name="type" value = "humor_board"><br>
+					        <input type="hidden" name="idx" value = "${idx}"><br>
+					        <input type="hidden" name="filename" value = "${board.filename}"><br>
+					        <input type="hidden" name="subject" value = "${board.subject}"><br>
+					        <input type="hidden" name="content" value = "${board.content}"><br>
+					 <input type="submit" class="btn btn-outline-info" value="글수정"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="글삭제" onclick="location.href='boardDelete.sj?type=humor_board&idx=${idx}'" class="btn btn-outline-info">
+   						</form>
+<!-- 						<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a> -->
 					</c:if>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					
-					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					</c:if>
+					
 					<br>
 					<br>
 					<br>
@@ -301,8 +307,6 @@
 
 
 		<!-- 꼬리글 목록 테이블 -->
-		<div id="replyAddReplyBody" class="container" ></div>
-		<div class="container" style="width: 900px; display: inline-block;">
 		<table class="table table-striped text-center">
 			<tbody id="replybody">
 
@@ -313,6 +317,8 @@
 
 			</tbody>
 		</table>
+		<div class="container" style="width: 900px; display: inline-block;">
+		<div id="replyAddReplyBody" class="container" ></div>
 		</div>
 	</div>
 	</div>

@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>- Team.1 ADMIN -</title>
 
 </head>
 
@@ -125,8 +125,11 @@
                                     </div>
 						</div>
 						
-						<div class="card-body" style="height:550px;">
-							<div id="chartArea"></div>    
+						<div class="card-body" style="height:720px;">
+							<div id="chartwrap" style="padding: 60px;">
+							
+								<div id="chartArea"></div>    
+							</div>
 
 						</div>
 						

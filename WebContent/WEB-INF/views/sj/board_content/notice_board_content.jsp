@@ -88,7 +88,7 @@
 							<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.subject}" class="form-control"
-								aria-describedby="basic-addon1">${board.subject}
+								aria-describedby="basic-addon1">[${board.subject}]
 								
 								</h2>
 								<br>
@@ -145,12 +145,17 @@
 								<input type="hidden" id="idx" name="idx"
 								class="form-control" aria-describedby="basic-addon1"
 								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1">👁 ${board.readnum}회
+								aria-describedby="basic-addon1">👀 ${board.readnum}회
 								&nbsp;&nbsp;&nbsp;
 								<input type="hidden" id="like_result" name="like_result"
 								class="form-control" aria-describedby="basic-addon1"
-								value="${board.readnum}" class="form-control"
-								aria-describedby="basic-addon1">❤️ ${board.up}
+								value="${board.up}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👍️ ${board.up}
+								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" id="like_result" name="like_result"
+								class="form-control" aria-describedby="basic-addon1"
+								value="${board.down}" class="form-control"
+								aria-describedby="basic-addon1" onclick="">👎️ ${board.down}
 								
 								</div>
 
@@ -182,30 +187,30 @@
 				</c:if> --%>
 					<%-- <h4> 게시판 글 쓴 사람 :  ${board.userid_fk} || 세션 접속한 사람 : ${sessionScope.userInfo.userId} </h4> --%>
 					
-					
-						<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
-					<form action="boardModifyWrite.sj" method="POST">
-				        <input type="hidden" name="type" value = "humor_board"><br>
-				        <input type="hidden" name="idx" value = "${idx}"><br>
-				        <input type="hidden" name="filename" value = "${board.filename}"><br>
-				        <input type="hidden" name="subject" value = "${board.subject}"><br>
-				        <input type="hidden" name="content" value = "${board.content}"><br>
-				        
-				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
-   					</form>
-					<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a>
+					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
+					<form action="boardModifyWrite.sj" method="POST" >
+					        <input type="hidden" name="type" value = "notice_board"><br>
+					        <input type="hidden" name="idx" value = "${idx}"><br>
+					        <input type="hidden" name="filename" value = "${board.filename}"><br>
+					        <input type="hidden" name="subject" value = "${board.subject}"><br>
+					        <input type="hidden" name="content" value = "${board.content}"><br>
+					 <input type="submit" class="btn btn-outline-info" value="글수정"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="글삭제" onclick="location.href='boardDelete.sj?type=notice_board&idx=${idx}'" class="btn btn-outline-info">
+   						</form>
+<!-- 						<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a> -->
 					</c:if>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					
-					<a  href="boardDelete.sj?type=humor_board&idx=${idx}" class="btn btn-outline-info">글삭제</a>
+					<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					</c:if>
+					
 					<br>
 					<br>
 					<br>
 					<br>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">️👍</a>
-					<a  class="btn btn-outline-info" onclick="like(this.form)">👎</a>
+					<a href="like.sj?type=notice_board&idx=${idx}" class="btn btn-outline-info" >️👍</a>
+					<a href="dislike.sj?type=notice_board&idx=${idx}" class="btn btn-outline-info">👎</a>
+								
 								
 <%-- 				<c:if test="${board.userid_fk eq sessionScope.userInfo.userId}">
 					<a href="boardDelete.sj?type=humor_board&idx=${idx}"></a><br>		
@@ -447,7 +452,7 @@
 				datatype : "json",
 				data :{
 					"idx" : $('#idx2').val(),//게시판idx
-					"type" : "humor_reply", //게시판종류
+					"type" : "notice_reply", //게시판종류
 					"sessionId" : '${sessionScope.userInfo.userId}',
 					"replyNickName" : frm.replyNickName.value,					
 					"refer" : frm.refer.value,
@@ -498,7 +503,7 @@
 		});
 	}
 	
-	function like(frm){
+/* 	function like(frm){
 		alert("추천하셨습니당!")
 		
 		$.ajax({
@@ -517,7 +522,7 @@
 			alert("ajax실패")
 			}
 			});
-		}
+		} */
 
 
 	

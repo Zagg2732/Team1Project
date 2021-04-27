@@ -3,6 +3,9 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="userInfo" value="${sessionScope.userInfo}" />
+
+<link href="${pageContext.request.contextPath}/images/favicon.png" rel="icon">
+<link href="${pageContext.request.contextPath}/images/apple-touch-icon.png" rel="apple-touch-icon">
        
 		<div class="offcanvas-menu-overlay"></div>
 		<div class="offcanvas-menu-wrapper">
@@ -32,9 +35,9 @@
 						</c:if>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                     	<div class="ht-widget">
 	                    	
 	                    	<c:if test="${not empty userInfo}">

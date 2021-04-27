@@ -56,9 +56,9 @@
             <a href="${pageContext.request.contextPath}/kimslist.kims" class="btn btn-primary">목록</a>
             
             <!-- 수정 삭제버튼 -->
-<%--                 <a href="update.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a>
-                <a href="deleteAction.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">삭제</a> --%>
-                
+               <%--  <a href="update.jsp?bbsID=<%=bbsID %>" class="btn btn-primary">수정</a> --%>
+                <a href="${pageContext.request.contextPath}/kimsboarddelete.kims?idx=${idx}" class="btn btn-primary">삭제</a>
+             
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

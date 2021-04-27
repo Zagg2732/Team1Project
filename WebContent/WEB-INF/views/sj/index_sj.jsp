@@ -19,6 +19,20 @@
 <link rel="Stylesheet" href="css/hsj_style/default.css">
 
 <style type="text/css">
+
+.tdNew{
+	width:60%;
+}
+.tdNewDate{
+	width:40%;
+}
+.tdList{ 
+	width:80%;
+}
+.tdInfo{
+	width:20%;
+}
+
 /* Underline Effect*/
 .nav-item {
 	position: relative;
@@ -233,7 +247,7 @@ a:hover {
 			<!-- 베스트  -->
 			<div class="col-sm-6">
 				<table class="table table-hover">
-					<thead style="color: #ff0000;">
+					<thead style="color: #ff0000; width:100%;" >
 
 						<tr>
 							<th><h3>Best</h3></th>
@@ -242,10 +256,10 @@ a:hover {
 
 					</thead>
 					<tbody>
-						<c:forEach var="board" items="${requestScope.noticelist}">
+						<c:forEach var="board" items="${requestScope.hotlist}">
 							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
-
+								<td class="tdList"><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+								<td class="tdInfo">👍️ ${board.up}</td>
 							</tr>
 							<br>
 						</c:forEach>
@@ -260,7 +274,7 @@ a:hover {
 			<!-- New -->
 			<div class="col-sm-6">
 				<table class="table table-hover">
-					<thead>
+					<thead >
 
 						<tr>
 							<th><h3>New</h3></th>
@@ -271,10 +285,10 @@ a:hover {
 
 					<tbody>
 
-						<c:forEach var="board" items="${requestScope.noticelist}">
+						<c:forEach var="board" items="${requestScope.newlist}">
 							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
-
+								<td class="tdNew"><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+								<td class="tdNewDate">🗓 ${board.writedate}</td>
 							</tr>
 							<br>
 						</c:forEach>
@@ -299,8 +313,8 @@ a:hover {
 					<tbody>
 						<c:forEach var="board" items="${requestScope.noticelist}">
 							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
-
+								<td class="tdList"><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
+								<td class="tdInfo">👀 ${board.readnum}</td>
 							</tr>
 							<br>
 						</c:forEach>
@@ -323,8 +337,8 @@ a:hover {
 					<tbody>
 						<c:forEach var="board" items="${requestScope.humorlist}">
 							<tr class="boardlist">
-								<td><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
-
+								<td class="boardList"><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+								<td class="tdInfo">👀 ${board.readnum}</td>
 							</tr>
 							<br>
 						</c:forEach>
