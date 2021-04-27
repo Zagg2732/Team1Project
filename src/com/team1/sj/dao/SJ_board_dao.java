@@ -178,12 +178,12 @@ public class SJ_board_dao {
 				board.setReadnum(rs.getInt("READNUM"));
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
+				board.setType(name);
 				
 				list.add(board);
 			}			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		System.out.println("넌 아니겠지 : " + e.getMessage());
@@ -193,7 +193,6 @@ public class SJ_board_dao {
 				rs.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 				System.out.println("너??" + e.getMessage());
@@ -228,6 +227,7 @@ public class SJ_board_dao {
 				board.setReadnum(rs.getInt("READNUM"));
 				board.setWritedate(rs.getDate("WRITEDATE"));
 				board.setSubject(rs.getString("SUBJECT"));
+				board.setType("humor_board");
 				
 				list.add(board);
 			}			
@@ -243,7 +243,6 @@ public class SJ_board_dao {
 				rs.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 				System.out.println("너??" + e.getMessage());

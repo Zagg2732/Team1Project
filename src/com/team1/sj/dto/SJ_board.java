@@ -14,9 +14,17 @@ public class SJ_board {
 	private String subject;
 	private String content;
 	private String filename;
+	private String type;
 	
 	
 	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getNickname() {
 		return nickname;
 	}
