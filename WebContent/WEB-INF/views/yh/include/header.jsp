@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 
     <nav class ="navbar navbar-default">
         <div class="navbar-header"> <!-- 홈페이지의 로고 -->
@@ -28,7 +29,9 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <li>${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <c:if test="${not empty userInfo}">
+            <li style="padding-top: 15px;">${sessionScope.userInfo.userId}님 환영합니다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            </c:if>
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" aria-haspopup="true"
