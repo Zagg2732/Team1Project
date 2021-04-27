@@ -25,10 +25,12 @@ public class SJ_HumorBoardList implements Action {
 			List<SJ_board> humorlist = dao.list(humor);			
 			List<SJ_board> noticelist = dao.list(notice);
 			List<SJ_board> hotlist = dao.hotlist();
+			List<SJ_board> newlist = dao.newlist();
 			
 			request.setAttribute("humorlist", humorlist);
 			request.setAttribute("noticelist", noticelist);
 			request.setAttribute("hotlist", hotlist);
+			request.setAttribute("newlist", newlist);
 					
 			forward = new ActionForward();
 			forward.setRedirect(false);
