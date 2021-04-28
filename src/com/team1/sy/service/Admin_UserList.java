@@ -59,7 +59,6 @@ public class Admin_UserList implements Action {
 			int pagersize=3; //[1][2][3]
 			ThePager pager = new ThePager(totalUserCnt,cpage,pagesize,pagersize,"UserList.admin");
 			
-			
 			request.setAttribute("pagesize", pagesize);
 			request.setAttribute("cpage", cpage);
 			request.setAttribute("pagecount", pagecount);

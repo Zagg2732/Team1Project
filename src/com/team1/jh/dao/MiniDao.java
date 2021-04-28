@@ -285,13 +285,13 @@ public class MiniDao {
 		try {
 			conn = ds.getConnection();
 			
-			//원본글을 삭제하면 답글까지 삭제해주기 위해 refer, depth를 꺼내봅니다
+			//글을 삭제하면 답글까지 삭제해주기 위해 refer, depth를 꺼내봅니다
 			String sql_refer_depth = "SELECT REFER, DEPTH FROM DIARY WHERE IDX=?";
 			
-			//댓글 삭제할 때 답글, 답글의 답글, 답글의 답글의 답글에 달린 댓글 전부를 먼저 삭제
+			//글을 삭제할 때 답글, 답글의 답글, 답글의 답글의 답글에 달린 댓글 전부를 먼저 삭제
 			String sql_reply = "DELETE FROM DIARY_REPLY " +
 							   "WHERE IDX_FK IN (SELECT IDX FROM DIARY WHERE IDX=? OR (REFER=? AND DEPTH >=?))";
-			//삭제 대상 원본or답글 삭제
+			//삭제 대상 글 삭제
 			String sql_diary = "DELETE FROM DIARY WHERE IDX=? OR (REFER=? AND DEPTH >=?)";
 			
 			//refer 꺼내기 

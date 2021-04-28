@@ -57,6 +57,10 @@ public class FrontBoardController extends HttpServlet {
     		System.out.println("글 삭제 도착");
         	action = new KimsBoardDeleteService();
         	forward = action.execute(request, response);
+    	}else if(url_Command.equals("/index.kims")) {
+    		forward = new ActionForward();
+    		forward.setRedirect(false);
+    		forward.setPath("/WEB-INF/views/yh/board_kims/indexyh.jsp");
     	}
     	///////////////////////////////////////////////
     	

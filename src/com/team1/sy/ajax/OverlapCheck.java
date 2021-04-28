@@ -11,9 +11,6 @@ import com.team1.sy.dao.TotalDao;
 
 import net.sf.json.JSONObject;
 
-/**
- * Servlet implementation class OverlapCheck
- */
 @WebServlet("/OverlapCheck.sooyeon")
 public class OverlapCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,25 +19,19 @@ public class OverlapCheck extends HttpServlet {
         super();
     }
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
 
 		String col = "";
 		boolean result = false;
 		
-		System.out.println(type);
-
 		if (type.equals("id")) {
 			col = "USERID";
 		} else {
 			col = "NICKNAME";
 		}
 		
-		System.out.println(col);
-
 		TotalDao dao = new TotalDao();
 		result = dao.overlapCheck(col, value);
 
@@ -50,7 +41,6 @@ public class OverlapCheck extends HttpServlet {
 
 		response.setContentType("application/x-json; charset=UTF-8");
 		response.getWriter().print(jObj);
-
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

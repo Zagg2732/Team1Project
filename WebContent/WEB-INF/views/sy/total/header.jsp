@@ -82,7 +82,7 @@
                                 <li class="active"><a href="index.team1">Home</a></li>
                                 <li><a href="index.sj">SJ Board</a></li>
                                 <li><a href="javscript:void(0);" onclick="window.open('home.jh','minihomepy','width=1200,height=650,location=no,status=no,scrollbars=yes');">Joohyun's minihomepy</a></li>
-                                <li><a href="${pageContext.request.contextPath}/indexyh.jsp">Kim's Board</a></li>
+                                <li><a href="index.kims">Kim's Board</a></li>
                             </ul>
                         </nav>
                     </div>

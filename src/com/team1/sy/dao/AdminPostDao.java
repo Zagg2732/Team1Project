@@ -19,9 +19,9 @@ import com.team1.yh.dto.KimsBoard;
 
 public class AdminPostDao {
 
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
+	//Connection conn;
+	//PreparedStatement pstmt;
+	//ResultSet rs;
 	DataSource ds;
 
 	public AdminPostDao() {
