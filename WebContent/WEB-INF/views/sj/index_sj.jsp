@@ -210,7 +210,7 @@ a:hover {
 					<a href="#" style="color: red;">Best</a>
 					<br>
 					<br>
-					<a href="#">New</a>
+					<a href="boardList.sj?type=humor_board">New</a>
 					<br>
 					<br>
 					<a href="boardList.sj?type=notice_board">공지게시판</a>
