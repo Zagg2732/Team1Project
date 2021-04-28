@@ -137,6 +137,8 @@ a:hover {
 #sidebar ul {
 	padding: 20px;
 }
+
+
 </style>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -182,8 +184,7 @@ a:hover {
 						Home <span class="sr-only"></span>
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#">Best</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">New</a></li>
+			
 				<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -287,7 +288,7 @@ a:hover {
 
 						<c:forEach var="board" items="${requestScope.newlist}">
 							<tr class="boardlist">
-								<td class="tdNew"><a href="board.sj?idx=${board.idx}&type=humor_board">${board.subject}</a></td>
+								<td class="tdNew"><a href="board.sj?idx=${board.idx}&type=notice_board">${board.subject}</a></td>
 								<td class="tdNewDate">🗓 ${board.writedate}</td>
 							</tr>
 							<br>

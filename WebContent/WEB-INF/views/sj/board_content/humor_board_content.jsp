@@ -15,6 +15,9 @@
 <title>유머 게시판</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+
+
 <style>
 #replyList {
 	margin-bottom: 250px;
@@ -47,8 +50,6 @@
 
 </style>
 
-<!-- SweetAlert2 -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <!-- 부트  -->
 <link rel="Stylesheet" href="css/hsj_style/default.css">
@@ -198,7 +199,7 @@
 					        <input type="hidden" name="subject" value = "${board.subject}"><br>
 					        <input type="hidden" name="content" value = "${board.content}"><br>
 					 <input type="submit" class="btn btn-outline-info" value="글수정"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="button" value="글삭제" onclick="location.href='boardDelete.sj?type=humor_board&idx=${idx}'" class="btn btn-outline-info">
+					<input  type="button" value="글삭제" onclick="location.href='boardDelete.sj?type=humor_board&idx=${idx}'" class="btn btn-outline-info">
    						</form>
 <!-- 						<a  href="boardModifyWrite.sj" class="btn btn-outline-info">글수정</a> -->
 					</c:if>
@@ -228,7 +229,7 @@
 				        <input type="hidden" name="content" value = "${board.content}"><br>
 				        
 				       <!--  <input type="submit" value="글쓴이는 수정버튼이 보여요. 눌러서 수정해볼래요"> -->
-   					</form>
+   					</form>btn btn-outline-info
 				</c:if> --%>
 		
 
@@ -507,6 +508,8 @@
 			}
 		});
 	}
+	
+
 
 	
 	/* 
