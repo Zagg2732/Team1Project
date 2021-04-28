@@ -205,9 +205,7 @@
 	
 	var frm = document.reply; //reply form 전체
 	var sessionUserid = '<%=(String)request.getAttribute("sessionUserid")%>';
-	var sessionGrade = <%=(int)request.getAttribute("sessionGrade")%>;
-	//sessionGrade를 int로 받겠다고 했지만 '' 때문에 string 으로 인식했었음
-	//그래서 !== 타입까지 비교를 하니 조건이 제대로 동작을 안함 
+	var sessionGrade = '<%=(int)request.getAttribute("sessionGrade")%>';
 	
 	$(function() {
 		replyList();
@@ -294,16 +292,16 @@
 	//미니홈피 주인만 모든 댓글 삭제 가능 
 	//그 밖의 회원은 본인 댓글만 삭제 가능
 	function reply_del(frm) {
-		console.log(sessionGrade); //회원등급
-		console.log(frm.userid.value); //글쓴이
-		console.log(sessionUserid); //로그인세션
+		//console.log(sessionGrade); //회원등급
+		//console.log(frm.userid.value); //글쓴이
+		//console.log(sessionUserid); //로그인세션
 		
-		console.log(sessionGrade !==1); //true
-		console.log(typeof(sessionGrade)); //String 
+		//console.log(sessionGrade !== 1); //true
+		//console.log(typeof(sessionGrade)); //String 
 
 		
- 		if(sessionGrade !== 1) {
-			if(frm.userid.value !== sessionUserid) {
+ 		if(sessionGrade != 1) {
+			if(frm.userid.value != sessionUserid) {
 				alert('본인이 작성한 댓글만 삭제 가능합니다 !');
 				return false;
 			}
@@ -316,10 +314,10 @@
 			data :{
 				"num" : frm.num.value,
 				"idx_fk" : frm.idx.value,
-				"userid_fk" : sessionUserid
+				"userid_fk" : frm.userid.value
 			},
 			success : function(data){
-				console.log(data);
+				//console.log(data);
 				replyList();
 				$('#reply_content').val("");
 				$('#replybody').empty();

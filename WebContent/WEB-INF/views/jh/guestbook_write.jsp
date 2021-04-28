@@ -208,7 +208,7 @@
   						`</div>
   					</div>
   					<input type="hidden" name="idx" value=` +obj.idx + ` class="idx">
-  					<input type="hidden" name="userid" value=` +obj.userid_fk + ` class="userid_fk">
+  					<input type="hidden" name="userid" value=` +obj.userid_fk + ` class="userid">
   					</form>
   					`
 					$('#guestbooklist').append(htmlString);
@@ -258,9 +258,12 @@
 	//미니홈피 주인만 모든 방명록 삭제 가능 
 	//그 밖의 회원은 본인 방명록만 삭제 가능
 	function guestbook_del(frm) {
-
-		if(sessionGrade !== 1) {
-			if(frm.userid.value !== sessionUserid) {
+		//console.log(sessionGrade);
+		//console.log(frm.userid.value);
+		//console.log(sessionUserid);
+		
+ 		if(sessionGrade != 1) {
+			if(frm.userid.value != sessionUserid) {
 				alert('본인이 작성한 방명록만 삭제 가능합니다.');
 				return false;
 			}
@@ -272,10 +275,10 @@
 			datatype : "text",
 			data :{
 				"idx" : frm.idx.value,
-				"userid_fk" : sessionUserid
+				"userid_fk" : frm.userid.value
 			},
 			success : function(data){
-				console.log(data);
+				//console.log(data);
 				guestBookList();
 				$('#content').val("");
 				$('#guestbooklist').empty();
