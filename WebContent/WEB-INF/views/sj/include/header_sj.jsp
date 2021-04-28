@@ -136,8 +136,20 @@ a:hover {
 					href="boardList.sj?type=notice_board">Notice</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="EditProfile.team1">MyPage</a></li>
+					
+			    <c:choose>
+			    
+    			<c:when test="${not empty sessionScope.userInfo.userId}">
+        			<p style="padding-left: 25px; padding-top: 9px;">${sessionScope.userInfo.nickName} 님 반갑습니다<p>
+        			<a href="Logout.team1"  style="text-align: right;">로그아웃<p>
+    			</c:when>
+			
+			    <c:otherwise>
+        			<a href="Login.team1" style="padding-left: 25px; padding-top: 9px;">로그인을 해주세요<p>
+			    </c:otherwise>
 			
 			
+				</c:choose>
 			</ul>
 		</div>
 	</nav>

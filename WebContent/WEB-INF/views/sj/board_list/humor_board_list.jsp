@@ -119,9 +119,10 @@
 				</table>
 			</div> <!-- 끝  -->
 			
+			<c:if test= "${not empty sessionScope.userInfo.userId}">
+				<a  href="boardWrite.sj?type=humor_board" class="btn btn-outline-info">글쓰기</a>
+			</c:if>
 			
-			
-			<a  href="boardWrite.sj?type=humor_board" class="btn btn-outline-info">글쓰기</a>
 		</div>
 
 	</div>
