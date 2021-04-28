@@ -129,10 +129,7 @@ a:hover {
 				</a></li>
 
 					
-						<li class="nav-item"><a class="nav-link"
-					href="boardList.sj?type=humor_board">Best</a></li>
-						<li class="nav-item"><a class="nav-link"
-					href="boardList.sj?type=humor_board">New</a></li>
+				
 						<li class="nav-item"><a class="nav-link"
 					href="boardList.sj?type=humor_board">Humor</a></li>
 				<li class="nav-item"><a class="nav-link"

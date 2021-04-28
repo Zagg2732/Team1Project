@@ -81,7 +81,6 @@
 
 						</c:forEach>
 
-
 						<tr>
 							<td colspan="9" align="center"> <!--페이징 처리 가운데 정렬  -->
 			
@@ -89,9 +88,7 @@
 					  <c:if test="${cpage > 1}">
 						<a href="boardList.sj?type=notice_board&cp=${cpage-1}&ps=${pagesize}">이전</a>
 						</c:if> 
-								
-								
-								
+	
 					<!-- page 목록 나열하기 --> 
 					<c:forEach var="i" begin="1"
 									end="${pagecount}" step="1">
