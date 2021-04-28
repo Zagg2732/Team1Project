@@ -32,7 +32,6 @@ public class VisitDataAjax extends HttpServlet {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println("today : " + df.format(cal.getTime()));
 		
 		String todayDate = df.format(cal.getTime());
 		int todayResult = dao.getThatdayCount(todayDate);

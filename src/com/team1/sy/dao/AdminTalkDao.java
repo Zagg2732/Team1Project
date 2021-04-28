@@ -18,8 +18,8 @@ import com.team1.sy.dto.Member;
 
 public class AdminTalkDao {
 
-	Connection conn;
-	PreparedStatement pstmt;
+	//Connection conn;
+	//PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds;
 
